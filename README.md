@@ -1,2 +1,1 @@
-# oakshiftsoftware.github.io
-Oakshift Software Repo
+# Oakshift Software
