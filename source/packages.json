@@ -1,0 +1,9 @@
+{
+  "AB12AB12AB12": {
+    "name": "Package Name",
+    "tags": ["Tag"], "categories": ["Service"],
+    "description": "Package Description.",
+    "core_services": [],
+    "optional_services": []
+  }
+}
