@@ -4,6 +4,7 @@
     "tags": ["SPA", "Website"], "categories": ["Website", "Development", "Starter"],
     "description": "Package Description.",
     "core_services": [
+      "AZHDNLH1-A", 
       "N5XAM8WP-A"
     ],
     "optional_services": [
