@@ -50,5 +50,15 @@
       "B": ["Intermediate", "£20.00"],
       "C": ["Advanced", "£35.00"]
     }
+  },
+  "W8KJ6CJX": {
+    "name": "Project Revisions",
+    "description": "Description here.",
+    "categories": ["Service", "Optional"],
+    "variants": {
+      "A": [2, "£20.00"],
+      "B": [4, "£35.00"],
+      "C": [8, "£60.00"]
+    }
   }
 }
