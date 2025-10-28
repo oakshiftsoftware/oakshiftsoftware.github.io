@@ -4,7 +4,7 @@
     "description": "Description here.",
     "categories": ["Product", "Core"],
     "variants": {
-      "A": ["Starter", "£40.00"],
+      "A": ["Individual", "£40.00"],
       "B": ["Professional", "£55.00"],
       "C": ["Enterprise", "£70.00"]
     }
@@ -14,10 +14,10 @@
     "description": "Description here.",
     "categories": ["Service", "Optional"],
     "variants": {
-      "A": ["3 Months", "£0.00"],
-      "B": ["6 Months", "£0.00"],
-      "C": ["12 Months", "£0.00"],
-      "D": ["18 Months", "£0.00"]
+      "A": ["3 Months", "£20.00"],
+      "B": ["6 Months", "£35.00"],
+      "C": ["12 Months", "£60.00"],
+      "D": ["18 Months", "£80.00"]
     }
   },
   "VLBTYCZS": {
@@ -25,10 +25,10 @@
     "description": "Description here.",
     "categories": ["Service", "Optional"],
     "variants": {
-      "A": ["3 Months", "£0.00"],
-      "B": ["6 Months", "£0.00"],
-      "C": ["12 Months", "£0.00"],
-      "D": ["18 Months", "£0.00"]
+      "A": ["3 Months", "£35.00"],
+      "B": ["6 Months", "£70.00"],
+      "C": ["12 Months", "£130.00"],
+      "D": ["18 Months", "£200.00"]
     }
   },
   "XAJ8XFNO": {
@@ -36,10 +36,10 @@
     "description": "Description here.",
     "categories": ["Service", "Core"],
     "variants": {
-      "A": ["3 Months", "£0.00"],
-      "B": ["6 Months", "£0.00"],
-      "C": ["12 Months", "£0.00"],
-      "D": ["18 Months", "£0.00"]
+      "A": ["3 Months", "£10.00"],
+      "B": ["6 Months", "£25.00"],
+      "C": ["12 Months", "£40.00"],
+      "D": ["18 Months", "£65.00"]
     }
   },
   "HAG4E84M": {
@@ -47,9 +47,9 @@
     "description": "Description here.",
     "categories": ["Product", "Optional"],
     "variants": {
-      "A": ["Basic", "£0.00"],
-      "B": ["Intermediate", "£0.00"],
-      "C": ["Advanced", "£0.00"]
+      "A": ["Basic", "£10.00"],
+      "B": ["Intermediate", "£20.00"],
+      "C": ["Advanced", "£35.00"]
     }
   }
 }
