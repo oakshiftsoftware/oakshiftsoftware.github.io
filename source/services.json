@@ -21,33 +21,24 @@
     }
   },
   "VLBTYCZS": {
-    "name": "Extended After Sales Support",
-    "tag": "EASS", "category": "Optional",
-    "description": "An extension of the After Sales Support included within a purchased Website Development package. The selected Extended After Sales Support length will append to the end of the included period of support (ensuring you get exactly what you pay for)",
+    "name": "Advanced After Sales Support",
+    "description": "Description here.",
+    "categories": ["Service", "Optional"],
     "variants": {
-      "a": ["6 Months", "£0.00"],
-      "b": ["12 Months", "£0.00"],
-      "c": ["18 Months", "£0.00"]
+      "A": ["3 Months", "£0.00"],
+      "B": ["6 Months", "£0.00"],
+      "C": ["12 Months", "£0.00"],
+      "D": ["18 Months", "£0.00"]
     }
   },
   "XAJ8XFNO": {
-    "name": "Advanced After Sales Support",
-    "tag": "AASS", "category": "Optional",
-    "description": "Operating as an upgrade to your After Sales Support, the ‘Advanced’ package not only extends your original After Sales Support period (as with the ‘Extended’ package) but also enables the request for four further amendments to the website once delivered. Specific rules and guidance surrounding what constitutes an ‘amendment’ can be found in our terms and conditions.",
-    "variants": {
-      "a": ["3 Months", "£0.00"],
-      "b": ["6 Months", "£0.00"],
-      "c": ["12 Months", "£0.00"],
-      "d": ["18 Months", "£0.00"]
-    }
-  },
-  "QNI6HTTO": {
     "name": "Extended Project Backup",
-    "tag": "EPB", "category": "Optional",
-    "description": "Allows for an extended period of time for Oakshift Software to hold on to a backup of your website. Essentially insurance for your website files.",
+    "description": "Description here.",
+    "categories": ["Service", "Optional"],
     "variants": {
-      "a": ["12 Months", "£0.00"],
-      "b": ["18 Months", "£0.00"]
+      "A": ["6 Months", "£0.00"],
+      "B": ["12 Months", "£0.00"],
+      "C": ["18 Months", "£0.00"]
     }
   }
 }
