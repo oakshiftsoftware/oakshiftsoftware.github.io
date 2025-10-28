@@ -1,4 +1,14 @@
 {
+  "AZHDNLH1": {
+    "name": "Single Page Application",
+    "description": "Description here.",
+    "categories": ["Product", "Core"],
+    "variants": {
+      "A": ["Starter", "£40.00"],
+      "B": ["Professional", "£55.00"],
+      "C": ["Enterprise", "£70.00"]
+    }
+  },
   "N5XAM8WP": {
     "name": "After Sales Support",
     "description": "Description here.",
