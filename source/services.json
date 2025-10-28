@@ -41,5 +41,15 @@
       "C": ["12 Months", "£0.00"],
       "D": ["18 Months", "£0.00"]
     }
+  },
+  "HAG4E84M": {
+    "name": "Google Analytics",
+    "description": "Description here.",
+    "categories": ["Product", "Optional"],
+    "variants": {
+      "A": ["Basic", "£0.00"],
+      "B": ["Intermediate", "£0.00"],
+      "C": ["Advanced", "£0.00"]
+    }
   }
 }
