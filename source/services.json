@@ -36,10 +36,9 @@
     "description": "Description here.",
     "categories": ["Service", "Core"],
     "variants": {
-      "A": ["3 Months", "£10.00"],
-      "B": ["6 Months", "£25.00"],
-      "C": ["12 Months", "£40.00"],
-      "D": ["18 Months", "£65.00"]
+      "A": ["6 Months", "£25.00"],
+      "B": ["12 Months", "£40.00"],
+      "C": ["18 Months", "£65.00"]
     }
   },
   "HAG4E84M": {
