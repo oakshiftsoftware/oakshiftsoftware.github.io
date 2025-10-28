@@ -3,9 +3,11 @@
     "name": "SPA Starter",
     "tags": ["SPA", "Website"], "categories": ["Website", "Development", "Starter"],
     "description": "Package Description.",
-    "core_services": [],
+    "core_services": [
+      "N5XAM8WP-A"
+    ],
     "optional_services": [
-      ""
+      "N5XAM8WP-B", "N5XAM8WP-C", "N5XAM8WP-D"
     ]
   }
 }
