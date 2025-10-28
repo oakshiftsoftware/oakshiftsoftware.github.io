@@ -1,4 +1,15 @@
 {
+  "N5XAM8WP": {
+    "name": "After Sales Support",
+    "description": "Description here.",
+    "categories": ["Service", "Optional"],
+    "variants": {
+      "A": ["3 Months", "£0.00"],
+      "B": ["6 Months", "£0.00"],
+      "C": ["12 Months", "£0.00"],
+      "D": ["18 Months", "£0.00"]
+    }
+  },
   "VLBTYCZS": {
     "name": "Extended After Sales Support",
     "tag": "EASS", "category": "Optional",
