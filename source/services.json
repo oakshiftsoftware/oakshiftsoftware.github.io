@@ -36,9 +36,10 @@
     "description": "Description here.",
     "categories": ["Service", "Optional"],
     "variants": {
-      "A": ["6 Months", "£0.00"],
-      "B": ["12 Months", "£0.00"],
-      "C": ["18 Months", "£0.00"]
+      "A": ["3 Months", "£0.00"],
+      "B": ["6 Months", "£0.00"],
+      "C": ["12 Months", "£0.00"],
+      "D": ["18 Months", "£0.00"]
     }
   }
 }
