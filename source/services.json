@@ -34,7 +34,7 @@
   "XAJ8XFNO": {
     "name": "Extended Project Backup",
     "description": "Description here.",
-    "categories": ["Service", "Optional"],
+    "categories": ["Service", "Core"],
     "variants": {
       "A": ["3 Months", "£0.00"],
       "B": ["6 Months", "£0.00"],
