@@ -8,7 +8,8 @@
       "N5XAM8WP-A"
     ],
     "optional_services": [
-      "N5XAM8WP-B", "N5XAM8WP-C", "N5XAM8WP-D"
+      "N5XAM8WP-B", "N5XAM8WP-C", "N5XAM8WP-D",
+      "VLBTYCZS-A", "VLBTYCZS-B", "VLBTYCZS-C", "VLBTYCZS-D"
     ]
   }
 }
