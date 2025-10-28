@@ -1,9 +1,11 @@
 {
-  "AB12AB12AB12": {
-    "name": "Package Name",
-    "tags": ["Tag"], "categories": ["Service"],
+  "DU8U2IL0": {
+    "name": "SPA Starter",
+    "tags": ["SPA", "Website"], "categories": ["Website", "Development", "Starter"],
     "description": "Package Description.",
     "core_services": [],
-    "optional_services": []
+    "optional_services": [
+      ""
+    ]
   }
 }
