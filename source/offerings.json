@@ -1,0 +1,62 @@
+{
+    "PHAG4E84M": {
+        "name": "Google Analytics",
+        "description": "Available to set up in varying degrees, from simply setting up the account and embedding the code, to using that data to focus your digital efforts.",
+        "tag": "GA", "category": "Product",
+        "variants": {
+            "A": ["Basic", 5.00, true],
+            "B": ["Standard", 15.00, false],
+            "C": ["Advanced", 3.00, false]
+        }
+    },
+    "PAZHDNLH1": {
+        "name": "Single Page Application",
+        "description": "A Single Page Application (SPA) is a self-contained website application, built to order, that is designed to be hosted on minimum costing hosting packages, ideal for small businesses or startups.",
+        "tag": "SPA", "category": "Product",
+        "variants": {
+            "A": ["Personal", 40.00, true],
+            "B": ["Standard", 60.00, true],
+            "C": ["Business", 80.00, true]
+        }
+    },
+    "PJTPCOU75": {
+        "name": "Progressive Web Application",
+        "description": "A Progressive Web Application (PWA) is a more complex web application that can provide a more app-like experience, including offline capabilities and push notifications.",
+        "tag": "PWA", "category": "Product",
+        "variants": {
+            "A": ["Personal", 55.00, true],
+            "B": ["Standard", 70.00, true],
+            "C": ["Business", 95.00, true]
+        }
+    },
+    "SXAJ8XFNO": {
+        "name": "Project Backup",
+        "description": "Oakshift Software will retain a backed up copy of the delivered HTML file for up to six months after the delivery date. A copy of this can be requested for free at any time during this six month period.",
+        "tag": "PB", "category": "Service",
+        "variants": {
+            "A": ["6 Months", 0.00, false],
+            "B": ["12 Months", 15.00, false],
+            "C": ["18 Months", 27.50, false]
+        }
+    },
+    "SN5XAM8WP": {
+        "name": "Extended Support",
+        "description": "The extended support is to assist with integration efforts as needed and diagnose any bugs. This type of support does not include requests for additional revisions once the website is delivered.",
+        "tag": "ES", "category": "Service",
+        "variants": {
+            "A": ["6 Months", 45.00, false],
+            "B": ["12 Months", 95.00, false],
+            "C": ["18 Months", 135.00, false]
+        }
+    },
+    "SW8KJ6CJX": {
+        "name": "Project Revisions",
+        "description": "Can be purchased in groups of 2, 4 or 8. And they are  also available in various other quantities as parts of packages.",
+        "tag": "PR", "category": "Service",
+        "variants": {
+            "A": ["2 Revisions", 40.00, false],
+            "B": ["4 Revisions", 75.00, false],
+            "C": ["8 Revisions", 150.00, false]
+        }
+    }
+}
