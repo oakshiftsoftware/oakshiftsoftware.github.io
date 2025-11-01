@@ -4,9 +4,9 @@
         "description": "A Single Page Application (SPA) is a self-contained website application that is designed to be hosted on minimum costing hosting packages, ideal for small businesses or start-ups.",
         "tag": "SPA", "category": "Core",
         "variants": {
-            "A": ["Personal", 40.00, true],
-            "B": ["Standard", 60.00, true],
-            "C": ["Business", 80.00, true]
+            "A": ["Personal", 40.00, false],
+            "B": ["Standard", 60.00, false],
+            "C": ["Business", 80.00, false]
         }
     },
     {
@@ -14,9 +14,9 @@
         "description": "A Progressive Web Application (PWA) is a self-contained website application, that is designed to be hosted on minimum costing hosting packages, and installable on mobile devices as a native application, ideal for small businesses or start-ups.",
         "tag": "PWA", "category": "Core",
         "variants": {
-            "A": ["Personal", 55.00, true],
-            "B": ["Standard", 70.00, true],
-            "C": ["Business", 95.00, true]
+            "A": ["Personal", 55.00, false],
+            "B": ["Standard", 70.00, false],
+            "C": ["Business", 95.00, false]
         }
     },
     {
@@ -24,9 +24,9 @@
         "description": "Oakshift Software will retain a backed up copy of the delivered project files for up to six months after the delivery date. A copy of these can then be requested at no additional charge at any time during the specified coverage period.",
         "tag": "PB", "category": "Optional",
         "variants": {
-            "A": ["6 Months", 0.00, false],
-            "B": ["12 Months", 15.00, false],
-            "C": ["18 Months", 27.50, false]
+            "A": ["6 Months", 0.00, true],
+            "B": ["12 Months", 15.00, true],
+            "C": ["18 Months", 27.50, true]
         }
     },
     {
@@ -34,9 +34,9 @@
         "description": "The extended support is to assist with integration efforts as needed and diagnose any bugs. This type of support does not include requests for additional revisions once the website is delivered.",
         "tag": "ES", "category": "Optional",
         "variants": {
-            "A": ["6 Months", 45.00, false],
-            "B": ["12 Months", 95.00, false],
-            "C": ["18 Months", 135.00, false]
+            "A": ["6 Months", 45.00, true],
+            "B": ["12 Months", 95.00, true],
+            "C": ["18 Months", 135.00, true]
         }
     },
     {
@@ -54,9 +54,9 @@
         "description": "Available to set up in varying degrees, from simply setting up the account and embedding the code, to using that data to focus your digital efforts.",
         "tag": "GA", "category": "Optional",
         "variants": {
-            "A": ["Standard", 5.00, true],
+            "A": ["Standard", 5.00, false],
             "B": ["Enhanced", 15.00, false],
-            "C": ["Advanced", 30.00, false]
+            "C": ["Advanced", 30.00, true]
         }
     }
 ]
