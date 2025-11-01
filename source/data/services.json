@@ -22,7 +22,7 @@
     {
         "code": "XAJ8XFNO", "name": "Project Backup",
         "description": "Oakshift Software will retain a backed up copy of the delivered project files for up to six months after the delivery date. A copy of these can then be requested at no additional charge at any time during the specified coverage period.",
-        "tag": "PB", "category": "Core",
+        "tag": "PB", "category": "Optional",
         "variants": {
             "A": ["6 Months", 0.00, false],
             "B": ["12 Months", 15.00, false],
