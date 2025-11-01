@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="https://oakshiftsoftware.github.io/source/images/logos/logo-b.png" type="image/png">
+        <title>Oakshift Software</title>
+        <style>
+            /* Global Styles */
+            :root {
+                --font-family: 'Arial', sans-serif;
+                --primary-color: #363636;
+                --secondary-color: #18bc9c;
+                --background-color: #d9d9d9;
+                --text-color: #363636;
+            }
+            h1, h2, h3, h4, h5, h6, p {
+                margin: 0;
+            }
+            body {
+                font-family: var(--font-family);
+                background-color: var(--background-color);
+                color: var(--text-color);
+                margin: 0;
+                padding: 0;
+            }
+            header {
+                background-color: var(--primary-color);
+                color: white;
+                padding: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .brand {
+                display: flex;
+                align-items: center;
+            }
+            .brand img {
+                height: 75px;
+                margin-right: 1rem;
+            }
+            .brand-text h1 {
+                margin: 0;
+                font-size: 1.5rem;
+            }
+            .brand-text p {
+                margin: 0;
+                font-size: 1rem;
+            }
+            nav ul {
+                list-style: none;
+                display: flex;
+                margin: 0;
+                padding: 0;
+            }
+            nav ul li {
+                margin-left: 2rem;
+            }
+            nav ul li a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+            }
+            nav ul li a:hover {
+                text-decoration: underline;
+            }
+            main {
+                padding: 0;
+            }
+            .main-content {
+                padding: 2rem;
+            }
+            .hero-banner {
+                margin-bottom: 2rem;
+                width: 100%;
+                height: 300px;
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                text-align: center;
+            }
+            .hero-banner img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                z-index: 1;
+            }
+            .hero-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 2;
+            }
+            .hero-content {
+                position: relative;
+                z-index: 3;
+                max-width: 800px;
+                padding: 2rem;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+            .hero-content p {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+            }
+            .hero-button {
+                display: inline-block;
+                padding: 0.8rem 1.5rem;
+                background: var(--secondary-color);
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+            .hero-button:hover {
+                background: #149f85;
+            }
+            .card {
+                background-color: white;
+                padding: 2rem;
+                margin-bottom: 2rem;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                border-radius: 2.5px;
+            }
+            .service-card {
+                border-left: 4px solid var(--secondary-color);
+            }
+            .variant-list {
+                list-style: none;
+                padding: 0;
+                margin: 1rem 0;
+            }
+            .variant-item {
+                display: flex;
+                justify-content: space-between;
+                padding: 0.5rem;
+                border-bottom: 1px solid #eee;
+            }
+            .variant-item:last-child {
+                border-bottom: none;
+            }
+            .category-tag {
+                display: inline-block;
+                padding: 0.25rem 0.5rem;
+                margin: 0.25rem;
+                background-color: var(--secondary-color);
+                color: white;
+                border-radius: 3px;
+                font-size: 0.8rem;
+            }
+            .package-services {
+                margin-top: 1rem;
+                padding: 1rem;
+                background-color: #f8f9fa;
+                border-radius: 2.5px;
+            }
+            .service-group h4 {
+                margin-bottom: 0.5rem;
+                color: var(--primary-color);
+            }
+            .service-list {
+                list-style: none;
+                padding: 0;
+            }
+            .service-list li {
+                padding: 0.25rem 0;
+            }
+            .service-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+            .service-card {
+                display: flex;
+                flex-direction: column;
+                border: none;
+                border-radius: 8px;
+                overflow: hidden;
+                transition: transform 0.3s, box-shadow 0.3s;
+            }
+            .service-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+            .service-card .tag {
+                background: var(--secondary-color);
+                color: white;
+                padding: 0.25rem 0.5rem;
+                border-radius: 3px;
+                font-size: 0.8rem;
+                align-self: flex-start;
+            }
+            .service-header {
+                padding: 1rem;
+                background: var(--primary-color);
+                color: white;
+            }
+            .service-content {
+                padding: 1rem;
+                flex-grow: 1;
+            }
+            .service-variants {
+                margin-top: 1rem;
+                border-top: 1px solid #eee;
+            }
+            .variant-selector {
+                display: flex;
+                align-items: center;
+                padding: 0.5rem;
+                cursor: pointer;
+                transition: background-color 0.2s, opacity 0.2s;
+            }
+            .variant-selector:hover {
+                background-color: #f8f9fa;
+            }
+            .variant-selector input[type="radio"] {
+                margin-right: 1rem;
+            }
+            .variant-selector input[type="radio"]:disabled + span {
+                opacity: 0.5;
+            }
+            .variant-selector:has(input[type="radio"]:disabled) {
+                cursor: not-allowed;
+                background-color: #f5f5f5;
+            }
+            .package-builder {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 2rem;
+            }
+            .package-summary {
+                position: sticky;
+                top: 2rem;
+                background: white;
+                padding: 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .package-total {
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 2px solid var(--secondary-color);
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+            .discount-badge {
+                display: inline-block;
+                padding: 0.25rem 0.5rem;
+                background: #dc3545;
+                color: white;
+                border-radius: 3px;
+                font-size: 0.8rem;
+                margin-left: 0.5rem;
+            }
+            .package-actions {
+                margin-top: 1.5rem;
+                display: flex;
+                gap: 1rem;
+            }
+            .package-action-button {
+                flex: 1;
+                padding: 0.8rem;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: background-color 0.2s;
+            }
+            .package-action-button.primary {
+                background-color: var(--secondary-color);
+                color: white;
+            }
+            .package-action-button.primary:hover {
+                background-color: #149f85;
+            }
+            .package-action-button.secondary {
+                background-color: #e9ecef;
+                color: var(--primary-color);
+            }
+            .package-action-button.secondary:hover {
+                background-color: #dee2e6;
+            }
+            .remove-service {
+                background: none;
+                border: none;
+                color: #dc3545;
+                cursor: pointer;
+                padding: 0.25rem;
+                margin-left: 0.5rem;
+                opacity: 0.7;
+                transition: opacity 0.2s;
+            }
+            .remove-service:hover {
+                opacity: 1;
+            }
+            .service-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.5rem;
+                border-bottom: 1px solid #eee;
+            }
+            .service-item:last-child {
+                border-bottom: none;
+            }
+            .service-item-details {
+                flex: 1;
+            }
+            .hidden {
+                display: none;
+            }
+            .active {
+                display: block;
+            }
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            .modal.active {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 20px;
+            }
+            .modal-content {
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                max-width: 800px;
+                width: 100%;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+            }
+            .modal-close {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+                cursor: pointer;
+                font-size: 24px;
+                color: #666;
+            }
+            .modal-actions {
+                margin-top: 20px;
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
+            }
+            footer {
+                background-color: var(--primary-color);
+                color: white;
+                text-align: center;
+                padding: 2rem;
+                width: -webkit-fill-available;
+                bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="brand">
+                <img src="https://oakshiftsoftware.github.io/source/images/logos/logo-b.png" />
+                <div class="brand-text">
+                    <h1>Oakshift Software</h1>
+                    <p>Empowering Innovative Solutions</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#packages">Packages</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <!-- Home Page -->
+            <section id="home" class="active">
+                <div class="hero-banner">
+                    <img src="https://placehold.co/2000x600/515151/d9d9d9/png?text=Welcome+to+Oakshift+Software" alt="Hero Banner" />
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h1>Welcome to Oakshift Software</h1>
+                        <p>Transform your business with our innovative software solutions</p>
+                        <a href="#services" class="hero-button">Explore Our Services</a>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="card">
+                        <h2>Welcome to Oakshift Software</h2>
+                        <p>Your partner in delivering cutting-edge software solutions tailored to your business needs. Explore our services and packages to find the perfect fit for your organization.</p>
+                    </div>
+                    <div class="card">
+                        <h2>Why Choose Us?</h2>
+                        <p>With years of experience in software development and a commitment to excellence, we deliver solutions that drive business growth and innovation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Page -->
+            <section id="services" class="hidden">
+                <div class="hero-banner">
+                    <img src="https://oakshiftsoftware.github.io/source/images/headers/img-1.png" alt="Services Banner" />
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h1>Our Services</h1>
+                        <p>Discover our range of professional software solutions</p>
+                    </div>
+                </div>
+                <div class="main-content" id="services-content">
+                    <div class="card">
+                        <h2>Our Services</h2>
+                        <p>Loading services...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Packages Page -->
+            <section id="packages" class="hidden">
+                <div class="hero-banner">
+                    <img src="https://oakshiftsoftware.github.io/source/images/headers/img-2.png" alt="Packages Banner" />
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h1>Build Your Package</h1>
+                        <p>Create a custom solution that fits your needs perfectly</p>
+                    </div>
+                </div>
+                <div class="main-content" id="packages-content">
+                    <div class="card">
+                        <h2>Our Packages</h2>
+                        <p>Loading packages...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Page -->
+            <section id="contact" class="hidden">
+                <div class="hero-banner">
+                    <img src="https://oakshiftsoftware.github.io/source/images/headers/img-3.png" alt="Contact Banner" />
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h1>Contact Us</h1>
+                        <p>Get in touch to discuss your project requirements</p>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="card">
+                        <h2>Contact Us</h2>
+                        <form id="contact-form">
+                            <div style="margin-bottom: 1rem;">
+                                <label for="name">Name:</label><br>
+                                <input type="text" id="name" name="name" style="width: 100%; padding: 0.5rem;">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label for="email">Email:</label><br>
+                                <input type="email" id="email" name="email" style="width: 100%; padding: 0.5rem;">
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label for="message">Message:</label><br>
+                                <textarea id="message" name="message" rows="4" style="width: 100%; padding: 0.5rem;"></textarea>
+                            </div>
+                            <button type="submit" style="background-color: var(--secondary-color); color: white; border: none; padding: 0.5rem 1rem; cursor: pointer;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            &copy; <script>document.write(new Date().getFullYear())</script> Oakshift Software. All rights reserved.
+        </footer>
+        <script>
+            // Service data URL
+            const services_list_url = "https://oakshiftsoftware.github.io/source/data/services.json";
+            const discounts_url = "https://oakshiftsoftware.github.io/source/data/discounts.json";
+            
+            // Store selected services
+            let selectedServices = new Map();
+            let availableDiscounts = [];
+
+            // Format price as currency
+            function formatPrice(price) {
+                return new Intl.NumberFormat('en-GB', { 
+                    style: 'currency', 
+                    currency: 'GBP' 
+                }).format(price);
+            }
+
+            // Function to create a service card element
+            function createServiceCard(service, isBuilder = false) {
+                const card = document.createElement('div');
+                card.className = 'card service-card';
+                
+                const variantsList = Object.entries(service.variants)
+                    .map(([key, [name, price, isRecurring]]) => {
+                        if (isBuilder) {
+                            return `
+                                <div class="variant-selector">
+                                    <input type="radio" 
+                                        name="service_${service.code}" 
+                                        value="${key}" 
+                                        data-service="${service.code}"
+                                        data-price="${price}"
+                                        data-name="${name}"
+                                        data-recurring="${isRecurring}">
+                                    <span>${name}</span>
+                                    <span style="margin-left: auto">${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
+                                </div>`;
+                        } else {
+                            return `
+                                <div class="variant-item">
+                                    <span>${name}</span>
+                                    <span>${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
+                                </div>`;
+                        }
+                    }).join('');
+
+                card.innerHTML = `
+                    <div class="service-header">
+                        <span class="tag">${service.tag}</span><br /><br />
+                        <h3>${service.name}</h3>
+                    </div>
+                    <div class="service-content">
+                        <p>${service.description}</p>
+                        <div class="service-variants">
+                            ${variantsList}
+                        </div>
+                    </div>
+                `;
+
+                // Return the card before adding event listeners if not a builder
+                if (!isBuilder) {
+                    return card;
+                }
+
+                // For builder cards, we need to properly wire up the event listeners
+                // We need to do this after the card is added to the DOM
+                setTimeout(() => {
+                    const radioButtons = card.querySelectorAll('input[type="radio"]');
+                    radioButtons.forEach(radio => {
+                        radio.addEventListener('change', handleServiceSelection);
+                    });
+                }, 0);
+
+                return card;
+            }
+
+            // Function to create the package builder
+            function createPackageBuilder(services) {
+                const builder = document.createElement('div');
+                builder.className = 'package-builder';
+
+                const servicesSection = document.createElement('div');
+                servicesSection.className = 'services-section';
+
+                // Group services by category
+                const coreServices = services.filter(s => s.category === 'Core');
+                const optionalServices = services.filter(s => s.category === 'Optional');
+
+                // Create core services section
+                servicesSection.innerHTML = '<h3 style="margin-top: 1rem; margin-bottom: 1rem;">Core Services</h3>';
+                const coreGrid = document.createElement('div');
+                coreGrid.className = 'service-grid';
+                
+                coreServices.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'card service-card';
+                    
+                    const variantsList = Object.entries(service.variants)
+                        .map(([key, [name, price, isRecurring]]) => `
+                            <label class="variant-selector">
+                                <input type="radio" 
+                                    name="service_${service.code}" 
+                                    value="${key}" 
+                                    data-service="${service.code}"
+                                    data-service-type="Core"
+                                    data-price="${price}"
+                                    data-name="${service.name} - ${name}"
+                                    data-recurring="${isRecurring}">
+                                <span>${name}</span>
+                                <span style="margin-left: auto">${formatPrice(price)}</span>
+                            </label>
+                        `).join('');
+
+                    card.innerHTML = `
+                        <div class="service-header">
+                            <span class="tag">${service.tag}</span><br /><br />
+                            <h3>${service.name}</h3>
+                        </div>
+                        <div class="service-content">
+                            <p>${service.description}</p>
+                            <div class="service-variants">
+                                ${variantsList}
+                            </div>
+                        </div>
+                    `;
+                    coreGrid.appendChild(card);
+                });
+                servicesSection.appendChild(coreGrid);
+
+                // Create optional services section
+                servicesSection.innerHTML += '<h3 style="margin-top: 1rem; margin-bottom: 1rem;">Optional Services</h3>';
+                const optionalGrid = document.createElement('div');
+                optionalGrid.className = 'service-grid';
+                
+                optionalServices.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'card service-card';
+                    
+                    const variantsList = Object.entries(service.variants)
+                        .map(([key, [name, price, isRecurring]]) => `
+                            <label class="variant-selector">
+                                <input type="radio" 
+                                    name="service_${service.code}" 
+                                    value="${key}" 
+                                    data-service="${service.code}"
+                                    data-service-type="Optional"
+                                    data-price="${price}"
+                                    data-name="${service.name} - ${name}"
+                                    data-recurring="${isRecurring}"
+                                    disabled>
+                                <span>${name}</span>
+                                <span style="margin-left: auto">${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
+                            </label>
+                        `).join('');
+
+                    card.innerHTML = `
+                        <div class="service-header">
+                            <span class="tag">${service.tag}</span><br /><br />
+                            <h3>${service.name}</h3>
+                        </div>
+                        <div class="service-content">
+                            <p>${service.description}</p>
+                            <div class="service-variants">
+                                ${variantsList}
+                            </div>
+                        </div>
+                    `;
+                    optionalGrid.appendChild(card);
+                });
+                servicesSection.appendChild(optionalGrid);
+
+                const summarySection = document.createElement('div');
+                summarySection.className = 'package-summary';
+                summarySection.innerHTML = `
+                    <h3>Your Package</h3>
+                    <div id="selected-services"></div>
+                    <div class="package-total">
+                        <div>One-time Setup Cost: <span id="package-total-amount">${formatPrice(0)}</span></div>
+                        <div>Monthly Cost: <span id="package-recurring-amount"></span></div>
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                            Initial Payment: <span id="package-initial-total"></span>
+                            <div style="font-size: 0.8em; color: #888;">(Setup Cost + First Month)</div>
+                        </div>
+                    </div>
+                    <div class="package-actions">
+                        <button id="preview-package" class="package-action-button secondary" disabled>
+                            Preview Quote
+                        </button>
+                        <button id="export-package" class="package-action-button primary" disabled>
+                            Export PDF
+                        </button>
+                    </div>
+                `;
+
+                builder.appendChild(servicesSection);
+                builder.appendChild(summarySection);
+
+                // Add event listeners after the builder is created
+                const allRadioButtons = builder.querySelectorAll('input[type="radio"]');
+                allRadioButtons.forEach(radio => {
+                    radio.addEventListener('change', handleServiceSelection);
+                });
+
+                return builder;
+            }
+
+            // Handle service selection in package builder
+            function handleServiceSelection(event) {
+                try {
+                    const radio = event.target;
+                    console.log('Service selected:', radio.dataset);
+                    
+                    const serviceCode = radio.dataset.service;
+                    const serviceType = radio.dataset.serviceType;
+                    const variantKey = radio.value;
+                    const price = parseFloat(radio.dataset.price);
+                    const name = radio.dataset.name;
+                    const isRecurring = radio.dataset.recurring === 'true';
+
+                    if (radio.checked) {
+                        console.log('Adding service to selection:', {
+                            serviceCode,
+                            serviceType,
+                            variantKey,
+                            price,
+                            name,
+                            isRecurring
+                        });
+
+                        selectedServices.set(serviceCode, {
+                            serviceType,
+                            variantKey,
+                            price,
+                            name,
+                            isRecurring
+                        });
+
+                        // Check if we have at least one Core service
+                        const hasCore = Array.from(selectedServices.values())
+                            .some(service => service.serviceType === 'Core');
+
+                        // Enable/disable Optional services based on Core service selection
+                        const optionalRadios = document.querySelectorAll('input[type="radio"][data-service-type="Optional"]');
+                        optionalRadios.forEach(radio => {
+                            radio.disabled = !hasCore;
+                        });
+
+                        // Add warning if trying to select Optional without Core
+                        if (serviceType === 'Optional' && !hasCore) {
+                            alert('Please select at least one Core service before adding Optional services.');
+                            radio.checked = false;
+                            selectedServices.delete(serviceCode);
+                            return;
+                        }
+                    }
+
+                    console.log('Current selected services:', selectedServices);
+                    updatePackageSummary();
+                } catch (error) {
+                    console.error('Error in handleServiceSelection:', error);
+                }
+            }
+
+            // Remove a service from the package
+            function removeService(serviceCode) {
+                const service = selectedServices.get(serviceCode);
+                if (service) {
+                    // Uncheck the radio button
+                    const radio = document.querySelector(`input[type="radio"][data-service="${serviceCode}"]:checked`);
+                    if (radio) {
+                        radio.checked = false;
+                    }
+                    
+                    // Remove from selected services
+                    selectedServices.delete(serviceCode);
+
+                    // If it was a Core service, check if we need to disable Optional services
+                    if (service.serviceType === 'Core') {
+                        const hasCore = Array.from(selectedServices.values())
+                            .some(s => s.serviceType === 'Core');
+                        
+                        const optionalRadios = document.querySelectorAll('input[type="radio"][data-service-type="Optional"]');
+                        optionalRadios.forEach(radio => {
+                            radio.disabled = !hasCore;
+                        });
+
+                        // Remove any Optional services if no Core services remain
+                        if (!hasCore) {
+                            selectedServices.forEach((s, code) => {
+                                if (s.serviceType === 'Optional') {
+                                    removeService(code);
+                                }
+                            });
+                        }
+                    }
+
+                    updatePackageSummary();
+                }
+            }
+
+            // Generate PDF content
+            async function generatePackagePDF() {
+                // Create the PDF content
+                const pdfContent = document.createElement('div');
+                pdfContent.innerHTML = `
+                    <div style="padding: 20px;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <img src="https://oakshiftsoftware.github.io/source/images/logos/logo-b.png" style="height: 100px;">
+                            <h1>Provisional Package Quote</h1>
+                            <p>Generated on ${new Date().toLocaleDateString()}</p>
+                        </div>
+                        <div style="margin-bottom: 30px;">
+                            <h2>Selected Services</h2>
+                            ${Array.from(selectedServices.entries()).map(([code, service]) => `
+                                <div style="margin-bottom: 15px;">
+                                    <h3>${service.name}</h3>
+                                    <p>Price: ${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-bottom: 30px;">
+                            <h2>Total Cost</h2>
+                            <p>One-time Cost: ${document.getElementById('package-total-amount').textContent}</p>
+                            <p>Recurring Cost: ${document.getElementById('package-recurring-amount').textContent || '£0.00'}</p>
+                        </div>
+                        <div>
+                            <p>This is a provisional quote and is valid for 30 days. To proceed with this package, please contact us:</p>
+                            <p>Email: oakshiftsoftware@gmail.com</p>
+                            <p>Reference: PKG-${Math.random().toString(36).substr(2, 9).toUpperCase()}</p>
+                        </div>
+                    </div>
+                `;
+
+                try {
+                    const printWindow = window.open('', 'PRINT', 'height=800,width=1200');
+                    printWindow.document.write(`
+                        <html>
+                        <head>
+                            <title>Package Quote</title>
+                            <style>
+                                body {
+                                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+                                    line-height: 1.5;
+                                    color: #363636;
+                                }
+                                h1, h2, h3 {
+                                    font-family: inherit;
+                                    margin-bottom: 1rem;
+                                }
+                                .quote-header {
+                                    text-align: center;
+                                    margin-bottom: 2rem;
+                                    padding-bottom: 2rem;
+                                    border-bottom: 2px solid #18bc9c;
+                                }
+                                .quote-section {
+                                    margin-bottom: 2rem;
+                                    padding: 1rem;
+                                    background-color: #f8f9fa;
+                                    border-radius: 5px;
+                                }
+                                .service-item {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    padding: 0.5rem 0;
+                                    border-bottom: 1px solid #dee2e6;
+                                }
+                                .quote-footer {
+                                    margin-top: 2rem;
+                                    padding-top: 2rem;
+                                    border-top: 2px solid #18bc9c;
+                                    font-size: 0.9rem;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                    `);
+                    printWindow.document.write(pdfContent.innerHTML);
+                    printWindow.document.write('</body></html>');
+                    printWindow.document.close();
+                    printWindow.focus();
+                    printWindow.print();
+                    printWindow.close();
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    alert('Error generating PDF. Please try again.');
+                }
+            }
+
+            // Update the package summary
+            function updatePackageSummary() {
+                const selectedServicesDiv = document.getElementById('selected-services');
+                const totalAmount = document.getElementById('package-total-amount');
+                const recurringAmount = document.getElementById('package-recurring-amount');
+                const initialTotal = document.getElementById('package-initial-total');
+                const exportButton = document.getElementById('export-package');
+                const previewButton = document.getElementById('preview-package');
+
+                let oneTimeTotal = 0;
+                let recurringTotal = 0;
+                let summaryHTML = '';
+
+                selectedServices.forEach((selection, serviceCode) => {
+                    if (selection.isRecurring) {
+                        recurringTotal += selection.price;
+                    } else {
+                        oneTimeTotal += selection.price;
+                    }
+                    
+                    summaryHTML += `
+                        <div class="service-item">
+                            <div class="service-item-details">
+                                <div>${selection.name}</div>
+                                <div>${formatPrice(selection.price)}${selection.isRecurring ? '/mo' : ''}</div>
+                            </div>
+                            <button class="remove-service" onclick="removeService('${serviceCode}')">
+                                ✕
+                            </button>
+                        </div>
+                    `;
+                });
+
+                // Build list of selected variant codes, e.g. "AZHDNLH1-A"
+                const selectedVariantCodes = Array.from(selectedServices.entries()).map(([code, sel]) => `${code}-${sel.variantKey}`);
+                // Apply discounts (match now against variant codes)
+                const applicableDiscounts = findApplicableDiscounts(selectedVariantCodes);
+                if (applicableDiscounts.length > 0) {
+                    applicableDiscounts.forEach(discount => {
+                        if (discount.type === 'percentage') {
+                            if (discount.target === 'total') {
+                                const discountAmount = oneTimeTotal * (discount.value / 100);
+                                oneTimeTotal -= discountAmount;
+                                summaryHTML += `
+                                    <div class="service-item">
+                                        <div class="service-item-details">
+                                            <div>${discount.name}</div>
+                                            <div class="discount-badge">-${discount.value}%</div>
+                                        </div>
+                                    </div>
+                                `;
+                            }
+                        } else if (discount.type === 'fixed') {
+                            oneTimeTotal -= discount.value;
+                            summaryHTML += `
+                                <div class="service-item">
+                                    <div class="service-item-details">
+                                        <div>${discount.name}</div>
+                                        <div class="discount-badge">-${formatPrice(discount.value)}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    });
+                }
+
+                selectedServicesDiv.innerHTML = summaryHTML;
+                totalAmount.textContent = formatPrice(oneTimeTotal);
+                if (recurringTotal > 0) {
+                    recurringAmount.textContent = ` + ${formatPrice(recurringTotal)}/mo`;
+                } else {
+                    recurringAmount.textContent = '';
+                }
+
+                // Enable/disable buttons based on whether there are any services selected
+                const hasServices = selectedServices.size > 0;
+                exportButton.disabled = !hasServices;
+                previewButton.disabled = !hasServices;
+                
+                // Calculate initial total (setup + first month)
+                const initialPayment = oneTimeTotal + recurringTotal;
+                initialTotal.textContent = formatPrice(initialPayment);
+            }
+
+            // Generate PDF content
+            function generatePDFContent() {
+                const pkgReference = 'PKG-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                const oneTimeCost = document.getElementById('package-total-amount').textContent;
+                const recurringCost = document.getElementById('package-recurring-amount').textContent.replace(' + ', '') || '£0.00';
+                const initialTotal = document.getElementById('package-initial-total').textContent;
+
+                const servicesContent = Array.from(selectedServices.entries()).map(([code, service]) => `
+                    <div style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                        <h3 style="margin-bottom: 5px;">${service.name}</h3>
+                        <p style="margin: 0; color: #666;">
+                            <strong>Variant:</strong> ${service.variantKey} (Code: ${code}-${service.variantKey})<br>
+                            <strong>Price:</strong> ${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}
+                        </p>
+                    </div>
+                `).join('');
+
+                return `
+                    <div style="padding: 20px; font-family: Arial, sans-serif;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <img src="https://oakshiftsoftware.github.io/source/images/logos/logo-b.png" style="height: 100px;">
+                            <h1>Provisional Package Quote</h1>
+                            <p>Generated on ${new Date().toLocaleDateString()}</p>
+                            <p>Reference: ${pkgReference}</p>
+                        </div>
+                        <div style="margin-bottom: 30px;">
+                            <h2>Selected Services</h2>
+                            ${servicesContent}
+                        </div>
+                        <div style="margin-bottom: 30px;">
+                            <h2>Cost Breakdown</h2>
+                            <p>One-time Setup Cost: ${oneTimeCost}</p>
+                            <p>Monthly Cost: ${recurringCost}</p>
+                            <p><strong>Initial Payment Required: ${initialTotal}</strong></p>
+                            <p style="font-size: 0.9em; color: #666;">
+                                (Includes setup cost and first month's subscription)
+                            </p>
+                        </div>
+                        <div>
+                            <p>This is a provisional quote and is valid for 30 days. To proceed with this package, please contact us:</p>
+                            <p>Email: oakshiftsoftware@gmail.com</p>
+                            <p>Please reference: ${pkgReference}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Preview PDF content
+            function previewPackageQuote() {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <span class="modal-close">&times;</span>
+                        <div id="preview-content">
+                            ${generatePDFContent()}
+                        </div>
+                        <div class="modal-actions">
+                            <button class="package-action-button secondary" onclick="copyToClipboard()">
+                                Copy to Clipboard
+                            </button>
+                            <button class="package-action-button primary" onclick="exportAsPDF()">
+                                Export as PDF
+                            </button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                setTimeout(() => modal.classList.add('active'), 10);
+
+                // Close modal functionality
+                modal.querySelector('.modal-close').onclick = () => {
+                    modal.classList.remove('active');
+                    setTimeout(() => modal.remove(), 300);
+                };
+
+                // Close when clicking outside the modal
+                modal.onclick = (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        setTimeout(() => modal.remove(), 300);
+                    }
+                };
+            }
+
+            // Copy content to clipboard
+            async function copyToClipboard() {
+                const content = document.getElementById('preview-content').innerText;
+                try {
+                    await navigator.clipboard.writeText(content);
+                    alert('Quote content copied to clipboard!');
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    alert('Failed to copy content. Please try again.');
+                }
+            }
+
+            // Export as PDF
+            function exportAsPDF() {
+                try {
+                    const printWindow = window.open('', 'PRINT', 'height=800,width=1200');
+                    printWindow.document.write(`
+                        <html>
+                        <head>
+                            <title>Package Quote</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    line-height: 1.6;
+                                    color: #333;
+                                    padding: 20px;
+                                }
+                                h1, h2, h3 {
+                                    color: #363636;
+                                }
+                                @media print {
+                                    body {
+                                        padding: 0;
+                                    }
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            ${generatePDFContent()}
+                        </body>
+                    </html>
+                    `);
+                    printWindow.document.close();
+                    printWindow.focus();
+                    setTimeout(() => {
+                        printWindow.print();
+                        printWindow.close();
+                    }, 250);
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    alert('Error generating PDF. Please try again.');
+                }
+            }
+
+            // Find applicable discounts by comparing required variant codes (e.g. "AZHDNLH1-A")
+            function findApplicableDiscounts(selectedVariantCodes) {
+                return availableDiscounts.filter(discount => {
+                    if (Array.isArray(discount.requiredServices) && discount.requiredServices.length > 0) {
+                        return discount.requiredServices.every(req => selectedVariantCodes.includes(req));
+                    }
+                    return false;
+                });
+            }
+
+            // Function to load services
+            async function loadServices() {
+                try {
+                    const response = await fetch(services_list_url);
+                    const services = await response.json();
+                    const servicesContent = document.getElementById('services-content');
+                    servicesContent.innerHTML = ''; // Clear loading message
+                    
+                    const serviceGrid = document.createElement('div');
+                    serviceGrid.className = 'service-grid';
+                    
+                    services.forEach(service => {
+                        serviceGrid.appendChild(createServiceCard(service));
+                    });
+
+                    servicesContent.appendChild(serviceGrid);
+                } catch (error) {
+                    console.error('Error loading services:', error);
+                    const servicesContent = document.getElementById('services-content');
+                    servicesContent.innerHTML = '<div class="card"><h2>Error</h2><p>Unable to load services. Please try again later.</p></div>';
+                }
+            }
+
+            // Function to load package builder
+            async function loadPackages() {
+                try {
+                    const [servicesResponse, discountsResponse] = await Promise.all([
+                        fetch(services_list_url),
+                        fetch(discounts_url).catch(() => ({ json: () => [] }))
+                    ]);
+                    
+                    const services = await servicesResponse.json();
+                    availableDiscounts = await discountsResponse.json();
+                    
+                    const packagesContent = document.getElementById('packages-content');
+                    packagesContent.innerHTML = `
+                        <h2>Build Your Package</h2>
+                        <p>Select the services you'd like to include in your package. Mix and match to create your perfect solution.</p>
+                    `;
+                    
+                    packagesContent.appendChild(createPackageBuilder(services));
+                } catch (error) {
+                    console.error('Error loading package builder:', error);
+                    const packagesContent = document.getElementById('packages-content');
+                    packagesContent.innerHTML = '<div class="card"><h2>Error</h2><p>Unable to load package builder. Please try again later.</p></div>';
+                }
+            }
+
+            // Handle contact form submission
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Add your form submission logic here
+                alert('Thank you for your message. We will get back to you soon!');
+                this.reset();
+            });
+
+            // Make functions available globally
+            window.copyToClipboard = copyToClipboard;
+            window.exportAsPDF = exportAsPDF;
+
+            // Handle preview and export button clicks
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.id === 'preview-package') {
+                    previewPackageQuote();
+                } else if (e.target && e.target.id === 'export-package') {
+                    exportAsPDF();
+                }
+            });
+
+            // Function to handle page navigation
+            function navigateToPage(pageId) {
+                sections.forEach(section => {
+                    if (section.id === pageId) {
+                        section.classList.remove('hidden');
+                        section.classList.add('active');
+                        // Load content when navigating to services or packages
+                        if (pageId === 'services') loadServices();
+                        if (pageId === 'packages') loadPackages();
+                    } else {
+                        section.classList.remove('active');
+                        section.classList.add('hidden');
+                    }
+                });
+                // Update URL without triggering page reload
+                history.pushState({page: pageId}, '', `#${pageId}`);
+            }
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', (event) => {
+                const pageId = event.state?.page || 'home';
+                navigateToPage(pageId);
+            });
+
+            // Check initial URL hash on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                const initialPage = window.location.hash.substring(1) || 'home';
+                navigateToPage(initialPage);
+            });
+
+            // Establish page routing system for single-page application
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    navigateToPage(targetId);
+                });
+            });
+        </script>
+    </body>
+</html>
