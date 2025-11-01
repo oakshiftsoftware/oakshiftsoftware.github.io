@@ -362,6 +362,47 @@
                 justify-content: flex-end;
                 gap: 10px;
             }
+            /* Mobile navigation toggle and FAB */
+            .nav-toggle {
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.6rem;
+                cursor: pointer;
+            }
+
+            .mobile-nav-list ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .fab {
+                position: fixed;
+                right: 16px;
+                bottom: 80px;
+                width: 56px;
+                height: 56px;
+                border-radius: 28px;
+                background: var(--secondary-color);
+                color: white;
+                display: none; /* visible on mobile via media query */
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                border: none;
+                cursor: pointer;
+                z-index: 1200;
+                font-size: 20px;
+            }
+
+            @media (max-width: 768px) {
+                nav ul { display: none; }
+                .nav-toggle { display: block; }
+                .package-builder { grid-template-columns: 1fr; }
+                .fab { display: flex; }
+            }
             footer {
                 background-color: var(--primary-color);
                 color: white;
@@ -381,6 +422,7 @@
                     <p>Empowering Innovative Solutions</p>
                 </div>
             </div>
+            <button id="nav-toggle" class="nav-toggle" aria-label="Open menu">☰</button>
             <nav>
                 <ul>
                     <li><a href="#home">Home</a></li>
@@ -482,6 +524,7 @@
                 </div>
             </section>
         </main>
+        <button id="package-fab" class="fab" title="View package">📦</button>
         <footer>
             &copy; <script>document.write(new Date().getFullYear())</script> Oakshift Software. All rights reserved.
         </footer>
@@ -965,6 +1008,9 @@
                 const recurringCost = document.getElementById('package-recurring-amount').textContent.replace(' + ', '') || '£0.00';
                 const initialTotal = document.getElementById('package-initial-total').textContent;
 
+                // Build services HTML and compute selected variant codes
+                const selectedVariantCodes = Array.from(selectedServices.entries()).map(([code, sel]) => `${code}-${sel.variantKey}`);
+
                 const servicesContent = Array.from(selectedServices.entries()).map(([code, service]) => `
                     <div style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
                         <h3 style="margin-bottom: 5px;">${service.name}</h3>
@@ -974,6 +1020,19 @@
                         </p>
                     </div>
                 `).join('');
+
+                // Determine applicable discounts (if any) and render them
+                const applicableDiscounts = findApplicableDiscounts(selectedVariantCodes);
+                const discountsContent = applicableDiscounts.length > 0
+                    ? applicableDiscounts.map(d => {
+                        if (d.type === 'percentage') {
+                            return `<div style="margin-bottom:8px;"><strong>${d.name}</strong>: ${d.value}% off</div>`;
+                        } else if (d.type === 'fixed') {
+                            return `<div style="margin-bottom:8px;"><strong>${d.name}</strong>: -${formatPrice(d.value)}</div>`;
+                        }
+                        return `<div style="margin-bottom:8px;"><strong>${d.name}</strong></div>`;
+                    }).join('')
+                    : '<div style="color:#666">None</div>';
 
                 return `
                     <div style="padding: 20px; font-family: Arial, sans-serif;">
@@ -995,6 +1054,10 @@
                             <p style="font-size: 0.9em; color: #666;">
                                 (Includes setup cost and first month's subscription)
                             </p>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <h2>Discounts Applied</h2>
+                            ${discountsContent}
                         </div>
                         <div>
                             <p>This is a provisional quote and is valid for 30 days. To proceed with this package, please contact us:</p>
@@ -1167,6 +1230,82 @@
             window.copyToClipboard = copyToClipboard;
             window.exportAsPDF = exportAsPDF;
 
+            // Open mobile nav modal (clones the nav links)
+            function openMobileNav() {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                const navHtml = document.querySelector('nav').innerHTML;
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <span class="modal-close">&times;</span>
+                        <div class="mobile-nav-list">${navHtml}</div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                setTimeout(() => modal.classList.add('active'), 10);
+                modal.querySelector('.modal-close').onclick = () => {
+                    modal.classList.remove('active');
+                    setTimeout(() => modal.remove(), 300);
+                };
+                modal.onclick = (e) => { if (e.target === modal) { modal.querySelector('.modal-close').click(); } };
+                // Wire up links inside the modal to navigate SPA and close modal
+                modal.querySelectorAll('a').forEach(a => {
+                    a.addEventListener('click', (ev) => {
+                        ev.preventDefault();
+                        const target = a.getAttribute('href').substring(1);
+                        navigateToPage(target);
+                        modal.querySelector('.modal-close').click();
+                    });
+                });
+            }
+
+            // Open mobile package FAB modal showing current package summary and quick actions
+            function openPackageFabModal() {
+                const modal = document.createElement('div');
+                modal.className = 'modal';
+                const selectedHTML = document.getElementById('selected-services')?.innerHTML || '<div class="card"><p>No services selected yet.</p></div>';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <span class="modal-close">&times;</span>
+                        <h3>Your Package (Preview)</h3>
+                        <div id="fab-package-summary">${selectedHTML}</div>
+                        <div style="margin-top:12px; color:#666; font-size:0.9rem;">Initial Payment: <strong id="fab-initial">${document.getElementById('package-initial-total')?.textContent || '£0.00'}</strong></div>
+                        <div class="modal-actions">
+                            <button class="package-action-button secondary" id="fab-show-options">Show Options</button>
+                            <button class="package-action-button secondary" id="fab-preview">Preview</button>
+                            <button class="package-action-button primary" id="fab-export">Export</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                setTimeout(() => modal.classList.add('active'), 10);
+
+                modal.querySelector('.modal-close').onclick = () => {
+                    modal.classList.remove('active');
+                    setTimeout(() => modal.remove(), 300);
+                };
+                modal.onclick = (e) => { if (e.target === modal) { modal.querySelector('.modal-close').click(); } };
+
+                modal.querySelector('#fab-preview').addEventListener('click', () => {
+                    modal.querySelector('.modal-close').click();
+                    previewPackageQuote();
+                });
+                modal.querySelector('#fab-export').addEventListener('click', () => {
+                    modal.querySelector('.modal-close').click();
+                    exportAsPDF();
+                });
+                modal.querySelector('#fab-show-options').addEventListener('click', () => {
+                    // Close modal and show the packages page options
+                    modal.querySelector('.modal-close').click();
+                    navigateToPage('packages');
+                    // give packages time to load then scroll to the services section
+                    setTimeout(() => {
+                        const servicesSection = document.querySelector('#packages-content .services-section');
+                        if (servicesSection) servicesSection.scrollIntoView({ behavior: 'smooth' });
+                    }, 200);
+                });
+            }
+
             // Handle preview and export button clicks
             document.addEventListener('click', function(e) {
                 if (e.target && e.target.id === 'preview-package') {
@@ -1204,6 +1343,23 @@
             document.addEventListener('DOMContentLoaded', () => {
                 const initialPage = window.location.hash.substring(1) || 'home';
                 navigateToPage(initialPage);
+                // Attach mobile nav toggle
+                const navToggle = document.getElementById('nav-toggle');
+                if (navToggle) navToggle.addEventListener('click', openMobileNav);
+
+                // Attach package FAB handler
+                const packageFab = document.getElementById('package-fab');
+                if (packageFab) packageFab.addEventListener('click', (e) => {
+                    // ensure we're on packages page (switch if necessary)
+                    const current = document.querySelector('main section.active')?.id;
+                    if (current !== 'packages') {
+                        navigateToPage('packages');
+                        // wait a short time to ensure packages loaded
+                        setTimeout(() => openPackageFabModal(), 300);
+                    } else {
+                        openPackageFabModal();
+                    }
+                });
             });
 
             // Establish page routing system for single-page application
