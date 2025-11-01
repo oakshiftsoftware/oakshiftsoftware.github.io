@@ -1,15 +1,15 @@
 [
   {
-    "name": "Core Bundle Discount",
+    "name": "SPA Starter",
     "type": "percentage",
     "value": 15,
     "target": "total",
-    "requiredServices": ["AZHDNLH1", "XAJ8XFNO"]
+    "requiredServices": ["AZHDNLH1-A", "XAJ8XFNO-A"]
   },
   {
-    "name": "Extended Support Special",
+    "name": "Support Special",
     "type": "fixed",
     "value": 20,
-    "requiredServices": ["N5XAM8WP", "W8KJ6CJX"]
+    "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"]
   }
 ]
