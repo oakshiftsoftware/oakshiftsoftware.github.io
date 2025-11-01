@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Core Bundle Discount",
+    "type": "percentage",
+    "value": 15,
+    "target": "total",
+    "requiredServices": ["AZHDNLH1", "XAJ8XFNO"]
+  },
+  {
+    "name": "Extended Support Special",
+    "type": "fixed",
+    "value": 20,
+    "requiredServices": ["N5XAM8WP", "W8KJ6CJX"]
+  }
+]
