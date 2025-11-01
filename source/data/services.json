@@ -40,6 +40,16 @@
         }
     },
     {
+        "code": "GNNXT7NQ", "name": "Revision Retainer",
+        "description": "An ongoing retainer, available for all Oakshift Software projects, that enables a specified number of content / project revisions per month.",
+        "tag": "RR", "category": "Optional",
+        "variants": {
+            "A": ["2 Revisions", 30.00, true],
+            "B": ["4 Revisions", 60.00, true],
+            "C": ["8 Revisions", 135.00, true]
+        }
+    },
+    {
         "code": "W8KJ6CJX", "name": "Project Revisions",
         "description": "Available as in various bundles, and intended for use ONLY with software creation services rendered by Oakshift Software. The term ‘Revision’ pertains to any change or amendment to the project that changes the styling or functionality of the delivered project.",
         "tag": "PR", "category": "Optional",
