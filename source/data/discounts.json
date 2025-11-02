@@ -14,13 +14,13 @@
   {
     "name": "SPA Standard Backup",
     "type": "fixed",
-    "value": 15,
+    "value": 5,
     "requiredServices": ["AZHDNLH1-B", "XAJ8XFNO-A"]
   },
   {
     "name": "SPA Business Backup",
     "type": "fixed",
-    "value": 27.50,
+    "value": 5,
     "requiredServices": ["AZHDNLH1-C", "XAJ8XFNO-A"]
   }
 ]
