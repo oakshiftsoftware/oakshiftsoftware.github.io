@@ -31,7 +31,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                gap: 55%;
+                gap: 50%;
             }
             .brand {
                 display: flex;
@@ -302,12 +302,26 @@
                 border-top: 1px dashed #eee;
             }
             .discount-value {
-                background: var(--secondary-color);
+                background: #62b966;
                 color: white;
                 padding: 0.25rem 0.5rem;
                 border-radius: 3px;
                 display: inline-block;
                 margin: 0.5rem 0;
+            }
+            .discount-service-list {
+                list-style: none;
+                padding: 0;
+                margin: 0.5rem 0 0 0;
+            }
+            .discount-service-list li {
+                padding: 0.25rem 0;
+                color: var(--primary-color);
+            }
+            .discount-service-list li::before {
+                content: "→";
+                color: #62b966;
+                margin-right: 0.5rem;
             }
             .service-header {
                 padding: 1rem;
@@ -638,7 +652,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#packages">Packages</a></li>
-                    <li><a href="#discounts">Discounts</a></li>
+                    <li><a href="#discounts">Deals</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -716,17 +730,18 @@
                     <img src="https://oakshiftsoftware.github.io/source/images/headers/img-4.png" alt="Discounts Banner" />
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
-                        <h1>Available Discounts</h1>
-                        <p>Explore our service combinations for special offers</p>
+                        <h1>Special Deals</h1>
+                        <p>Explore our service combinations for exclusive savings</p>
                     </div>
                 </div>
                 <div class="main-content">
                     <div class="card">
-                        <h2>Current Discounts</h2>
+                        <h2>Current Deals</h2>
+                        <p>All deals are automatically applied when the required services are purchased together, you can try this yourself by building your package with our handy package builder.</p>
                         <div id="discount-grid" class="discount-grid">
                             <div class="discount-card loading">
                                 <div class="loading-spinner"></div>
-                                <p>Loading available discounts...</p>
+                                <p>Loading available deals...</p>
                             </div>
                         </div>
                     </div>
@@ -810,12 +825,30 @@
                 }
             }
 
-            function getServiceNameById(serviceId) {
-                const [baseId] = serviceId.split('-');
-                const service = allServices.find(s => s.id === baseId);
-                const variant = allVariants.find(v => v.id === serviceId);
-                return variant ? `${service?.name || 'Unknown Service'} (${variant.name})` 
-                             : service?.name || 'Unknown Service';
+            function getServiceDetails(serviceId) {
+                // Split the ID into base service ID and variant code
+                const matches = serviceId.match(/([A-Z0-9]+)-([A-Z])/);
+                if (!matches) return { name: 'Unknown Service' };
+
+                const [, baseId, variantCode] = matches;
+                const service = allServices.find(s => s.code === baseId);
+                if (!service) return { name: 'Unknown Service' };
+
+                const variantEntry = Object.entries(service.variants)
+                    .find(([key]) => key === variantCode);
+                
+                if (!variantEntry) return { 
+                    name: service.name,
+                    isRecurring: false
+                };
+
+                const [, [variantName, price, isRecurring]] = variantEntry;
+                return {
+                    name: service.name,
+                    variantName,
+                    price,
+                    isRecurring
+                };
             }
 
             function displayDiscounts(discounts) {
@@ -826,22 +859,37 @@
                     const card = document.createElement('div');
                     card.className = 'discount-card';
 
-                    // Get the required services information
-                    const requiredServices = discount.requiredServices.map(id => 
-                        getServiceNameById(id)).join(' + ');
-
                     // Get the discounted service information
-                    const discountedServiceName = getServiceNameById(discount.discountedService);
+                    const discountedService = getServiceDetails(discount.discountedService);
+                    const discountedServiceText = discountedService.variantName ? 
+                        `${discountedService.name} (${discountedService.variantName})` : 
+                        discountedService.name;
+
+                    // Get the required services information
+                    const requiredServices = discount.requiredServices.map(id => {
+                        const service = getServiceDetails(id);
+                        return service.variantName ? 
+                            `${service.name} (${service.variantName})` : 
+                            service.name;
+                    });
+
+                    const savingsText = discountedService.isRecurring ? 
+                        `Save ${formatPrice(discount.value)}/mo` : 
+                        `Save ${formatPrice(discount.value)}`;
 
                     card.innerHTML = `
                         <h3>${discount.name}</h3>
-                        <div class="discount-value">Save ${formatPrice(discount.value)}</div>
+                        <div class="discount-value">${savingsText}</div>
                         <p class="discount-description">
-                            Get a discount on ${discountedServiceName} when you combine it with the required services.
+                            Get a discount on <strong>${discountedServiceText}</strong>
+                            ${discountedService.isRecurring ? ' monthly fee' : ''}
+                            when you combine it with these services:
                         </p>
                         <div class="discount-requirement">
-                            <strong>Required Services:</strong><br>
-                            ${requiredServices}
+                            <strong>Required Services:</strong>
+                            <ul class="discount-service-list">
+                                ${requiredServices.map(service => `<li>${service}</li>`).join('')}
+                            </ul>
                         </div>
                     `;
 
@@ -1421,7 +1469,7 @@
                                     <div style="margin-bottom:8px;">
                                         <strong>${d.name}</strong>
                                         <div style="color:#666; font-size:0.9em; margin-top:2px;">
-                                            Service reversed: ${service.name}<br>
+                                            Service charge reversed: ${service.name}<br>
                                             Amount: -${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}
                                         </div>
                                     </div>`;
@@ -1461,8 +1509,9 @@
                             </p>
                         </div>
                         <div>
-                            <p>This is a provisional quote and is valid for 30 days. To proceed with this package, please contact us:</p>
+                            <p>This is a provisional quote and is not a valid contract until you contact us with your package details and confirm your purchase:</p><br>
                             <p>Email: oakshiftsoftware@gmail.com</p>
+                            <p>Phone: +44(0) 7542 104 333</p><br>
                             <p>Please reference: ${pkgReference}</p>
                         </div>
                     </div>
