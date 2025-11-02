@@ -1,12 +1,5 @@
 [
   {
-    "name": "SPA Starter",
-    "type": "percentage",
-    "value": 15,
-    "target": "total",
-    "requiredServices": ["AZHDNLH1-A", "XAJ8XFNO-A"]
-  },
-  {
     "name": "Support Special",
     "type": "fixed",
     "value": 20,
@@ -15,7 +8,19 @@
   {
     "name": "SPA Personal Backup",
     "type": "fixed",
-    "value": 20,
-    "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"]
+    "value": 5,
+    "requiredServices": ["AZHDNLH1-A", "XAJ8XFNO-A"]
+  },
+  {
+    "name": "SPA Standard Backup",
+    "type": "fixed",
+    "value": 15,
+    "requiredServices": ["AZHDNLH1-B", "XAJ8XFNO-A"]
+  },
+  {
+    "name": "SPA Business Backup",
+    "type": "fixed",
+    "value": 27.50,
+    "requiredServices": ["AZHDNLH1-C", "XAJ8XFNO-A"]
   }
 ]
