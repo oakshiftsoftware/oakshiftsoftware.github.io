@@ -198,8 +198,116 @@
                 color: white;
                 padding: 0.25rem 0.5rem;
                 border-radius: 3px;
-                font-size: 0.8rem;
-                align-self: flex-start;
+            }
+            .loading-spinner {
+                width: 50px;
+                height: 50px;
+                border: 3px solid #f3f3f3;
+                border-top: 3px solid var(--secondary-color);
+                border-radius: 50%;
+                margin: 20px auto;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            .discount-card.loading {
+                text-align: center;
+                color: #666;
+            }
+            .discount-requirement {
+                color: #666;
+                font-size: 0.9rem;
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                border-top: 1px dashed #eee;
+            }
+            .discount-value {
+                background: var(--secondary-color);
+                color: white;
+                padding: 0.25rem 0.5rem;
+                border-radius: 3px;
+                display: inline-block;
+                margin: 0.5rem 0;
+            }
+            /* Discounts Page Styles */
+            .discount-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                padding: 1rem 0;
+            }
+            .discount-card {
+                background: white;
+                padding: 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .discount-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            }
+            .discount-card h3 {
+                color: var(--primary-color);
+                margin-bottom: 1rem;
+                font-size: 1.25rem;
+            }
+            .discount-description {
+                color: #666;
+                margin-bottom: 1rem;
+                line-height: 1.4;
+            }
+            .discount-details {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .discount-details li {
+                padding: 0.5rem 0;
+                border-bottom: 1px solid #eee;
+                color: var(--primary-color);
+            }
+            .discount-details li:last-child {
+                border-bottom: none;
+            }
+            .discount-details li::before {
+                content: "★";
+                color: var(--secondary-color);
+                margin-right: 0.5rem;
+            }
+            .loading-spinner {
+                width: 50px;
+                height: 50px;
+                border: 3px solid #f3f3f3;
+                border-top: 3px solid var(--secondary-color);
+                border-radius: 50%;
+                margin: 20px auto;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            .discount-card.loading {
+                text-align: center;
+                color: #666;
+            }
+            .discount-requirement {
+                color: #666;
+                font-size: 0.9rem;
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                border-top: 1px dashed #eee;
+            }
+            .discount-value {
+                background: var(--secondary-color);
+                color: white;
+                padding: 0.25rem 0.5rem;
+                border-radius: 3px;
+                display: inline-block;
+                margin: 0.5rem 0;
             }
             .service-header {
                 padding: 1rem;
@@ -530,6 +638,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#packages">Packages</a></li>
+                    <li><a href="#discounts">Discounts</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -549,11 +658,18 @@
                 <div class="main-content">
                     <div class="card">
                         <h2>Welcome to Oakshift Software</h2>
-                        <p>Your partner in delivering cutting-edge software solutions tailored to your business needs. Explore our services and packages to find the perfect fit for your organization.</p>
+                        <p>At Oakshift Software, we build more than code. We partner with you to design and deliver software that works for your business — not the other way around. Whether you need a reliable internal tool, a scalable customer-facing app, or seamless integrations that simplify your workflow, we’re here to make it happen.</p>
                     </div>
                     <div class="card">
-                        <h2>Why Choose Us?</h2>
-                        <p>With years of experience in software development and a commitment to excellence, we deliver solutions that drive business growth and innovation.</p>
+                        <h2>Why Work With Us?</h2>
+                        <p>Experienced, dependable, and focused on your success.</p>
+                        <ul style="margin: 1rem 0 0 0;">
+                            <li><b>Tailored solutions</b> – We don’t deliver off-the-shelf. Every project is crafted to your unique goals and challenges.</li>
+                            <li><b>End-to-end ownership</b> – From ideation and architecture through to deployment and maintenance, we’re with you every step of the way.</li>
+                            <li><b>Business-first mindset</b> – We speak both tech and business. Our work doesn’t just run — it delivers measurable results.</li>
+                            <li><b>Clear communication & strong collaboration</b> – You’ll always know what’s happening, what’s next and why.</li>
+                            <li><b>Flexible engagement</b> – Full projects, modular tasks, or ongoing support — you decide how we work together.</li>
+                        </ul>
                     </div>
                 </div>
             </section>
@@ -590,6 +706,29 @@
                     <div class="card">
                         <h2>Our Packages</h2>
                         <p>Loading packages...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Discounts Page -->
+            <section id="discounts" class="hidden">
+                <div class="hero-banner">
+                    <img src="https://oakshiftsoftware.github.io/source/images/headers/img-4.png" alt="Discounts Banner" />
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <h1>Available Discounts</h1>
+                        <p>Explore our service combinations for special offers</p>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="card">
+                        <h2>Current Discounts</h2>
+                        <div id="discount-grid" class="discount-grid">
+                            <div class="discount-card loading">
+                                <div class="loading-spinner"></div>
+                                <p>Loading available discounts...</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -631,13 +770,114 @@
             &copy; <script>document.write(new Date().getFullYear())</script> Oakshift Software. All rights reserved.
         </footer>
         <script>
-            // Service data URL
+            // Service data URLs
             const services_list_url = "https://oakshiftsoftware.github.io/source/data/services.json";
+            const variants_url = "https://oakshiftsoftware.github.io/source/data/variants.json";
             const discounts_url = "https://oakshiftsoftware.github.io/source/data/discounts.json";
             
-            // Store selected services
+            // Store data
             let selectedServices = new Map();
             let availableDiscounts = [];
+            let allServices = [];
+            let allVariants = [];
+
+            // Load services and variants
+            async function loadServiceData() {
+                try {
+                    const [servicesResponse, variantsResponse] = await Promise.all([
+                        fetch(services_list_url),
+                        fetch(variants_url)
+                    ]);
+                    allServices = await servicesResponse.json();
+                    allVariants = await variantsResponse.json();
+                } catch (error) {
+                    console.error('Error loading service data:', error);
+                }
+            }
+
+            // Discounts handling
+            async function loadDiscounts() {
+                try {
+                    if (allServices.length === 0 || allVariants.length === 0) {
+                        await loadServiceData();
+                    }
+                    const response = await fetch(discounts_url);
+                    const discounts = await response.json();
+                    displayDiscounts(discounts);
+                } catch (error) {
+                    console.error('Error loading discounts:', error);
+                    displayDiscountError();
+                }
+            }
+
+            function getServiceNameById(serviceId) {
+                const [baseId] = serviceId.split('-');
+                const service = allServices.find(s => s.id === baseId);
+                const variant = allVariants.find(v => v.id === serviceId);
+                return variant ? `${service?.name || 'Unknown Service'} (${variant.name})` 
+                             : service?.name || 'Unknown Service';
+            }
+
+            function displayDiscounts(discounts) {
+                const grid = document.getElementById('discount-grid');
+                grid.innerHTML = '';
+
+                discounts.forEach(discount => {
+                    const card = document.createElement('div');
+                    card.className = 'discount-card';
+
+                    // Get the required services information
+                    const requiredServices = discount.requiredServices.map(id => 
+                        getServiceNameById(id)).join(' + ');
+
+                    // Get the discounted service information
+                    const discountedServiceName = getServiceNameById(discount.discountedService);
+
+                    card.innerHTML = `
+                        <h3>${discount.name}</h3>
+                        <div class="discount-value">Save ${formatPrice(discount.value)}</div>
+                        <p class="discount-description">
+                            Get a discount on ${discountedServiceName} when you combine it with the required services.
+                        </p>
+                        <div class="discount-requirement">
+                            <strong>Required Services:</strong><br>
+                            ${requiredServices}
+                        </div>
+                    `;
+
+                    grid.appendChild(card);
+                });
+            }
+
+            function displayDiscountError() {
+                const grid = document.getElementById('discount-grid');
+                grid.innerHTML = `
+                    <div class="discount-card">
+                        <h3>Error Loading Discounts</h3>
+                        <p class="discount-description">
+                            We're having trouble loading the current discounts. Please try again later.
+                        </p>
+                    </div>
+                `;
+            }
+
+            // Load discounts when the discounts page is shown
+            document.addEventListener('DOMContentLoaded', () => {
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.target.id === 'discounts' && 
+                            !mutation.target.classList.contains('hidden')) {
+                            loadDiscounts();
+                        }
+                    });
+                });
+
+                const discountsSection = document.getElementById('discounts');
+                observer.observe(discountsSection, { 
+                    attributes: true, 
+                    attributeFilter: ['class'] 
+                });
+            });
 
             // Format price as currency
             function formatPrice(price) {
