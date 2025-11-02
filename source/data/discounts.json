@@ -11,5 +11,11 @@
     "type": "fixed",
     "value": 20,
     "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"]
+  },
+  {
+    "name": "SPA Personal Backup",
+    "type": "fixed",
+    "value": 20,
+    "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"]
   }
 ]
