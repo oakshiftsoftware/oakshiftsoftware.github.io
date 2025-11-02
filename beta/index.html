@@ -31,6 +31,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                gap: 55%;
             }
             .brand {
                 display: flex;
@@ -72,8 +73,7 @@
                 padding: 2rem;
             }
             .hero-banner {
-                margin-bottom: 2rem;
-                width: 100%;
+                width: -webkit-fill-available;
                 height: 300px;
                 overflow: hidden;
                 position: relative;
@@ -116,17 +116,18 @@
             .hero-button {
                 display: inline-block;
                 padding: 0.8rem 1.5rem;
-                background: var(--secondary-color);
+                background: #646464;
                 color: white;
                 text-decoration: none;
                 border-radius: 5px;
+                font-weight: bold;
                 transition: background-color 0.3s;
             }
             .hero-button:hover {
-                background: #149f85;
+                background: #474747;
             }
             .card {
-                background-color: white;
+                background-color: #fafafa;
                 padding: 2rem;
                 margin-bottom: 2rem;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -178,7 +179,7 @@
             .service-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-                gap: 2rem;
+                gap: 0rem 2rem;
             }
             .service-card {
                 display: flex;
@@ -245,11 +246,12 @@
                 padding: 1.5rem;
                 border-radius: 8px;
                 box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                height: fit-content;
             }
             .package-total {
                 margin-top: 1rem;
                 padding-top: 1rem;
-                border-top: 2px solid var(--secondary-color);
+                border-top: 2px solid var(--background-color);
                 font-size: 1.2rem;
                 font-weight: bold;
             }
@@ -260,7 +262,7 @@
                 color: white;
                 border-radius: 3px;
                 font-size: 0.8rem;
-                margin-left: 0.5rem;
+                margin-top: 0.1rem;
             }
             .package-actions {
                 margin-top: 1.5rem;
@@ -277,11 +279,11 @@
                 transition: background-color 0.2s;
             }
             .package-action-button.primary {
-                background-color: var(--secondary-color);
+                background-color: #646464;
                 color: white;
             }
             .package-action-button.primary:hover {
-                background-color: #149f85;
+                background-color: #474747;
             }
             .package-action-button.secondary {
                 background-color: #e9ecef;
@@ -328,7 +330,7 @@
                 z-index: 1000;
                 left: 0;
                 top: 0;
-                width: 100%;
+                width: -webkit-fill-available;
                 height: 100%;
                 background-color: rgba(0, 0, 0, 0.5);
             }
@@ -344,6 +346,62 @@
                 border-radius: 8px;
                 max-width: 800px;
                 width: 100%;
+                .nav-toggle {
+                    display: none;
+                    background: none;
+                    border: 2px solid transparent;
+                    color: white;
+                    font-size: 1.6rem;
+                    cursor: pointer;
+                    padding: 8px;
+                    border-radius: 4px;
+                    transition: all 0.2s ease;
+                }
+
+                .nav-toggle:hover {
+                    border-color: rgba(255, 255, 255, 0.2);
+                    background: rgba(255, 255, 255, 0.1);
+                }
+
+                .nav-toggle:active {
+                    transform: scale(0.95);
+                }
+
+                .mobile-nav-list {
+                    padding: 2rem 0 0 0;
+                }
+
+                .mobile-nav-list ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .mobile-nav-list ul li {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .mobile-nav-list ul li a {
+                    display: block;
+                    padding: 1rem 1.5rem;
+                    color: var(--primary-color);
+                    text-decoration: none;
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    transition: all 0.2s ease;
+                    border-left: 4px solid transparent;
+                }
+
+                .mobile-nav-list ul li a:hover {
+                    background: #f5f5f5;
+                    border-left-color: var(--primary-color);
+                    text-decoration: none;
+                }
+
+                .mobile-nav-list ul li a:active {
+                    background: #eeeeee;
+                }
                 max-height: 90vh;
                 overflow-y: auto;
                 position: relative;
@@ -356,6 +414,50 @@
                 font-size: 24px;
                 color: #666;
             }
+            .modal-close:hover {
+                color: darkred;
+            }
+
+                /* Mobile nav specific modal styling */
+                .mobile-nav-modal .modal-content {
+                    padding: 0;
+                    border-radius: 0;
+                    max-width: 300px;
+                    margin-left: auto;
+                    margin-right: 0;
+                    height: 100vh;
+                    max-height: none;
+                    animation: slideIn 0.3s ease-out;
+                }
+
+                .mobile-nav-modal {
+                    background-color: rgba(0, 0, 0, 0.3);
+                    backdrop-filter: blur(4px);
+                }
+
+                .mobile-nav-header {
+                    background: var(--primary-color);
+                    color: white;
+                    padding: 1.5rem;
+                    position: relative;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                }
+
+                .mobile-nav-header h3 {
+                    margin: 0;
+                    font-size: 1.2rem;
+                    color: white;
+                }
+
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                    }
+                    to {
+                        transform: translateX(0);
+                    }
+                }
+
             .modal-actions {
                 margin-top: 20px;
                 display: flex;
@@ -380,13 +482,13 @@
 
             .fab {
                 position: fixed;
-                right: 16px;
-                bottom: 80px;
+                right: 20px;
+                bottom: 20px;
                 width: 56px;
                 height: 56px;
                 border-radius: 28px;
-                background: var(--secondary-color);
-                color: white;
+                background: var(--primary-color);
+                color: var(--background-color);
                 display: none; /* visible on mobile via media query */
                 align-items: center;
                 justify-content: center;
@@ -419,7 +521,7 @@
                 <img src="https://oakshiftsoftware.github.io/source/images/logos/logo-b.png" />
                 <div class="brand-text">
                     <h1>Oakshift Software</h1>
-                    <p>Empowering Innovative Solutions</p>
+                    <p></p>
                 </div>
             </div>
             <button id="nav-toggle" class="nav-toggle" aria-label="Open menu">☰</button>
@@ -436,7 +538,7 @@
             <!-- Home Page -->
             <section id="home" class="active">
                 <div class="hero-banner">
-                    <img src="https://placehold.co/2000x600/515151/d9d9d9/png?text=Welcome+to+Oakshift+Software" alt="Hero Banner" />
+                    <img src="https://oakshiftsoftware.github.io/source/images/headers/img-5.png" alt="Hero Banner" />
                     <div class="hero-overlay"></div>
                     <div class="hero-content">
                         <h1>Welcome to Oakshift Software</h1>
@@ -706,7 +808,7 @@
                     <div id="selected-services"></div>
                     <div class="package-total">
                         <div>One-time Setup Cost: <span id="package-total-amount">${formatPrice(0)}</span></div>
-                        <div>Monthly Cost: <span id="package-recurring-amount"></span></div>
+                        <div>Monthly Cost: <span id="package-recurring-amount">£0.00/mo</span></div>
                         <div style="margin-top: 10px; font-size: 0.9em; color: #666;">
                             Initial Payment: <span id="package-initial-total"></span>
                             <div style="font-size: 0.8em; color: #888;">(Setup Cost + First Month)</div>
@@ -764,7 +866,6 @@
                             name,
                             isRecurring
                         });
-
                         // Check if we have at least one Core service
                         const hasCore = Array.from(selectedServices.values())
                             .some(service => service.serviceType === 'Core');
@@ -774,6 +875,20 @@
                         optionalRadios.forEach(radio => {
                             radio.disabled = !hasCore;
                         });
+
+                        // If a Core service is selected, disable other Core service options
+                        const coreRadios = document.querySelectorAll('input[type="radio"][data-service-type="Core"]');
+                        if (hasCore) {
+                            // find the first selected core service code
+                            const selectedCoreCode = Array.from(selectedServices.entries()).find(([c, s]) => s.serviceType === 'Core')[0];
+                            coreRadios.forEach(r => {
+                                // keep radios for the selected core enabled so user can change variants
+                                r.disabled = (r.dataset.service !== selectedCoreCode);
+                            });
+                        } else {
+                            // no core selected - ensure all core radios enabled
+                            coreRadios.forEach(r => r.disabled = false);
+                        }
 
                         // Add warning if trying to select Optional without Core
                         if (serviceType === 'Optional' && !hasCore) {
@@ -813,6 +928,18 @@
                         optionalRadios.forEach(radio => {
                             radio.disabled = !hasCore;
                         });
+
+                        // Manage core radios: if there is still a core selected, keep only that core's radios enabled
+                        const coreRadios = document.querySelectorAll('input[type="radio"][data-service-type="Core"]');
+                        if (hasCore) {
+                            const remainingCore = Array.from(selectedServices.entries()).find(([c, s]) => s.serviceType === 'Core');
+                            const remainingCode = remainingCore ? remainingCore[0] : null;
+                            coreRadios.forEach(r => {
+                                r.disabled = remainingCode ? (r.dataset.service !== remainingCode) : false;
+                            });
+                        } else {
+                            coreRadios.forEach(r => r.disabled = false);
+                        }
 
                         // Remove any Optional services if no Core services remain
                         if (!hasCore) {
@@ -956,40 +1083,60 @@
                 const applicableDiscounts = findApplicableDiscounts(selectedVariantCodes);
                 if (applicableDiscounts.length > 0) {
                     applicableDiscounts.forEach(discount => {
-                        if (discount.type === 'percentage') {
-                            if (discount.target === 'total') {
-                                const discountAmount = oneTimeTotal * (discount.value / 100);
-                                oneTimeTotal -= discountAmount;
+                        // Handle service-specific discounts (price reversal)
+                        if (discount.discountedService && selectedVariantCodes.includes(discount.discountedService)) {
+                            // Find the service being discounted
+                            const [serviceCode, variantKey] = discount.discountedService.split('-');
+                            const service = selectedServices.get(serviceCode);
+                            if (service && service.variantKey === variantKey) {
+                                // Reverse the price of the specific service
+                                if (service.isRecurring) {
+                                    recurringTotal -= service.price;
+                                } else {
+                                    oneTimeTotal -= service.price;
+                                }
                                 summaryHTML += `
                                     <div class="service-item">
                                         <div class="service-item-details">
                                             <div>${discount.name}</div>
-                                            <div class="discount-badge">-${discount.value}%</div>
+                                            <div class="discount-badge">-${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}</div>
                                         </div>
                                     </div>
                                 `;
                             }
-                        } else if (discount.type === 'fixed') {
-                            oneTimeTotal -= discount.value;
-                            summaryHTML += `
-                                <div class="service-item">
-                                    <div class="service-item-details">
-                                        <div>${discount.name}</div>
-                                        <div class="discount-badge">-${formatPrice(discount.value)}</div>
+                        } else {
+                            // Handle regular fixed/percentage discounts
+                            if (discount.type === 'percentage') {
+                                if (discount.target === 'total') {
+                                    const discountAmount = oneTimeTotal * (discount.value / 100);
+                                    oneTimeTotal -= discountAmount;
+                                    summaryHTML += `
+                                        <div class="service-item">
+                                            <div class="service-item-details">
+                                                <div>${discount.name}</div>
+                                                <div class="discount-badge">-${discount.value}%</div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+                            } else if (discount.type === 'fixed') {
+                                oneTimeTotal -= discount.value;
+                                summaryHTML += `
+                                    <div class="service-item">
+                                        <div class="service-item-details">
+                                            <div>${discount.name}</div>
+                                            <div class="discount-badge">-${formatPrice(discount.value)}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            `;
+                                `;
+                            }
                         }
                     });
                 }
 
                 selectedServicesDiv.innerHTML = summaryHTML;
                 totalAmount.textContent = formatPrice(oneTimeTotal);
-                if (recurringTotal > 0) {
-                    recurringAmount.textContent = ` + ${formatPrice(recurringTotal)}/mo`;
-                } else {
-                    recurringAmount.textContent = '';
-                }
+                recurringAmount.textContent = recurringTotal > 0 ? formatPrice(recurringTotal) + '/mo' : formatPrice(0) + '/mo';
 
                 // Enable/disable buttons based on whether there are any services selected
                 const hasServices = selectedServices.size > 0;
@@ -1005,7 +1152,7 @@
             function generatePDFContent() {
                 const pkgReference = 'PKG-' + Math.random().toString(36).substr(2, 9).toUpperCase();
                 const oneTimeCost = document.getElementById('package-total-amount').textContent;
-                const recurringCost = document.getElementById('package-recurring-amount').textContent.replace(' + ', '') || '£0.00';
+                const recurringCost = document.getElementById('package-recurring-amount').textContent;
                 const initialTotal = document.getElementById('package-initial-total').textContent;
 
                 // Build services HTML and compute selected variant codes
@@ -1025,7 +1172,21 @@
                 const applicableDiscounts = findApplicableDiscounts(selectedVariantCodes);
                 const discountsContent = applicableDiscounts.length > 0
                     ? applicableDiscounts.map(d => {
-                        if (d.type === 'percentage') {
+                        if (d.discountedService && selectedVariantCodes.includes(d.discountedService)) {
+                            // Find the reversed service details
+                            const [serviceCode, variantKey] = d.discountedService.split('-');
+                            const service = selectedServices.get(serviceCode);
+                            if (service && service.variantKey === variantKey) {
+                                return `
+                                    <div style="margin-bottom:8px;">
+                                        <strong>${d.name}</strong>
+                                        <div style="color:#666; font-size:0.9em; margin-top:2px;">
+                                            Service reversed: ${service.name}<br>
+                                            Amount: -${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}
+                                        </div>
+                                    </div>`;
+                            }
+                        } else if (d.type === 'percentage') {
                             return `<div style="margin-bottom:8px;"><strong>${d.name}</strong>: ${d.value}% off</div>`;
                         } else if (d.type === 'fixed') {
                             return `<div style="margin-bottom:8px;"><strong>${d.name}</strong>: -${formatPrice(d.value)}</div>`;
@@ -1046,6 +1207,10 @@
                             <h2>Selected Services</h2>
                             ${servicesContent}
                         </div>
+                        <div style="margin-bottom: 20px;">
+                            <h2>Discounts Applied</h2>
+                            ${discountsContent}
+                        </div>
                         <div style="margin-bottom: 30px;">
                             <h2>Cost Breakdown</h2>
                             <p>One-time Setup Cost: ${oneTimeCost}</p>
@@ -1054,10 +1219,6 @@
                             <p style="font-size: 0.9em; color: #666;">
                                 (Includes setup cost and first month's subscription)
                             </p>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <h2>Discounts Applied</h2>
-                            ${discountsContent}
                         </div>
                         <div>
                             <p>This is a provisional quote and is valid for 30 days. To proceed with this package, please contact us:</p>
@@ -1163,8 +1324,14 @@
             // Find applicable discounts by comparing required variant codes (e.g. "AZHDNLH1-A")
             function findApplicableDiscounts(selectedVariantCodes) {
                 return availableDiscounts.filter(discount => {
+                    // Check if all required services are present
                     if (Array.isArray(discount.requiredServices) && discount.requiredServices.length > 0) {
-                        return discount.requiredServices.every(req => selectedVariantCodes.includes(req));
+                        const requiredMet = discount.requiredServices.every(req => selectedVariantCodes.includes(req));
+                        // For service-specific discounts, also verify the discounted service exists
+                        if (requiredMet && discount.discountedService) {
+                            return selectedVariantCodes.includes(discount.discountedService);
+                        }
+                        return requiredMet;
                     }
                     return false;
                 });
@@ -1267,7 +1434,7 @@
                 modal.innerHTML = `
                     <div class="modal-content">
                         <span class="modal-close">&times;</span>
-                        <h3>Your Package (Preview)</h3>
+                        <h3>Your Package (Preview)</h3><br /><br />
                         <div id="fab-package-summary">${selectedHTML}</div>
                         <div style="margin-top:12px; color:#666; font-size:0.9rem;">Initial Payment: <strong id="fab-initial">${document.getElementById('package-initial-total')?.textContent || '£0.00'}</strong></div>
                         <div class="modal-actions">
