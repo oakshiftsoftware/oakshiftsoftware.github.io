@@ -3,24 +3,28 @@
     "name": "Support Special",
     "type": "fixed",
     "value": 20,
-    "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"]
+    "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"],
+    "discountedService": "W8KJ6CJX-A"
   },
   {
     "name": "SPA Personal Backup",
     "type": "fixed",
     "value": 5,
-    "requiredServices": ["AZHDNLH1-A", "XAJ8XFNO-A"]
+    "requiredServices": ["AZHDNLH1-A", "XAJ8XFNO-A"],
+    "discountedService": "XAJ8XFNO-A"
   },
   {
     "name": "SPA Standard Backup",
     "type": "fixed",
     "value": 5,
-    "requiredServices": ["AZHDNLH1-B", "XAJ8XFNO-A"]
+    "requiredServices": ["AZHDNLH1-B", "XAJ8XFNO-A"],
+    "discountedService": "XAJ8XFNO-A"
   },
   {
     "name": "SPA Business Backup",
     "type": "fixed",
     "value": 5,
-    "requiredServices": ["AZHDNLH1-C", "XAJ8XFNO-A"]
+    "requiredServices": ["AZHDNLH1-C", "XAJ8XFNO-A"],
+    "discountedService": "XAJ8XFNO-A"
   }
 ]
