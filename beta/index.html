@@ -2380,6 +2380,9 @@
 
             // Function to handle page navigation
             function navigateToPage(pageId) {
+                // Scroll to top of page
+                window.scrollTo(0, 0);
+                
                 sections.forEach(section => {
                     if (section.id === pageId) {
                         section.classList.remove('hidden');
@@ -2404,6 +2407,16 @@
 
             // Check initial URL hash on page load
             document.addEventListener('DOMContentLoaded', () => {
+                // Handle hero banner button click
+                const heroButton = document.querySelector('.hero-button');
+                if (heroButton) {
+                    heroButton.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetId = heroButton.getAttribute('href').substring(1);
+                        navigateToPage(targetId);
+                    });
+                }
+
                 const initialPage = window.location.hash.substring(1) || 'home';
                 navigateToPage(initialPage);
                 // Attach mobile nav toggle
