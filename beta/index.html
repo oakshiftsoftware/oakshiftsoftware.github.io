@@ -141,14 +141,43 @@
                 padding: 0;
                 margin: 1rem 0;
             }
+            .service-header {
+                /* Not clickable - header should not open modal */
+                cursor: default;
+                transition: background-color 0.15s ease;
+                position: relative;
+            }
+            .service-header:hover {
+                background-color: rgba(0,0,0,0.75);
+            }
             .variant-item {
                 display: flex;
                 justify-content: space-between;
-                padding: 0.5rem;
+                padding: 0.75rem 0 0.75rem 0;
                 border-bottom: 1px solid #eee;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                position: relative;
+                padding-right: 2.5rem;
             }
             .variant-item:last-child {
                 border-bottom: none;
+            }
+            .variant-item::after {
+                content: "ℹ️";
+                position: absolute;
+                right: 0rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 1.2rem;
+                opacity: 0.7;
+                transition: opacity 0.2s;
+            }
+            .variant-item:hover {
+                background-color: #f8f9fa;
+            }
+            .variant-item:hover::after {
+                opacity: 1;
             }
             .category-tag {
                 display: inline-block;
@@ -211,6 +240,10 @@
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
+            }
+            @keyframes modalSlideIn {
+                from { transform: translateY(20px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
             }
             .discount-card.loading {
                 text-align: center;
@@ -413,6 +446,92 @@
             }
             .package-action-button.secondary:hover {
                 background-color: #dee2e6;
+            }
+            /* Modal Styles */
+            .modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;  /* Changed from flex to none */
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+            }
+            .modal:not(.hidden) {
+                display: flex;  /* Show modal when not hidden */
+            }
+            .modal-content {
+                background: white;
+                border-radius: 8px;
+                width: 90%;
+                max-width: 600px;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+                transform: translateY(0);
+                animation: modalSlideIn 0.3s ease;
+            }
+            .modal-header {
+                padding: 1.5rem;
+                background: var(--primary-color);
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .modal-header h3 {
+                margin: 0;
+            }
+            .modal-close {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 0;
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                transition: background-color 0.2s;
+            }
+            .modal-close:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+            .modal-body {
+                padding: 1.5rem;
+            }
+            .features-section {
+                margin-top: 1.5rem;
+            }
+            .features-section h4 {
+                color: var(--primary-color);
+                margin-bottom: 1rem;
+            }
+            .feature-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            .feature-list li {
+                padding: 0.5rem 0;
+                display: flex;
+                align-items: start;
+            }
+            .feature-list li::before {
+                content: "✓";
+                color: var(--secondary-color);
+                margin-right: 0.75rem;
+                font-weight: bold;
+            }
+            #modal-description {
+                line-height: 1.6;
+                color: #666;
             }
             .remove-service {
                 background: none;
@@ -781,6 +900,24 @@
             </section>
         </main>
         <button id="package-fab" class="fab" title="View package">📦</button>
+
+        <!-- Service Info Modal -->
+        <div id="service-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title"></h3>
+                    <button class="modal-close" onclick="closeServiceModal()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div id="modal-description"></div>
+                    <div class="features-section">
+                        <h4>Features:</h4>
+                        <ul id="modal-features" class="feature-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer>
             &copy; <script>document.write(new Date().getFullYear())</script> Oakshift Software. All rights reserved.
         </footer>
@@ -911,6 +1048,7 @@
 
             // Load discounts when the discounts page is shown
             document.addEventListener('DOMContentLoaded', () => {
+                // Observer for discounts page
                 const observer = new MutationObserver((mutations) => {
                     mutations.forEach((mutation) => {
                         if (mutation.target.id === 'discounts' && 
@@ -925,6 +1063,39 @@
                     attributes: true, 
                     attributeFilter: ['class'] 
                 });
+
+                // Event delegation for modal triggers
+                document.addEventListener('click', (event) => {
+                    // ignore clicks inside the modal content
+                    if (event.target.closest('.modal-content')) return;
+
+                    // Service header clicks are intentionally ignored (headers are not clickable)
+
+                    // Variant item click
+                    const variantItem = event.target.closest('.variant-item');
+                    if (variantItem) {
+                        const serviceData = variantItem.getAttribute('data-service-data');
+                        const variantKey = variantItem.getAttribute('data-variant-key');
+                        if (serviceData && variantKey) {
+                            try { showServiceModal(serviceData, variantKey); } catch (e) { console.error(e); }
+                        }
+                        return;
+                    }
+
+                    // Variant selector click (but not the radio input itself)
+                    const variantSelector = event.target.closest('.variant-selector');
+                    if (variantSelector && !event.target.matches('input[type="radio"]')) {
+                        const input = variantSelector.querySelector('input');
+                        if (input) {
+                            const serviceData = input.getAttribute('data-service-data');
+                            const variantKey = input.getAttribute('data-variant-key');
+                            if (serviceData && variantKey) {
+                                try { showServiceModal(serviceData, variantKey); } catch (e) { console.error(e); }
+                            }
+                        }
+                        return;
+                    }
+                });
             });
 
             // Format price as currency
@@ -935,6 +1106,74 @@
                 }).format(price);
             }
 
+            // Modal Functions
+            function showServiceModal(serviceData, variantKey = null) {
+                try {
+                    console.log('showServiceModal called', { serviceData, variantKey });
+                    // Parse the service data if it's a string
+                    const service = typeof serviceData === 'string' ? JSON.parse(serviceData) : serviceData;
+                    
+                    const modal = document.getElementById('service-modal');
+                    const title = document.getElementById('modal-title');
+                    const description = document.getElementById('modal-description');
+                    const featuresList = document.getElementById('modal-features');
+
+                    if (!modal || !title || !description || !featuresList) {
+                        console.error('Modal elements missing');
+                        return;
+                    }
+
+                    // Set title and base description
+                    title.textContent = service.name || 'Service';
+                    description.textContent = service.description || '';
+
+                    // Clear existing features
+                    featuresList.innerHTML = '';
+
+                    // If a specific variant is selected, show its features
+                    if (variantKey && service.variants && service.variants[variantKey]) {
+                        const [variantName, , , variantInfo] = service.variants[variantKey];
+                        title.textContent = `${service.name} - ${variantName}`;
+                        if (variantInfo && variantInfo.description) {
+                            description.textContent = variantInfo.description;
+                            
+                            if (variantInfo.features && Array.isArray(variantInfo.features)) {
+                                variantInfo.features.forEach(feature => {
+                                    const li = document.createElement('li');
+                                    li.textContent = feature;
+                                    featuresList.appendChild(li);
+                                });
+                            }
+                        }
+                    }
+
+                    // Show modal (ensure display + class)
+                    modal.style.display = 'flex';
+                    // small timeout to allow styles to apply before removing hidden
+                    setTimeout(() => modal.classList.remove('hidden'), 10);
+                } catch (error) {
+                    console.error('Error showing modal:', error);
+                }
+            }
+
+            function closeServiceModal() {
+                const modal = document.getElementById('service-modal');
+                if (!modal) return;
+                modal.classList.add('hidden');
+                // hide from layout after animation duration
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            }
+
+            // Close modal when clicking outside
+            document.addEventListener('click', (event) => {
+                const modal = document.getElementById('service-modal');
+                if (event.target === modal) {
+                    closeServiceModal();
+                }
+            });
+
             // Function to create a service card element
             function createServiceCard(service, isBuilder = false) {
                 const card = document.createElement('div');
@@ -942,6 +1181,25 @@
                 
                 const variantsList = Object.entries(service.variants)
                     .map(([key, [name, price, isRecurring]]) => {
+                        const variantHtml = isBuilder ? `
+                            <div class="variant-selector">
+                                <input type="radio" 
+                                    name="service_${service.code}" 
+                                    value="${key}" 
+                                    data-service="${service.code}"
+                                    data-price="${price}"
+                                    data-name="${name}"
+                                    data-recurring="${isRecurring}"
+                                    data-variant-key="${key}"
+                                    data-service-data='${JSON.stringify(service)}'>
+                                <span>${name}</span>
+                                <span style="margin-left: auto">${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
+                            </div>` : `
+                            <div class="variant-item" data-variant-key="${key}" data-service-data='${JSON.stringify(service)}'>
+                                <span>${name}</span>
+                                <span>${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
+                            </div>`;
+                        return variantHtml;
                         if (isBuilder) {
                             return `
                                 <div class="variant-selector">
