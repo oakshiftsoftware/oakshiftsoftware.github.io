@@ -933,6 +933,85 @@
             let allServices = [];
             let allVariants = [];
 
+            // Package cache helpers (persist package between page navigation)
+            const PACKAGE_CACHE_KEY = 'oakshift_package_v1';
+            let currentReferenceCode = null;
+
+            // Generate a reference code based on package content hash
+            function generatePackageHash() {
+                const servicesStr = Array.from(selectedServices.entries())
+                    .map(([code, sel]) => `${code}-${sel.variantKey}`)
+                    .sort()
+                    .join('|');
+                return btoa(servicesStr).replace(/[^a-zA-Z0-9]/g, '').substr(0, 8).toUpperCase();
+            }
+
+            function savePackageCache() {
+                try {
+                    // Check if we need a new reference code
+                    if (!currentReferenceCode) {
+                        currentReferenceCode = 'PKG-' + generatePackageHash();
+                    }
+
+                    const items = Array.from(selectedServices.entries()).map(([code, sel]) => ({
+                        code,
+                        serviceType: sel.serviceType,
+                        variantKey: sel.variantKey,
+                        price: sel.price,
+                        name: sel.name,
+                        isRecurring: sel.isRecurring
+                    }));
+                    const payload = { 
+                        items, 
+                        savedAt: Date.now(),
+                        referenceCode: currentReferenceCode,
+                        contentHash: generatePackageHash()
+                    };
+                    localStorage.setItem(PACKAGE_CACHE_KEY, JSON.stringify(payload));
+                } catch (e) {
+                    console.error('Error saving package cache', e);
+                }
+            }
+
+            function loadPackageCache() {
+                try {
+                    const raw = localStorage.getItem(PACKAGE_CACHE_KEY);
+                    if (!raw) return false;
+                    const parsed = JSON.parse(raw);
+                    if (!parsed || !Array.isArray(parsed.items)) return false;
+                    
+                    selectedServices = new Map(parsed.items.map(i => [i.code, {
+                        serviceType: i.serviceType,
+                        variantKey: i.variantKey,
+                        price: i.price,
+                        name: i.name,
+                        isRecurring: i.isRecurring
+                    }]));
+
+                    // Load reference code but verify hash matches current package
+                    const currentHash = generatePackageHash();
+                    if (parsed.referenceCode && parsed.contentHash === currentHash) {
+                        currentReferenceCode = parsed.referenceCode;
+                    } else {
+                        // Generate new reference if package changed
+                        currentReferenceCode = 'PKG-' + currentHash;
+                    }
+
+                    return true;
+                } catch (e) {
+                    console.error('Error loading package cache', e);
+                    return false;
+                }
+            }
+
+            function clearPackageCache() {
+                try {
+                    localStorage.removeItem(PACKAGE_CACHE_KEY);
+                } catch (e) {
+                    console.error('Error clearing package cache', e);
+                }
+            }
+
             // Load services and variants
             async function loadServiceData() {
                 try {
@@ -957,7 +1036,7 @@
                     const discounts = await response.json();
                     displayDiscounts(discounts);
                 } catch (error) {
-                    console.error('Error loading discounts:', error);
+                    console.error('Error loading deals:', error);
                     displayDiscountError();
                 }
             }
@@ -1018,7 +1097,7 @@
                         <h3>${discount.name}</h3>
                         <div class="discount-value">${savingsText}</div>
                         <p class="discount-description">
-                            Get a discount on <strong>${discountedServiceText}</strong>
+                            Get a deal on <strong>${discountedServiceText}</strong>
                             ${discountedService.isRecurring ? ' monthly fee' : ''}
                             when you combine it with these services:
                         </p>
@@ -1038,9 +1117,9 @@
                 const grid = document.getElementById('discount-grid');
                 grid.innerHTML = `
                     <div class="discount-card">
-                        <h3>Error Loading Discounts</h3>
+                        <h3>Error Loading Deals</h3>
                         <p class="discount-description">
-                            We're having trouble loading the current discounts. Please try again later.
+                            We're having trouble loading the current deals. Please try again later.
                         </p>
                     </div>
                 `;
@@ -1367,6 +1446,9 @@
                         <button id="export-package" class="package-action-button primary" disabled>
                             Export PDF
                         </button>
+                        <button id="clear-package-cache" class="package-action-button secondary" style="background:#fff;border:1px solid #e9ecef;color:var(--primary-color);">
+                            Clear Saved Package
+                        </button>
                     </div>
                 `;
 
@@ -1378,6 +1460,23 @@
                 allRadioButtons.forEach(radio => {
                     radio.addEventListener('change', handleServiceSelection);
                 });
+
+                // Clear saved package button
+                const clearBtn = summarySection.querySelector('#clear-package-cache');
+                if (clearBtn) {
+                    clearBtn.addEventListener('click', () => {
+                        if (confirm('Clear the saved package from cache? This will also clear your current selections.')) {
+                            clearPackageCache();
+                            selectedServices.clear();
+                            // Uncheck any radios in this builder
+                            const radios = builder.querySelectorAll('input[type="radio"]');
+                            radios.forEach(r => r.checked = false);
+                            // Re-enable radios
+                            radios.forEach(r => r.disabled = false);
+                            updatePackageSummary();
+                        }
+                    });
+                }
 
                 return builder;
             }
@@ -1692,85 +1791,109 @@
                 // Calculate initial total (setup + first month)
                 const initialPayment = oneTimeTotal + recurringTotal;
                 initialTotal.textContent = formatPrice(initialPayment);
+                // Persist current package selection to cache
+                try { savePackageCache(); } catch (e) { console.error('Error auto-saving package', e); }
             }
 
             // Generate PDF content
             function generatePDFContent() {
-                const pkgReference = 'PKG-' + Math.random().toString(36).substr(2, 9).toUpperCase();
                 const oneTimeCost = document.getElementById('package-total-amount').textContent;
                 const recurringCost = document.getElementById('package-recurring-amount').textContent;
                 const initialTotal = document.getElementById('package-initial-total').textContent;
 
-                // Build services HTML and compute selected variant codes
-                const selectedVariantCodes = Array.from(selectedServices.entries()).map(([code, sel]) => `${code}-${sel.variantKey}`);
+                // Group services by type
+                const coreServices = Array.from(selectedServices.entries())
+                    .filter(([, s]) => s.serviceType === 'Core');
+                const optionalServices = Array.from(selectedServices.entries())
+                    .filter(([, s]) => s.serviceType === 'Optional');
 
-                const servicesContent = Array.from(selectedServices.entries()).map(([code, service]) => `
-                    <div style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-                        <h3 style="margin-bottom: 5px;">${service.name}</h3>
-                        <p style="margin: 0; color: #666;">
-                            <strong>Variant:</strong> ${service.variantKey} (Code: ${code}-${service.variantKey})<br>
-                            <strong>Price:</strong> ${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}
-                        </p>
+                // Build services content
+                const servicesContent = `
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: #363636; margin-bottom: 15px;">Core Services</h3>
+                        ${coreServices.map(([code, service]) => `
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <div>${service.name}</div>
+                                <div style="font-weight: 500;">${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}</div>
+                            </div>
+                        `).join('')}
+                        ${optionalServices.length > 0 ? `
+                            <h3 style="color: #363636; margin: 20px 0 15px;">Additional Services</h3>
+                            ${optionalServices.map(([code, service]) => `
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                    <div>${service.name}</div>
+                                    <div style="font-weight: 500;">${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}</div>
+                                </div>
+                            `).join('')}
+                        ` : ''}
                     </div>
-                `).join('');
+                `;
 
-                // Determine applicable discounts (if any) and render them
+                // Build discounts content
+                const selectedVariantCodes = Array.from(selectedServices.entries())
+                    .map(([code, sel]) => `${code}-${sel.variantKey}`);
                 const applicableDiscounts = findApplicableDiscounts(selectedVariantCodes);
-                const discountsContent = applicableDiscounts.length > 0
-                    ? applicableDiscounts.map(d => {
-                        if (d.discountedService && selectedVariantCodes.includes(d.discountedService)) {
-                            // Find the reversed service details
-                            const [serviceCode, variantKey] = d.discountedService.split('-');
-                            const service = selectedServices.get(serviceCode);
-                            if (service && service.variantKey === variantKey) {
-                                return `
-                                    <div style="margin-bottom:8px;">
-                                        <strong>${d.name}</strong>
-                                        <div style="color:#666; font-size:0.9em; margin-top:2px;">
-                                            Service charge reversed: ${service.name}<br>
-                                            Amount: -${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}
-                                        </div>
-                                    </div>`;
-                            }
-                        } else if (d.type === 'percentage') {
-                            return `<div style="margin-bottom:8px;"><strong>${d.name}</strong>: ${d.value}% off</div>`;
-                        } else if (d.type === 'fixed') {
-                            return `<div style="margin-bottom:8px;"><strong>${d.name}</strong>: -${formatPrice(d.value)}</div>`;
-                        }
-                        return `<div style="margin-bottom:8px;"><strong>${d.name}</strong></div>`;
-                    }).join('')
-                    : '<div style="color:#666">None</div>';
+                const discountsContent = applicableDiscounts.length > 0 ? `
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="color: #363636; margin-bottom: 15px;">Applied Deals</h3>
+                        ${applicableDiscounts.map(d => `
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
+                                <div>${d.name}</div>
+                                <div style="font-weight: 500; color: #dc3545;">
+                                    ${d.type === 'percentage' ? `-${d.value}%` : 
+                                      d.discountedService ? (() => {
+                                        const [serviceCode, variantKey] = d.discountedService.split('-');
+                                        const service = selectedServices.get(serviceCode);
+                                        return service && service.variantKey === variantKey ? 
+                                          `-${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}` : 
+                                          '-Amount varies';
+                                      })() : 
+                                      `-${formatPrice(d.value)}`}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : '';
 
                 return `
-                    <div style="padding: 20px; font-family: Arial, sans-serif;">
+                    <div style="padding: 20px; font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;">
                         <div style="text-align: center; margin-bottom: 30px;">
                             <img src="https://oakshiftsoftware.github.io/source/images/logos/logo-b.png" style="height: 100px;">
-                            <h1>Provisional Package Quote</h1>
-                            <p>Generated on ${new Date().toLocaleDateString()}</p>
-                            <p>Reference: ${pkgReference}</p>
+                            <h1 style="margin: 20px 0 10px;">Package Quote</h1>
+                            <div style="color: #666;">Generated on ${new Date().toLocaleDateString()}</div>
+                            <div style="color: #363636; font-weight: bold; margin-top: 5px;">Reference: ${currentReferenceCode}</div>
                         </div>
-                        <div style="margin-bottom: 30px;">
-                            <h2>Selected Services</h2>
-                            ${servicesContent}
+
+                        ${servicesContent}
+                        ${discountsContent}
+
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee;">
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                <div>One-time Setup Cost</div>
+                                <div style="font-weight: 500;">${oneTimeCost}</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                <div>Monthly Cost</div>
+                                <div style="font-weight: 500;">${recurringCost}</div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; padding: 15px 0; margin-top: 10px; border-top: 1px solid #eee; font-weight: bold;">
+                                <div>Initial Payment Required</div>
+                                <div>${initialTotal}</div>
+                            </div>
+                            <div style="font-size: 0.9em; color: #666; text-align: right;">
+                                (Setup Cost + First Month)
+                            </div>
                         </div>
-                        <div style="margin-bottom: 20px;">
-                            <h2>Discounts Applied</h2>
-                            ${discountsContent}
-                        </div>
-                        <div style="margin-bottom: 30px;">
-                            <h2>Cost Breakdown</h2>
-                            <p>One-time Setup Cost: ${oneTimeCost}</p>
-                            <p>Monthly Cost: ${recurringCost}</p>
-                            <p><strong>Initial Payment Required: ${initialTotal}</strong></p>
-                            <p style="font-size: 0.9em; color: #666;">
-                                (Includes setup cost and first month's subscription)
+
+                        <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #eee; color: #666;">
+                            <p>This is a provisional quote and is valid for 30 days. To proceed with this package or discuss customizations, please contact us:</p>
+                            <p style="margin-top: 15px;">
+                                <strong>Email:</strong> oakshiftsoftware@gmail.com<br>
+                                <strong>Phone:</strong> +44(0) 7542 104 333
                             </p>
-                        </div>
-                        <div>
-                            <p>This is a provisional quote and is not a valid contract until you contact us with your package details and confirm your purchase:</p><br>
-                            <p>Email: oakshiftsoftware@gmail.com</p>
-                            <p>Phone: +44(0) 7542 104 333</p><br>
-                            <p>Please reference: ${pkgReference}</p>
+                            <p style="margin-top: 15px;">
+                                <strong>Please reference:</strong> ${currentReferenceCode}
+                            </p>
                         </div>
                     </div>
                 `;
@@ -1780,11 +1903,100 @@
             function previewPackageQuote() {
                 const modal = document.createElement('div');
                 modal.className = 'modal';
+                
+                // Group services by type for more organized display
+                const coreServices = Array.from(selectedServices.entries())
+                    .filter(([, s]) => s.serviceType === 'Core');
+                const optionalServices = Array.from(selectedServices.entries())
+                    .filter(([, s]) => s.serviceType === 'Optional');
+                
+                // Get the costs
+                const oneTimeCost = document.getElementById('package-total-amount').textContent;
+                const recurringCost = document.getElementById('package-recurring-amount').textContent;
+                const initialTotal = document.getElementById('package-initial-total').textContent;
+                
+                // Build services summary with collapsible sections
+                const servicesSummary = `
+                    <div class="services-summary">
+                        <div class="service-group">
+                            <h4>Core Services</h4>
+                            ${coreServices.map(([code, service]) => `
+                                <div class="service-row">
+                                    <div class="service-name">${service.name}</div>
+                                    <div class="service-price">${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ${optionalServices.length > 0 ? `
+                            <div class="service-group">
+                                <h4>Additional Services</h4>
+                                ${optionalServices.map(([code, service]) => `
+                                    <div class="service-row">
+                                        <div class="service-name">${service.name}</div>
+                                        <div class="service-price">${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                // Build discounts summary if any apply
+                const selectedVariantCodes = Array.from(selectedServices.entries())
+                    .map(([code, sel]) => `${code}-${sel.variantKey}`);
+                const applicableDiscounts = findApplicableDiscounts(selectedVariantCodes);
+                const discountsSummary = applicableDiscounts.length > 0 ? `
+                    <div class="discounts-summary">
+                        <h4>Applied Discounts</h4>
+                        ${applicableDiscounts.map(d => `
+                            <div class="discount-row">
+                                <div class="discount-name">${d.name}</div>
+                                <div class="discount-value">
+                                    ${d.type === 'percentage' ? `${d.value}%` : 
+                                      d.discountedService ? (() => {
+                                        const [serviceCode, variantKey] = d.discountedService.split('-');
+                                        const service = selectedServices.get(serviceCode);
+                                        return service && service.variantKey === variantKey ? 
+                                          `-${formatPrice(service.price)}${service.isRecurring ? '/mo' : ''}` : 
+                                          '-Amount varies';
+                                      })() : 
+                                      formatPrice(d.value)}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : '';
+
                 modal.innerHTML = `
                     <div class="modal-content">
-                        <span class="modal-close">&times;</span>
-                        <div id="preview-content">
-                            ${generatePDFContent()}
+                        <div class="modal-header">
+                            <h3>Package Quote Preview</h3>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div id="preview-content" class="quote-preview">
+                            <div class="quote-header">
+                                <div class="quote-reference">Reference: ${currentReferenceCode}</div>
+                                <div class="quote-date">Generated: ${new Date().toLocaleDateString()}</div>
+                            </div>
+                            
+                            ${servicesSummary}
+                            ${discountsSummary}
+                            
+                            <div class="quote-totals">
+                                <div class="total-row">
+                                    <div>One-time Setup</div>
+                                    <div>${oneTimeCost}</div>
+                                </div>
+                                <div class="total-row">
+                                    <div>Monthly Cost</div>
+                                    <div>${recurringCost}</div>
+                                </div>
+                                <div class="total-row total-highlight">
+                                    <div>Initial Payment</div>
+                                    <div>${initialTotal}</div>
+                                    <div class="total-note">(Setup + First Month)</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-actions">
                             <button class="package-action-button secondary" onclick="copyToClipboard()">
@@ -1796,6 +2008,86 @@
                         </div>
                     </div>
                 `;
+                
+                // Add styles for the new compact layout
+                const styleSheet = document.createElement('style');
+                styleSheet.textContent = `
+                    .quote-preview {
+                        padding: 1.5rem;
+                    }
+                    .quote-header {
+                        margin-bottom: 1.5rem;
+                        padding-bottom: 1rem;
+                        border-bottom: 1px solid #eee;
+                    }
+                    .quote-reference {
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        color: var(--primary-color);
+                    }
+                    .quote-date {
+                        font-size: 0.9rem;
+                        color: #666;
+                    }
+                    .services-summary {
+                        margin-bottom: 1.5rem;
+                    }
+                    .service-group {
+                        margin-bottom: 1rem;
+                    }
+                    .service-group h4 {
+                        margin-bottom: 0.5rem;
+                        color: var(--primary-color);
+                    }
+                    .service-row, .discount-row {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 0.5rem;
+                        border-bottom: 1px solid #f5f5f5;
+                    }
+                    .service-row:last-child {
+                        border-bottom: none;
+                    }
+                    .service-name, .discount-name {
+                        flex: 1;
+                    }
+                    .service-price, .discount-value {
+                        font-weight: 500;
+                        margin-left: 1rem;
+                    }
+                    .discounts-summary {
+                        margin: 1.5rem 0;
+                        padding-top: 1rem;
+                        border-top: 1px solid #eee;
+                    }
+                    .quote-totals {
+                        margin-top: 1.5rem;
+                        padding-top: 1rem;
+                        border-top: 1px solid #eee;
+                    }
+                    .total-row {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 0.5rem;
+                        font-weight: 500;
+                    }
+                    .total-highlight {
+                        margin-top: 0.5rem;
+                        padding-top: 1rem;
+                        border-top: 1px solid #eee;
+                        font-size: 1.1rem;
+                        font-weight: bold;
+                        color: var(--primary-color);
+                    }
+                    .total-note {
+                        display: block;
+                        font-size: 0.8rem;
+                        color: #666;
+                        font-weight: normal;
+                        margin-top: 0.25rem;
+                    }
+                `;
+                document.head.appendChild(styleSheet);
                 document.body.appendChild(modal);
                 setTimeout(() => modal.classList.add('active'), 10);
 
@@ -1924,7 +2216,44 @@
                         <p>Select the services you'd like to include in your package. Mix and match to create your perfect solution.</p>
                     `;
                     
-                    packagesContent.appendChild(createPackageBuilder(services));
+                    const builderElem = createPackageBuilder(services);
+                    packagesContent.appendChild(builderElem);
+
+                    // Restore package from cache (if present)
+                    const restored = loadPackageCache();
+                    if (restored) {
+                        try {
+                            // mark radios according to cached selection
+                            selectedServices.forEach((sel, code) => {
+                                const radio = packagesContent.querySelector(`input[type="radio"][data-service="${code}"][value="${sel.variantKey}"]`);
+                                if (radio) radio.checked = true;
+                            });
+
+                            // enforce enabling/disabling based on core selection
+                            const hasCore = Array.from(selectedServices.values()).some(s => s.serviceType === 'Core');
+                            const optionalRadios = packagesContent.querySelectorAll('input[type="radio"][data-service-type="Optional"]');
+                            optionalRadios.forEach(r => r.disabled = !hasCore);
+
+                            const coreRadios = packagesContent.querySelectorAll('input[type="radio"][data-service-type="Core"]');
+                            if (hasCore) {
+                                const selectedCoreCode = Array.from(selectedServices.entries()).find(([c, s]) => s.serviceType === 'Core')[0];
+                                coreRadios.forEach(r => r.disabled = (r.dataset.service !== selectedCoreCode));
+                            } else {
+                                coreRadios.forEach(r => r.disabled = false);
+                            }
+
+                            // Wire radio event listeners (they were added in createPackageBuilder, but ensure handlers reflect restored state)
+                            const allRadioButtons = packagesContent.querySelectorAll('input[type="radio"]');
+                            allRadioButtons.forEach(radio => {
+                                radio.removeEventListener('change', handleServiceSelection);
+                                radio.addEventListener('change', handleServiceSelection);
+                            });
+
+                            updatePackageSummary();
+                        } catch (e) {
+                            console.error('Error restoring package state:', e);
+                        }
+                    }
                 } catch (error) {
                     console.error('Error loading package builder:', error);
                     const packagesContent = document.getElementById('packages-content');
