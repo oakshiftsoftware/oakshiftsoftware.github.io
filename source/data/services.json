@@ -4,9 +4,42 @@
         "description": "A Single Page Application (SPA) is a self-contained website application that is designed to be hosted on minimum costing hosting packages, ideal for small businesses or start-ups.",
         "tag": "SPA", "category": "Core",
         "variants": {
-            "A": ["Personal", 40.00, false],
-            "B": ["Standard", 60.00, false],
-            "C": ["Business", 80.00, false]
+            "A": [
+                "Personal", 40.00, false,
+                {
+                    "description": "A basic single page application, suitable for personal projects or small portfolios.",
+                    "features": [
+                        "Custom All-in-one HTML File",
+                        "Responsive Design",
+                        "Basic SEO Setup"
+                    ]
+                }
+            ],
+            "B": [
+                "Standard", 60.00, false,
+                {
+                    "description": "A standard single page application, suitable for most business needs.",
+                    "features": [
+                        "Custom All-in-one HTML File",
+                        "Responsive Design",
+                        "Basic SEO Setup",
+                        "Contact Form Integration"
+                    ]
+                }
+            ],
+            "C": [
+                "Business", 80.00, false,
+                {
+                    "description": "A business single page application, suitable for larger projects.",
+                    "features": [
+                        "Custom All-in-one HTML File",
+                        "Responsive Design",
+                        "Basic SEO Setup",
+                        "Contact Form Integration",
+                        "Advanced Analytics"
+                    ]
+                }
+            ]
         }
     },
     {
@@ -14,9 +47,42 @@
         "description": "A Progressive Web Application (PWA) is a self-contained website application, that is designed to be hosted on minimum costing hosting packages, and installable on mobile devices as a native application, ideal for small businesses or start-ups.",
         "tag": "PWA", "category": "Core",
         "variants": {
-            "A": ["Personal", 55.00, false],
-            "B": ["Standard", 70.00, false],
-            "C": ["Business", 95.00, false]
+            "A": [
+                "Personal", 55.00, false,
+                {
+                    "description": "A basic progressive web application, suitable for personal projects or small portfolios.",
+                    "features": [
+                        "Custom All-in-one HTML File",
+                        "Responsive Design",
+                        "Basic SEO Setup"
+                    ]
+                }
+            ],
+            "B": [
+                "Standard", 70.00, false,
+                {
+                    "description": "A standard progressive web application, suitable for most business needs.",
+                    "features": [
+                        "Custom All-in-one HTML File",
+                        "Responsive Design",
+                        "Basic SEO Setup",
+                        "Service Worker Integration"
+                    ]
+                }
+            ],
+            "C": [
+                "Business", 95.00, false,
+                {
+                    "description": "A business progressive web application, suitable for larger projects.",
+                    "features": [
+                        "Custom All-in-one HTML File",
+                        "Responsive Design",
+                        "Basic SEO Setup",
+                        "Service Worker Integration",
+                        "Advanced Analytics"
+                    ]
+                }
+            ]
         }
     },
     {
@@ -24,9 +90,36 @@
         "description": "Oakshift Software will retain a backed up copy of the delivered project files for up to six months after the delivery date. A copy of these can then be requested at no additional charge at any time during the specified coverage period.",
         "tag": "PB", "category": "Optional",
         "variants": {
-            "A": ["6 Months", 5.00, true],
-            "B": ["12 Months", 15.00, true],
-            "C": ["18 Months", 27.50, true]
+            "A": [
+                "6 Months", 5.00, true,
+                {
+                    "description": "Backup of project files retained for six months after delivery.",
+                    "features": [
+                        "6 Months Backup Retention",
+                        "Email Request for Backup"
+                    ]
+                }
+            ],
+            "B": [
+                "12 Months", 15.00, true,
+                {
+                    "description": "Backup of project files retained for twelve months after delivery.",
+                    "features": [
+                        "12 Months Backup Retention",
+                        "Email Request for Backup"
+                    ]
+                }
+            ],
+            "C": [
+                "18 Months", 27.50, true,
+                {
+                    "description": "Backup of project files retained for eighteen months after delivery.",
+                    "features": [
+                        "18 Months Backup Retention",
+                        "Email Request for Backup"
+                    ]
+                }
+            ]
         }
     },
     {
@@ -34,9 +127,36 @@
         "description": "The extended support is to assist with integration efforts as needed and diagnose any bugs. This type of support does not include requests for additional revisions once the website is delivered.",
         "tag": "ES", "category": "Optional",
         "variants": {
-            "A": ["6 Months", 45.00, true],
-            "B": ["12 Months", 95.00, true],
-            "C": ["18 Months", 135.00, true]
+            "A": [
+                "6 Months", 45.00, true,
+                {
+                    "description": "Extended support for six months after project delivery.",
+                    "features": [
+                        "6 Months Support Coverage",
+                        "Email and Phone Support"
+                    ]
+                }
+            ],
+            "B": [
+                "12 Months", 95.00, true,
+                {
+                    "description": "Extended support for twelve months after project delivery.",
+                    "features": [
+                        "12 Months Support Coverage",
+                        "Email and Phone Support"
+                    ]
+                }
+            ],
+            "C": [
+                "18 Months", 135.00, true,
+                {
+                    "description": "Extended support for eighteen months after project delivery.",
+                    "features": [
+                        "18 Months Support Coverage",
+                        "Email and Phone Support"
+                    ]
+                }
+            ]
         }
     },
     {
@@ -44,9 +164,36 @@
         "description": "An ongoing retainer, available for all Oakshift Software projects, that enables a specified number of content / project revisions per month.",
         "tag": "RR", "category": "Optional",
         "variants": {
-            "A": ["2 Revisions", 30.00, true],
-            "B": ["4 Revisions", 60.00, true],
-            "C": ["8 Revisions", 135.00, true]
+            "A": [
+                "2 Revisions", 30.00, true,
+                {
+                    "description": "Retainer for two revisions per month.",
+                    "features": [
+                        "2 Revisions per Month",
+                        "Email Request for Revisions"
+                    ]
+                }
+            ],
+            "B": [
+                "4 Revisions", 60.00, true,
+                {
+                    "description": "Retainer for four revisions per month.",
+                    "features": [
+                        "4 Revisions per Month",
+                        "Email Request for Revisions"
+                    ]
+                }
+            ],
+            "C": [
+                "8 Revisions", 135.00, true,
+                {
+                    "description": "Retainer for eight revisions per month.",
+                    "features": [
+                        "8 Revisions per Month",
+                        "Email Request for Revisions"
+                    ]
+                }
+            ]
         }
     },
     {
@@ -54,9 +201,36 @@
         "description": "Available as in various bundles, and intended for use ONLY with software creation services rendered by Oakshift Software. The term ‘Revision’ pertains to any change or amendment to the project that changes the styling or functionality of the delivered project.",
         "tag": "PR", "category": "Optional",
         "variants": {
-            "A": ["2 Revisions", 40.00, false],
-            "B": ["4 Revisions", 75.00, false],
-            "C": ["8 Revisions", 150.00, false]
+            "A": [
+                "2 Revisions", 40.00, false,
+                {
+                    "description": "Bundle of two project revisions.",
+                    "features": [
+                        "2 Project Revisions",
+                        "Email Request for Revisions"
+                    ]
+                }
+            ],
+            "B": [
+                "4 Revisions", 75.00, false,
+                {
+                    "description": "Bundle of four project revisions.",
+                    "features": [
+                        "4 Project Revisions",
+                        "Email Request for Revisions"
+                    ]
+                }
+            ],
+            "C": [
+                "8 Revisions", 150.00, false,
+                {
+                    "description": "Bundle of eight project revisions.",
+                    "features": [
+                        "8 Project Revisions",
+                        "Email Request for Revisions"
+                    ]
+                }
+            ]
         }
     },
     {
@@ -64,9 +238,37 @@
         "description": "Available to set up in varying degrees, from simply setting up the account and embedding the code, to using that data to focus your digital efforts.",
         "tag": "GA", "category": "Optional",
         "variants": {
-            "A": ["Standard", 5.00, false],
-            "B": ["Enhanced", 15.00, false],
-            "C": ["Advanced", 30.00, true]
+            "A": [
+                "Standard", 5.00, false,
+                {
+                    "description": "Basic setup of Google Analytics account and embedding tracking code.",
+                    "features": [
+                        "Google Analytics Account Setup",
+                        "Tracking Code Integration"
+                    ]
+                }
+            ],
+            "B": [
+                "Enhanced", 15.00, false,
+                {
+                    "description": "Enhanced setup of Google Analytics with additional tracking features.",
+                    "features": [
+                        "Enhanced Tracking Code Integration",
+                        "Event Tracking Setup"
+                    ]
+                }
+            ],
+            "C": [
+                "Advanced", 30.00, true,
+                {
+                    "description": "Comprehensive setup of Google Analytics with advanced features.",
+                    "features": [
+                        "Advanced Tracking Code Integration",
+                        "Goal Tracking Setup",
+                        "Custom Reporting"
+                    ]
+                }
+            ]
         }
     }
 ]
