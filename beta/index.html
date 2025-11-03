@@ -936,23 +936,23 @@
             // Package cache helpers (persist package between page navigation)
             const PACKAGE_CACHE_KEY = 'oakshift_package_v1';
             let currentReferenceCode = null;
+            let lastSavedContentKey = null;
 
-            // Generate a reference code based on package content hash
-            function generatePackageHash() {
-                const servicesStr = Array.from(selectedServices.entries())
+            // Return a deterministic content key for the current selected services
+            // (sorted list of "code-variantKey" joined by '|'). Empty string if none.
+            function getPackageContentKey() {
+                return Array.from(selectedServices.entries())
                     .map(([code, sel]) => `${code}-${sel.variantKey}`)
                     .sort()
                     .join('|');
-                return btoa(servicesStr).replace(/[^a-zA-Z0-9]/g, '').substr(0, 8).toUpperCase();
+            }
+
+            function randomToken(len = 8) {
+                return Math.random().toString(36).substr(2, len).toUpperCase();
             }
 
             function savePackageCache() {
                 try {
-                    // Check if we need a new reference code
-                    if (!currentReferenceCode) {
-                        currentReferenceCode = 'PKG-' + generatePackageHash();
-                    }
-
                     const items = Array.from(selectedServices.entries()).map(([code, sel]) => ({
                         code,
                         serviceType: sel.serviceType,
@@ -961,11 +961,20 @@
                         name: sel.name,
                         isRecurring: sel.isRecurring
                     }));
-                    const payload = { 
-                        items, 
+
+                    // Generate content key and decide if a new reference is required
+                    const contentKey = getPackageContentKey();
+                    if (contentKey !== lastSavedContentKey) {
+                        // New change detected (add/remove/change) -> generate fresh random ref
+                        currentReferenceCode = 'PKG-' + randomToken(8);
+                        lastSavedContentKey = contentKey;
+                    }
+
+                    const payload = {
+                        items,
                         savedAt: Date.now(),
                         referenceCode: currentReferenceCode,
-                        contentHash: generatePackageHash()
+                        contentKey
                     };
                     localStorage.setItem(PACKAGE_CACHE_KEY, JSON.stringify(payload));
                 } catch (e) {
@@ -979,7 +988,7 @@
                     if (!raw) return false;
                     const parsed = JSON.parse(raw);
                     if (!parsed || !Array.isArray(parsed.items)) return false;
-                    
+
                     selectedServices = new Map(parsed.items.map(i => [i.code, {
                         serviceType: i.serviceType,
                         variantKey: i.variantKey,
@@ -988,13 +997,14 @@
                         isRecurring: i.isRecurring
                     }]));
 
-                    // Load reference code but verify hash matches current package
-                    const currentHash = generatePackageHash();
-                    if (parsed.referenceCode && parsed.contentHash === currentHash) {
+                    // Restore saved content key and reference only if it matches current package
+                    lastSavedContentKey = parsed.contentKey || '';
+                    const currentKey = getPackageContentKey();
+                    if (parsed.referenceCode && parsed.contentKey === currentKey) {
                         currentReferenceCode = parsed.referenceCode;
                     } else {
-                        // Generate new reference if package changed
-                        currentReferenceCode = 'PKG-' + currentHash;
+                        // Don't reuse old reference when package content differs; let save/preview generate a new one
+                        currentReferenceCode = null;
                     }
 
                     return true;
@@ -1797,6 +1807,11 @@
 
             // Generate PDF content
             function generatePDFContent() {
+                // Ensure a reference code exists for exported PDF
+                if (!currentReferenceCode) {
+                    currentReferenceCode = 'PKG-' + randomToken(8);
+                    lastSavedContentKey = getPackageContentKey();
+                }
                 const oneTimeCost = document.getElementById('package-total-amount').textContent;
                 const recurringCost = document.getElementById('package-recurring-amount').textContent;
                 const initialTotal = document.getElementById('package-initial-total').textContent;
@@ -1901,6 +1916,11 @@
 
             // Preview PDF content
             function previewPackageQuote() {
+                // Ensure we have a reference code for this session/preview
+                if (!currentReferenceCode) {
+                    currentReferenceCode = 'PKG-' + randomToken(8);
+                    lastSavedContentKey = getPackageContentKey();
+                }
                 const modal = document.createElement('div');
                 modal.className = 'modal';
                 
