@@ -5,9 +5,7 @@
       "name": "Sirus",
       "class": "M",
       "diameter": 1242.742,
-      "biomes": [
-        "Plains", "Mountains", "Marshes", "Forests"
-      ]
+      "biomes": ["Plains", "Mountains", "Forests", "Shorelines", "Waters"]
     }
   },
   "sectors": [
