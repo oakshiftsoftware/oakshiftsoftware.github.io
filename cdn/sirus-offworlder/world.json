@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "planet": {
+      "designation": "HD 148756 X",
+      "name": "Sirus",
+      "class": "M",
+      "diameter": 1242.742,
+      "biomes": [
+        "Plains", "Mountains", "Marshes", "Forests"
+      ]
+    }
+  },
+  "sectors": [
+    {
+      "sector_id": 1,
+      "image_url": "#",
+      "biomes": ["Plains", "Mountaints"],
+      "encounter_types": [0]
+    },
+    {
+      "sector_id": 2,
+      "image_url": "#",
+      "biomes": ["Plains", "Mountaints"],
+      "encounter_types": [0]
+    },
+    {
+      "sector_id": 3,
+      "image_url": "#",
+      "biomes": ["Plains", "Mountaints"],
+      "encounter_types": [0]
+    },
+    {
+      "sector_id": 4,
+      "image_url": "#",
+      "biomes": ["Plains", "Forests"],
+      "encounter_types": [0]
+    },
+    {
+      "sector_id": 5,
+      "image_url": "#",
+      "biomes": ["Plains", "Mountains", "Forests"],
+      "encounter_types": [0]
+    }
+  ]
+}
