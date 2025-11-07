@@ -40,6 +40,36 @@
       "image_url": "#",
       "biomes": ["Plains", "Mountains", "Forests"],
       "encounter_types": [0]
+    },
+    {
+      "sector_id": 6,
+      "image_url": "#",
+      "biomes": ["Plains", "Mountains", "Forests"],
+      "encounter_types": [0]
+    },
+    {
+      "sector_id": 7,
+      "image_url": "#",
+      "biomes": ["Plains", "Mountains", "Shorelines", "Waters"],
+      "encounter_types": [0]
+    },
+    {
+      "sector_id": 8,
+      "image_url": "#",
+      "biomes": ["Plains", "Mountains", "Forests"],
+      "encounter_types": [0]
+    },
+    {
+      "sector_id": 9,
+      "image_url": "#",
+      "biomes": ["Plains", "Forests", "Mountains"],
+      "encounter_types": [0]
+    },
+    {
+      "sector_id": 10,
+      "image_url": "#",
+      "biomes": ["Plains", "Mountains", "Forests"],
+      "encounter_types": [0]
     }
   ]
 }
