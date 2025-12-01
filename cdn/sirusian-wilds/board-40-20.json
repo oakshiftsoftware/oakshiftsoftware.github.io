@@ -1,0 +1,2454 @@
+{
+  "width": 40,
+  "height": 20,
+  "tiles": [
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave_exit",
+        "id": "C3"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "start_position",
+        "id": "P2"
+      },
+      {
+        "type": "start_position",
+        "id": "P2"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_entrance",
+        "id": "C5"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "escape_pod"
+      },
+      {
+        "type": "escape_pod"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "escape_pod"
+      },
+      {
+        "type": "escape_pod"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave_entrance",
+        "id": "C2"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "start_position",
+        "id": "P1"
+      },
+      {
+        "type": "start_position",
+        "id": "P1"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "main"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_exit",
+        "id": "C6"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "cave"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      }
+    ]
+  ]
+}
