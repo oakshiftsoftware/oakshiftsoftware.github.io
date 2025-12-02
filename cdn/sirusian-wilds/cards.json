@@ -1,1 +1,1994 @@
-{}
+{
+    "010101": {
+        "nickname": "Skerrix",
+        "scientific_name": "Cryptoviverra skerrix",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 11,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 2,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 6,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010102": {
+        "nickname": "Skerrix",
+        "scientific_name": "Cryptoviverra skerrix",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 19,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 4,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 10,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010103": {
+        "nickname": "Skerrix",
+        "scientific_name": "Cryptoviverra skerrix",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 15,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 3,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 8,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+
+    "010201": {
+        "nickname": "Echouse",
+        "scientific_name": "Echoceilus resonatus",
+        "companion_type": "Rodent",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 7,
+            "def": 1
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 4,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Whip",
+                "damage": 1,
+                "description": "Whips with both of its tails at its target."
+            }
+        ]
+    },
+    "010202": {
+        "nickname": "Echouse",
+        "scientific_name": "Echoceilus resonatus",
+        "companion_type": "Rodent",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 12,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 6,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Whip",
+                "damage": 3,
+                "description": "Whips with both of its tails at its target."
+            }
+        ]
+    },
+    "010203": {
+        "nickname": "Echouse",
+        "scientific_name": "Echoceilus resonatus",
+        "companion_type": "Rodent",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 10,
+            "def": 1
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 5,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Whip",
+                "damage": 2,
+                "description": "Whips with both of its tails at its target."
+            }
+        ]
+    },
+
+    "010301": {
+        "nickname": "Whiptail",
+        "scientific_name": "Verrutalus caudavernum",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 22,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 11,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Whip",
+                "damage": 6,
+                "description": "Whips its tail to cause injury to its target."
+            }
+        ]
+    },
+    "010302": {
+        "nickname": "Whiptail",
+        "scientific_name": "Verrutalus caudavernum",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 37,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 19,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Whip",
+                "damage": 10,
+                "description": "Whips its tail to cause injury to its target."
+            }
+        ]
+    },
+    "010303": {
+        "nickname": "Whiptail",
+        "scientific_name": "Verrutalus caudavernum",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 30,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 15,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Whip",
+                "damage": 8,
+                "description": "Whips its tail to cause injury to its target."
+            }
+        ]
+    },
+
+    "010401": {
+        "nickname": "Sabrecat",
+        "scientific_name": "Fellisar mordex",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 23,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 8,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 11,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010402": {
+        "nickname": "Sabrecat",
+        "scientific_name": "Fellisar mordex",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 38,
+            "def": 7
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 13,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 19,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010403": {
+        "nickname": "Sabrecat",
+        "scientific_name": "Fellisar mordex",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 30,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 10,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 15,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+
+    "010501": {
+        "nickname": "Glaciomane",
+        "scientific_name": "Crytarrux glaciomaneus",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 25,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 12,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Rake",
+                "damage": 10,
+                "description": "Slashes at its target with its long chilled claws."
+            }
+        ]
+    },
+    "010502": {
+        "nickname": "Glaciomane",
+        "scientific_name": "Crytarrux glaciomaneus",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 42,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 20,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Rake",
+                "damage": 18,
+                "description": "Slashes at its target with its long chilled claws."
+            }
+        ]
+    },
+    "010503": {
+        "nickname": "Glaciomane",
+        "scientific_name": "Crytarrux glaciomaneus",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 25,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 12,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Rake",
+                "damage": 10,
+                "description": "Slashes at its target with its long chilled claws."
+            }
+        ]
+    },
+
+    "010601": {
+        "nickname": "Verdanthex",
+        "scientific_name": "Crytarrux verdantheri",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 19,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 7,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 9,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010602": {
+        "nickname": "Verdanthex",
+        "scientific_name": "Crytarrux verdantheri",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 32,
+            "def": 5
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 12,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 15,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010603": {
+        "nickname": "Verdanthex",
+        "scientific_name": "Crytarrux verdantheri",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 26,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 10,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 12,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+
+    "010701": {
+        "nickname": "Snowstalker",
+        "scientific_name": "Crytarrux nivaleus",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 25,
+            "def": 5
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 10,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 12,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010702": {
+        "nickname": "Snowstalker",
+        "scientific_name": "Crytarrux nivaleus",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 42,
+            "def": 8
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 16,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 20,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010703": {
+        "nickname": "Snowstalker",
+        "scientific_name": "Crytarrux nivaleus",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 34,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 13,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 16,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+
+    "010801": {
+        "nickname": "Sylphine",
+        "scientific_name": "Sylphodus meandrix",
+        "companion_type": "Rodent",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 7,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 4,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Kick",
+                "damage": 2,
+                "description": "Leaps up kicking its target with its hind legs."
+            }
+        ]
+    },
+    "010802": {
+        "nickname": "Sylphine",
+        "scientific_name": "Sylphodus meandrix",
+        "companion_type": "Rodent",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 11,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 6,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Kick",
+                "damage": 4,
+                "description": "Leaps up kicking its target with its hind legs."
+            }
+        ]
+    },
+    "010803": {
+        "nickname": "Sylphine",
+        "scientific_name": "Sylphodus meandrix",
+        "companion_type": "Rodent",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 9,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 5,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Kick",
+                "damage": 3,
+                "description": "Leaps up kicking its target with its hind legs."
+            }
+        ]
+    },
+
+    "010901": {
+        "nickname": "Sprintwhisker",
+        "scientific_name": "Velocifelis tenua",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 6,
+            "def": 1
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 3,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Kick",
+                "damage": 1,
+                "description": "Leaps up kicking its target with its hind legs."
+            }
+        ]
+    },
+    "010902": {
+        "nickname": "Sprintwhisker",
+        "scientific_name": "Velocifelis tenua",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 10,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 5,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Kick",
+                "damage": 3,
+                "description": "Leaps up kicking its target with its hind legs."
+            }
+        ]
+    },
+    "010903": {
+        "nickname": "Sprintwhisker",
+        "scientific_name": "Velocifelis tenua",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 8,
+            "def": 1
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 4,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Kick",
+                "damage": 2,
+                "description": "Leaps up kicking its target with its hind legs."
+            }
+        ]
+    },
+
+    "011001": {
+        "nickname": "Tendrynax",
+        "scientific_name": "Tendrythus abyssa",
+        "companion_type": "Amphibian",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 26,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Grapple",
+                "damage": 11,
+                "description": "Latches on with its teeth and grapples its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 16,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "011002": {
+        "nickname": "Tendrynax",
+        "scientific_name": "Tendrythus abyssa",
+        "companion_type": "Amphibian",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 43,
+            "def": 10
+        },
+        "attacks": [
+            {
+                "name": "Grapple",
+                "damage": 18,
+                "description": "Latches on with its teeth and grapples its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 26,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "011003": {
+        "nickname": "Tendrynax",
+        "scientific_name": "Tendrythus abyssa",
+        "companion_type": "Amphibian",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 34,
+            "def": 8
+        },
+        "attacks": [
+            {
+                "name": "Grapple",
+                "damage": 14,
+                "description": "Latches on with its teeth and grapples its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 21,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+
+    "011101": {
+        "nickname": "Serpentmaw",
+        "scientific_name": "Serpenthydrus vorali",
+        "companion_type": "Amphibian",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 19,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Spout",
+                "damage": 11,
+                "description": "Squirts a super-compressed stream of water."
+            },
+            {
+                "name": "Bite",
+                "damage": 9,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "011102": {
+        "nickname": "Serpentmaw",
+        "scientific_name": "Serpenthydrus vorali",
+        "companion_type": "Amphibian",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 32,
+            "def": 7
+        },
+        "attacks": [
+            {
+                "name": "Spout",
+                "damage": 19,
+                "description": "Squirts a super-compressed stream of water."
+            },
+            {
+                "name": "Bite",
+                "damage": 15,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "011103": {
+        "nickname": "Serpentmaw",
+        "scientific_name": "Serpenthydrus vorali",
+        "companion_type": "Amphibian",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 26,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Spout",
+                "damage": 15,
+                "description": "Squirts a super-compressed stream of water."
+            },
+            {
+                "name": "Bite",
+                "damage": 12,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+
+    "011201": {
+        "nickname": "Mossback",
+        "scientific_name": "Terravernus mossali",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 17,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Charge",
+                "damage": 7,
+                "description": "Runs directly at its target with its long tusks."
+            },
+            {
+                "name": "Pierce",
+                "damage": 10,
+                "description": "Rises up and aims its tusk in a stabbing motion."
+            }
+        ]
+    },
+    "011202": {
+        "nickname": "Mossback",
+        "scientific_name": "Terravernus mossali",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 29,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Charge",
+                "damage": 11,
+                "description": "Runs directly at its target with its long tusks."
+            },
+            {
+                "name": "Pierce",
+                "damage": 17,
+                "description": "Rises up and aims its tusk in a stabbing motion."
+            }
+        ]
+    },
+    "011203": {
+        "nickname": "Mossback",
+        "scientific_name": "Terravernus mossali",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 23,
+            "def": 5
+        },
+        "attacks": [
+            {
+                "name": "Charge",
+                "damage": 9,
+                "description": "Runs directly at its target with its long tusks."
+            },
+            {
+                "name": "Pierce",
+                "damage": 14,
+                "description": "Rises up and aims its tusk in a stabbing motion."
+            }
+        ]
+    },
+
+    "011301": {
+        "nickname": "Fernlurker",
+        "scientific_name": "Vessiloth cree'ta",
+        "companion_type": "Reptile",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 8,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 2,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 4,
+                "description": "Pounces at its target and bites with its teeth."
+            }
+        ]
+    },
+    "011302": {
+        "nickname": "Fernlurker",
+        "scientific_name": "Vessiloth cree'ta",
+        "companion_type": "Reptile",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 14,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 4,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 7,
+                "description": "Pounces at its target and bites with its teeth."
+            }
+        ]
+    },
+    "011303": {
+        "nickname": "Fernlurker",
+        "scientific_name": "Vessiloth cree'ta",
+        "companion_type": "Reptile",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 11,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 3,
+                "description": "Leaps forward with a rapid double-claw strike."
+            },
+            {
+                "name": "Bite",
+                "damage": 6,
+                "description": "Pounces at its target and bites with its teeth."
+            }
+        ]
+    },
+
+    "011401": {
+        "nickname": "Leafling",
+        "scientific_name": "Faeundra syl'letis",
+        "companion_type": "Amphibian",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 7,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Puff",
+                "damage": 3,
+                "description": "Releases a small cloud of hazardous spores."
+            },
+            {
+                "name": "Screech",
+                "damage": 1,
+                "description": "Emits a high-pitched sound, damaging ear drums."
+            }
+        ]
+    },
+    "011402": {
+        "nickname": "Leafling",
+        "scientific_name": "Faeundra syl'letis",
+        "companion_type": "Amphibian",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 12,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Puff",
+                "damage": 5,
+                "description": "Releases a small cloud of hazardous spores."
+            },
+            {
+                "name": "Screech",
+                "damage": 2,
+                "description": "Emits a high-pitched sound, damaging ear drums."
+            }
+        ]
+    },
+    "011403": {
+        "nickname": "Leafling",
+        "scientific_name": "Faeundra syl'letis",
+        "companion_type": "Amphibian",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 10,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Puff",
+                "damage": 4,
+                "description": "Releases a small cloud of hazardous spores."
+            },
+            {
+                "name": "Screech",
+                "damage": 2,
+                "description": "Emits a high-pitched sound, damaging ear drums."
+            }
+        ]
+    },
+
+    "011501": {
+        "nickname": "Shellback",
+        "scientific_name": "Crustivora shel'kun",
+        "companion_type": "Amphibian",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 11,
+            "def": 5
+        },
+        "attacks": [
+            {
+                "name": "Spout",
+                "damage": 5,
+                "description": "Squirts a super-compressed stream of water."
+            },
+            {
+                "name": "Roll",
+                "damage": 2,
+                "description": "Curls into its shell while rolling into its target."
+            }
+        ]
+    },
+    "011502": {
+        "nickname": "Shellback",
+        "scientific_name": "Crustivora shel'kun",
+        "companion_type": "Amphibian",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 19,
+            "def": 8
+        },
+        "attacks": [
+            {
+                "name": "Spout",
+                "damage": 9,
+                "description": "Squirts a super-compressed stream of water."
+            },
+            {
+                "name": "Roll",
+                "damage": 4,
+                "description": "Curls into its shell while rolling into its target."
+            }
+        ]
+    },
+    "011503": {
+        "nickname": "Shellback",
+        "scientific_name": "Crustivora shel'kun",
+        "companion_type": "Amphibian",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 15,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Spout",
+                "damage": 7,
+                "description": "Squirts a super-compressed stream of water."
+            },
+            {
+                "name": "Roll",
+                "damage": 3,
+                "description": "Curls into its shell while rolling into its target."
+            }
+        ]
+    },
+
+    "011601": {
+        "nickname": "Driftwing",
+        "scientific_name": "Aerolitha venusta",
+        "companion_type": "Insect",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 7,
+            "def": 1
+        },
+        "attacks": [
+            {
+                "name": "Cut",
+                "damage": 3,
+                "description": "Swoops in slicing with its razor-tipped wings."
+            },
+            {
+                "name": "Bite",
+                "damage": 4,
+                "description": "Bites at its target, injecting a tiny amount of venom."
+            }
+        ]
+    },
+    "011602": {
+        "nickname": "Driftwing",
+        "scientific_name": "Aerolitha venusta",
+        "companion_type": "Insect",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 12,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Cut",
+                "damage": 5,
+                "description": "Swoops in slicing with its razor-tipped wings."
+            },
+            {
+                "name": "Bite",
+                "damage": 6,
+                "description": "Bites at its target, injecting a tiny amount of venom."
+            }
+        ]
+    },
+    "011603": {
+        "nickname": "Driftwing",
+        "scientific_name": "Aerolitha venusta",
+        "companion_type": "Insect",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "NONE"
+        ],
+        "stats": {
+            "hp": 10,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Cut",
+                "damage": 4,
+                "description": "Swoops in slicing with its razor-tipped wings."
+            },
+            {
+                "name": "Bite",
+                "damage": 5,
+                "description": "Bites at its target, injecting a tiny amount of venom."
+            }
+        ]
+    },
+
+    "011701": {
+        "nickname": "Venobarb",
+        "scientific_name": "Toximarus venobarri",
+        "companion_type": "Crustacean",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 16,
+            "def": 1
+        },
+        "attacks": [
+            {
+                "name": "Slash",
+                "damage": 8,
+                "description": "Swipes and slashes with its barbed claws."
+            },
+            {
+                "name": "Vice",
+                "damage": 10,
+                "description": "Grips with its claws to cause deep lacerations."
+            }
+        ]
+    },
+    "011702": {
+        "nickname": "Venobarb",
+        "scientific_name": "Toximarus venobarri",
+        "companion_type": "Crustacean",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 26,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Slash",
+                "damage": 13,
+                "description": "Swipes and slashes with its barbed claws."
+            },
+            {
+                "name": "Vice",
+                "damage": 17,
+                "description": "Grips with its claws to cause deep lacerations."
+            }
+        ]
+    },
+    "011703": {
+        "nickname": "Venobarb",
+        "scientific_name": "Toximarus venobarri",
+        "companion_type": "Crustacean",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 21,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Slash",
+                "damage": 10,
+                "description": "Swipes and slashes with its barbed claws."
+            },
+            {
+                "name": "Vice",
+                "damage": 14,
+                "description": "Grips with its claws to cause deep lacerations."
+            }
+        ]
+    },
+
+    "011801": {
+        "nickname": "Silvercrest",
+        "scientific_name": "Aviothrax silveren",
+        "companion_type": "Avian",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 34,
+            "def": 5
+        },
+        "attacks": [
+            {
+                "name": "Pierce",
+                "damage": 19,
+                "description": "Raises up and delivers a downward beak strike."
+            },
+            {
+                "name": "Slam",
+                "damage": 13,
+                "description": "Jumps up and slams down into the target hard."
+            }
+        ]
+    },
+    "011802": {
+        "nickname": "Silvercrest",
+        "scientific_name": "Aviothrax silveren",
+        "companion_type": "Avian",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 4},
+                {"item": "Raw Fish", "quantity": 4}
+            ]
+        ],
+        "stats": {
+            "hp": 57,
+            "def": 8
+        },
+        "attacks": [
+            {
+                "name": "Pierce",
+                "damage": 31,
+                "description": "Raises up and delivers a downward beak strike."
+            },
+            {
+                "name": "Slam",
+                "damage": 22,
+                "description": "Jumps up and slams down into the target hard."
+            }
+        ]
+    },
+    "011803": {
+        "nickname": "Silvercrest",
+        "scientific_name": "Aviothrax silveren",
+        "companion_type": "Avian",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 3},
+                {"item": "Raw Fish", "quantity": 3}
+            ]
+        ],
+        "stats": {
+            "hp": 46,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Pierce",
+                "damage": 25,
+                "description": "Raises up and delivers a downward beak strike."
+            },
+            {
+                "name": "Slam",
+                "damage": 18,
+                "description": "Jumps up and slams down into the target hard."
+            }
+        ]
+    },
+
+    "011901": {
+        "nickname": "Cavernsnare",
+        "scientific_name": "Cryptofelis snareth",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 26,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 13,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Rend",
+                "damage": 9,
+                "description": "Rips at the target with rapid slashing strikes."
+            }
+        ]
+    },
+    "011902": {
+        "nickname": "Cavernsnare",
+        "scientific_name": "Cryptofelis snareth",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 43,
+            "def": 5
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 21,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Rend",
+                "damage": 15,
+                "description": "Rips at the target with rapid slashing strikes."
+            }
+        ]
+    },
+    "011903": {
+        "nickname": "Cavernsnare",
+        "scientific_name": "Cryptofelis snareth",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 34,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Bite",
+                "damage": 17,
+                "description": "Pounces at its target and bites with its fangs."
+            },
+            {
+                "name": "Rend",
+                "damage": 12,
+                "description": "Rips at the target with rapid slashing strikes."
+            }
+        ]
+    },
+
+    "012001": {
+        "nickname": "Terrorclaw",
+        "scientific_name": "Ravox saurthem",
+        "companion_type": "Reptile",
+        "age": "Young",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 29,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 11,
+                "description": "Slashes at its target with its elongated claws."
+            },
+            {
+                "name": "Bite",
+                "damage": 15,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "012002": {
+        "nickname": "Terrorclaw",
+        "scientific_name": "Ravox saurthem",
+        "companion_type": "Reptile",
+        "age": "Adult",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 3},
+                {"item": "Raw Fish", "quantity": 3}
+            ]
+        ],
+        "stats": {
+            "hp": 48,
+            "def": 7
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 18,
+                "description": "Slashes at its target with its elongated claws."
+            },
+            {
+                "name": "Bite",
+                "damage": 25,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "012003": {
+        "nickname": "Terrorclaw",
+        "scientific_name": "Ravox saurthem",
+        "companion_type": "Reptile",
+        "age": "Elderly",
+        "card_type": "Companion",
+        "imagry": {
+            "card_image": "#",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 3},
+                {"item": "Raw Fish", "quantity": 3}
+            ]
+        ],
+        "stats": {
+            "hp": 38,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 14,
+                "description": "Slashes at its target with its elongated claws."
+            },
+            {
+                "name": "Bite",
+                "damage": 20,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    }
+}
