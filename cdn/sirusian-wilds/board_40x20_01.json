@@ -1,0 +1,3014 @@
+{
+  "width": 40,
+  "height": 20,
+  "tiles": [
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_exit",
+        "id": "C3"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "start_position",
+        "id": "P2"
+      },
+      {
+        "type": "start_position",
+        "id": "P2"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_entrance",
+        "id": "C5"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "cex1"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "cen2"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "strp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "strp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a",
+        "biome": "wash"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      }
+    ],
+    [
+      {
+        "type": "cave_a",
+        "biome": "strp"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_a",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_a",
+        "biome": "wash"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "escape_pod"
+      },
+      {
+        "type": "escape_pod"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_b",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_a",
+        "biome": "wash"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "escape_pod"
+      },
+      {
+        "type": "escape_pod"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_b",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_b",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b",
+        "biome": "strp"
+      }
+    ],
+    [
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "wash"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "wash"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b",
+        "biome": "wash"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "mohi"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "strp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "mome"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "strp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "molo"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "cen1"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "cex2"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fode"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "fosp"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      }
+    ],
+    [
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_a"
+      },
+      {
+        "type": "cave_entrance",
+        "id": "C2"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "start_position",
+        "id": "P1"
+      },
+      {
+        "type": "start_position",
+        "id": "P1"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "main",
+        "biome": "plan"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "cave_exit",
+        "id": "C6"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "cave_b",
+        "biome": "ciwa"
+      },
+      {
+        "type": "cave_b"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      },
+      {
+        "type": "non_playable"
+      }
+    ]
+  ]
+}
