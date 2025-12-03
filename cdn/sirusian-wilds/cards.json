@@ -6,7 +6,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010101.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -40,7 +40,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010102.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -74,7 +74,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010103.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -109,7 +109,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010201.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -139,7 +139,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010202.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -169,7 +169,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010203.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -200,7 +200,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010301.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -234,7 +234,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010302.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -268,7 +268,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010303.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -303,7 +303,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010401.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -337,7 +337,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010402.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -371,7 +371,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010403.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -406,7 +406,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010501.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -440,7 +440,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010502.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -474,7 +474,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010503.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -509,7 +509,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010601.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -543,7 +543,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010602.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -577,7 +577,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010603.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -612,7 +612,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010701.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -646,7 +646,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010702.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -680,7 +680,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010703.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -715,7 +715,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010801.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -745,7 +745,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010802.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -775,7 +775,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010803.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -806,7 +806,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010901.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -836,7 +836,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010902.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -866,7 +866,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/010903.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -897,7 +897,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011001.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -931,7 +931,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011002.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -965,7 +965,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011003.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1000,7 +1000,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011101.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1034,7 +1034,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011102.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1068,7 +1068,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011103.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1103,7 +1103,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011201.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1137,7 +1137,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011202.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1171,7 +1171,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011203.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1206,7 +1206,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011301.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1236,7 +1236,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011302.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1270,7 +1270,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011303.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1305,7 +1305,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011401.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1335,7 +1335,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011402.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1368,7 +1368,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011403.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1402,7 +1402,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011501.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1435,7 +1435,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011502.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1468,7 +1468,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011503.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1502,7 +1502,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011601.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1532,7 +1532,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011602.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1562,7 +1562,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011603.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1593,7 +1593,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011701.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1626,7 +1626,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011702.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1659,7 +1659,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011703.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1693,7 +1693,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011801.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1727,7 +1727,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011802.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1761,7 +1761,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011803.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1796,7 +1796,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011901.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1829,7 +1829,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011902.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1862,7 +1862,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/011903.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1896,7 +1896,7 @@
         "age": "Young",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/012001.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1930,7 +1930,7 @@
         "age": "Adult",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/012002.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1964,7 +1964,7 @@
         "age": "Elderly",
         "card_type": "Companion",
         "imagry": {
-            "card_image": "#",
+            "card_image": "/cdn/sirusian-wilds/images/cards/012003.png",
             "companion_image": "#"
         },
         "summon_cost": [
@@ -1990,5 +1990,54 @@
                 "description": "Pounces at its target and bites with its fangs."
             }
         ]
+    },
+
+    "020101": {
+        "name": "Shardstone",
+        "card_type": "Resource",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020101.png"
+        },
+        "description": "Shardstone is a useful manufacturing and construction material. It can be found in abundance across, and interspersed throughout, the planet Sirus."
+    },
+    "020201": {
+        "name": "Murky Water",
+        "card_type": "Resource",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020201.png"
+        },
+        "description": "Unfiltered, and dirty, water that is in abundance on Sirus. Whilst not safe to drink in its natural state, it can be deposited into a Portable Purifier to make safe for drinking."
+    },
+    "020301": {
+        "name": "Wood",
+        "card_type": "Resource",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020301.png"
+        },
+        "description": "A small collection of wood, found in large quantities across the planet, that is used in various manufacturing and construction efforts."
+    },
+    "020401": {
+        "name": "Biomass",
+        "card_type": "Resource",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020401.png"
+        },
+        "description": "A mixture of various biological debris (i.e. wood shavings, wilting plant life, wasting fauna, etc), in a state of advanced decay. When in this state the resulting Biomass produces natural gas emissions that have manufacturing and power generation benefits."
+    },
+    "020501": {
+        "name": "Raw Meat",
+        "card_type": "Resource",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020501.png"
+        },
+        "description": "Usually obtained as a result of hunting or trapping wild animals, Raw Meat can be used as bait to summon Companions OR depositing it into a Compact Grill to restore HP."
+    },
+    "020601": {
+        "name": "Raw Fish",
+        "card_type": "Resource",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020601.png"
+        },
+        "description": "Obtained via the simple act of fishing, Raw Fish can be used as bait to summon Companions OR depositing it into a Compact Grill to restore HP."
     }
 }
