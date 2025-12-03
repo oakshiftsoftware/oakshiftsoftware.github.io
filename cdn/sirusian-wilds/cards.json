@@ -1992,6 +1992,7 @@
         ]
     },
 
+
     "020101": {
         "name": "Shardstone",
         "card_type": "Resource",
@@ -2039,5 +2040,398 @@
             "card_image": "/cdn/sirusian-wilds/images/cards/020601.png"
         },
         "description": "Obtained via the simple act of fishing, Raw Fish can be used as bait to summon Companions OR depositing it into a Compact Grill to restore HP."
+    },
+
+
+    "030101": {
+        "name": "Survival Axe",
+        "card_type": "Equipment",
+        "sub_type": "Weapon",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030101.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1,
+            "equipping_cost": [
+                "NONE"
+            ]
+        },
+        "usage": "When equipped, the Survival Axe can be used against wild animals and other players. (Swinging Attack = 5 Damage)"
+    },
+    "030102": {
+        "name": "Service Handgun",
+        "card_type": "Equipment",
+        "sub_type": "Weapon",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030102.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 3,
+            "uses_per_turn": 1,
+            "equipping_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 1}
+                ]
+            ]
+        },
+        "usage": "When equipped, the Service Handgun can be used against wild animals and other players. (Single Shot = 11 Damage)"
+    },
+    "030103": {
+        "name": "Assault Rifle",
+        "card_type": "Equipment",
+        "sub_type": "Weapon",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030103.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 5,
+            "uses_per_turn": 2,
+            "equipping_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 2}
+                ]
+            ]
+        },
+        "usage": "When equipped, the Assault Rifle can be used against wild animals and other players. (Burst Fire = 17 Damage)"
+    },
+    "030201": {
+        "name": "Expedition Pack",
+        "card_type": "Equipment",
+        "sub_type": "Utility",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030201.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 1,
+            "uses_per_turn": 2,
+            "equipping_cost": [
+                "NONE"
+            ]
+        },
+        "usage": "When equipped, store up to four (4) Resources OR two (2) Utilities for later use. Stored items should be placed on top of this card."
+    },
+    "030202": {
+        "name": "Portable Purifier",
+        "card_type": "Equipment",
+        "sub_type": "Utility",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030202.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 1,
+            "uses_per_turn": 2,
+            "equipping_cost": [
+                "OR",
+                [
+                    {"item": "Biomass", "quantity": 1}
+                ]
+            ]
+        },
+        "usage": "When equipped, deposit Murky Water into the purifier to replenish some HP. (x1 Murky Water = +15 HP)"
+    },
+    "030203": {
+        "name": "Compact Grill",
+        "card_type": "Equipment",
+        "sub_type": "Utility",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030203.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 2,
+            "uses_per_turn": 1,
+            "equipping_cost": [
+                "OR",
+                [
+                    {"item": "Biomass", "quantity": 1}
+                ]
+            ]
+        },
+        "usage": "When equipped, deposit Raw Meat or Raw Fish into the grill to replenish significant HP. (x1 Raw Meat OR x1 Raw Fish = +30 HP)"
+    },
+    "030204": {
+        "name": "Handheld Torch",
+        "card_type": "Equipment",
+        "sub_type": "Utility",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030204.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1,
+            "equipping_cost": [
+                "NONE"
+            ]
+        },
+        "usage": "When equipped, in a cavernous area, encounter roll chances are cut in half. But no card draws. (1-3 = No Encounter, 4-6 = Encounter)"
+    },
+
+
+    "040101": {
+        "name": "Prefab Warehouse",
+        "card_type": "Structure",
+        "sub_type": "Storage",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040101.png"
+        },
+        "effects": {
+            "turns_to_build": 2,
+            "accessible_range": 5,
+            "uses_per_turn": 2,
+            "build_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 2},
+                    {"item": "Wood", "quantity": 2},
+                    {"item": "Biomass", "quantity": 1}
+                ]
+            ]
+        },
+        "stats": {
+            "hp": 50,
+            "def": 25
+        },
+        "storage_capacity": [
+            "OR",
+            [
+                {"item": "Resources", "quantity": 8},
+                {"item": "Equipment", "quantity": 4}
+            ]
+        ],
+        "usage": "Allows for the storage of up to eight (8) Resources or four (4) Equipment. Must visit the structure to deposit items, but can withdraw from anywhere."
+    },
+    "040201": {
+        "name": "Prefab Habitat",
+        "card_type": "Structure",
+        "sub_type": "Shelter",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040201.png"
+        },
+        "effects": {
+            "turns_to_build": 2,
+            "accessible_range": 1,
+            "uses_per_turn": 1,
+            "build_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 2},
+                    {"item": "Wood", "quantity": 2}
+                ]
+            ]
+        },
+        "stats": {
+            "hp": 30,
+            "def": 15
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_turn": 20},
+            {"target": "Companion", "hp_per_turn": 20}
+        ],
+        "usage": "At the end of your turn, your character OR a summoned Companion can replenish 20 HP. (30 HP / 15 DEF)"
+    },
+    "040301": {
+        "name": "Drone Hub",
+        "card_type": "Structure",
+        "sub_type": "Defense",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040301.png"
+        },
+        "effects": {
+            "turns_to_build": 2,
+            "accessible_range": 5,
+            "uses_per_turn": 1,
+            "build_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 3},
+                    {"item": "Wood", "quantity": 2},
+                    {"item": "Biomass", "quantity": 2}
+                ]
+            ]
+        },
+        "stats": {
+            "hp": 40,
+            "def": 10
+        },
+        "attacks": [
+            {
+                "name": "Defensive Attack",
+                "damage": 15,
+                "description": "Automated drones attack a selected hostile target within range."
+            }
+        ],
+        "usage": "Once per turn, deploy automated security drones to deal 15 Damage to a hostile target in range. (40 HP / 10 DEF)"
+    },
+    "040401": {
+        "name": "Armoury",
+        "card_type": "Structure",
+        "sub_type": "Utility",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040401.png"
+        },
+        "effects": {
+            "turns_to_build": 2,
+            "accessible_range": 1,
+            "uses_per_turn": 2,
+            "build_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 3},
+                    {"item": "Wood", "quantity": 2}
+                ]
+            ]
+        },
+        "stats": {
+            "hp": 35,
+            "def": 20
+        },
+        "allowed_equipment": [
+            "Weapon"
+        ],
+        "equipping_cost_override": [
+            "NONE"
+        ],
+        "usage": "When your character is on the Armoury tile, all Weapons can be equipped at no Equipping Cost. (35 HP / 20 DEF)"
+    },
+    "040402": {
+        "name": "Workshop",
+        "card_type": "Structure",
+        "sub_type": "Utility",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040402.png"
+        },
+        "effects": {
+            "turns_to_build": 2,
+            "accessible_range": 1,
+            "uses_per_turn": 2,
+            "build_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 3},
+                    {"item": "Wood", "quantity": 2}
+                ]
+            ]
+        },
+        "stats": {
+            "hp": 35,
+            "def": 15
+        },
+        "allowed_equipment": [
+            "Utility"
+        ],
+        "equipping_cost_override": [
+            "NONE"
+        ],
+        "usage": "When your character is on the Workshop tile, all Utilities can be equipped at no Equipping Cost. (35 HP / 15 DEF)"
+    },
+
+    "050101": {
+        "name": "Trauma MedKit",
+        "card_type": "Special Action",
+        "sub_type": "Health",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/050101.png"
+        },
+        "effects": {
+            "turns_active": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_use": 15},
+            {"target": "Companion", "hp_per_use": 15}
+        ],
+        "mp_addition": [
+            {"target": "Character", "mp_bonus": 0}
+        ],
+        "disable_opponent_card_draws": {
+            "is_true": false, 
+            "turns": 0
+        },
+        "description": "Use the Trauma MedKit to restore health. Costs 1 Biomass to use. (Usage limited to once per turn)"
+    },
+    "050102": {
+        "name": "Emergency MedKit",
+        "card_type": "Special Action",
+        "sub_type": "Health",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/050102.png"
+        },
+        "effects": {
+            "turns_active": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_use": 25},
+            {"target": "Companion", "hp_per_use": 25}
+        ],
+        "mp_addition": [
+            {"target": "Character", "mp_bonus": 0}
+        ],
+        "disable_opponent_card_draws": {
+            "is_true": false, 
+            "turns": 0
+        },
+        "description": "Use the Emergency MedKit to restore health. Costs 2 Biomass to use. (Usage limited to once per turn)"
+    },
+    "050201": {
+        "name": "Settlement Rations",
+        "card_type": "Special Action",
+        "sub_type": "Movement",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/050201.png"
+        },
+        "effects": {
+            "turns_active": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_use": 0},
+            {"target": "Companion", "hp_per_use": 0}
+        ],
+        "mp_addition": [
+            {"target": "Character", "mp_bonus": 2}
+        ],
+        "disable_opponent_card_draws": {
+            "is_true": false, 
+            "turns": 0
+        },
+        "description": "Use the Settlement Rations to restore movement points. Costs 1 Biomass to use. (Usage limited to once per turn)"
+    },
+    "050301": {
+        "name": "Signal Jammer",
+        "card_type": "Special Action",
+        "sub_type": "Sabotage",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/050301.png"
+        },
+        "effects": {
+            "turns_active": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_use": 0},
+            {"target": "Companion", "hp_per_use": 0}
+        ],
+        "mp_addition": [
+            {"target": "Character", "mp_bonus": 0}
+        ],
+        "disable_opponent_card_draws": {
+            "is_true": true, 
+            "turns": 1
+        },
+        "description": "Use the Signal Jammer to disrupt enemy signals. Costs 1 Biomass to use. (Usage limited to once per turn)"
     }
 }
