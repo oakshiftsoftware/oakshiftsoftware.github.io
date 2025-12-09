@@ -1,0 +1,692 @@
+{
+    "010101": {
+        "card_type": "Companion",
+        "nickname": "Skerrix",
+        "scientific_name": "Cryptoviverra skerrix",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010101.png",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 11,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 2,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 6,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010102": {
+        "card_type": "Companion",
+        "nickname": "Skerrix",
+        "scientific_name": "Cryptoviverra skerrix",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010102.png",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 19,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 4,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 10,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010103": {
+        "card_type": "Companion",
+        "nickname": "Skerrix",
+        "scientific_name": "Cryptoviverra skerrix",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010103.png",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 1},
+                {"item": "Raw Fish", "quantity": 1}
+            ]
+        ],
+        "stats": {
+            "hp": 15,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 3,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 8,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    },
+    "010201": {
+        "card_type": "Companion",
+        "nickname": "Echouse",
+        "scientific_name": "Echoceilus resonatus",
+        "companion_type": "Rodent",
+        "age": "Young",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010201.png",
+            "companion_image": "#"
+        },
+        "summon_cost": ["NONE"],
+        "stats": {
+            "hp": 7,
+            "def": 1
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 4,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Whip",
+                "damage": 1,
+                "description": "Whips with both of its tails at its target."
+            }
+        ]
+    },
+    "010202": {
+        "card_type": "Companion",
+        "nickname": "Echouse",
+        "scientific_name": "Echoceilus resonatus",
+        "companion_type": "Rodent",
+        "age": "Adult",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010202.png",
+            "companion_image": "#"
+        },
+        "summon_cost": ["NONE"],
+        "stats": {
+            "hp": 12,
+            "def": 2
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 6,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Whip",
+                "damage": 3,
+                "description": "Whips with both of its tails at its target."
+            }
+        ]
+    },
+    "010203": {
+        "card_type": "Companion",
+        "nickname": "Echouse",
+        "scientific_name": "Echoceilus resonatus",
+        "companion_type": "Rodent",
+        "age": "Elderly",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010203.png",
+            "companion_image": "#"
+        },
+        "summon_cost": ["NONE"],
+        "stats": {
+            "hp": 9,
+            "def": 1
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 5,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Whip",
+                "damage": 2,
+                "description": "Whips with both of its tails at its target."
+            }
+        ]
+    },
+    "010301": {
+        "card_type": "Companion",
+        "nickname": "Whiptail",
+        "scientific_name": "Verrutalus caudavernum",
+        "companion_type": "Mammal",
+        "age": "Young",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010301.png",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 21,
+            "def": 4
+        },
+        "attacks": [
+            {
+                "name": "Tail Whip",
+                "damage": 7,
+                "description": "Uses its powerful tail to strike its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 5,
+                "description": "Bites with its sharp teeth."
+            }
+        ]
+    },
+    "010302": {
+        "card_type": "Companion",
+        "nickname": "Whiptail",
+        "scientific_name": "Verrutalus caudavernum",
+        "companion_type": "Mammal",
+        "age": "Adult",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010302.png",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 30,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Tail Whip",
+                "damage": 10,
+                "description": "Uses its powerful tail to strike its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 8,
+                "description": "Bites with its sharp teeth."
+            }
+        ]
+    },
+    "010303": {
+        "card_type": "Companion",
+        "nickname": "Whiptail",
+        "scientific_name": "Verrutalus caudavernum",
+        "companion_type": "Mammal",
+        "age": "Elderly",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/010303.png",
+            "companion_image": "#"
+        },
+        "summon_cost": [
+            "OR",
+            [
+                {"item": "Raw Meat", "quantity": 2},
+                {"item": "Raw Fish", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 25,
+            "def": 6
+        },
+        "attacks": [
+            {
+                "name": "Tail Whip",
+                "damage": 9,
+                "description": "Uses its powerful tail to strike its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 7,
+                "description": "Bites with its sharp teeth."
+            }
+        ]
+    },
+    "020101": {
+        "card_type": "Resource",
+        "name": "Shardstone",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020101.png"
+        },
+        "description": "Shardstone is a useful manufacturing and construction material. It can be found in abundance across, and interspersed throughout, the planet Sirus."
+    },
+    "020201": {
+        "card_type": "Resource",
+        "name": "Murky Water",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020201.png"
+        },
+        "description": "Unfiltered, and dirty, water that is in abundance on Sirus. Whilst not safe to drink in its natural state, it can be deposited into a Portable Purifier to make safe for drinking."
+    },
+    "020301": {
+        "card_type": "Resource",
+        "name": "Wood",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020301.png"
+        },
+        "description": "A small collection of wood, found in large quantities across the planet, that is used in various manufacturing and construction efforts."
+    },
+    "020401": {
+        "card_type": "Resource",
+        "name": "Biomass",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020401.png"
+        },
+        "description": "A mixture of various biological debris (i.e. wood shavings, wilting plant life, wasting fauna, etc), in a state of advanced decay. When in this state the resulting Biomass produces natural gas emissions that have manufacturing and power generation benefits."
+    },
+    "020501": {
+        "card_type": "Resource",
+        "name": "Raw Meat",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020501.png"
+        },
+        "description": "Usually obtained as a result of hunting or trapping wild animals, Raw Meat can be used as bait to summon Companions OR depositing it into a Compact Grill to restore HP."
+    },
+    "020601": {
+        "card_type": "Resource",
+        "name": "Raw Fish",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/020601.png"
+        },
+        "description": "Obtained via the simple act of fishing, Raw Fish can be used as bait to summon Companions OR depositing it into a Compact Grill to restore HP."
+    },
+    "030101": {
+        "card_type": "Equipment",
+        "sub_type": "Weapon",
+        "name": "Survival Axe",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030101.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1,
+            "equipping_cost": ["NONE"]
+        },
+        "usage": "When equipped, the Survival Axe can be used against wild animals and other players. (Swinging Attack = 5 Damage)"
+    },
+    "030102": {
+        "card_type": "Equipment",
+        "sub_type": "Weapon",
+        "name": "Service Handgun",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030102.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 3,
+            "uses_per_turn": 1,
+            "equipping_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 1}
+                ]
+            ]
+        },
+        "usage": "When equipped, the Service Handgun can be used against wild animals and other players. (Single Shot = 11 Damage)"
+    },
+    "030103": {
+        "card_type": "Equipment",
+        "sub_type": "Weapon",
+        "name": "Assault Rifle",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030103.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 5,
+            "uses_per_turn": 2,
+            "equipping_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 2}
+                ]
+            ]
+        },
+        "usage": "When equipped, the Assault Rifle can be used against wild animals and other players. (Burst Fire = 17 Damage)"
+    },
+    "030201": {
+        "card_type": "Equipment",
+        "sub_type": "Utility",
+        "name": "Portable Bag",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030201.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 0,
+            "uses_per_turn": 0,
+            "equipping_cost": ["NONE"]
+        },
+        "usage": "When equipped, store up to four (4) Resources OR two (2) Utilities for later use. Stored items should be placed on top of this card."
+    },
+    "030202": {
+        "card_type": "Equipment",
+        "sub_type": "Utility",
+        "name": "Portable Purifier",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030202.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 0,
+            "uses_per_turn": 1,
+            "equipping_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 1}
+                ]
+            ]
+        },
+        "usage": "When equipped, deposit Murky Water into the purifier to replenish some HP. (x1 Murky Water = +15 HP)"
+    },
+    "030203": {
+        "card_type": "Equipment",
+        "sub_type": "Utility",
+        "name": "Compact Grill",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030203.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 0,
+            "uses_per_turn": 1,
+            "equipping_cost": [
+                "OR",
+                [
+                    {"item": "Shardstone", "quantity": 1},
+                    {"item": "Wood", "quantity": 1}
+                ]
+            ]
+        },
+        "usage": "When equipped, deposit Raw Meat or Raw Fish into the grill to replenish significant HP. (x1 Raw Meat OR x1 Raw Fish = +30 HP)"
+    },
+    "030204": {
+        "card_type": "Equipment",
+        "sub_type": "Utility",
+        "name": "Caving Lantern",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/030204.png"
+        },
+        "effects": {
+            "turns_to_equip": 1,
+            "effective_range": 0,
+            "uses_per_turn": 0,
+            "equipping_cost": ["NONE"]
+        },
+        "usage": "When equipped, in a cavernous area, encounter roll chances are cut in half. But no card draws. (1-3 = No Encounter, 4-6 = Encounter)"
+    },
+    "040101": {
+        "card_type": "Structure",
+        "sub_type": "Storage",
+        "name": "Prefab Warehouse",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040101.png"
+        },
+        "construction_cost": [
+            "AND",
+            [
+                {"item": "Shardstone", "quantity": 3},
+                {"item": "Wood", "quantity": 3}
+            ]
+        ],
+        "stats": {
+            "hp": 40,
+            "def": 20
+        },
+        "usage": "Allows for the storage of up to eight (8) Resources or four (4) Equipment. Must visit the structure to deposit items, but can withdraw from anywhere."
+    },
+    "040201": {
+        "card_type": "Structure",
+        "sub_type": "Medical",
+        "name": "Medical Station",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040201.png"
+        },
+        "construction_cost": [
+            "AND",
+            [
+                {"item": "Shardstone", "quantity": 2},
+                {"item": "Wood", "quantity": 2},
+                {"item": "Biomass", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 30,
+            "def": 15
+        },
+        "usage": "At the end of your turn, your character OR a summoned Companion can replenish 20 HP. (30 HP / 15 DEF)"
+    },
+    "040301": {
+        "card_type": "Structure",
+        "sub_type": "Defense",
+        "name": "Automated Turret",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040301.png"
+        },
+        "construction_cost": [
+            "AND",
+            [
+                {"item": "Shardstone", "quantity": 4},
+                {"item": "Biomass", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 40,
+            "def": 10
+        },
+        "usage": "Once per turn, deploy automated security drones to deal 15 Damage to a hostile target in range. (40 HP / 10 DEF)"
+    },
+    "040401": {
+        "card_type": "Structure",
+        "sub_type": "Workshop",
+        "name": "Armoury",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040401.png"
+        },
+        "construction_cost": [
+            "AND",
+            [
+                {"item": "Shardstone", "quantity": 3},
+                {"item": "Wood", "quantity": 2}
+            ]
+        ],
+        "stats": {
+            "hp": 35,
+            "def": 20
+        },
+        "equipping_cost_override": ["NONE"],
+        "usage": "When your character is on the Armoury tile, all Weapons can be equipped at no Equipping Cost. (35 HP / 20 DEF)"
+    },
+    "040402": {
+        "card_type": "Structure",
+        "sub_type": "Workshop",
+        "name": "Workshop",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/040402.png"
+        },
+        "construction_cost": [
+            "AND",
+            [
+                {"item": "Shardstone", "quantity": 2},
+                {"item": "Wood", "quantity": 3}
+            ]
+        ],
+        "stats": {
+            "hp": 35,
+            "def": 15
+        },
+        "equipping_cost_override": ["NONE"],
+        "usage": "When your character is on the Workshop tile, all Utilities can be equipped at no Equipping Cost. (35 HP / 15 DEF)"
+    },
+    "050101": {
+        "card_type": "Special Action",
+        "sub_type": "Health",
+        "name": "Trauma MedKit",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/050101.png"
+        },
+        "effects": {
+            "turns_active": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_use": 15},
+            {"target": "Companion", "hp_per_use": 15}
+        ],
+        "mp_addition": [
+            {"target": "Character", "mp_bonus": 0}
+        ],
+        "disable_opponent_card_draws": {
+            "is_true": false, 
+            "turns": 0
+        },
+        "description": "Use the Trauma MedKit to restore health. Costs 1 Biomass to use. (Usage limited to once per turn)"
+    },
+    "050102": {
+        "card_type": "Special Action",
+        "sub_type": "Health",
+        "name": "Emergency MedKit",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/050102.png"
+        },
+        "effects": {
+            "turns_active": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_use": 25},
+            {"target": "Companion", "hp_per_use": 25}
+        ],
+        "mp_addition": [
+            {"target": "Character", "mp_bonus": 0}
+        ],
+        "disable_opponent_card_draws": {
+            "is_true": false, 
+            "turns": 0
+        },
+        "description": "Use the Emergency MedKit to restore health. Costs 2 Biomass to use. (Usage limited to once per turn)"
+    },
+    "050201": {
+        "card_type": "Special Action",
+        "sub_type": "Movement",
+        "name": "Settlement Rations",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/050201.png"
+        },
+        "effects": {
+            "turns_active": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_use": 0},
+            {"target": "Companion", "hp_per_use": 0}
+        ],
+        "mp_addition": [
+            {"target": "Character", "mp_bonus": 2}
+        ],
+        "disable_opponent_card_draws": {
+            "is_true": false, 
+            "turns": 0
+        },
+        "description": "Use the Settlement Rations to restore movement points. Costs 1 Biomass to use. (Usage limited to once per turn)"
+    },
+    "050301": {
+        "card_type": "Special Action",
+        "sub_type": "Sabotage",
+        "name": "Signal Jammer",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/050301.png"
+        },
+        "effects": {
+            "turns_active": 1,
+            "effective_range": 1,
+            "uses_per_turn": 1
+        },
+        "hp_regeneration": [
+            {"target": "Character", "hp_per_use": 0},
+            {"target": "Companion", "hp_per_use": 0}
+        ],
+        "mp_addition": [
+            {"target": "Character", "mp_bonus": 0}
+        ],
+        "disable_opponent_card_draws": {
+            "is_true": true, 
+            "turns": 1
+        },
+        "description": "Use the Signal Jammer to disrupt enemy signals. Costs 1 Biomass to use. (Usage limited to once per turn)"
+    },
+    "060101": {
+        "card_type": "Encounter",
+        "sub_type": "Animal Attack",
+        "name": "Skerrix Attack",
+        "description": "A wild adult Skerrix has ambushed you!",
+        "imagry": {
+            "card_image": "/cdn/sirusian-wilds/images/cards/060101.png"
+        },
+        "stats": {
+            "hp": 19,
+            "def": 3
+        },
+        "attacks": [
+            {
+                "name": "Swipe",
+                "damage": 4,
+                "description": "Uses its claws to scratch and swipe at its target."
+            },
+            {
+                "name": "Bite",
+                "damage": 10,
+                "description": "Pounces at its target and bites with its fangs."
+            }
+        ]
+    }
+}
