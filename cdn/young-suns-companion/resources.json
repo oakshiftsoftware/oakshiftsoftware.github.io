@@ -7,6 +7,7 @@
     "zips": {"name": "Zips", "location": "junk_planetoid"},
     "drift": {"name": "Drift", "location": "junk_planetoid"},
 
+    "nickel": {"name": "Nickel", "location": "ore_planetoid"},
     "basalt": {"name": "Basalt", "location": "ore_planetoid"},
     "peridot": {"name": "Peridot", "location": "ore_planetoid"}
 }
