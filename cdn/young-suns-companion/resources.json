@@ -1,0 +1,12 @@
+{
+    "textile_ends": {"name": "Textile Ends", "location": "trading_quilt"},
+    "tool_socket": {"name": "Tool Socket", "location": "trading_quilt"},
+    "water_hopper": {"name": "Water Hopper", "location": "trading_quilt"},
+
+    "scrap_metal": {"name": "Scrap Metal", "location": "junk_planetoid"},
+    "zips": {"name": "Zips", "location": "junk_planetoid"},
+    "drift": {"name": "Drift", "location": "junk_planetoid"},
+
+    "basalt": {"name": "Basalt", "location": "ore_planetoid"},
+    "peridot": {"name": "Peridot", "location": "ore_planetoid"}
+}
