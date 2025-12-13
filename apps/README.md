@@ -5,6 +5,6 @@ The below is a list of UNOFFICIAL game companion applications, that have been co
 
 _It is also worth noting that the full Python source files for each application are linked to their respective project below. This is done to enhance trust and foster transparency when we create publicly free applcations in this manner._
 
-> Young Suns Companion (ysc.apk)
+> Young Suns Companion (IN DEVELOPMENT)
   - Game Developer: KO_OP (www.ko-opmode.com)
-  - Application Core Files
+  - Application Core Files: COMING SOON
