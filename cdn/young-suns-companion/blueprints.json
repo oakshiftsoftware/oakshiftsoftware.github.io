@@ -1,0 +1,93 @@
+{
+    "sunpax": {
+        "name": "Sunpax",
+        "medium": "printer",
+        "variant": "intermediate",
+        "required": [
+            {"item": "scrap_metal", "quantity": 5},
+            {"item": "peridot", "quantity": 2},
+            {"item": "zips", "quantity": 2}
+        ]
+    },
+    "basalt_paste": {
+        "name": "Basalt Paste",
+        "medium": "printer",
+        "variant": "intermediate",
+        "required": [
+            {"item": "scrap_metal", "quantity": 7},
+            {"item": "basalt", "quantity": 3}
+        ]
+    },
+    "pot_metal": {
+        "name": "Pot Metal",
+        "medium": "printer",
+        "variant": "intermediate",
+        "required": [
+            {"item": "scrap_metal", "quantity": 10},
+            {"item": "water_hopper", "quantity": 5}
+        ]
+    },
+
+    "clamp": {
+        "name": "Clamp",
+        "medium": "workbench",
+        "variant": "equipment",
+        "required": [
+            {"item": "pot_metal", "quantity": 2},
+            {"item": "zips", "quantity": 15},
+            {"item": "nickel", "quantity": 10},
+            {"item": "tool_socket", "quantity": 1}
+        ]
+    },
+    "extractor": {
+        "name": "Extractor",
+        "medium": "workbench",
+        "variant": "equipment",
+        "required": [
+            {"item": "basalt_paste", "quantity": 2},
+            {"item": "sunpax", "quantity": 10},
+            {"item": "tool_socket", "quantity": 1}
+        ]
+    },
+    "drill": {
+        "name": "Drill",
+        "medium": "workbench",
+        "variant": "equipment",
+        "required": [
+            {"item": "scrap_metal", "quantity": 10},
+            {"item": "nickel", "quantity": 1},
+            {"item": "sunpax", "quantity": 2},
+            {"item": "zips", "quantity": 10},
+            {"item": "tool_socket", "quantity": 1}
+        ]
+    },
+    "hammer": {
+        "name": "Hammer",
+        "medium": "workbench",
+        "variant": "equipment",
+        "required": [
+            {"item": "nickel", "quantity": 10},
+            {"item": "tool_socket", "quantity": 1}
+        ]
+    },
+    "wrench": {
+        "name": "Wrench",
+        "medium": "workbench",
+        "variant": "equipment",
+        "required": [
+            {"item": "basalt_paste", "quantity": 1},
+            {"item": "pot_metal", "quantity": 1},
+            {"item": "tool_socket", "quantity": 1}
+        ]
+    },
+    "mop": {
+        "name": "Mop",
+        "medium": "workbench",
+        "variant": "equipment",
+        "required": [
+            {"item": "textile_ends", "quantity": 3},
+            {"item": "drift", "quantity": 3},
+            {"item": "tool_socket", "quantity": 1}
+        ]
+    }
+}
