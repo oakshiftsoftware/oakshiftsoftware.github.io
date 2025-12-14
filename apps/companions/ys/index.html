@@ -515,7 +515,7 @@
         <!-- THREE.js (CDN) -->
         <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
 
-        <!-- Inline App JS (no service worker, no manifest) -->
+        <!-- JS Implementation -->
         <script>
             const CONFIG = {
                 cdn_host: 'https://oakshiftsoftware.github.io/cdn/young-suns-companion',
@@ -685,8 +685,8 @@
             appState.decrement = function (res_id) { const current = this.resource_tracker[res_id] || 0; if (current > 0) { this.resource_tracker[res_id] = current - 1; this.save_tracker(); } };
             appState.clear_count = function (res_id) { this.resource_tracker[res_id] = 0; this.save_tracker(); };
 
-            const ui = UI; // keep existing onclick references working
-            const app = UI; // expose as app for buttons
+            const ui = UI;
+            const app = UI;
 
             async function init_app() {
                 const dataService = new DataService(); appState.load_cached();
@@ -699,9 +699,9 @@
                 init_three_background();
             }
 
-            // Lightweight THREE.js animated background
+            // THREE.js Animated Background
             function init_three_background() {
-                if (!window.THREE) return; // graceful if CDN blocked
+                if (!window.THREE) return;
                 const canvas = document.getElementById('bg-canvas');
                 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
                 const scene = new THREE.Scene();
