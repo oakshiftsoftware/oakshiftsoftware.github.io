@@ -593,7 +593,7 @@
                 render_build_queue() {
                     const list = document.getElementById('queue-list'); list.innerHTML = '';
                     if (appState.build_queue.length === 0) { const item = document.createElement('div'); item.className = 'list-item disabled'; item.textContent = "Tap '+' to add blueprints"; list.appendChild(item); return; }
-                    for (const bp_id of appState.build_queue) { const bp = appState.blueprints[bp_id] || {}; const item = document.createElement('div'); item.className = 'list-item queue-item'; item.innerHTML = `<div>${bp.name || bp_id}</div><button class="icon-btn" onclick="appState.remove_from_build_queue('${bp_id}'); app.switch_screen('queue')">✕</button>`; item.addEventListener('click', () => this.show_detail(bp_id)); list.appendChild(item); }
+                    for (const bp_id of appState.build_queue) { const bp = appState.blueprints[bp_id] || {}; const item = document.createElement('div'); item.className = 'list-item queue-item'; item.innerHTML = `<div>${bp.name || bp_id}</div>`; item.addEventListener('click', () => this.show_detail(bp_id)); list.appendChild(item); }
                 },
                 render_blueprints() {
                     const list = document.getElementById('blueprints-list'); list.innerHTML = '';
