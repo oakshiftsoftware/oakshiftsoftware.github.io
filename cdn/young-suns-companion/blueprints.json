@@ -3,6 +3,7 @@
         "name": "Sunpax",
         "medium": "printer",
         "variant": "intermediate",
+        "gratitude_cost": 25,
         "required": [
             {"item": "scrap_metal", "quantity": 5},
             {"item": "peridot", "quantity": 2},
@@ -13,6 +14,7 @@
         "name": "Basalt Paste",
         "medium": "printer",
         "variant": "intermediate",
+        "gratitude_cost": 20,
         "required": [
             {"item": "scrap_metal", "quantity": 7},
             {"item": "basalt", "quantity": 3}
@@ -22,6 +24,7 @@
         "name": "Pot Metal",
         "medium": "printer",
         "variant": "intermediate",
+        "gratitude_cost": 25,
         "required": [
             {"item": "scrap_metal", "quantity": 10},
             {"item": "water_hopper", "quantity": 5}
@@ -32,6 +35,7 @@
         "name": "Clamp",
         "medium": "workbench",
         "variant": "equipment",
+        "gratitude_cost": 0,
         "required": [
             {"item": "pot_metal", "quantity": 2},
             {"item": "zips", "quantity": 15},
@@ -43,6 +47,7 @@
         "name": "Extractor",
         "medium": "workbench",
         "variant": "equipment",
+        "gratitude_cost": 0,
         "required": [
             {"item": "basalt_paste", "quantity": 2},
             {"item": "sunpax", "quantity": 10},
@@ -53,6 +58,7 @@
         "name": "Drill",
         "medium": "workbench",
         "variant": "equipment",
+        "gratitude_cost": 0,
         "required": [
             {"item": "scrap_metal", "quantity": 10},
             {"item": "nickel", "quantity": 1},
@@ -65,6 +71,7 @@
         "name": "Hammer",
         "medium": "workbench",
         "variant": "equipment",
+        "gratitude_cost": 0,
         "required": [
             {"item": "nickel", "quantity": 10},
             {"item": "tool_socket", "quantity": 1}
@@ -74,6 +81,7 @@
         "name": "Wrench",
         "medium": "workbench",
         "variant": "equipment",
+        "gratitude_cost": 0,
         "required": [
             {"item": "basalt_paste", "quantity": 1},
             {"item": "pot_metal", "quantity": 1},
@@ -84,6 +92,7 @@
         "name": "Mop",
         "medium": "workbench",
         "variant": "equipment",
+        "gratitude_cost": 0,
         "required": [
             {"item": "textile_ends", "quantity": 3},
             {"item": "drift", "quantity": 3},
