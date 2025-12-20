@@ -10,5 +10,8 @@
     "nickel": {"name": "Nickel", "location": "ore_planetoid"},
     "basalt": {"name": "Basalt", "location": "ore_planetoid"},
     "peridot": {"name": "Peridot", "location": "ore_planetoid"},
-    "kupacite": {"name": "Kupacite", "location": "ore_planetoid"}
+    "kupacite": {"name": "Kupacite", "location": "ore_planetoid"},
+
+    "goema_bark": {"name": "Goema Bark", "location": "flora_planetoid"},
+    "sapear_sap": {"name": "Sapear Sap", "location": "flora_planetoid"}
 }
