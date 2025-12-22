@@ -26,7 +26,7 @@
       },
       {
         "type": "cave_exit",
-        "id": "C3"
+        "id": "c1"
       },
       {
         "type": "non_playable"
@@ -104,7 +104,7 @@
       },
       {
         "type": "cave_entrance",
-        "id": "C5"
+        "id": "c2"
       },
       {
         "type": "cave_b"
@@ -413,7 +413,8 @@
         "type": "main"
       },
       {
-        "type": "main"
+        "type": "cave_exit",
+        "id": "c1"
       },
       {
         "type": "main"
@@ -452,7 +453,8 @@
         "type": "main"
       },
       {
-        "type": "main"
+        "type": "cave_entrance",
+        "id": "c2"
       },
       {
         "type": "main"
@@ -1999,7 +2001,8 @@
         "type": "main"
       },
       {
-        "type": "main"
+        "type": "cave_entrance",
+        "id": "c1"
       },
       {
         "type": "main"
@@ -2038,7 +2041,8 @@
         "type": "main"
       },
       {
-        "type": "main"
+        "type": "cave_exit",
+        "id": "c2"
       },
       {
         "type": "main"
@@ -2348,7 +2352,7 @@
       },
       {
         "type": "cave_entrance",
-        "id": "C2"
+        "id": "c1"
       },
       {
         "type": "non_playable"
@@ -2426,7 +2430,7 @@
       },
       {
         "type": "cave_exit",
-        "id": "C6"
+        "id": "c2"
       },
       {
         "type": "cave_b"
