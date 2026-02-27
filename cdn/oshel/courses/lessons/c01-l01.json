@@ -1,0 +1,38 @@
+{
+    "metadata": {
+        "title": "What is money?",
+        "description": "An introduction to the concept of money, its history, and its role in society.",
+        "age_range": "10-12",
+        "contributors": [
+            "Jamie Harper (Oakshift Software)"
+        ]
+    },
+    "sections": [
+        {
+            "subtitle": "What is it?",
+            "content": [
+                "Money (also known as 'currency') is a way for people to exchange goods and services in an effective and convenient way.",
+                "It can come in a few different forms, such as; coins, paper bills, and even digital currency.",
+                "Usually money is created and distributed by a country's government, and the amount of money in circulation is carefully controlled to maintain its value."
+            ]
+        },
+        {
+            "subtitle": "#",
+            "content": [
+                "#"
+            ]
+        }
+    ],
+    "assessment": [
+        {
+            "question": "#",
+            "options": [
+                "1) A medium of exchange",
+                "2) A store of value",
+                "3) A unit of account",
+                "4) All of the above"
+            ],
+            "answer": 1
+        }
+    ]
+}
