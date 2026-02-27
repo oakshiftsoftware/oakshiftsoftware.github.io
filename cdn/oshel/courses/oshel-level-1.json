@@ -1,0 +1,14 @@
+{
+    "id": "oshel-level-1",
+    "metadata": {
+        "title": "OSHEL Level 1",
+        "ages": "10-12",
+        "description": "An introduction to basic monetary and economic concepts for children aged 10-12.",
+        "contributors": [
+            "Oakshift Software (Jamie Harper)"
+        ]
+    },
+    "lessons": [
+        "c01-lo1.json"
+    ]
+}
