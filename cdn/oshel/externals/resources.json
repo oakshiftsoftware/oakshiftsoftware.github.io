@@ -1,0 +1,20 @@
+{
+    "youtube": [
+        {
+            "title": "YouTube Video Title",
+            "description": "A brief description of the YouTube video content.",
+            "tags": [
+                "uk"
+            ],
+            "url": "#"
+        }
+    ],
+    "documents": [
+        {
+            "title": "Document Title",
+            "description": "A brief description of the document content.",
+            "tags": [],
+            "url": "#"
+        }
+    ]
+}
