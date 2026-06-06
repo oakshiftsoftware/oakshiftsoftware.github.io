@@ -19,16 +19,6 @@
             "C": ["Business", 80.00, true]
         }
     },
-    "PJTPCOU75": {
-        "name": "Progressive Web Application",
-        "description": "A Progressive Web Application (PWA) is a more complex web application that can provide a more app-like experience, including offline capabilities and push notifications.",
-        "tag": "PWA", "category": "Product",
-        "variants": {
-            "A": ["Personal", 55.00, true],
-            "B": ["Standard", 70.00, true],
-            "C": ["Business", 95.00, true]
-        }
-    },
     "SXAJ8XFNO": {
         "name": "Project Backup",
         "description": "Oakshift Software will retain a backed up copy of the delivered HTML file for up to six months after the delivery date. A copy of this can be requested for free at any time during this six month period.",
