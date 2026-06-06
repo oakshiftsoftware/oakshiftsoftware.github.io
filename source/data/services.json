@@ -43,49 +43,6 @@
         }
     },
     {
-        "code": "JTPCOU75", "name": "Progressive Web Application",
-        "description": "A Progressive Web Application (PWA) is a self-contained website application, that is designed to be hosted on minimum costing hosting packages, and installable on mobile devices as a native application, ideal for small businesses or start-ups.",
-        "tag": "PWA", "category": "Core",
-        "variants": {
-            "A": [
-                "Personal", 55.00, false,
-                {
-                    "description": "A basic progressive web application, suitable for personal projects or small portfolios.",
-                    "features": [
-                        "Custom All-in-one HTML File",
-                        "Responsive Design",
-                        "Basic SEO Setup"
-                    ]
-                }
-            ],
-            "B": [
-                "Standard", 70.00, false,
-                {
-                    "description": "A standard progressive web application, suitable for most business needs.",
-                    "features": [
-                        "Custom All-in-one HTML File",
-                        "Responsive Design",
-                        "Basic SEO Setup",
-                        "Service Worker Integration"
-                    ]
-                }
-            ],
-            "C": [
-                "Business", 95.00, false,
-                {
-                    "description": "A business progressive web application, suitable for larger projects.",
-                    "features": [
-                        "Custom All-in-one HTML File",
-                        "Responsive Design",
-                        "Basic SEO Setup",
-                        "Service Worker Integration",
-                        "Advanced Analytics"
-                    ]
-                }
-            ]
-        }
-    },
-    {
         "code": "XAJ8XFNO", "name": "Project Backup",
         "description": "Oakshift Software will retain a backed up copy of the delivered project files for up to six months after the delivery date. A copy of these can then be requested at no additional charge at any time during the specified coverage period.",
         "tag": "PB", "category": "Optional",
