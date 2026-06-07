@@ -1390,8 +1390,6 @@ document.addEventListener('click', function (e) {
 
 
 function navigateToPage(pageId, pushState = true) {
-    window.scrollTo(0, 0);
-
     sections.forEach(section => {
         if (section.id === pageId) {
             section.classList.remove('hidden');
@@ -1407,6 +1405,8 @@ function navigateToPage(pageId, pushState = true) {
     if (pushState) {
         history.pushState({ page: pageId }, '', `#${pageId}`);
     }
+
+    window.scrollTo(0, 0);
 }
 
 
@@ -1422,13 +1422,15 @@ window.addEventListener('hashchange', () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const heroButtons = document.querySelectorAll('.hero-button');
-    heroButtons.forEach((heroButton) => {
-        heroButton.addEventListener('click', (e) => {
-            const href = heroButton.getAttribute('href');
+    const internalHashLinks = document.querySelectorAll('a[href^="#"]');
+    internalHashLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
             if (!href || !href.startsWith('#')) return;
-            e.preventDefault();
             const targetId = href.substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (!targetSection) return;
+            e.preventDefault();
             navigateToPage(targetId);
         });
     });
