@@ -1307,28 +1307,42 @@ window.exportAsPDF = exportAsPDF;
 
 function openMobileNav() {
     const modal = document.createElement('div');
-    modal.className = 'modal';
+    modal.className = 'modal mobile-nav-modal';
     const navHtml = document.querySelector('nav').innerHTML;
     modal.innerHTML = `
                     <div class="modal-content">
-                        <span class="modal-close">&times;</span>
-                        <div class="mobile-nav-list">${navHtml}</div>
+                        <div class="mobile-nav-panel">
+                            <div class="mobile-nav-header">
+                                <span class="mobile-nav-title">Menu</span>
+                                <button class="modal-close" aria-label="Close menu">&times;</button>
+                            </div>
+                            <nav class="mobile-nav-list">${navHtml}</nav>
+                        </div>
                     </div>
                 `;
     document.body.appendChild(modal);
+    document.body.classList.add('modal-open');
     setTimeout(() => modal.classList.add('active'), 10);
-    modal.querySelector('.modal-close').onclick = () => {
+
+    const closeMenu = () => {
         modal.classList.remove('active');
-        setTimeout(() => modal.remove(), 300);
+        document.body.classList.remove('modal-open');
+        setTimeout(() => modal.remove(), 320);
     };
-    modal.onclick = (e) => { if (e.target === modal) { modal.querySelector('.modal-close').click(); } };
-    
-    modal.querySelectorAll('a').forEach(a => {
+
+    modal.querySelector('.modal-close').onclick = closeMenu;
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            closeMenu();
+        }
+    };
+
+    modal.querySelectorAll('.mobile-nav-list a').forEach(a => {
         a.addEventListener('click', (ev) => {
             ev.preventDefault();
             const target = a.getAttribute('href').substring(1);
             navigateToPage(target);
-            modal.querySelector('.modal-close').click();
+            closeMenu();
         });
     });
 }
