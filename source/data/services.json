@@ -62,13 +62,13 @@
             "B": [
                 "Standard", 90.00, false,
                 {
-                    "description": "A standard websiite, suitable for most small business needs.",
+                    "description": "A standard website, suitable for most small business needs.",
                     "features": [
                         "Custom Small Business Website",
                         "Hosting Package Setup",
                         "Responsive Design",
                         "Basic SEO Setup",
-                        "Admin Dahsboard"
+                        "Admin Dashboard"
                     ]
                 }
             ],
