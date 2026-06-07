@@ -244,7 +244,7 @@
             "A": [
                 "Standard", 5.00, false,
                 {
-                    "description": "Basic setup of Google Analytics account and embedding tracking code.",
+                    "description": "Standard setup of Google Analytics account and embedding tracking code.",
                     "features": [
                         "Google Analytics Account Setup",
                         "Tracking Code Integration"
@@ -256,7 +256,8 @@
                 {
                     "description": "Enhanced setup of Google Analytics with additional tracking features.",
                     "features": [
-                        "Enhanced Tracking Code Integration",
+                        "Google Analytics Account Setup",
+                        "Tracking Code Integration",
                         "Event Tracking Setup"
                     ]
                 }
@@ -266,7 +267,9 @@
                 {
                     "description": "Comprehensive setup of Google Analytics with advanced features.",
                     "features": [
-                        "Advanced Tracking Code Integration",
+                        "Google Analytics Account Setup",
+                        "Tracking Code Integration",
+                        "Event Tracking Setup",
                         "Goal Tracking Setup",
                         "Custom Reporting"
                     ]
