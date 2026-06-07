@@ -43,6 +43,52 @@
         }
     },
     {
+        "code": "TFIQ05KT", "name": "Full Website",
+        "description": "A full website, complete with multiple files and relevant database back-end setup. Hosting packages are setup in the client's name and with their information, and Oakshift only retains access to the hosting package during the development process.",
+        "tag": "STW", "category": "Core",
+        "variants": {
+            "A": [
+                "Personal", 70.00, false,
+                {
+                    "description": "A personal website, suitable for smaller projects or portfolios.",
+                    "features": [
+                        "Custom Personal Website",
+                        "Hosting Package Setup",
+                        "Responsive Design",
+                        "Basic SEO Setup"
+                    ]
+                }
+            ],
+            "B": [
+                "Basic", 90.00, false,
+                {
+                    "description": "A basic websiite, suitable for most small business needs.",
+                    "features": [
+                        "Custom Small Business Website",
+                        "Hosting Package Setup",
+                        "Responsive Design",
+                        "Basic SEO Setup",
+                        "Admin Dahsboard"
+                    ]
+                }
+            ],
+            "C": [
+                "Advanced", 110.00, false,
+                {
+                    "description": "An advanced business website, suitable for larger projects.",
+                    "features": [
+                        "Custom Medium to Large Business Website",
+                        "Hosting Package Setup",
+                        "Responsive Design",
+                        "Basic SEO Setup",
+                        "Admin Dashboard",
+                        "Integrated Analytics"
+                    ]
+                }
+            ]
+        }
+    },
+    {
         "code": "XAJ8XFNO", "name": "Project Backup",
         "description": "Oakshift Software will retain a backed up copy of the delivered project files for up to six months after the delivery date. A copy of these can then be requested at no additional charge at any time during the specified coverage period.",
         "tag": "PB", "category": "Optional",
