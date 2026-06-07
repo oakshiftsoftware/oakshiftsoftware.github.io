@@ -968,7 +968,7 @@ main {
 
 .features-section h4 {
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .feature-list {
@@ -978,7 +978,7 @@ main {
 }
 
 .feature-list li {
-    padding: 0.5rem 0;
+    padding: 0.5rem 0 0 0;
     display: flex;
     align-items: start;
 }
