@@ -21,13 +21,6 @@
     "discountedService": "XAJ8XFNO-A"
   },
   {
-    "name": "SPA Business Backup",
-    "type": "fixed",
-    "value": 5,
-    "requiredServices": ["AZHDNLH1-C", "XAJ8XFNO-A"],
-    "discountedService": "XAJ8XFNO-A"
-  },
-  {
     "name": "Website Personal Backup",
     "type": "fixed",
     "value": 5,
@@ -39,13 +32,6 @@
     "type": "fixed",
     "value": 5,
     "requiredServices": ["TFIQ05KT-B", "XAJ8XFNO-A"],
-    "discountedService": "XAJ8XFNO-A"
-  },
-  {
-    "name": "Website Business Backup",
-    "type": "fixed",
-    "value": 5,
-    "requiredServices": ["TFIQ05KT-C", "XAJ8XFNO-A"],
     "discountedService": "XAJ8XFNO-A"
   }
 ]
