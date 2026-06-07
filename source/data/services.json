@@ -94,7 +94,7 @@
         "tag": "PB", "category": "Optional",
         "variants": {
             "A": [
-                "6 Months", 5.00, true,
+                "6 Months", 5.00, false,
                 {
                     "description": "Backup of project files retained for six months after delivery.",
                     "features": [
@@ -104,7 +104,7 @@
                 }
             ],
             "B": [
-                "12 Months", 15.00, true,
+                "12 Months", 15.00, false,
                 {
                     "description": "Backup of project files retained for twelve months after delivery.",
                     "features": [
@@ -114,7 +114,7 @@
                 }
             ],
             "C": [
-                "18 Months", 27.50, true,
+                "18 Months", 27.50, false,
                 {
                     "description": "Backup of project files retained for eighteen months after delivery.",
                     "features": [
