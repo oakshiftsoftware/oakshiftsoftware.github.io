@@ -6,7 +6,6 @@
     "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"],
     "discountedService": "W8KJ6CJX-A"
   },
-  
   {
     "name": "SPA Personal Backup",
     "type": "fixed",
@@ -28,7 +27,6 @@
     "requiredServices": ["AZHDNLH1-C", "XAJ8XFNO-A"],
     "discountedService": "XAJ8XFNO-A"
   },
-
   {
     "name": "Website Personal Backup",
     "type": "fixed",
