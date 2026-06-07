@@ -60,9 +60,9 @@
                 }
             ],
             "B": [
-                "Basic", 90.00, false,
+                "Standard", 90.00, false,
                 {
-                    "description": "A basic websiite, suitable for most small business needs.",
+                    "description": "A standard websiite, suitable for most small business needs.",
                     "features": [
                         "Custom Small Business Website",
                         "Hosting Package Setup",
