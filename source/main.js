@@ -1,12 +1,10 @@
 const services_list_url = "https://oakshift.co.uk/source/data/services.json";
-const variants_url = "https://oakshift.co.uk/source/data/variants.json";
 const discounts_url = "https://oakshift.co.uk/source/data/discounts.json";
 
 
 let selectedServices = new Map();
 let availableDiscounts = [];
 let allServices = [];
-let allVariants = [];
 
 
 const PACKAGE_CACHE_KEY = 'oakshift_package_v1';
@@ -99,12 +97,8 @@ function clearPackageCache() {
 
 async function loadServiceData() {
     try {
-        const [servicesResponse, variantsResponse] = await Promise.all([
-            fetch(services_list_url),
-            fetch(variants_url)
-        ]);
-        allServices = await servicesResponse.json();
-        allVariants = await variantsResponse.json();
+        const response = await fetch(services_list_url);
+        allServices = await response.json();
     } catch (error) {
         console.error('Error loading service data:', error);
     }
@@ -113,7 +107,7 @@ async function loadServiceData() {
 
 async function loadDiscounts() {
     try {
-        if (allServices.length === 0 || allVariants.length === 0) {
+        if (allServices.length === 0) {
             await loadServiceData();
         }
         const response = await fetch(discounts_url);
@@ -149,6 +143,11 @@ function getServiceDetails(serviceId) {
         price,
         isRecurring
     };
+}
+
+
+function findServiceByCode(code) {
+    return allServices.find(service => service.code === code) || null;
 }
 
 
@@ -231,10 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const variantItem = event.target.closest('.variant-item');
         if (variantItem) {
-            const serviceData = variantItem.getAttribute('data-service-data');
+            const serviceCode = variantItem.getAttribute('data-service-code');
             const variantKey = variantItem.getAttribute('data-variant-key');
-            if (serviceData && variantKey) {
-                try { showServiceModal(serviceData, variantKey); } catch (e) { console.error(e); }
+            const service = findServiceByCode(serviceCode);
+            if (service && variantKey) {
+                try { showServiceModal(service, variantKey); } catch (e) { console.error(e); }
             }
             return;
         }
@@ -244,10 +244,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (variantSelector && !event.target.matches('input[type="radio"]')) {
             const input = variantSelector.querySelector('input');
             if (input) {
-                const serviceData = input.getAttribute('data-service-data');
+                const serviceCode = input.getAttribute('data-service-code');
                 const variantKey = input.getAttribute('data-variant-key');
-                if (serviceData && variantKey) {
-                    try { showServiceModal(serviceData, variantKey); } catch (e) { console.error(e); }
+                const service = findServiceByCode(serviceCode);
+                if (service && variantKey) {
+                    try { showServiceModal(service, variantKey); } catch (e) { console.error(e); }
                 }
             }
             return;
@@ -335,45 +336,27 @@ function createServiceCard(service, isBuilder = false) {
 
     const variantsList = Object.entries(service.variants)
         .map(([key, [name, price, isRecurring]]) => {
-            const variantHtml = isBuilder ? `
+            if (isBuilder) {
+                return `
                             <div class="variant-selector">
                                 <input type="radio" 
                                     name="service_${service.code}" 
                                     value="${key}" 
                                     data-service="${service.code}"
+                                    data-service-code="${service.code}"
                                     data-price="${price}"
                                     data-name="${name}"
                                     data-recurring="${isRecurring}"
-                                    data-variant-key="${key}"
-                                    data-service-data='${JSON.stringify(service)}'>
+                                    data-variant-key="${key}">
                                 <span>${name}</span>
                                 <span style="margin-left: auto">${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
-                            </div>` : `
-                            <div class="variant-item" data-variant-key="${key}" data-service-data='${JSON.stringify(service)}'>
+                            </div>`;
+            }
+            return `
+                            <div class="variant-item" data-service-code="${service.code}" data-variant-key="${key}">
                                 <span>${name}</span>
                                 <span>${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
                             </div>`;
-            return variantHtml;
-            if (isBuilder) {
-                return `
-                                <div class="variant-selector">
-                                    <input type="radio" 
-                                        name="service_${service.code}" 
-                                        value="${key}" 
-                                        data-service="${service.code}"
-                                        data-price="${price}"
-                                        data-name="${name}"
-                                        data-recurring="${isRecurring}">
-                                    <span>${name}</span>
-                                    <span style="margin-left: auto">${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
-                                </div>`;
-            } else {
-                return `
-                                <div class="variant-item">
-                                    <span>${name}</span>
-                                    <span>${formatPrice(price)}${isRecurring ? '/mo' : ''}</span>
-                                </div>`;
-            }
         }).join('');
 
     card.innerHTML = `
@@ -1224,6 +1207,7 @@ async function loadServices() {
     try {
         const response = await fetch(services_list_url);
         const services = await response.json();
+        allServices = services;
         const servicesContent = document.getElementById('services-content');
         servicesContent.innerHTML = ''; // Clear loading message
 
@@ -1251,6 +1235,7 @@ async function loadPackages() {
         ]);
 
         const services = await servicesResponse.json();
+        allServices = services;
         availableDiscounts = await discountsResponse.json();
 
         const packagesContent = document.getElementById('packages-content');
