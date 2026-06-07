@@ -131,7 +131,7 @@
         "tag": "ES", "category": "Optional",
         "variants": {
             "A": [
-                "6 Months", 45.00, true,
+                "6 Months", 7.50, true,
                 {
                     "description": "Extended support for six months after project delivery.",
                     "features": [
