@@ -1438,6 +1438,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialPage = window.location.hash.substring(1) || 'home';
     navigateToPage(initialPage);
 
+    window.addEventListener('load', () => {
+        window.scrollTo(0, 0);
+    });
+
     const navToggle = document.getElementById('nav-toggle');
     if (navToggle) navToggle.addEventListener('click', openMobileNav);
 
