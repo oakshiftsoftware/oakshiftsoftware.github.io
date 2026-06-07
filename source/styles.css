@@ -116,7 +116,7 @@ main {
     position: relative;
     z-index: 3;
     max-width: 800px;
-    padding: 2rem;
+    padding: 0 2rem;
 }
 
 .hero-content h1 {
