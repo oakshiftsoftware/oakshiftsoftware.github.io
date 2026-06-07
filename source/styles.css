@@ -414,20 +414,30 @@ main {
 
 @media (max-width: 700px) {
     header {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1.25rem;
-        gap: 1rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        gap: 0;
     }
 
-    nav ul {
-        flex-wrap: wrap;
+    .brand {
+        display: flex;
+        align-items: center;
         gap: 0.75rem;
-        width: 100%;
     }
 
-    nav ul li {
-        margin-left: 0;
+    .brand-text {
+        display: none;
+    }
+
+    .brand img {
+        margin-right: 0;
+        height: 60px;
+    }
+
+    nav {
+        display: none;
     }
 
     .nav-toggle {
@@ -437,6 +447,7 @@ main {
         border: 1px solid rgba(255,255,255,0.18);
         padding: 0.65rem 0.85rem;
         border-radius: 12px;
+        color: white;
     }
 
     .hero-banner {
@@ -468,12 +479,12 @@ main {
 
 @media (max-width: 560px) {
     header {
-        align-items: stretch;
+        align-items: center;
     }
 
     .brand {
-        width: 100%;
-        justify-content: space-between;
+        width: auto;
+        justify-content: flex-start;
     }
 
     .hero-content h1 {
