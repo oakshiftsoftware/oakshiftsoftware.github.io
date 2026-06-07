@@ -1,6 +1,6 @@
-const services_list_url = "https://oakshiftsoftware.github.io/source/data/services.json";
-const variants_url = "https://oakshiftsoftware.github.io/source/data/variants.json";
-const discounts_url = "https://oakshiftsoftware.github.io/source/data/discounts.json";
+const services_list_url = "https://oakshift.co.uk/source/data/services.json";
+const variants_url = "https://oakshift.co.uk/source/data/variants.json";
+const discounts_url = "https://oakshift.co.uk/source/data/discounts.json";
 
 
 let selectedServices = new Map();
