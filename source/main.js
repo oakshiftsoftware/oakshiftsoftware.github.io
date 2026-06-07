@@ -1311,36 +1311,32 @@ function openMobileNav() {
     const navHtml = document.querySelector('nav').innerHTML;
     modal.innerHTML = `
                     <div class="modal-content">
-                        <div class="mobile-nav-panel">
-                            <div class="mobile-nav-header">
-                                <span class="mobile-nav-title">Menu</span>
-                                <button class="modal-close" aria-label="Close menu">&times;</button>
-                            </div>
-                            <nav class="mobile-nav-list">${navHtml}</nav>
+                        <div class="mobile-nav-header">
+                            <h3>Navigation</h3>
+                            <button class="modal-close" aria-label="Close menu">&times;</button>
                         </div>
+                        <div class="mobile-nav-list">${navHtml}</div>
                     </div>
                 `;
     document.body.appendChild(modal);
-    document.body.classList.add('modal-open');
-    setTimeout(() => modal.classList.add('active'), 10);
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => modal.classList.add('active'));
 
     const closeMenu = () => {
         modal.classList.remove('active');
-        document.body.classList.remove('modal-open');
-        setTimeout(() => modal.remove(), 320);
+        document.body.style.overflow = '';
+        setTimeout(() => modal.remove(), 300);
     };
 
     modal.querySelector('.modal-close').onclick = closeMenu;
-    modal.onclick = (e) => {
-        if (e.target === modal) {
-            closeMenu();
-        }
-    };
+    modal.onclick = (e) => { if (e.target === modal) { closeMenu(); } };
 
-    modal.querySelectorAll('.mobile-nav-list a').forEach(a => {
+    modal.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', (ev) => {
+            const href = a.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
             ev.preventDefault();
-            const target = a.getAttribute('href').substring(1);
+            const target = href.substring(1);
             navigateToPage(target);
             closeMenu();
         });
