@@ -88,7 +88,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../source/images/WatercolourBackground.png');
+    background-image: url('https://oakshiftsoftware.github.io/demos/uniquelyus/source/images/WatercolourBackground.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
