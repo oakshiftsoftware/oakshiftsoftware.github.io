@@ -43,9 +43,9 @@
         }
     },
     {
-        "code": "TFIQ05KT", "name": "Full Website",
+        "code": "TFIQ05KT", "name": "Complete Website",
         "description": "A full website, complete with multiple files and relevant database back-end setup. Hosting packages are setup in the client's name and with their information, and Oakshift only retains access to the hosting package during the development process.",
-        "tag": "STW", "category": "Core",
+        "tag": "COW", "category": "Core",
         "variants": {
             "A": [
                 "Personal", 70.00, false,
