@@ -2,7 +2,7 @@
   {
     "name": "Streamer Special",
     "type": "fixed",
-    "value": 105,
+    "value": 85,
     "requiredServices": ["AZHDNLH1-A", "XAJ8XFNO-B", "N5XAM8WP-B", "W8KJ6CJX-A", "HAG4E84M-A"],
     "discountedService": "N5XAM8WP-B"
   },
