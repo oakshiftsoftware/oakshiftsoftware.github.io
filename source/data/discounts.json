@@ -1,6 +1,6 @@
 [
   {
-    "name": "Support Special",
+    "name": "Support Bundle",
     "type": "fixed",
     "value": 20,
     "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"],
