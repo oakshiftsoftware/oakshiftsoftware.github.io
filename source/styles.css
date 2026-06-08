@@ -140,6 +140,8 @@ main {
     border-radius: 999px;
     font-weight: 700;
     transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    border: 0;
 }
 
 .hero-button.secondary {
