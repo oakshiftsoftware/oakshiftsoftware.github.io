@@ -48,6 +48,7 @@
             </nav>
         </header>
         <main>
+            <!-- Home Page -->
             <section id="home" class="active">
                 <div class="hero-banner">
                     <img src="https://oakshiftsoftware.github.io/source/images/headers/img-5.png" alt="Hero Banner" />
@@ -102,7 +103,7 @@
                     </div>
                 </div>
             </section>
-            
+
             <section id="services" class="hidden">
                 <div class="hero-banner hero-sub">
                     <img src="https://oakshiftsoftware.github.io/source/images/headers/img-1.png" alt="Services Banner" />
@@ -120,6 +121,7 @@
                 </div>
             </section>
 
+            <!-- Packages Page -->
             <section id="packages" class="hidden">
                 <div class="hero-banner hero-sub">
                     <img src="https://oakshiftsoftware.github.io/source/images/headers/img-2.png" alt="Packages Banner" />
@@ -137,6 +139,7 @@
                 </div>
             </section>
 
+            <!-- Discounts Page -->
             <section id="discounts" class="hidden">
                 <div class="hero-banner hero-sub">
                     <img src="https://oakshiftsoftware.github.io/source/images/headers/img-4.png" alt="Discounts Banner" />
@@ -210,6 +213,80 @@
                 </div>
             </section>
 
+            <section id="streamers" class="hidden">
+                <div class="hero-banner hero-sub">
+                    <img src="https://oakshiftsoftware.github.io/source/images/headers/img-5.png" alt="Streamer Special Banner" />
+                    <div class="hero-overlay"></div>
+                    <div class="hero-content">
+                        <span class="eyebrow">Exclusive Limited-Time Offer</span>
+                        <h1>Streamer Special</h1>
+                        <p>Everything content creators need to launch and maintain their web presence, with a massive £85 discount</p>
+                        <div class="hero-actions">
+                            <button id="load-streamer-special" class="hero-button" onclick="loadStreamerSpecial()"><i class="fa-solid fa-cart-plus"></i>Build This Package</button>
+                            <a href="#home" class="hero-button secondary"><i class="fa-solid fa-home"></i>Return Home</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="card">
+                        <h2>What's Included in the Streamer Special?</h2>
+                        <p>Perfect for streamers, content creators, and digital professionals who want a complete web presence with dedicated support and analytics.</p>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                            <div>
+                                <h3 style="color: var(--primary-color); margin-bottom: 1rem;"><i class="fa-solid fa-file-invoice"></i> Your Package Includes</h3>
+                                <ul class="feature-list">
+                                    <li><strong>Single Page Application (Personal)</strong>&nbsp;- Your custom landing page or portfolio site</li>
+                                    <li><strong>Project Backup (12 Months)</strong>&nbsp;- We keep your files safe and accessible</li>
+                                    <li><strong>Extended Support (12 Months)</strong>&nbsp;-&nbsp;<span style="color: var(--primary-color); font-weight: bold;">FREE with this offer!</span>&nbsp;Quick fixes and integration help</li>
+                                    <li><strong>Project Revisions (2 Revisions)</strong>&nbsp;- Make updates to your site after launch</li>
+                                    <li><strong>Google Analytics Setup</strong>&nbsp;- Track your audience and understand your visitors</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 style="color: var(--primary-color); margin-bottom: 1rem;"><i class="fa-solid fa-wallet"></i> The Value</h3>
+                                <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.95em;">
+                                        <span>Regular value:</span>
+                                        <span style="text-decoration: line-through; color: #999;">£185.00</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.95em;">
+                                        <span>Discount:</span>
+                                        <span style="color: #dc3545; font-weight: bold;">-£85.00</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding-top: 0.75rem; border-top: 2px solid #dee2e6; font-weight: bold; font-size: 1.1em;">
+                                        <span>Your price:</span>
+                                        <span style="color: var(--primary-color); font-size: 1.3em;">£100.00</span>
+                                    </div>
+                                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #dee2e6; font-size: 0.85em; color: #666;">
+                                        <strong>Save 45.95%</strong> compared to purchasing services separately
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Perfect For</h3>
+                        <ul class="feature-list">
+                            <li>Content creators launching their personal brand</li>
+                            <li>Streamers wanting a professional web presence</li>
+                            <li>Creators who need analytics to understand their audience</li>
+                            <li>Anyone launching a project with peace of mind</li>
+                        </ul>
+
+                        <div style="background: #e7f3ff; padding: 1rem; border-radius: 8px; margin-top: 2rem; border-left: 4px solid var(--primary-color);">
+                            <p style="margin: 0;"><strong>Ready to get started?</strong> Click "Build This Package" above to add all services to the package builder. You can review everything and customize if needed before getting a quote.</p>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem; background: #f8f9fa;">
+                        <h3 style="margin-bottom: 1rem;">Questions About This Package?</h3>
+                        <p>Contact our team for more details about what's included or to discuss any customizations.</p>
+                        <a href="#contact" class="hero-button" style="display: inline-block; margin-top: 1rem;"><i class="fa-solid fa-envelope"></i>Get in Touch</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thank You Page -->
             <section id="thankyou" class="hidden">
                 <div class="hero-banner hero-sub">
                     <img src="https://oakshiftsoftware.github.io/source/images/headers/img-3.png" alt="Thank You Banner" />
@@ -255,7 +332,7 @@
         </div>
 
         <footer>
-            &copy; <script>document.write(new Date().getFullYear())</script> Oakshift Software. All rights reserved.
+            &copy; <script>document.write(new Date().getFullYear())</script> Oakshift Software.<br>All rights reserved.
         </footer>
 
         <script>
