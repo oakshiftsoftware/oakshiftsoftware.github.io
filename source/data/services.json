@@ -263,7 +263,7 @@
                 }
             ],
             "C": [
-                "Advanced", 30.00, true,
+                "Advanced", 30.00, false,
                 {
                     "description": "Comprehensive setup of Google Analytics with advanced features.",
                     "features": [
