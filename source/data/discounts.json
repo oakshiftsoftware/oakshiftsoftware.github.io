@@ -1,5 +1,12 @@
 [
   {
+    "name": "Streamer Special",
+    "type": "fixed",
+    "value": 95,
+    "requiredServices": ["AZHDNLH1-A", "XAJ8XFNO-B", "N5XAM8WP-C", "W8KJ6CJX-A", "HAG4E84M-A"],
+    "discountedService": "N5XAM8WP-B"
+  },
+  {
     "name": "Support Bundle",
     "type": "fixed",
     "value": 20,
