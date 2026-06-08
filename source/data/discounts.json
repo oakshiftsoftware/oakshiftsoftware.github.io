@@ -9,7 +9,7 @@
   {
     "name": "Support Bundle",
     "type": "fixed",
-    "value": 20,
+    "value": 40,
     "requiredServices": ["N5XAM8WP-A", "W8KJ6CJX-A"],
     "discountedService": "W8KJ6CJX-A"
   },
