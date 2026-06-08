@@ -154,6 +154,13 @@ main {
     transform: translateY(-1px);
 }
 
+.promo-div {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 2rem; 
+    margin: 2rem 0;
+}
+
 .card {
     background-color: #ffffff;
     padding: 2rem;
@@ -400,6 +407,9 @@ main {
 }
 
 @media (max-width: 850px) {
+    .promo-div {
+        grid-template-columns: 1fr;
+    }
     .hero-banner {
         min-height: fit-content;
         padding: 3rem 1rem;
