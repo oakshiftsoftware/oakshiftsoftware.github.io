@@ -239,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Variant selector click (but not the radio input itself)
         const variantSelector = event.target.closest('.variant-selector');
         if (variantSelector && !event.target.matches('input[type="radio"]')) {
             const input = variantSelector.querySelector('input');
@@ -1203,6 +1202,58 @@ function findApplicableDiscounts(selectedVariantCodes) {
 }
 
 
+async function loadStreamerSpecial() {
+    try {
+        if (allServices.length === 0) {
+            const response = await fetch(services_list_url);
+            allServices = await response.json();
+        }
+
+        clearPackageCache();
+        selectedServices.clear();
+
+        const streamerSpecialServices = [
+            { code: 'AZHDNLH1', variant: 'A', serviceType: 'Core' },    // Single Page Application - Personal
+            { code: 'XAJ8XFNO', variant: 'B', serviceType: 'Optional' }, // Project Backup - 12 Months
+            { code: 'N5XAM8WP', variant: 'B', serviceType: 'Optional' }, // Extended Support - 12 Months
+            { code: 'W8KJ6CJX', variant: 'A', serviceType: 'Optional' }, // Project Revisions - 2 Revisions
+            { code: 'HAG4E84M', variant: 'A', serviceType: 'Optional' }  // Google Analytics - Standard
+        ];
+
+        streamerSpecialServices.forEach(serviceItem => {
+            const service = allServices.find(s => s.code === serviceItem.code);
+            if (service && service.variants[serviceItem.variant]) {
+                const [variantName, price, isRecurring] = service.variants[serviceItem.variant];
+                selectedServices.set(serviceItem.code, {
+                    serviceType: serviceItem.serviceType,
+                    variantKey: serviceItem.variant,
+                    price: price,
+                    name: `${service.name} - ${variantName}`,
+                    isRecurring: isRecurring
+                });
+            }
+        });
+
+        savePackageCache();
+
+        await loadPackages();
+
+        navigateToPage('packages', false);
+
+        setTimeout(() => {
+            const builderSection = document.querySelector('#packages-content .package-builder');
+            if (builderSection) {
+                builderSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 300);
+
+    } catch (error) {
+        console.error('Error loading Streamer Special:', error);
+        alert('Error loading Streamer Special. Please try again or manually select the services.');
+    }
+}
+
+
 async function loadServices() {
     try {
         const response = await fetch(services_list_url);
@@ -1288,6 +1339,8 @@ async function loadPackages() {
 
 window.copyToClipboard = copyToClipboard;
 window.exportAsPDF = exportAsPDF;
+window.loadStreamerSpecial = loadStreamerSpecial;
+
 
 
 function openMobileNav() {
