@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6TFNL4VCN"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+    
+            gtag('config', 'G-W6TFNL4VCN');
+        </script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="https://oakshiftsoftware.github.io/cdn/young-suns-companion/ysc-si.png">
+        <meta name="description" content="Sundog Tracker - An unofficial companion app for the Young Suns Xbox game">
+        <meta name="keywords" content="Young Suns, Sundog Tracker, Companion App, KO_OP, Game Tracker, Resource Management, Oakshift Software">
+        <meta name="author" content="Oakshift Software (Jamie Harper)">
+        <link rel="shortcut icon" href="https://oakshiftsoftware.github.io/cdn/young-suns-companion/ysc-logo.png" type="image/png">
+        <title>Sundog Tracker (Unofficial)</title>
+        <link rel="stylesheet" href="source/styles.css">
+    </head>
+
+    <body>
+        <canvas id="bg-canvas"></canvas>
+        <div id="app">
+            <!-- Build Queue Screen -->
+            <div id="screen-queue" class="screen active">
+                <div class="app-bar">
+                    <div class="app-bar-title">Sundog Tracker</div>
+                    <div class="app-bar-actions">
+                        <button class="icon-btn" onclick="app.switch_screen('blueprints')" title="Add Blueprint">+</button>
+                        <button class="icon-btn" onclick="app.switch_screen('resources')"
+                            title="Resource Tracker">📋</button>
+                        <button class="icon-btn" onclick="app.switch_screen('about')" title="About">ℹ️</button>
+                    </div>
+                </div>
+                <div class="screen-content">
+                    <div id="queue-list" class="list"></div>
+                </div>
+            </div>
+
+            <!-- Blueprints Screen -->
+            <div id="screen-blueprints" class="screen">
+                <div class="app-bar">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <button class="icon-btn" onclick="app.switch_screen('queue')">←</button>
+                        <div class="app-bar-title">Add Blueprint</div>
+                    </div>
+                </div>
+                <div class="screen-content">
+                    <div id="blueprints-list" class="list"></div>
+                </div>
+            </div>
+
+            <!-- Blueprint Detail Screen -->
+            <div id="screen-detail" class="screen">
+                <div class="app-bar">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <button class="icon-btn" onclick="app.switch_screen('queue')">←</button>
+                        <div class="app-bar-title">Blueprint Details</div>
+                    </div>
+                    <div class="app-bar-actions">
+                        <button class="icon-btn"
+                            onclick="appState.remove_from_build_queue(appState.current_detail_id); app.switch_screen('queue')">✕</button>
+                    </div>
+                </div>
+                <div class="screen-content">
+                    <div id="detail-list" class="list"></div>
+                </div>
+            </div>
+
+            <!-- Resources Screen -->
+            <div id="screen-resources" class="screen">
+                <div class="app-bar">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <button class="icon-btn" onclick="app.switch_screen('queue')">←</button>
+                        <div class="app-bar-title">Resource Tracker</div>
+                    </div>
+                    <div class="app-bar-actions">
+                        <button class="icon-btn" onclick="app.render_resources()">🔄</button>
+                    </div>
+                </div>
+                <div class="screen-content">
+                    <div id="resources-list" class="list"></div>
+                </div>
+            </div>
+
+            <!-- About Screen -->
+            <div id="screen-about" class="screen">
+                <div class="app-bar">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <button class="icon-btn" onclick="app.switch_screen('queue')">←</button>
+                        <div class="app-bar-title">About</div>
+                    </div>
+                </div>
+                <div class="screen-content">
+                    <div id="about-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Overlay -->
+        <div id="modal-overlay" class="modal-overlay">
+            <div id="modal" class="modal"></div>
+        </div>
+        
+        <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+        <script src="source/main.js"></script>
+    </body>
+</html>
