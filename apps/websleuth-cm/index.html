@@ -1,1 +1,162 @@
 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oakshift Software — Coming Soon</title>
+        <meta name="description" content="Oakshift Software is launching this new website soon. Stay tuned for updates." />
+        <link rel="shortcut icon" href="https://oakshiftsoftware.github.io/source/images/logos/logo-b.png" type="image/png">
+        <style>
+            :root {
+                --font-family: 'Arial', sans-serif;
+                --primary-color: #363636;
+                --secondary-color: #18bc9c;
+                --background-color: #0d1118;
+                --surface-color: #141a24;
+                --text-color: #f4f5f7;
+                --muted-color: #9aa8b8;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: var(--font-family);
+                background: radial-gradient(circle at top, rgba(24, 188, 156, 0.16), transparent 28%),
+                            radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.06), transparent 20%),
+                            var(--background-color);
+                color: var(--text-color);
+                display: grid;
+                place-items: center;
+                padding: 1.5rem;
+            }
+
+            .container {
+                width: min(100%, 680px);
+                background: rgba(21, 27, 36, 0.95);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                border-radius: 28px;
+                padding: 2rem;
+                box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+                text-align: center;
+            }
+
+            .brand {
+                align-items: center;
+                margin-bottom: 1rem;
+            }
+
+            .brand-container {
+                display: inline-grid;
+            }
+
+            .brand img {
+                width: 100px;
+                height: auto;
+                object-fit: contain;
+            }
+
+            .hero-title {
+                font-size: clamp(2.25rem, 4vw, 3.5rem);
+                line-height: 1.03;
+                margin: 0 0 1rem;
+            }
+
+            .hero-copy {
+                font-size: 1.05rem;
+                line-height: 1.85;
+                color: var(--muted-color);
+                max-width: 520px;
+                margin: 0 auto 1rem;
+            }
+
+            .spotlight {
+                align-items: center;
+                text-align: center;
+                color: #d4fff3;
+                border-radius: 999px;
+                margin-bottom: 1rem;
+                font-weight: 700;
+                font-size: 0.95rem;
+            }
+
+            .actions {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .action-button {
+                border: none;
+                border-radius: 999px;
+                padding: 0.95rem 1.7rem;
+                font-size: 0.95rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .action-button.secondary {
+                background: rgba(255, 255, 255, 0.08);
+                color: var(--text-color);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+            }
+
+            .action-button:hover {
+                transform: translateY(-1px);
+            }
+
+            .footer-note {
+                margin-top: 1rem;
+                color: var(--muted-color);
+                font-size: 0.94rem;
+                margin-bottom: 0;
+            }
+
+            .footer-note a {
+                color: var(--secondary-color);
+                text-decoration: none;
+            }
+
+            @media (max-width: 620px) {
+                .container {
+                    padding: 2rem 1.5rem;
+                }
+
+                .hero-title {
+                    font-size: 2.2rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="brand-container">
+                <div class="brand">
+                    <img src="https://oakshift.co.uk/source/images/logos/logo-b.png" alt="Oakshift Software logo" />
+                </div>
+                <h1 class="hero-title">Coming Soon</h1>
+                <div class="spotlight">Websleuth CM</div>
+            </div>
+
+            <p class="hero-copy">This page is a temporary holding page for our upcoming Oakshift release. We’re polishing the experience and will be back with a fresh product soon.</p>
+
+            <div class="actions">
+                <button class="action-button secondary" onclick="openHome()">Visit Oakshift</button>
+            </div>
+
+            <p class="footer-note">Need to reach us?<br>Email: <a href="mailto:oakshiftsoftware@gmail.com">oakshiftsoftware@gmail.com</a></p>
+        </div>
+
+        <script>
+            function openHome() {
+                window.location.href = 'https://oakshift.co.uk';
+            }
+        </script>
+    </body>
+</html>
