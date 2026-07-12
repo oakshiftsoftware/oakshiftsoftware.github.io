@@ -1,5 +1,5 @@
 const CONFIG = {
-    cdn_host: 'https://oakshiftsoftware.github.io/cdn/young-suns-companion',
+    cdn_host: 'https://oakshift.co.uk/cdn/young-suns-companion',
     app_name: 'Sundog Tracker',
     app_version: '0.0.6',
     app_author: 'Oakshift Software',
