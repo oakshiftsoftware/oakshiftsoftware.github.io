@@ -615,7 +615,8 @@
             },
             oauth: {
                 clientId: "Ov23liJxZCIXpxYWlATm",
-                scope: "repo read:user"
+                scope: "repo read:user",
+                brokerBaseUrl: ""
             },
             session: {
                 ttlSeconds: 8 * 60 * 60
@@ -850,20 +851,33 @@
             return decodeURIComponent(escape(atob(input)));
         }
 
+        function getOAuthBrokerBaseUrl() {
+            return String(WEBEDITOR_CONFIG.oauth.brokerBaseUrl || "").trim().replace(/\/$/, "");
+        }
+
+        function requireOAuthBrokerBaseUrl() {
+            const brokerBaseUrl = getOAuthBrokerBaseUrl();
+            if (!brokerBaseUrl) {
+                throw new Error("OAuth broker is not configured. GitHub blocks direct browser calls to its OAuth token endpoints, so set WEBEDITOR_CONFIG.oauth.brokerBaseUrl first.");
+            }
+            return brokerBaseUrl;
+        }
+
         async function startDeviceFlow() {
             const clientId = WEBEDITOR_CONFIG.oauth.clientId;
             if (!clientId) {
                 throw new Error("OAuth client ID is not configured.");
             }
+            const brokerBaseUrl = requireOAuthBrokerBaseUrl();
 
             clearStatus(el.authStatus);
-            setStatus(el.authStatus, "Starting device authorization...", "info");
+            setStatus(el.authStatus, "Starting device authorization through configured broker...", "info");
 
             const form = new URLSearchParams();
             form.set("client_id", clientId);
             form.set("scope", WEBEDITOR_CONFIG.oauth.scope);
 
-            const startResponse = await fetch("https://github.com/login/device/code", {
+            const startResponse = await fetch(brokerBaseUrl + "/github/device/code", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -873,7 +887,8 @@
             });
 
             if (!startResponse.ok) {
-                throw new Error("Device flow start failed. Verify OAuth app setup and Client ID.");
+                const message = await startResponse.text();
+                throw new Error("Device flow start failed. Check OAuth app setup and broker configuration. " + message);
             }
 
             const payload = await startResponse.json();
@@ -893,6 +908,7 @@
         async function pollForAccessToken(clientId, deviceCode, intervalSeconds) {
             const maxTries = 120;
             let tries = 0;
+            const brokerBaseUrl = requireOAuthBrokerBaseUrl();
 
             while (tries < maxTries) {
                 await new Promise(function(resolve) {
@@ -904,7 +920,7 @@
                 body.set("device_code", deviceCode);
                 body.set("grant_type", "urn:ietf:params:oauth:grant-type:device_code");
 
-                const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
+                const tokenResponse = await fetch(brokerBaseUrl + "/github/oauth/access_token", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
@@ -914,7 +930,8 @@
                 });
 
                 if (!tokenResponse.ok) {
-                    throw new Error("Token polling failed.");
+                    const message = await tokenResponse.text();
+                    throw new Error("Token polling failed. " + message);
                 }
 
                 const tokenData = await tokenResponse.json();
