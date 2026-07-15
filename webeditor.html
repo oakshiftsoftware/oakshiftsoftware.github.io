@@ -477,10 +477,6 @@
                         <section class="wizard-panel">
                             <h2>Stage 1: Sign In with GitHub</h2>
                             <div class="row">
-                                <div style="min-width:260px; flex:1;">
-                                    <label for="clientIdInput">GitHub OAuth Client ID</label>
-                                    <input id="clientIdInput" type="text" placeholder="Paste your GitHub OAuth app client ID">
-                                </div>
                                 <button class="primary" id="startLoginBtn">Login with GitHub</button>
                                 <button id="logoutBtn" class="warn">Sign Out</button>
                                 <span class="pill" id="authPill">Not authenticated</span>
@@ -609,10 +605,63 @@
 
     <script>
         const API_BASE = "https://api.github.com";
+        const GITHUB_OAUTH_CLIENT_ID = "Ov23liJxZCIXpxYWlATm";
         const REQUIRED_ROOT_FILES = ["ghwe_config.json", "ghwe_log.json"];
+        const AUTH_STORAGE_KEY = "ghwe_auth_session";
+        const DEFAULT_SESSION_TTL_SECONDS = 8 * 60 * 60;
+
+        function loadStoredAuthSession() {
+            const raw = sessionStorage.getItem(AUTH_STORAGE_KEY);
+            if (!raw) {
+                return null;
+            }
+
+            try {
+                const parsed = JSON.parse(raw);
+                if (!parsed || typeof parsed !== "object" || !parsed.accessToken) {
+                    return null;
+                }
+
+                if (parsed.expiresAt && Date.now() >= Number(parsed.expiresAt)) {
+                    sessionStorage.removeItem(AUTH_STORAGE_KEY);
+                    return null;
+                }
+
+                return parsed;
+            } catch (_error) {
+                sessionStorage.removeItem(AUTH_STORAGE_KEY);
+                return null;
+            }
+        }
+
+        function saveAuthSession(accessToken, tokenPayload) {
+            const expiresIn = Number(tokenPayload && tokenPayload.expires_in) || DEFAULT_SESSION_TTL_SECONDS;
+            const authSession = {
+                accessToken,
+                createdAt: Date.now(),
+                expiresAt: Date.now() + (expiresIn * 1000)
+            };
+            sessionStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authSession));
+            return authSession;
+        }
+
+        function clearStoredAuthSession() {
+            sessionStorage.removeItem(AUTH_STORAGE_KEY);
+        }
+
+        function isStoredSessionExpired() {
+            const session = loadStoredAuthSession();
+            if (!session) {
+                return true;
+            }
+            return Boolean(session.expiresAt && Date.now() >= Number(session.expiresAt));
+        }
+
+        const storedAuthSession = loadStoredAuthSession();
 
         const state = {
-            token: sessionStorage.getItem("ghwe_token") || "",
+            token: storedAuthSession ? storedAuthSession.accessToken : "",
+            authSession: storedAuthSession,
             user: null,
             repos: [],
             repoChecks: {},
@@ -643,7 +692,6 @@
                 document.getElementById("stepPill2"),
                 document.getElementById("stepPill3")
             ],
-            clientIdInput: document.getElementById("clientIdInput"),
             startLoginBtn: document.getElementById("startLoginBtn"),
             logoutBtn: document.getElementById("logoutBtn"),
             authPill: document.getElementById("authPill"),
@@ -741,6 +789,10 @@
                 }
             });
             if (!response.ok) {
+                if (response.status === 401 || response.status === 403) {
+                    signOut("Session expired or invalid. Please login again.");
+                    throw new Error("Session expired or invalid. Please login again.");
+                }
                 const body = await response.text();
                 throw new Error("GitHub API error " + response.status + ": " + body);
             }
@@ -756,11 +808,7 @@
         }
 
         async function startDeviceFlow() {
-            const clientId = el.clientIdInput.value.trim();
-            if (!clientId) {
-                setStatus(el.authStatus, "Client ID is required.", "bad");
-                return;
-            }
+            const clientId = GITHUB_OAUTH_CLIENT_ID;
 
             clearStatus(el.authStatus);
             setStatus(el.authStatus, "Starting device authorization...", "info");
@@ -827,7 +875,7 @@
 
                 if (tokenData.access_token) {
                     state.token = tokenData.access_token;
-                    sessionStorage.setItem("ghwe_token", state.token);
+                    state.authSession = saveAuthSession(state.token, tokenData);
                     await loadUserProfile();
                     await fetchAllRepos();
                     setStatus(el.authStatus, "Authentication successful.", "ok");
@@ -859,8 +907,9 @@
             el.authPill.textContent = "Authenticated as " + state.user.login;
         }
 
-        function signOut() {
+        function signOut(reasonMessage) {
             state.token = "";
+            state.authSession = null;
             state.user = null;
             state.repos = [];
             state.repoChecks = {};
@@ -868,7 +917,7 @@
             state.selectedRepoCandidate = "";
             state.selectedRepo = null;
             state.config = null;
-            sessionStorage.removeItem("ghwe_token");
+            clearStoredAuthSession();
             el.authPill.textContent = "Not authenticated";
             el.repoList.innerHTML = "";
             el.jsonFileSelect.innerHTML = "";
@@ -878,7 +927,7 @@
             clearStatus(el.authStatus);
             clearStatus(el.repoStatus);
             clearStatus(el.fileStatus);
-            setStatus(el.editorStatus, "Signed out.", "ok");
+            setStatus(el.editorStatus, reasonMessage || "Signed out.", reasonMessage ? "bad" : "ok");
             setEditorStep(0);
         }
 
@@ -1487,6 +1536,10 @@
             route();
             switchEditorMode("raw");
             setEditorStep(0);
+            if (state.authSession && isStoredSessionExpired()) {
+                signOut("Session timed out. Please login again.");
+                return;
+            }
             if (state.token) {
                 try {
                     await loadUserProfile();
