@@ -310,6 +310,49 @@
             gap: 0.75rem;
         }
 
+        .crm-drag-panel {
+            margin-top: 0.8rem;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 0.6rem;
+            background: #fbfdff;
+        }
+
+        .crm-drag-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .crm-drag-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+            padding: 0.45rem 0.55rem;
+            cursor: grab;
+        }
+
+        .crm-drag-item .handle {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .crm-drag-item.active {
+            border-color: #6ca8bc;
+            background: #edf7fb;
+        }
+
+        .crm-drag-item.drag-over {
+            border-color: var(--brand);
+            box-shadow: inset 0 0 0 1px var(--brand);
+        }
+
         .wizard-shell {
             overflow: hidden;
             border-radius: var(--radius);
@@ -567,6 +610,10 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div id="crmDragPanel" class="crm-drag-panel">
+                                    <label>Reorder objects (drag and drop)</label>
+                                    <ul id="crmDragList" class="crm-drag-list"></ul>
+                                </div>
                                 <div id="crmFields" class="field-grid" style="margin-top:0.8rem;"></div>
                             </div>
 
@@ -768,6 +815,8 @@
             validateJsonBtn: document.getElementById("validateJsonBtn"),
             crmRootMode: document.getElementById("crmRootMode"),
             crmRecordSelect: document.getElementById("crmRecordSelect"),
+            crmDragPanel: document.getElementById("crmDragPanel"),
+            crmDragList: document.getElementById("crmDragList"),
             crmFields: document.getElementById("crmFields"),
             crmNewRecordBtn: document.getElementById("crmNewRecordBtn"),
             crmDeleteRecordBtn: document.getElementById("crmDeleteRecordBtn"),
@@ -914,11 +963,15 @@
                 throw new Error("Device flow response did not include a user code. Check broker response forwarding.");
             }
 
-            const verificationUrl = payload.verification_uri || "https://github.com/login/device";
+            const verificationUrl = payload.verification_uri_complete || payload.verification_uri || "https://github.com/login/device";
             el.deviceFlowBlock.classList.remove("hidden");
             el.deviceUriText.textContent = verificationUrl;
             el.deviceCodeText.textContent = payload.user_code;
-            setStatus(el.authStatus, "Popup opened. Enter code " + payload.user_code + " in the GitHub window, then this app will continue automatically.", "ok");
+            if (payload.verification_uri_complete) {
+                setStatus(el.authStatus, "Popup opened with your code prefilled. Confirm access in GitHub, then this app will continue automatically.", "ok");
+            } else {
+                setStatus(el.authStatus, "Popup opened. Enter code " + payload.user_code + " in the GitHub window, then this app will continue automatically.", "ok");
+            }
 
             const popup = window.open(verificationUrl, "ghwe-github-login", "popup=yes,width=840,height=900");
             if (popup) {
@@ -1239,6 +1292,7 @@
                 option.value = "0";
                 option.textContent = "No records";
                 el.crmRecordSelect.appendChild(option);
+                renderCrmDragList();
                 return;
             }
 
@@ -1250,6 +1304,103 @@
                     option.selected = true;
                 }
                 el.crmRecordSelect.appendChild(option);
+            });
+
+            renderCrmDragList();
+        }
+
+        function getRecordLabel(record, index) {
+            if (!record || typeof record !== "object") {
+                return "Record " + (index + 1);
+            }
+
+            const candidateKeys = ["title", "name", "id", "slug", "label"];
+            for (const key of candidateKeys) {
+                if (record[key]) {
+                    return "Record " + (index + 1) + ": " + String(record[key]);
+                }
+            }
+
+            const keys = Object.keys(record);
+            if (keys.length) {
+                return "Record " + (index + 1) + ": " + keys.slice(0, 2).join(" / ");
+            }
+
+            return "Record " + (index + 1);
+        }
+
+        function reorderRecords(fromIndex, toIndex) {
+            if (fromIndex === toIndex || fromIndex < 0 || toIndex < 0) {
+                return;
+            }
+
+            const moved = state.crmModel.records.splice(fromIndex, 1)[0];
+            state.crmModel.records.splice(toIndex, 0, moved);
+            state.crmModel.selectedIndex = toIndex;
+
+            renderCrmRecordSelect();
+            renderCrmFields();
+            syncCrmToJsonText();
+        }
+
+        function renderCrmDragList() {
+            el.crmDragList.innerHTML = "";
+
+            if (state.crmModel.rootMode !== "array") {
+                el.crmDragPanel.classList.add("hidden");
+                return;
+            }
+
+            el.crmDragPanel.classList.remove("hidden");
+
+            state.crmModel.records.forEach(function(record, idx) {
+                const item = document.createElement("li");
+                item.className = "crm-drag-item" + (idx === state.crmModel.selectedIndex ? " active" : "");
+                item.draggable = true;
+
+                const handle = document.createElement("span");
+                handle.className = "handle";
+                handle.textContent = "::";
+
+                const text = document.createElement("span");
+                text.className = "mono";
+                text.textContent = getRecordLabel(record, idx);
+
+                item.appendChild(handle);
+                item.appendChild(text);
+
+                item.addEventListener("click", function() {
+                    state.crmModel.selectedIndex = idx;
+                    renderCrmRecordSelect();
+                    renderCrmFields();
+                });
+
+                item.addEventListener("dragstart", function(event) {
+                    event.dataTransfer.effectAllowed = "move";
+                    event.dataTransfer.setData("text/plain", String(idx));
+                });
+
+                item.addEventListener("dragover", function(event) {
+                    event.preventDefault();
+                    item.classList.add("drag-over");
+                });
+
+                item.addEventListener("dragleave", function() {
+                    item.classList.remove("drag-over");
+                });
+
+                item.addEventListener("drop", function(event) {
+                    event.preventDefault();
+                    item.classList.remove("drag-over");
+                    const fromIndex = Number(event.dataTransfer.getData("text/plain"));
+                    reorderRecords(fromIndex, idx);
+                });
+
+                item.addEventListener("dragend", function() {
+                    item.classList.remove("drag-over");
+                });
+
+                el.crmDragList.appendChild(item);
             });
         }
 
@@ -1310,6 +1461,18 @@
                 output = state.crmModel.records;
             }
             el.jsonTextArea.value = JSON.stringify(output, null, 2);
+            state.currentJsonData = output;
+        }
+
+        function hydrateCrmFromTextarea() {
+            try {
+                state.currentJsonData = JSON.parse(el.jsonTextArea.value);
+                hydrateCrmFromCurrentJson();
+                return true;
+            } catch (error) {
+                setStatus(el.editorStatus, "CRM mode requires valid JSON in the editor first: " + error.message, "bad");
+                return false;
+            }
         }
 
         function parseAndNormalizeEditorJson() {
@@ -1534,7 +1697,7 @@
 
             el.modeCrmBtn.addEventListener("click", function() {
                 switchEditorMode("crm");
-                hydrateCrmFromCurrentJson();
+                hydrateCrmFromTextarea();
             });
 
             el.formatJsonBtn.addEventListener("click", function() {
@@ -1564,6 +1727,7 @@
             el.crmRecordSelect.addEventListener("change", function() {
                 state.crmModel.selectedIndex = Number(el.crmRecordSelect.value || 0);
                 renderCrmFields();
+                renderCrmDragList();
             });
 
             el.crmNewRecordBtn.addEventListener("click", function() {
