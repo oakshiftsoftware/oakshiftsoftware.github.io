@@ -912,11 +912,23 @@
         }
 
         function b64EncodeUnicode(input) {
-            return btoa(unescape(encodeURIComponent(input)));
+            const bytes = new TextEncoder().encode(input);
+            let binary = "";
+            const chunkSize = 0x8000;
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+                const chunk = bytes.subarray(i, i + chunkSize);
+                binary += String.fromCharCode.apply(null, chunk);
+            }
+            return btoa(binary);
         }
 
         function b64DecodeUnicode(input) {
-            return decodeURIComponent(escape(atob(input)));
+            const binary = atob(input);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i += 1) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return new TextDecoder().decode(bytes);
         }
 
         function getOAuthBrokerBaseUrl() {
@@ -1170,6 +1182,44 @@
             return response.json();
         }
 
+        async function resolveRepoFileText(repoFullName, fileMeta) {
+            if (fileMeta.content && fileMeta.encoding === "base64") {
+                return b64DecodeUnicode(String(fileMeta.content).replace(/\n/g, ""));
+            }
+
+            if (fileMeta.sha) {
+                const blobResponse = await ghFetch("/repos/" + repoFullName + "/git/blobs/" + fileMeta.sha);
+                const blob = await blobResponse.json();
+                if (blob.content && blob.encoding === "base64") {
+                    return b64DecodeUnicode(String(blob.content).replace(/\n/g, ""));
+                }
+            }
+
+            if (fileMeta.download_url) {
+                const rawResponse = await fetch(fileMeta.download_url, {
+                    headers: getAuthHeaders({
+                        Accept: "application/vnd.github.raw"
+                    })
+                });
+                if (!rawResponse.ok) {
+                    throw new Error("Failed to download raw file content.");
+                }
+                return rawResponse.text();
+            }
+
+            throw new Error("File content could not be resolved from GitHub API response.");
+        }
+
+        async function loadRepoJsonFile(repoFullName, filePath) {
+            const fileMeta = await loadRepoFile(repoFullName, filePath);
+            const text = await resolveRepoFileText(repoFullName, fileMeta);
+            return {
+                fileMeta,
+                text,
+                data: JSON.parse(text)
+            };
+        }
+
         async function connectSelectedRepository() {
             const selectedFullName = state.selectedRepoCandidate;
             if (!selectedFullName) {
@@ -1189,16 +1239,16 @@
             }
 
             state.selectedRepo = selected;
-            const configFile = await loadRepoFile(selected.full_name, "ghwe_config.json");
-            const logFile = await loadRepoFile(selected.full_name, "ghwe_log.json");
+            const configResult = await loadRepoJsonFile(selected.full_name, "ghwe_config.json");
+            const logResult = await loadRepoJsonFile(selected.full_name, "ghwe_log.json");
 
             state.config = {
-                path: configFile.path,
-                sha: configFile.sha,
-                data: JSON.parse(b64DecodeUnicode(configFile.content.replace(/\n/g, "")))
+                path: configResult.fileMeta.path,
+                sha: configResult.fileMeta.sha,
+                data: configResult.data
             };
 
-            state.log = JSON.parse(b64DecodeUnicode(logFile.content.replace(/\n/g, "")) || "[]");
+            state.log = Array.isArray(logResult.data) ? logResult.data : [];
 
             el.repoSummary.textContent = selected.full_name + " (branch: " + selected.default_branch + ")";
             renderConfiguredFiles();
@@ -1240,9 +1290,9 @@
                 throw new Error("Connect a repository first.");
             }
 
-            const file = await loadRepoFile(state.selectedRepo.full_name, filePath);
-            const decoded = b64DecodeUnicode(file.content.replace(/\n/g, ""));
-            const parsed = JSON.parse(decoded);
+            const loaded = await loadRepoJsonFile(state.selectedRepo.full_name, filePath);
+            const file = loaded.fileMeta;
+            const parsed = loaded.data;
 
             state.currentJsonPath = file.path;
             state.currentJsonSha = file.sha;
@@ -1518,9 +1568,9 @@
 
             const repoFullName = state.selectedRepo.full_name;
             const branch = state.selectedRepo.default_branch;
-            const logContent = await loadRepoFile(repoFullName, "ghwe_log.json");
-            const logSha = logContent.sha;
-            const existing = JSON.parse(b64DecodeUnicode(logContent.content.replace(/\n/g, "")) || "[]");
+            const logLoaded = await loadRepoJsonFile(repoFullName, "ghwe_log.json");
+            const logSha = logLoaded.fileMeta.sha;
+            const existing = Array.isArray(logLoaded.data) ? logLoaded.data : [];
 
             existing.push({
                 timestamp: new Date().toISOString(),
@@ -1791,8 +1841,8 @@
                     if (!state.selectedRepo) {
                         throw new Error("Connect a repository first.");
                     }
-                    const logFile = await loadRepoFile(state.selectedRepo.full_name, "ghwe_log.json");
-                    const data = JSON.parse(b64DecodeUnicode(logFile.content.replace(/\n/g, "")) || "[]");
+                    const logLoaded = await loadRepoJsonFile(state.selectedRepo.full_name, "ghwe_log.json");
+                    const data = Array.isArray(logLoaded.data) ? logLoaded.data : [];
                     setStatus(el.editorStatus, "ghwe_log.json entries: " + data.length, "ok");
                 } catch (error) {
                     setStatus(el.editorStatus, error.message, "bad");
