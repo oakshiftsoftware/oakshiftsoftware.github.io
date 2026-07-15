@@ -451,6 +451,7 @@
                 <a class="nav-link" href="#home" data-route="home">Home</a>
                 <a class="nav-link" href="#editor" data-route="editor">Editor</a>
                 <a class="nav-link" href="#about" data-route="about">About</a>
+                <a class="nav-link" href="#licence" data-route="licence">Licence</a>
             </nav>
         </header>
 
@@ -482,6 +483,7 @@
                                 <span class="pill" id="authPill">Not authenticated</span>
                             </div>
                             <div class="status hidden" id="authStatus" style="margin-top:0.7rem;"></div>
+                            <p style="margin-top:0.8rem; color: var(--muted);">By authenticating and using this tool, you agree to the Oakshift Software licence terms set out on the Licence page.</p>
                             <div class="hidden code-box" id="deviceFlowBlock" style="margin-top:0.8rem;">
                                 <p>A popup was opened to GitHub login. If needed, use this device code:</p>
                                 <p class="mono">URL: <strong id="deviceUriText"></strong></p>
@@ -596,6 +598,22 @@
                     <li>Automatic append to ghwe_log.json for each successful commit action.</li>
                 </ul>
             </section>
+
+            <section id="licence" class="page card">
+                <h2>Licence and EULA</h2>
+                <p>This software is provided by Oakshift Software as the GitHub WebEditor service and application framework. By accessing, authenticating with, or using this software, you agree to the following terms.</p>
+                <ul class="list">
+                    <li>GitHub WebEditor is supplied as a repository configuration and content management tool for GitHub-hosted JSON workflows.</li>
+                    <li>Users remain solely responsible for all repository content, configuration, commits, publications, and downstream effects arising from changes made through the tool.</li>
+                    <li>Oakshift Software does not accept liability for content errors, site breakage, malformed data, publication defects, data loss, or business interruption caused by user-authored or user-approved changes.</li>
+                    <li>Users must review content before saving changes and are responsible for maintaining their own repository governance, approvals, backups, and release discipline.</li>
+                    <li>Oakshift Software provides the application and its expected repository configuration format, but does not assume editorial ownership or legal responsibility for customer site content.</li>
+                    <li>Rollback, restoration, revision recovery, remediation, and similar intervention services are not included by default.</li>
+                    <li>Rollback or restoration assistance is available only to Oakshift Software clients holding an active Revision Retainer agreement or active Extended Support arrangement.</li>
+                    <li>Where support services are purchased, service availability and response obligations are governed exclusively by the applicable client agreement.</li>
+                    <li>Use of this application constitutes acceptance of these terms and of any additional client-specific service agreement where one exists.</li>
+                </ul>
+            </section>
         </main>
 
         <footer>
@@ -616,7 +634,7 @@
             oauth: {
                 clientId: "Ov23liJxZCIXpxYWlATm",
                 scope: "repo read:user",
-                brokerBaseUrl: ""
+                brokerBaseUrl: "https://replace-with-your-worker.workers.dev"
             },
             session: {
                 ttlSeconds: 8 * 60 * 60
@@ -627,7 +645,7 @@
         };
 
         const API_BASE = "https://api.github.com";
-        const REQUIRED_ROOT_FILES = ["ghwe_config.json", "ghwe_log.json"];
+        const REQUIRED_ROOT_FILES = WEBEDITOR_CONFIG.repository.requiredRootFiles;
         const AUTH_STORAGE_KEY = "ghwe_auth_session";
         const DEFAULT_SESSION_TTL_SECONDS = WEBEDITOR_CONFIG.session.ttlSeconds;
 
