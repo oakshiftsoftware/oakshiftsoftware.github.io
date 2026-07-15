@@ -593,6 +593,7 @@
 
                             <div id="crmMode" class="hidden" style="margin-top:0.8rem;">
                                 <p>CRM mode expects either an object or an array of objects.</p>
+                                <p style="color: var(--muted);">For drag-and-drop reordering, the root JSON must be an array of objects.</p>
                                 <div class="row" style="margin-bottom:0.7rem;">
                                     <button id="crmNewRecordBtn">Add Record</button>
                                     <button id="crmDeleteRecordBtn" class="warn">Delete Selected</button>
@@ -968,7 +969,7 @@
             el.deviceUriText.textContent = verificationUrl;
             el.deviceCodeText.textContent = payload.user_code;
             if (payload.verification_uri_complete) {
-                setStatus(el.authStatus, "Popup opened with your code prefilled. Confirm access in GitHub, then this app will continue automatically.", "ok");
+                setStatus(el.authStatus, "Popup opened with your code prefilled. Confirm access in GitHub. If the popup closes after approval, that is expected.", "ok");
             } else {
                 setStatus(el.authStatus, "Popup opened. Enter code " + payload.user_code + " in the GitHub window, then this app will continue automatically.", "ok");
             }
@@ -976,6 +977,8 @@
             const popup = window.open(verificationUrl, "ghwe-github-login", "popup=yes,width=840,height=900");
             if (popup) {
                 popup.focus();
+            } else {
+                setStatus(el.authStatus, "Popup was blocked by the browser. Open the URL shown below and enter code " + payload.user_code + ".", "bad");
             }
 
             await pollForAccessToken(clientId, payload.device_code, payload.interval || 5);
@@ -1282,6 +1285,7 @@
             el.crmRootMode.value = state.crmModel.rootMode;
             renderCrmRecordSelect();
             renderCrmFields();
+            renderCrmDragList();
         }
 
         function renderCrmRecordSelect() {
@@ -1406,6 +1410,15 @@
 
         function renderCrmFields() {
             el.crmFields.innerHTML = "";
+
+            if (!state.crmModel.records.length) {
+                const emptyState = document.createElement("div");
+                emptyState.className = "status";
+                emptyState.textContent = "No objects to display. Add a record or switch back to raw mode to edit JSON directly.";
+                el.crmFields.appendChild(emptyState);
+                return;
+            }
+
             const rec = state.crmModel.records[state.crmModel.selectedIndex] || {};
 
             const keys = Object.keys(rec);
@@ -1697,7 +1710,13 @@
 
             el.modeCrmBtn.addEventListener("click", function() {
                 switchEditorMode("crm");
-                hydrateCrmFromTextarea();
+                if (hydrateCrmFromTextarea()) {
+                    if (state.crmModel.rootMode === "array") {
+                        setStatus(el.editorStatus, "CRM loaded. Use drag-and-drop below to reorder top-level objects.", "ok");
+                    } else {
+                        setStatus(el.editorStatus, "CRM loaded for object editing.", "ok");
+                    }
+                }
             });
 
             el.formatJsonBtn.addEventListener("click", function() {
@@ -1722,6 +1741,8 @@
             el.crmRootMode.addEventListener("change", function() {
                 state.crmModel.rootMode = el.crmRootMode.value;
                 syncCrmToJsonText();
+                renderCrmRecordSelect();
+                renderCrmFields();
             });
 
             el.crmRecordSelect.addEventListener("change", function() {
