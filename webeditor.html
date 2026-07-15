@@ -910,12 +910,17 @@
             }
 
             const payload = await startResponse.json();
-            el.deviceFlowBlock.classList.remove("hidden");
-            el.deviceUriText.textContent = payload.verification_uri;
-            el.deviceCodeText.textContent = payload.user_code;
-            setStatus(el.authStatus, "Popup opened to GitHub sign-in. Complete login, then this app will continue automatically.", "ok");
+            if (!payload.user_code) {
+                throw new Error("Device flow response did not include a user code. Check broker response forwarding.");
+            }
 
-            const popup = window.open(payload.verification_uri, "ghwe-github-login", "popup=yes,width=840,height=900");
+            const verificationUrl = payload.verification_uri || "https://github.com/login/device";
+            el.deviceFlowBlock.classList.remove("hidden");
+            el.deviceUriText.textContent = verificationUrl;
+            el.deviceCodeText.textContent = payload.user_code;
+            setStatus(el.authStatus, "Popup opened. Enter code " + payload.user_code + " in the GitHub window, then this app will continue automatically.", "ok");
+
+            const popup = window.open(verificationUrl, "ghwe-github-login", "popup=yes,width=840,height=900");
             if (popup) {
                 popup.focus();
             }
