@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub WebEditor</title>
+    <meta name="description" content="Client-side GitHub JSON editor with OAuth login, repository validation, and commit workflow.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #eef2f7;
+            --card: #ffffff;
+            --ink: #0d1b2a;
+            --muted: #5b6677;
+            --line: #ced6e1;
+            --brand: #005f73;
+            --brand-strong: #003845;
+            --ok: #1f7a1f;
+            --warn: #a95c00;
+            --bad: #a10f2b;
+            --radius: 14px;
+            --mono: "IBM Plex Mono", monospace;
+            --font: "Space Grotesk", sans-serif;
+            --shadow: 0 12px 36px rgba(13, 27, 42, 0.12);
+            --maxw: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font);
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 10% 10%, #d8f3dc 0%, transparent 26%),
+                radial-gradient(circle at 85% 18%, #cde4f7 0%, transparent 24%),
+                linear-gradient(160deg, #eef2f7 0%, #f8fafc 100%);
+            min-height: 100vh;
+        }
+
+        .shell {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 1.2rem;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.84);
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 1rem;
+            z-index: 9;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .brand p {
+            margin: 0.15rem 0 0;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 0.92rem;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            transition: 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--brand);
+            color: #fff;
+            border-color: var(--brand);
+        }
+
+        main {
+            margin-top: 1rem;
+        }
+
+        .page {
+            display: none;
+            animation: reveal 0.35s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1rem;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        h2 {
+            margin: 0 0 0.8rem;
+            font-size: 1.25rem;
+        }
+
+        h3 {
+            margin: 0 0 0.6rem;
+            font-size: 1rem;
+        }
+
+        p {
+            margin: 0.35rem 0;
+        }
+
+        label {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-bottom: 0.28rem;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            font: inherit;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 0.55rem 0.65rem;
+            background: #fff;
+        }
+
+        textarea {
+            min-height: 300px;
+            resize: vertical;
+            font-family: var(--mono);
+            font-size: 0.86rem;
+            line-height: 1.35;
+        }
+
+        button {
+            border: 1px solid var(--line);
+            background: #fff;
+            color: var(--ink);
+            border-radius: 10px;
+            padding: 0.55rem 0.8rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button:hover {
+            border-color: var(--brand);
+            color: var(--brand);
+        }
+
+        button.primary {
+            background: var(--brand);
+            border-color: var(--brand);
+            color: #fff;
+        }
+
+        button.primary:hover {
+            background: var(--brand-strong);
+            border-color: var(--brand-strong);
+            color: #fff;
+        }
+
+        button.warn {
+            background: #fff7ef;
+            border-color: #f2c38e;
+            color: var(--warn);
+        }
+
+        .mono {
+            font-family: var(--mono);
+            font-size: 0.86rem;
+        }
+
+        .status {
+            border-left: 4px solid var(--brand);
+            background: #f2f8fb;
+            padding: 0.55rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .status.ok {
+            border-left-color: var(--ok);
+            background: #ecf8ec;
+        }
+
+        .status.bad {
+            border-left-color: var(--bad);
+            background: #fdeff2;
+        }
+
+        .drop-zone {
+            border: 2px dashed #96adca;
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            color: var(--muted);
+            transition: 0.2s ease;
+        }
+
+        .drop-zone.drag {
+            border-color: var(--brand);
+            background: #eef8fb;
+            color: var(--brand);
+        }
+
+        .mode-switch {
+            display: inline-flex;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 0.18rem;
+            background: #fff;
+        }
+
+        .mode-switch button {
+            border: 0;
+            border-radius: 999px;
+            padding: 0.45rem 0.7rem;
+            font-size: 0.86rem;
+            color: var(--muted);
+            background: transparent;
+        }
+
+        .mode-switch button.active {
+            color: #fff;
+            background: var(--brand);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            padding: 0.18rem 0.58rem;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .list {
+            margin: 0;
+            padding-left: 1.1rem;
+        }
+
+        .field-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .wizard-shell {
+            overflow: hidden;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: var(--card);
+            box-shadow: var(--shadow);
+        }
+
+        .wizard-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.45rem;
+            padding: 0.7rem;
+            border-bottom: 1px solid var(--line);
+            background: #f7fbff;
+        }
+
+        .wizard-step-pill {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: #fff;
+            color: var(--muted);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.42rem 0.55rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .wizard-step-pill.active {
+            background: var(--brand);
+            color: #fff;
+            border-color: var(--brand);
+        }
+
+        .wizard-step-pill.done {
+            border-color: #8ccf98;
+            background: #ecf8ec;
+            color: var(--ok);
+        }
+
+        .wizard-track {
+            display: grid;
+            grid-template-columns: repeat(4, 100%);
+            transition: transform 0.35s ease;
+        }
+
+        .wizard-panel {
+            padding: 1rem;
+            min-height: 540px;
+        }
+
+        .repo-list {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            max-height: 340px;
+            overflow: auto;
+            background: #fff;
+        }
+
+        .repo-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0.6rem;
+            align-items: center;
+            width: 100%;
+            border: 0;
+            border-bottom: 1px solid #edf1f6;
+            padding: 0.62rem 0.7rem;
+            cursor: pointer;
+            background: transparent;
+            text-align: left;
+        }
+
+        .repo-item:last-child {
+            border-bottom: 0;
+        }
+
+        .repo-item.active {
+            background: #edf7fb;
+            outline: 1px solid #b5dce8;
+        }
+
+        .repo-badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            padding: 0.2rem 0.55rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .repo-badge.ok {
+            color: var(--ok);
+            border-color: #8ccf98;
+            background: #ecf8ec;
+        }
+
+        .repo-badge.bad {
+            color: var(--bad);
+            border-color: #e8a6b2;
+            background: #fdeff2;
+        }
+
+        .code-box {
+            background: #f5f9ff;
+            border: 1px solid #bfd5f1;
+            border-radius: 10px;
+            padding: 0.7rem;
+        }
+
+        footer {
+            color: var(--muted);
+            text-align: center;
+            font-size: 0.85rem;
+            padding: 1rem 0 2.5rem;
+        }
+
+        @media (max-width: 980px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <header>
+            <div class="brand">
+                <h1>GitHub WebEditor</h1>
+                <p>OAuth login, config-driven repository selection, and JSON commits in-browser</p>
+            </div>
+            <nav>
+                <a class="nav-link" href="#home" data-route="home">Home</a>
+                <a class="nav-link" href="#editor" data-route="editor">Editor</a>
+                <a class="nav-link" href="#about" data-route="about">About</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="home" class="page card">
+                <h2>Welcome</h2>
+                <p>This SPA runs entirely in the browser and can authenticate to GitHub, validate repositories that contain both ghwe_config.json and ghwe_log.json, then edit and commit JSON files listed in configuration.</p>
+                <ul class="list">
+                    <li>OAuth sign-in uses GitHub Device Flow so no backend is required.</li>
+                    <li>Repository validation is based on root files ghwe_config.json and ghwe_log.json.</li>
+                    <li>Editor offers two modes: drag/drop raw JSON and CRM-style form entry.</li>
+                </ul>
+            </section>
+
+            <section id="editor" class="page">
+                <div class="wizard-shell">
+                    <div class="wizard-steps">
+                        <button id="stepPill0" class="wizard-step-pill active">1. Login</button>
+                        <button id="stepPill1" class="wizard-step-pill">2. Repositories</button>
+                        <button id="stepPill2" class="wizard-step-pill">3. Files</button>
+                        <button id="stepPill3" class="wizard-step-pill">4. Editor</button>
+                    </div>
+                    <div id="wizardTrack" class="wizard-track">
+                        <section class="wizard-panel">
+                            <h2>Stage 1: Sign In with GitHub</h2>
+                            <div class="row">
+                                <div style="min-width:260px; flex:1;">
+                                    <label for="clientIdInput">GitHub OAuth Client ID</label>
+                                    <input id="clientIdInput" type="text" placeholder="Paste your GitHub OAuth app client ID">
+                                </div>
+                                <button class="primary" id="startLoginBtn">Login with GitHub</button>
+                                <button id="logoutBtn" class="warn">Sign Out</button>
+                                <span class="pill" id="authPill">Not authenticated</span>
+                            </div>
+                            <div class="status hidden" id="authStatus" style="margin-top:0.7rem;"></div>
+                            <div class="hidden code-box" id="deviceFlowBlock" style="margin-top:0.8rem;">
+                                <p>A popup was opened to GitHub login. If needed, use this device code:</p>
+                                <p class="mono">URL: <strong id="deviceUriText"></strong></p>
+                                <p class="mono">Code: <strong id="deviceCodeText"></strong></p>
+                                <div class="row">
+                                    <button id="copyCodeBtn">Copy Code</button>
+                                    <button id="copyUrlBtn">Copy URL</button>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="wizard-panel">
+                            <h2>Stage 2: Select Repository</h2>
+                            <div class="row">
+                                <button id="loadReposBtn">Refresh Repositories</button>
+                                <span id="repoSummary" class="pill">No repository selected</span>
+                            </div>
+                            <p style="margin-top:0.7rem;">Repositories with both required root files show a green status.</p>
+                            <div id="repoList" class="repo-list" style="margin-top:0.6rem;"></div>
+                            <div class="row" style="margin-top:0.7rem;">
+                                <button id="connectRepoBtn" class="primary">Use Selected Repository</button>
+                            </div>
+                            <div class="status hidden" id="repoStatus" style="margin-top:0.7rem;"></div>
+                        </section>
+
+                        <section class="wizard-panel">
+                            <h2>Stage 3: Select Configured JSON File</h2>
+                            <div class="two-col">
+                                <div>
+                                    <label for="jsonFileSelect">Configured files from ghwe_config.json</label>
+                                    <select id="jsonFileSelect"></select>
+                                    <div class="row" style="margin-top:0.7rem;">
+                                        <button id="loadJsonBtn" class="primary">Load Selected File</button>
+                                        <button id="refreshConfigBtn">Reload Config</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3>Configured File Map</h3>
+                                    <ul id="configuredFilesList" class="list"></ul>
+                                </div>
+                            </div>
+                            <div class="status hidden" id="fileStatus" style="margin-top:0.7rem;"></div>
+                        </section>
+
+                        <section class="wizard-panel">
+                            <h2>Stage 4: Edit and Commit</h2>
+                            <div class="row">
+                                <div class="mode-switch" role="tablist" aria-label="editor mode switch">
+                                    <button id="modeRawBtn" class="active">Drag & Drop JSON</button>
+                                    <button id="modeCrmBtn">CRM Entry</button>
+                                </div>
+                                <span class="pill mono" id="currentFilePill">No file loaded</span>
+                            </div>
+
+                            <div id="rawMode" style="margin-top:0.8rem;">
+                                <div class="drop-zone" id="dropZone">Drop a .json file here to load it into the editor</div>
+                                <label for="jsonTextArea" style="margin-top:0.8rem;">JSON content</label>
+                                <textarea id="jsonTextArea" spellcheck="false"></textarea>
+                                <div class="row" style="margin-top:0.7rem;">
+                                    <button id="formatJsonBtn">Format JSON</button>
+                                    <button id="validateJsonBtn">Validate JSON</button>
+                                </div>
+                            </div>
+
+                            <div id="crmMode" class="hidden" style="margin-top:0.8rem;">
+                                <p>CRM mode expects either an object or an array of objects.</p>
+                                <div class="row" style="margin-bottom:0.7rem;">
+                                    <button id="crmNewRecordBtn">Add Record</button>
+                                    <button id="crmDeleteRecordBtn" class="warn">Delete Selected</button>
+                                </div>
+                                <div class="two-col">
+                                    <div>
+                                        <label for="crmRecordSelect">Records</label>
+                                        <select id="crmRecordSelect"></select>
+                                    </div>
+                                    <div>
+                                        <label for="crmRootMode">Interpretation</label>
+                                        <select id="crmRootMode">
+                                            <option value="array">Array of objects</option>
+                                            <option value="object">Single object</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="crmFields" class="field-grid" style="margin-top:0.8rem;"></div>
+                            </div>
+
+                            <div style="margin-top:0.85rem;" class="stack">
+                                <div>
+                                    <label for="commitMessage">Commit message</label>
+                                    <input id="commitMessage" type="text" placeholder="Update JSON content via GHWE">
+                                </div>
+                                <div class="row">
+                                    <button id="saveJsonBtn" class="primary">Commit JSON Changes</button>
+                                    <button id="saveConfigBtn">Commit ghwe_config.json</button>
+                                    <button id="viewLogBtn">Load ghwe_log.json</button>
+                                </div>
+                            </div>
+                            <div class="status hidden" id="editorStatus" style="margin-top:0.7rem;"></div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="page card">
+                <h2>About</h2>
+                <p>GitHub WebEditor is a browser-based Single Page Application for maintaining static JSON files in GitHub repositories.</p>
+                <p>Workflow:</p>
+                <ul class="list">
+                    <li>Authenticate with GitHub.</li>
+                    <li>Select a repository that contains root files ghwe_config.json and ghwe_log.json.</li>
+                    <li>Load configured JSON files, edit in raw or CRM mode, and commit changes.</li>
+                    <li>Automatic append to ghwe_log.json for each successful commit action.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p><span id="yearNow"></span> GitHub WebEditor</p>
+        </footer>
+    </div>
+
+    <script>
+        const API_BASE = "https://api.github.com";
+        const REQUIRED_ROOT_FILES = ["ghwe_config.json", "ghwe_log.json"];
+
+        const state = {
+            token: sessionStorage.getItem("ghwe_token") || "",
+            user: null,
+            repos: [],
+            repoChecks: {},
+            validRepos: [],
+            selectedRepoCandidate: "",
+            selectedRepo: null,
+            config: null,
+            log: [],
+            currentJsonPath: "",
+            currentJsonSha: "",
+            currentJsonData: null,
+            editorStep: 0,
+            crmModel: {
+                rootMode: "array",
+                records: [],
+                selectedIndex: 0
+            }
+        };
+
+        const el = {
+            navLinks: document.querySelectorAll(".nav-link"),
+            pages: document.querySelectorAll(".page"),
+            yearNow: document.getElementById("yearNow"),
+            wizardTrack: document.getElementById("wizardTrack"),
+            stepPills: [
+                document.getElementById("stepPill0"),
+                document.getElementById("stepPill1"),
+                document.getElementById("stepPill2"),
+                document.getElementById("stepPill3")
+            ],
+            clientIdInput: document.getElementById("clientIdInput"),
+            startLoginBtn: document.getElementById("startLoginBtn"),
+            logoutBtn: document.getElementById("logoutBtn"),
+            authPill: document.getElementById("authPill"),
+            authStatus: document.getElementById("authStatus"),
+            deviceFlowBlock: document.getElementById("deviceFlowBlock"),
+            deviceUriText: document.getElementById("deviceUriText"),
+            deviceCodeText: document.getElementById("deviceCodeText"),
+            copyCodeBtn: document.getElementById("copyCodeBtn"),
+            copyUrlBtn: document.getElementById("copyUrlBtn"),
+            loadReposBtn: document.getElementById("loadReposBtn"),
+            repoList: document.getElementById("repoList"),
+            connectRepoBtn: document.getElementById("connectRepoBtn"),
+            refreshConfigBtn: document.getElementById("refreshConfigBtn"),
+            repoSummary: document.getElementById("repoSummary"),
+            repoStatus: document.getElementById("repoStatus"),
+            configuredFilesList: document.getElementById("configuredFilesList"),
+            jsonFileSelect: document.getElementById("jsonFileSelect"),
+            loadJsonBtn: document.getElementById("loadJsonBtn"),
+            fileStatus: document.getElementById("fileStatus"),
+            modeRawBtn: document.getElementById("modeRawBtn"),
+            modeCrmBtn: document.getElementById("modeCrmBtn"),
+            currentFilePill: document.getElementById("currentFilePill"),
+            rawMode: document.getElementById("rawMode"),
+            crmMode: document.getElementById("crmMode"),
+            dropZone: document.getElementById("dropZone"),
+            jsonTextArea: document.getElementById("jsonTextArea"),
+            formatJsonBtn: document.getElementById("formatJsonBtn"),
+            validateJsonBtn: document.getElementById("validateJsonBtn"),
+            crmRootMode: document.getElementById("crmRootMode"),
+            crmRecordSelect: document.getElementById("crmRecordSelect"),
+            crmFields: document.getElementById("crmFields"),
+            crmNewRecordBtn: document.getElementById("crmNewRecordBtn"),
+            crmDeleteRecordBtn: document.getElementById("crmDeleteRecordBtn"),
+            commitMessage: document.getElementById("commitMessage"),
+            saveJsonBtn: document.getElementById("saveJsonBtn"),
+            saveConfigBtn: document.getElementById("saveConfigBtn"),
+            viewLogBtn: document.getElementById("viewLogBtn"),
+            editorStatus: document.getElementById("editorStatus")
+        };
+
+        function setEditorStep(step) {
+            const clamped = Math.max(0, Math.min(3, step));
+            state.editorStep = clamped;
+            el.wizardTrack.style.transform = "translateX(-" + (clamped * 100) + "%)";
+
+            el.stepPills.forEach(function(pill, idx) {
+                pill.classList.toggle("active", idx === clamped);
+                pill.classList.toggle("done", idx < clamped);
+            });
+        }
+
+        function setStatus(target, message, type = "info") {
+            target.textContent = message;
+            target.classList.remove("hidden", "ok", "bad");
+            if (type === "ok") {
+                target.classList.add("ok");
+            } else if (type === "bad") {
+                target.classList.add("bad");
+            }
+        }
+
+        function clearStatus(target) {
+            target.classList.add("hidden");
+            target.textContent = "";
+            target.classList.remove("ok", "bad");
+        }
+
+        function route() {
+            const routeId = (location.hash || "#home").replace("#", "");
+            for (const page of el.pages) {
+                page.classList.toggle("active", page.id === routeId);
+            }
+            for (const link of el.navLinks) {
+                link.classList.toggle("active", link.dataset.route === routeId);
+            }
+        }
+
+        function getAuthHeaders(extra = {}) {
+            if (!state.token) {
+                throw new Error("You must authenticate first.");
+            }
+            return {
+                Accept: "application/vnd.github+json",
+                Authorization: "Bearer " + state.token,
+                ...extra
+            };
+        }
+
+        async function ghFetch(path, options = {}) {
+            const response = await fetch(API_BASE + path, {
+                ...options,
+                headers: {
+                    ...(options.headers || {}),
+                    ...getAuthHeaders(options.headers || {})
+                }
+            });
+            if (!response.ok) {
+                const body = await response.text();
+                throw new Error("GitHub API error " + response.status + ": " + body);
+            }
+            return response;
+        }
+
+        function b64EncodeUnicode(input) {
+            return btoa(unescape(encodeURIComponent(input)));
+        }
+
+        function b64DecodeUnicode(input) {
+            return decodeURIComponent(escape(atob(input)));
+        }
+
+        async function startDeviceFlow() {
+            const clientId = el.clientIdInput.value.trim();
+            if (!clientId) {
+                setStatus(el.authStatus, "Client ID is required.", "bad");
+                return;
+            }
+
+            clearStatus(el.authStatus);
+            setStatus(el.authStatus, "Starting device authorization...", "info");
+
+            const form = new URLSearchParams();
+            form.set("client_id", clientId);
+            form.set("scope", "repo read:user");
+
+            const startResponse = await fetch("https://github.com/login/device/code", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    Accept: "application/json"
+                },
+                body: form
+            });
+
+            if (!startResponse.ok) {
+                throw new Error("Device flow start failed. Verify OAuth app setup and Client ID.");
+            }
+
+            const payload = await startResponse.json();
+            el.deviceFlowBlock.classList.remove("hidden");
+            el.deviceUriText.textContent = payload.verification_uri;
+            el.deviceCodeText.textContent = payload.user_code;
+            setStatus(el.authStatus, "Popup opened to GitHub sign-in. Complete login, then this app will continue automatically.", "ok");
+
+            const popup = window.open(payload.verification_uri, "ghwe-github-login", "popup=yes,width=840,height=900");
+            if (popup) {
+                popup.focus();
+            }
+
+            await pollForAccessToken(clientId, payload.device_code, payload.interval || 5);
+        }
+
+        async function pollForAccessToken(clientId, deviceCode, intervalSeconds) {
+            const maxTries = 120;
+            let tries = 0;
+
+            while (tries < maxTries) {
+                await new Promise(function(resolve) {
+                    setTimeout(resolve, intervalSeconds * 1000);
+                });
+
+                const body = new URLSearchParams();
+                body.set("client_id", clientId);
+                body.set("device_code", deviceCode);
+                body.set("grant_type", "urn:ietf:params:oauth:grant-type:device_code");
+
+                const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        Accept: "application/json"
+                    },
+                    body
+                });
+
+                if (!tokenResponse.ok) {
+                    throw new Error("Token polling failed.");
+                }
+
+                const tokenData = await tokenResponse.json();
+
+                if (tokenData.access_token) {
+                    state.token = tokenData.access_token;
+                    sessionStorage.setItem("ghwe_token", state.token);
+                    await loadUserProfile();
+                    await fetchAllRepos();
+                    setStatus(el.authStatus, "Authentication successful.", "ok");
+                    el.deviceFlowBlock.classList.add("hidden");
+                    setEditorStep(1);
+                    return;
+                }
+
+                if (tokenData.error === "authorization_pending") {
+                    tries += 1;
+                    continue;
+                }
+
+                if (tokenData.error === "slow_down") {
+                    intervalSeconds += 5;
+                    tries += 1;
+                    continue;
+                }
+
+                throw new Error("Device flow stopped: " + (tokenData.error || "unknown_error"));
+            }
+
+            throw new Error("OAuth polling timed out. Restart login.");
+        }
+
+        async function loadUserProfile() {
+            const res = await ghFetch("/user");
+            state.user = await res.json();
+            el.authPill.textContent = "Authenticated as " + state.user.login;
+        }
+
+        function signOut() {
+            state.token = "";
+            state.user = null;
+            state.repos = [];
+            state.repoChecks = {};
+            state.validRepos = [];
+            state.selectedRepoCandidate = "";
+            state.selectedRepo = null;
+            state.config = null;
+            sessionStorage.removeItem("ghwe_token");
+            el.authPill.textContent = "Not authenticated";
+            el.repoList.innerHTML = "";
+            el.jsonFileSelect.innerHTML = "";
+            el.configuredFilesList.innerHTML = "";
+            el.repoSummary.textContent = "No repository selected";
+            el.currentFilePill.textContent = "No file loaded";
+            clearStatus(el.authStatus);
+            clearStatus(el.repoStatus);
+            clearStatus(el.fileStatus);
+            setStatus(el.editorStatus, "Signed out.", "ok");
+            setEditorStep(0);
+        }
+
+        async function fetchAllRepos() {
+            if (!state.token) {
+                throw new Error("Authenticate first.");
+            }
+
+            setStatus(el.editorStatus, "Loading repositories from GitHub...", "info");
+            let page = 1;
+            const perPage = 100;
+            const result = [];
+
+            while (true) {
+                const response = await ghFetch("/user/repos?per_page=" + perPage + "&page=" + page + "&sort=updated");
+                const repos = await response.json();
+                result.push(...repos);
+                if (repos.length < perPage) {
+                    break;
+                }
+                page += 1;
+            }
+
+            state.repos = result;
+            state.repoChecks = await validateRepos(result);
+            state.validRepos = result.filter(function(repo) {
+                return Boolean(state.repoChecks[repo.full_name]);
+            });
+            renderRepoList();
+            setStatus(el.repoStatus, "Loaded " + state.repos.length + " repositories. " + state.validRepos.length + " configured repositories are eligible.", "ok");
+        }
+
+        async function repoHasRequiredFiles(repoFullName) {
+            for (const fileName of REQUIRED_ROOT_FILES) {
+                const response = await ghFetch("/repos/" + repoFullName + "/contents/" + fileName);
+                const payload = await response.json();
+                if (payload.type !== "file") {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        async function validateRepos(repos) {
+            const checks = {};
+            setStatus(el.repoStatus, "Checking repository root files (ghwe_config.json + ghwe_log.json)...", "info");
+
+            for (const repo of repos) {
+                try {
+                    checks[repo.full_name] = await repoHasRequiredFiles(repo.full_name);
+                } catch (_error) {
+                    checks[repo.full_name] = false;
+                }
+            }
+
+            return checks;
+        }
+
+        function renderRepoList() {
+            el.repoList.innerHTML = "";
+
+            if (!state.repos.length) {
+                const div = document.createElement("div");
+                div.className = "repo-item";
+                div.textContent = "No repositories found.";
+                el.repoList.appendChild(div);
+                return;
+            }
+
+            for (const repo of state.repos) {
+                const ok = Boolean(state.repoChecks[repo.full_name]);
+                const row = document.createElement("button");
+                row.type = "button";
+                row.className = "repo-item" + (state.selectedRepoCandidate === repo.full_name ? " active" : "");
+
+                const name = document.createElement("span");
+                name.className = "mono";
+                name.textContent = repo.full_name;
+
+                const badge = document.createElement("span");
+                badge.className = "repo-badge " + (ok ? "ok" : "bad");
+                badge.textContent = ok ? "✓ Valid" : "✕ Missing Files";
+
+                row.appendChild(name);
+                row.appendChild(badge);
+
+                row.addEventListener("click", function() {
+                    state.selectedRepoCandidate = repo.full_name;
+                    renderRepoList();
+                });
+
+                el.repoList.appendChild(row);
+            }
+        }
+
+        async function loadRepoFile(repoFullName, filePath) {
+            const response = await ghFetch("/repos/" + repoFullName + "/contents/" + filePath);
+            return response.json();
+        }
+
+        async function connectSelectedRepository() {
+            const selectedFullName = state.selectedRepoCandidate;
+            if (!selectedFullName) {
+                throw new Error("Choose a repository first.");
+            }
+
+            if (!state.repoChecks[selectedFullName]) {
+                throw new Error("Selected repository does not contain required ghwe root files.");
+            }
+
+            const selected = state.validRepos.find(function(repo) {
+                return repo.full_name === selectedFullName;
+            });
+
+            if (!selected) {
+                throw new Error("Selected repository is not validated.");
+            }
+
+            state.selectedRepo = selected;
+            const configFile = await loadRepoFile(selected.full_name, "ghwe_config.json");
+            const logFile = await loadRepoFile(selected.full_name, "ghwe_log.json");
+
+            state.config = {
+                path: configFile.path,
+                sha: configFile.sha,
+                data: JSON.parse(b64DecodeUnicode(configFile.content.replace(/\n/g, "")))
+            };
+
+            state.log = JSON.parse(b64DecodeUnicode(logFile.content.replace(/\n/g, "")) || "[]");
+
+            el.repoSummary.textContent = selected.full_name + " (branch: " + selected.default_branch + ")";
+            renderConfiguredFiles();
+            setStatus(el.repoStatus, "Repository connected. Continue to file selection.", "ok");
+            setEditorStep(2);
+        }
+
+        function renderConfiguredFiles() {
+            const fileMap = (state.config && state.config.data && state.config.data.json_files) || {};
+            el.configuredFilesList.innerHTML = "";
+            el.jsonFileSelect.innerHTML = "";
+
+            const entries = Object.entries(fileMap);
+            for (const [key, path] of entries) {
+                const item = document.createElement("li");
+                item.className = "mono";
+                item.textContent = key + " -> " + path;
+                el.configuredFilesList.appendChild(item);
+
+                const option = document.createElement("option");
+                option.value = path;
+                option.textContent = key + " (" + path + ")";
+                el.jsonFileSelect.appendChild(option);
+            }
+
+            if (!entries.length) {
+                const item = document.createElement("li");
+                item.textContent = "No json_files configured.";
+                el.configuredFilesList.appendChild(item);
+            }
+        }
+
+        async function loadSelectedJsonFile() {
+            const filePath = el.jsonFileSelect.value;
+            if (!filePath) {
+                throw new Error("Choose a configured JSON file.");
+            }
+            if (!state.selectedRepo) {
+                throw new Error("Connect a repository first.");
+            }
+
+            const file = await loadRepoFile(state.selectedRepo.full_name, filePath);
+            const decoded = b64DecodeUnicode(file.content.replace(/\n/g, ""));
+            const parsed = JSON.parse(decoded);
+
+            state.currentJsonPath = file.path;
+            state.currentJsonSha = file.sha;
+            state.currentJsonData = parsed;
+            el.jsonTextArea.value = JSON.stringify(parsed, null, 2);
+
+            hydrateCrmFromCurrentJson();
+            el.currentFilePill.textContent = file.path;
+            setStatus(el.fileStatus, "Loaded " + file.path + ". Continue to editor stage.", "ok");
+            setEditorStep(3);
+        }
+
+        function switchEditorMode(mode) {
+            const isRaw = mode === "raw";
+            el.rawMode.classList.toggle("hidden", !isRaw);
+            el.crmMode.classList.toggle("hidden", isRaw);
+            el.modeRawBtn.classList.toggle("active", isRaw);
+            el.modeCrmBtn.classList.toggle("active", !isRaw);
+        }
+
+        function hydrateCrmFromCurrentJson() {
+            if (!state.currentJsonData) {
+                return;
+            }
+
+            if (Array.isArray(state.currentJsonData)) {
+                state.crmModel.rootMode = "array";
+                state.crmModel.records = state.currentJsonData.map(function(item) {
+                    return (item && typeof item === "object") ? { ...item } : { value: item };
+                });
+            } else if (state.currentJsonData && typeof state.currentJsonData === "object") {
+                state.crmModel.rootMode = "object";
+                state.crmModel.records = [{ ...state.currentJsonData }];
+            } else {
+                state.crmModel.rootMode = "array";
+                state.crmModel.records = [{ value: state.currentJsonData }];
+            }
+
+            state.crmModel.selectedIndex = 0;
+            el.crmRootMode.value = state.crmModel.rootMode;
+            renderCrmRecordSelect();
+            renderCrmFields();
+        }
+
+        function renderCrmRecordSelect() {
+            el.crmRecordSelect.innerHTML = "";
+
+            if (!state.crmModel.records.length) {
+                const option = document.createElement("option");
+                option.value = "0";
+                option.textContent = "No records";
+                el.crmRecordSelect.appendChild(option);
+                return;
+            }
+
+            state.crmModel.records.forEach(function(_record, idx) {
+                const option = document.createElement("option");
+                option.value = String(idx);
+                option.textContent = "Record " + (idx + 1);
+                if (idx === state.crmModel.selectedIndex) {
+                    option.selected = true;
+                }
+                el.crmRecordSelect.appendChild(option);
+            });
+        }
+
+        function renderCrmFields() {
+            el.crmFields.innerHTML = "";
+            const rec = state.crmModel.records[state.crmModel.selectedIndex] || {};
+
+            const keys = Object.keys(rec);
+            if (!keys.length) {
+                rec.value = "";
+            }
+
+            for (const key of Object.keys(rec)) {
+                const wrapper = document.createElement("div");
+                const label = document.createElement("label");
+                label.textContent = key;
+
+                const input = document.createElement("input");
+                input.type = "text";
+                input.value = String(rec[key] ?? "");
+                input.dataset.field = key;
+                input.addEventListener("input", function(event) {
+                    rec[key] = event.target.value;
+                    syncCrmToJsonText();
+                });
+
+                wrapper.appendChild(label);
+                wrapper.appendChild(input);
+                el.crmFields.appendChild(wrapper);
+            }
+
+            const addFieldWrap = document.createElement("div");
+            const addFieldBtn = document.createElement("button");
+            addFieldBtn.type = "button";
+            addFieldBtn.textContent = "Add Field";
+            addFieldBtn.addEventListener("click", function() {
+                const name = prompt("Field name");
+                if (!name) {
+                    return;
+                }
+                if (Object.prototype.hasOwnProperty.call(rec, name)) {
+                    alert("Field already exists");
+                    return;
+                }
+                rec[name] = "";
+                renderCrmFields();
+                syncCrmToJsonText();
+            });
+            addFieldWrap.appendChild(addFieldBtn);
+            el.crmFields.appendChild(addFieldWrap);
+        }
+
+        function syncCrmToJsonText() {
+            let output;
+            if (state.crmModel.rootMode === "object") {
+                output = state.crmModel.records[0] || {};
+            } else {
+                output = state.crmModel.records;
+            }
+            el.jsonTextArea.value = JSON.stringify(output, null, 2);
+        }
+
+        function parseAndNormalizeEditorJson() {
+            const parsed = JSON.parse(el.jsonTextArea.value);
+            state.currentJsonData = parsed;
+            return parsed;
+        }
+
+        async function commitFile(repoFullName, branch, path, message, contentString, sha) {
+            const response = await ghFetch("/repos/" + repoFullName + "/contents/" + path, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message,
+                    content: b64EncodeUnicode(contentString),
+                    branch,
+                    sha
+                })
+            });
+
+            return response.json();
+        }
+
+        async function appendLog(action, details) {
+            if (!state.selectedRepo) {
+                return;
+            }
+
+            const repoFullName = state.selectedRepo.full_name;
+            const branch = state.selectedRepo.default_branch;
+            const logContent = await loadRepoFile(repoFullName, "ghwe_log.json");
+            const logSha = logContent.sha;
+            const existing = JSON.parse(b64DecodeUnicode(logContent.content.replace(/\n/g, "")) || "[]");
+
+            existing.push({
+                timestamp: new Date().toISOString(),
+                actor: state.user ? state.user.login : "unknown",
+                action,
+                details
+            });
+
+            await commitFile(
+                repoFullName,
+                branch,
+                "ghwe_log.json",
+                "Append GHWE log entry: " + action,
+                JSON.stringify(existing, null, 2),
+                logSha
+            );
+
+            state.log = existing;
+        }
+
+        async function commitCurrentJson() {
+            if (!state.selectedRepo || !state.currentJsonPath) {
+                throw new Error("Load a configured JSON file first.");
+            }
+
+            const json = parseAndNormalizeEditorJson();
+            const commitMessage = (el.commitMessage.value || "Update " + state.currentJsonPath + " via GHWE").trim();
+
+            const result = await commitFile(
+                state.selectedRepo.full_name,
+                state.selectedRepo.default_branch,
+                state.currentJsonPath,
+                commitMessage,
+                JSON.stringify(json, null, 2),
+                state.currentJsonSha
+            );
+
+            state.currentJsonSha = result.content.sha;
+            await appendLog("update_json", {
+                path: state.currentJsonPath,
+                commit_sha: result.commit.sha
+            });
+            setStatus(el.editorStatus, "Committed " + state.currentJsonPath + " and updated ghwe_log.json.", "ok");
+        }
+
+        async function commitConfig() {
+            if (!state.selectedRepo || !state.config) {
+                throw new Error("Connect a repository first.");
+            }
+
+            const commitMessage = (el.commitMessage.value || "Update ghwe_config.json via GHWE").trim();
+            const payload = JSON.stringify(state.config.data, null, 2);
+
+            const result = await commitFile(
+                state.selectedRepo.full_name,
+                state.selectedRepo.default_branch,
+                "ghwe_config.json",
+                commitMessage,
+                payload,
+                state.config.sha
+            );
+
+            state.config.sha = result.content.sha;
+            await appendLog("update_config", {
+                path: "ghwe_config.json",
+                commit_sha: result.commit.sha
+            });
+
+            setStatus(el.editorStatus, "Committed ghwe_config.json and updated ghwe_log.json.", "ok");
+        }
+
+        function setupDropZone() {
+            ["dragenter", "dragover"].forEach(function(eventName) {
+                el.dropZone.addEventListener(eventName, function(event) {
+                    event.preventDefault();
+                    el.dropZone.classList.add("drag");
+                });
+            });
+
+            ["dragleave", "drop"].forEach(function(eventName) {
+                el.dropZone.addEventListener(eventName, function(event) {
+                    event.preventDefault();
+                    el.dropZone.classList.remove("drag");
+                });
+            });
+
+            el.dropZone.addEventListener("drop", function(event) {
+                const files = event.dataTransfer.files;
+                if (!files || !files.length) {
+                    return;
+                }
+
+                const file = files[0];
+                if (!file.name.toLowerCase().endsWith(".json")) {
+                    setStatus(el.editorStatus, "Dropped file must be a .json file.", "bad");
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const text = String(reader.result || "");
+                    try {
+                        const parsed = JSON.parse(text);
+                        el.jsonTextArea.value = JSON.stringify(parsed, null, 2);
+                        state.currentJsonData = parsed;
+                        hydrateCrmFromCurrentJson();
+                        setStatus(el.editorStatus, "Loaded dropped JSON into editor.", "ok");
+                    } catch (_error) {
+                        setStatus(el.editorStatus, "Dropped file is not valid JSON.", "bad");
+                    }
+                };
+                reader.readAsText(file);
+            });
+        }
+
+        function wireUiEvents() {
+            window.addEventListener("hashchange", route);
+            if (!location.hash) {
+                location.hash = "#home";
+            } else {
+                route();
+            }
+
+            el.yearNow.textContent = String(new Date().getFullYear());
+
+            el.stepPills.forEach(function(pill, index) {
+                pill.addEventListener("click", function() {
+                    if (index <= state.editorStep) {
+                        setEditorStep(index);
+                    }
+                });
+            });
+
+            el.startLoginBtn.addEventListener("click", async function() {
+                try {
+                    await startDeviceFlow();
+                } catch (error) {
+                    setStatus(el.authStatus, error.message, "bad");
+                }
+            });
+
+            el.logoutBtn.addEventListener("click", signOut);
+
+            el.copyCodeBtn.addEventListener("click", async function() {
+                await navigator.clipboard.writeText(el.deviceCodeText.textContent || "");
+            });
+
+            el.copyUrlBtn.addEventListener("click", async function() {
+                await navigator.clipboard.writeText(el.deviceUriText.textContent || "");
+            });
+
+            el.loadReposBtn.addEventListener("click", async function() {
+                try {
+                    await fetchAllRepos();
+                } catch (error) {
+                    setStatus(el.repoStatus, error.message, "bad");
+                }
+            });
+
+            el.connectRepoBtn.addEventListener("click", async function() {
+                try {
+                    await connectSelectedRepository();
+                } catch (error) {
+                    setStatus(el.repoStatus, error.message, "bad");
+                }
+            });
+
+            el.refreshConfigBtn.addEventListener("click", async function() {
+                try {
+                    await connectSelectedRepository();
+                } catch (error) {
+                    setStatus(el.fileStatus, error.message, "bad");
+                }
+            });
+
+            el.loadJsonBtn.addEventListener("click", async function() {
+                try {
+                    await loadSelectedJsonFile();
+                } catch (error) {
+                    setStatus(el.fileStatus, error.message, "bad");
+                }
+            });
+
+            el.modeRawBtn.addEventListener("click", function() {
+                switchEditorMode("raw");
+            });
+
+            el.modeCrmBtn.addEventListener("click", function() {
+                switchEditorMode("crm");
+                hydrateCrmFromCurrentJson();
+            });
+
+            el.formatJsonBtn.addEventListener("click", function() {
+                try {
+                    const parsed = JSON.parse(el.jsonTextArea.value);
+                    el.jsonTextArea.value = JSON.stringify(parsed, null, 2);
+                    setStatus(el.editorStatus, "JSON formatted.", "ok");
+                } catch (error) {
+                    setStatus(el.editorStatus, "JSON parse error: " + error.message, "bad");
+                }
+            });
+
+            el.validateJsonBtn.addEventListener("click", function() {
+                try {
+                    JSON.parse(el.jsonTextArea.value);
+                    setStatus(el.editorStatus, "Valid JSON.", "ok");
+                } catch (error) {
+                    setStatus(el.editorStatus, "Invalid JSON: " + error.message, "bad");
+                }
+            });
+
+            el.crmRootMode.addEventListener("change", function() {
+                state.crmModel.rootMode = el.crmRootMode.value;
+                syncCrmToJsonText();
+            });
+
+            el.crmRecordSelect.addEventListener("change", function() {
+                state.crmModel.selectedIndex = Number(el.crmRecordSelect.value || 0);
+                renderCrmFields();
+            });
+
+            el.crmNewRecordBtn.addEventListener("click", function() {
+                state.crmModel.records.push({});
+                state.crmModel.selectedIndex = state.crmModel.records.length - 1;
+                renderCrmRecordSelect();
+                renderCrmFields();
+                syncCrmToJsonText();
+            });
+
+            el.crmDeleteRecordBtn.addEventListener("click", function() {
+                if (!state.crmModel.records.length) {
+                    return;
+                }
+                state.crmModel.records.splice(state.crmModel.selectedIndex, 1);
+                state.crmModel.selectedIndex = Math.max(0, state.crmModel.selectedIndex - 1);
+                renderCrmRecordSelect();
+                renderCrmFields();
+                syncCrmToJsonText();
+            });
+
+            el.saveJsonBtn.addEventListener("click", async function() {
+                try {
+                    await commitCurrentJson();
+                } catch (error) {
+                    setStatus(el.editorStatus, error.message, "bad");
+                }
+            });
+
+            el.saveConfigBtn.addEventListener("click", async function() {
+                try {
+                    await commitConfig();
+                } catch (error) {
+                    setStatus(el.editorStatus, error.message, "bad");
+                }
+            });
+
+            el.viewLogBtn.addEventListener("click", async function() {
+                try {
+                    if (!state.selectedRepo) {
+                        throw new Error("Connect a repository first.");
+                    }
+                    const logFile = await loadRepoFile(state.selectedRepo.full_name, "ghwe_log.json");
+                    const data = JSON.parse(b64DecodeUnicode(logFile.content.replace(/\n/g, "")) || "[]");
+                    setStatus(el.editorStatus, "ghwe_log.json entries: " + data.length, "ok");
+                } catch (error) {
+                    setStatus(el.editorStatus, error.message, "bad");
+                }
+            });
+
+            setupDropZone();
+        }
+
+        async function bootstrap() {
+            wireUiEvents();
+            route();
+            switchEditorMode("raw");
+            setEditorStep(0);
+            if (state.token) {
+                try {
+                    await loadUserProfile();
+                    await fetchAllRepos();
+                    setStatus(el.authStatus, "Restored authenticated session.", "ok");
+                    setEditorStep(1);
+                } catch (_error) {
+                    signOut();
+                }
+            }
+        }
+
+        bootstrap();
+    </script>
+</body>
+</html>
