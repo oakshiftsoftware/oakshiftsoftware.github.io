@@ -444,8 +444,8 @@
     <div class="shell">
         <header>
             <div class="brand">
-                <h1>GitHub WebEditor</h1>
-                <p>OAuth login, config-driven repository selection, and JSON commits in-browser</p>
+                <h1 id="brandTitle">GitHub WebEditor</h1>
+                <p id="brandTagline">OAuth login, config-driven repository selection, and JSON commits in-browser</p>
             </div>
             <nav>
                 <a class="nav-link" href="#home" data-route="home">Home</a>
@@ -456,8 +456,8 @@
 
         <main>
             <section id="home" class="page card">
-                <h2>Welcome</h2>
-                <p>This SPA runs entirely in the browser and can authenticate to GitHub, validate repositories that contain both ghwe_config.json and ghwe_log.json, then edit and commit JSON files listed in configuration.</p>
+                <h2 id="homeTitle">Welcome</h2>
+                <p id="homeIntro">This SPA runs entirely in the browser and can authenticate to GitHub, validate repositories that contain both ghwe_config.json and ghwe_log.json, then edit and commit JSON files listed in configuration.</p>
                 <ul class="list">
                     <li>OAuth sign-in uses GitHub Device Flow so no backend is required.</li>
                     <li>Repository validation is based on root files ghwe_config.json and ghwe_log.json.</li>
@@ -586,8 +586,8 @@
             </section>
 
             <section id="about" class="page card">
-                <h2>About</h2>
-                <p>GitHub WebEditor is a browser-based Single Page Application for maintaining static JSON files in GitHub repositories.</p>
+                <h2 id="aboutTitle">About</h2>
+                <p id="aboutIntro">GitHub WebEditor is a browser-based Single Page Application for maintaining static JSON files in GitHub repositories.</p>
                 <p>Workflow:</p>
                 <ul class="list">
                     <li>Authenticate with GitHub.</li>
@@ -599,16 +599,36 @@
         </main>
 
         <footer>
-            <p><span id="yearNow"></span> GitHub WebEditor</p>
+            <p><span id="yearNow"></span> <span id="footerTitle">GitHub WebEditor</span></p>
         </footer>
     </div>
 
     <script>
+        const WEBEDITOR_CONFIG = {
+            branding: {
+                appTitle: "GitHub WebEditor",
+                tagline: "OAuth login, config-driven repository selection, and JSON commits in-browser",
+                homeTitle: "Welcome",
+                homeIntro: "This SPA runs entirely in the browser and can authenticate to GitHub, validate repositories that contain both ghwe_config.json and ghwe_log.json, then edit and commit JSON files listed in configuration.",
+                aboutTitle: "About",
+                aboutIntro: "GitHub WebEditor is a browser-based Single Page Application for maintaining static JSON files in GitHub repositories."
+            },
+            oauth: {
+                clientId: "Ov23liJxZCIXpxYWlATm",
+                scope: "repo read:user"
+            },
+            session: {
+                ttlSeconds: 8 * 60 * 60
+            },
+            repository: {
+                requiredRootFiles: ["ghwe_config.json", "ghwe_log.json"]
+            }
+        };
+
         const API_BASE = "https://api.github.com";
-        const GITHUB_OAUTH_CLIENT_ID = "Ov23liJxZCIXpxYWlATm";
         const REQUIRED_ROOT_FILES = ["ghwe_config.json", "ghwe_log.json"];
         const AUTH_STORAGE_KEY = "ghwe_auth_session";
-        const DEFAULT_SESSION_TTL_SECONDS = 8 * 60 * 60;
+        const DEFAULT_SESSION_TTL_SECONDS = WEBEDITOR_CONFIG.session.ttlSeconds;
 
         function loadStoredAuthSession() {
             const raw = sessionStorage.getItem(AUTH_STORAGE_KEY);
@@ -685,6 +705,13 @@
             navLinks: document.querySelectorAll(".nav-link"),
             pages: document.querySelectorAll(".page"),
             yearNow: document.getElementById("yearNow"),
+            brandTitle: document.getElementById("brandTitle"),
+            brandTagline: document.getElementById("brandTagline"),
+            homeTitle: document.getElementById("homeTitle"),
+            homeIntro: document.getElementById("homeIntro"),
+            aboutTitle: document.getElementById("aboutTitle"),
+            aboutIntro: document.getElementById("aboutIntro"),
+            footerTitle: document.getElementById("footerTitle"),
             wizardTrack: document.getElementById("wizardTrack"),
             stepPills: [
                 document.getElementById("stepPill0"),
@@ -731,6 +758,22 @@
             viewLogBtn: document.getElementById("viewLogBtn"),
             editorStatus: document.getElementById("editorStatus")
         };
+
+        function applyBranding() {
+            document.title = WEBEDITOR_CONFIG.branding.appTitle;
+            const metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+                metaDescription.setAttribute("content", WEBEDITOR_CONFIG.branding.tagline);
+            }
+
+            el.brandTitle.textContent = WEBEDITOR_CONFIG.branding.appTitle;
+            el.brandTagline.textContent = WEBEDITOR_CONFIG.branding.tagline;
+            el.homeTitle.textContent = WEBEDITOR_CONFIG.branding.homeTitle;
+            el.homeIntro.textContent = WEBEDITOR_CONFIG.branding.homeIntro;
+            el.aboutTitle.textContent = WEBEDITOR_CONFIG.branding.aboutTitle;
+            el.aboutIntro.textContent = WEBEDITOR_CONFIG.branding.aboutIntro;
+            el.footerTitle.textContent = WEBEDITOR_CONFIG.branding.appTitle;
+        }
 
         function setEditorStep(step) {
             const clamped = Math.max(0, Math.min(3, step));
@@ -808,14 +851,17 @@
         }
 
         async function startDeviceFlow() {
-            const clientId = GITHUB_OAUTH_CLIENT_ID;
+            const clientId = WEBEDITOR_CONFIG.oauth.clientId;
+            if (!clientId) {
+                throw new Error("OAuth client ID is not configured.");
+            }
 
             clearStatus(el.authStatus);
             setStatus(el.authStatus, "Starting device authorization...", "info");
 
             const form = new URLSearchParams();
             form.set("client_id", clientId);
-            form.set("scope", "repo read:user");
+            form.set("scope", WEBEDITOR_CONFIG.oauth.scope);
 
             const startResponse = await fetch("https://github.com/login/device/code", {
                 method: "POST",
@@ -1532,6 +1578,7 @@
         }
 
         async function bootstrap() {
+            applyBranding();
             wireUiEvents();
             route();
             switchEditorMode("raw");
