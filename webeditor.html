@@ -2497,7 +2497,10 @@
                             rec[schemaKey] = getDefaultByType(typeName);
                         }
                     });
-                    renderKeys = schemaKeys;
+                    const dynamicKeys = Object.keys(rec).filter(function(key) {
+                        return !schemaKeys.includes(key);
+                    });
+                    renderKeys = schemaKeys.concat(dynamicKeys);
                 }
             }
 
