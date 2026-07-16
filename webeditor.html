@@ -2839,79 +2839,88 @@
                 renderKeys = ["value"];
             }
 
+            let crm_fc = 0;
+
             for (const key of renderKeys) {
-                const wrapper = document.createElement("div");
-                const label = document.createElement("label");
-                label.textContent = key;
-                const head = document.createElement("div");
-                head.className = "crm-field-head";
-                head.appendChild(label);
-
-                const fieldTypeOptions = resolveCrmFieldTypeOptions(key, rec[key]);
-                let fieldType = getFieldType(key, rec[key]);
-                const inferredType = inferNodeType(rec[key]);
-                if (fieldTypeOptions.length > 1) {
-                    fieldType = fieldTypeOptions.includes(inferredType) ? inferredType : fieldTypeOptions[0];
-                }
-                let input;
-
-                if (fieldTypeOptions.length > 1) {
-                    const typeSelect = document.createElement("select");
-                    fieldTypeOptions.forEach(function(optionType) {
-                        const option = document.createElement("option");
-                        option.value = optionType;
-                        option.textContent = optionType;
-                        if (optionType === fieldType) {
-                            option.selected = true;
-                        }
-                        typeSelect.appendChild(option);
-                    });
-                    typeSelect.addEventListener("change", function(event) {
-                        const nextType = event.target.value;
-                        rec[key] = getDefaultByType(nextType);
-                        renderCrmFields();
-                        syncCrmToJsonText();
-                    });
-                    head.appendChild(typeSelect);
-                }
-
-                if (fieldType === "boolean") {
-                    input = document.createElement("input");
-                    input.type = "checkbox";
-                    input.checked = Boolean(rec[key]);
-                    input.addEventListener("change", function(event) {
-                        rec[key] = Boolean(event.target.checked);
-                        syncCrmToJsonText();
-                    });
-                } else if (fieldType === "array" || fieldType === "object") {
-                    input = document.createElement("textarea");
-                    input.style.minHeight = "120px";
-                    input.value = JSON.stringify(rec[key] == null ? getDefaultByType(fieldType) : rec[key], null, 2);
-                    input.addEventListener("input", function(event) {
-                        rec[key] = parseFieldInputValue(fieldType, event.target.value);
-                        syncCrmToJsonText();
-                    });
-                } else if (fieldType === "null") {
-                    input = document.createElement("input");
-                    input.type = "text";
-                    input.value = "null";
-                    input.readOnly = true;
+                if (crm_fc == 0) {
+                    // 
+                    crm_fc++;
                 } else {
-                    input = document.createElement("input");
-                    input.type = fieldType === "number" ? "number" : "text";
-                    input.value = String(rec[key] == null ? "" : rec[key]);
-                    input.addEventListener("input", function(event) {
-                        rec[key] = parseFieldInputValue(fieldType, event.target.value);
-                        syncCrmToJsonText();
-                    });
+                    // 
+                    crm_fc++;
+                    const wrapper = document.createElement("div");
+                    const label = document.createElement("label");
+                    label.textContent = key;
+                    const head = document.createElement("div");
+                    head.className = "crm-field-head";
+                    head.appendChild(label);
+
+                    const fieldTypeOptions = resolveCrmFieldTypeOptions(key, rec[key]);
+                    let fieldType = getFieldType(key, rec[key]);
+                    const inferredType = inferNodeType(rec[key]);
+                    if (fieldTypeOptions.length > 1) {
+                        fieldType = fieldTypeOptions.includes(inferredType) ? inferredType : fieldTypeOptions[0];
+                    }
+                    let input;
+
+                    if (fieldTypeOptions.length > 1) {
+                        const typeSelect = document.createElement("select");
+                        fieldTypeOptions.forEach(function(optionType) {
+                            const option = document.createElement("option");
+                            option.value = optionType;
+                            option.textContent = optionType;
+                            if (optionType === fieldType) {
+                                option.selected = true;
+                            }
+                            typeSelect.appendChild(option);
+                        });
+                        typeSelect.addEventListener("change", function(event) {
+                            const nextType = event.target.value;
+                            rec[key] = getDefaultByType(nextType);
+                            renderCrmFields();
+                            syncCrmToJsonText();
+                        });
+                        head.appendChild(typeSelect);
+                    }
+
+                    if (fieldType === "boolean") {
+                        input = document.createElement("input");
+                        input.type = "checkbox";
+                        input.checked = Boolean(rec[key]);
+                        input.addEventListener("change", function(event) {
+                            rec[key] = Boolean(event.target.checked);
+                            syncCrmToJsonText();
+                        });
+                    } else if (fieldType === "array" || fieldType === "object") {
+                        input = document.createElement("textarea");
+                        input.style.minHeight = "120px";
+                        input.value = JSON.stringify(rec[key] == null ? getDefaultByType(fieldType) : rec[key], null, 2);
+                        input.addEventListener("input", function(event) {
+                            rec[key] = parseFieldInputValue(fieldType, event.target.value);
+                            syncCrmToJsonText();
+                        });
+                    } else if (fieldType === "null") {
+                        input = document.createElement("input");
+                        input.type = "text";
+                        input.value = "null";
+                        input.readOnly = true;
+                    } else {
+                        input = document.createElement("input");
+                        input.type = fieldType === "number" ? "number" : "text";
+                        input.value = String(rec[key] == null ? "" : rec[key]);
+                        input.addEventListener("input", function(event) {
+                            rec[key] = parseFieldInputValue(fieldType, event.target.value);
+                            syncCrmToJsonText();
+                        });
+                    }
+
+                    input.dataset.field = key;
+
+                    wrapper.className = "crm-field-card";
+                    wrapper.appendChild(head);
+                    wrapper.appendChild(input);
+                    el.crmFields.appendChild(wrapper);
                 }
-
-                input.dataset.field = key;
-
-                wrapper.className = "crm-field-card";
-                wrapper.appendChild(head);
-                wrapper.appendChild(input);
-                el.crmFields.appendChild(wrapper);
             }
 
             const addFieldWrap = document.createElement("div");
