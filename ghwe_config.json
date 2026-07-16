@@ -1,0 +1,13 @@
+{
+    "site_data": {
+        "title": "Oakshift Software",
+        "url": "https://oakshift.co.uk/"
+    }, 
+    "metadata": {
+        "last_updated": null
+    }, 
+    "json_files": {
+        "services": "source/data/services.json",
+        "discounts": "source/data/discounts.json"
+    }
+}
