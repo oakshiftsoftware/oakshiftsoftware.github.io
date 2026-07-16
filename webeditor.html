@@ -692,6 +692,15 @@
             }
         };
 
+        const JSON_OBJECT_NODE_TYPES = {
+            jon_strong: "string",
+            jon_number: "number",
+            json_boolean: "boolean",
+            json_null: "null",
+            json_array: "array",
+            json_object: "object"
+        };
+
         const API_BASE = "https://api.github.com";
         const REQUIRED_ROOT_FILES = WEBEDITOR_CONFIG.repository.requiredRootFiles;
         const AUTH_STORAGE_KEY = "ghwe_auth_session";
