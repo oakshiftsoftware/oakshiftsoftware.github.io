@@ -353,6 +353,53 @@
             box-shadow: inset 0 0 0 1px var(--brand);
         }
 
+        .node-builder {
+            margin-top: 0.8rem;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 0.7rem;
+            background: #fbfdff;
+        }
+
+        .node-list {
+            list-style: none;
+            margin: 0.6rem 0 0;
+            padding: 0;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .node-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 0.5rem;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 0.45rem 0.55rem;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .node-item.active {
+            border-color: #6ca8bc;
+            background: #edf7fb;
+        }
+
+        .node-item.drag-over {
+            border-color: var(--brand);
+            box-shadow: inset 0 0 0 1px var(--brand);
+        }
+
+        .node-type-pill {
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 0.15rem 0.45rem;
+            font-size: 0.72rem;
+            color: var(--muted);
+            background: #fff;
+        }
+
         .wizard-shell {
             overflow: hidden;
             border-radius: var(--radius);
@@ -589,6 +636,16 @@
                                     <button id="formatJsonBtn">Format JSON</button>
                                     <button id="validateJsonBtn">Validate JSON</button>
                                 </div>
+                                <div class="node-builder" id="nodeBuilderPanel">
+                                    <label>Top-level JSON node builder (drag and drop reorder)</label>
+                                    <p style="margin-top:0.2rem; color: var(--muted);">Works with root object or array. Reordering updates JSON immediately.</p>
+                                    <div class="row" style="margin-top:0.45rem;">
+                                        <button id="nodeAddBtn" type="button">Add Node</button>
+                                        <button id="nodeDeleteBtn" type="button" class="warn">Delete Selected Node</button>
+                                        <span id="nodeBuilderHint" class="pill">No node selected</span>
+                                    </div>
+                                    <ul id="nodeBuilderList" class="node-list"></ul>
+                                </div>
                             </div>
 
                             <div id="crmMode" class="hidden" style="margin-top:0.8rem;">
@@ -773,8 +830,16 @@
             crmModel: {
                 rootMode: "array",
                 records: [],
-                selectedIndex: 0
-            }
+                selectedIndex: 0,
+                schema: {
+                    enabled: false,
+                    root: null,
+                    metadata: {},
+                    fields: {},
+                    dataKey: ""
+                }
+            },
+            nodeBuilderSelected: ""
         };
 
         const el = {
@@ -823,6 +888,11 @@
             jsonTextArea: document.getElementById("jsonTextArea"),
             formatJsonBtn: document.getElementById("formatJsonBtn"),
             validateJsonBtn: document.getElementById("validateJsonBtn"),
+            nodeBuilderPanel: document.getElementById("nodeBuilderPanel"),
+            nodeBuilderHint: document.getElementById("nodeBuilderHint"),
+            nodeBuilderList: document.getElementById("nodeBuilderList"),
+            nodeAddBtn: document.getElementById("nodeAddBtn"),
+            nodeDeleteBtn: document.getElementById("nodeDeleteBtn"),
             crmRootMode: document.getElementById("crmRootMode"),
             crmRecordSelect: document.getElementById("crmRecordSelect"),
             crmDragPanel: document.getElementById("crmDragPanel"),
@@ -1320,6 +1390,149 @@
             el.crmMode.classList.toggle("hidden", isRaw);
             el.modeRawBtn.classList.toggle("active", isRaw);
             el.modeCrmBtn.classList.toggle("active", !isRaw);
+            if (isRaw) {
+                renderNodeBuilder();
+            }
+        }
+
+        function deepClone(value) {
+            return JSON.parse(JSON.stringify(value));
+        }
+
+        function inferNodeType(value) {
+            if (Array.isArray(value)) {
+                return "array";
+            }
+            if (value === null) {
+                return "null";
+            }
+            return typeof value;
+        }
+
+        function parseNodeType(typeRaw) {
+            const normalized = String(typeRaw || "").trim().toLowerCase();
+            if (["string", "number", "boolean", "null", "array", "object"].includes(normalized)) {
+                return normalized;
+            }
+            return "string";
+        }
+
+        function getDefaultByType(typeName) {
+            if (typeName === "number") {
+                return 0;
+            }
+            if (typeName === "boolean") {
+                return false;
+            }
+            if (typeName === "null") {
+                return null;
+            }
+            if (typeName === "array") {
+                return [];
+            }
+            if (typeName === "object") {
+                return {};
+            }
+            return "";
+        }
+
+        function getFieldDefinition(fieldName) {
+            const fields = state.crmModel.schema.fields || {};
+            const definition = fields[fieldName];
+            if (definition && typeof definition === "object" && !Array.isArray(definition)) {
+                return definition;
+            }
+            return {};
+        }
+
+        function getFieldType(fieldName, value) {
+            const definition = getFieldDefinition(fieldName);
+            const fromSchema = definition.type || definition.field_type || definition.node_type || definition.value_type;
+            if (fromSchema) {
+                return parseNodeType(fromSchema);
+            }
+
+            const inferred = inferNodeType(value);
+            if (["array", "object", "number", "boolean", "null", "string"].includes(inferred)) {
+                return inferred;
+            }
+            return "string";
+        }
+
+        function resolveSchemaDataKey(rootObject) {
+            const metadata = (rootObject && typeof rootObject === "object" && rootObject.metadata && typeof rootObject.metadata === "object")
+                ? rootObject.metadata
+                : {};
+
+            const explicit = [metadata.crm_data_key, metadata.crmDataKey, metadata.data_key, metadata.dataKey, metadata.records_key, metadata.recordsKey, metadata.content_key, metadata.contentKey]
+                .find(function(candidate) {
+                    return typeof candidate === "string" && Object.prototype.hasOwnProperty.call(rootObject, candidate);
+                });
+            if (explicit) {
+                return explicit;
+            }
+
+            const conventional = ["data", "records", "items", "entries", "content"]
+                .find(function(candidate) {
+                    return Object.prototype.hasOwnProperty.call(rootObject, candidate);
+                });
+            if (conventional) {
+                return conventional;
+            }
+
+            const fallback = Object.keys(rootObject || {}).find(function(key) {
+                return key !== "metadata" && key !== "fields";
+            });
+            return fallback || "data";
+        }
+
+        function buildRecordFromFields(fieldMap) {
+            const record = {};
+            Object.entries(fieldMap || {}).forEach(function(entry) {
+                const key = entry[0];
+                const config = entry[1];
+                if (config && typeof config === "object" && !Array.isArray(config) && Object.prototype.hasOwnProperty.call(config, "default")) {
+                    record[key] = deepClone(config.default);
+                    return;
+                }
+                const typeName = getFieldType(key, "");
+                record[key] = getDefaultByType(typeName);
+            });
+            return record;
+        }
+
+        function parseFieldInputValue(typeName, rawValue) {
+            if (typeName === "number") {
+                const parsed = Number(rawValue);
+                return Number.isFinite(parsed) ? parsed : 0;
+            }
+            if (typeName === "boolean") {
+                return Boolean(rawValue);
+            }
+            if (typeName === "null") {
+                return null;
+            }
+            if (typeName === "array" || typeName === "object") {
+                try {
+                    return JSON.parse(rawValue);
+                } catch (_error) {
+                    return typeName === "array" ? [] : {};
+                }
+            }
+            return String(rawValue ?? "");
+        }
+
+        function getNodeBuilderRoot() {
+            try {
+                return JSON.parse(el.jsonTextArea.value);
+            } catch (_error) {
+                return null;
+            }
+        }
+
+        function updateEditorJson(nextData) {
+            state.currentJsonData = nextData;
+            el.jsonTextArea.value = JSON.stringify(nextData, null, 2);
         }
 
         function hydrateCrmFromCurrentJson() {
@@ -1327,7 +1540,49 @@
                 return;
             }
 
-            if (Array.isArray(state.currentJsonData)) {
+            state.crmModel.schema.enabled = false;
+            state.crmModel.schema.root = null;
+            state.crmModel.schema.metadata = {};
+            state.crmModel.schema.fields = {};
+            state.crmModel.schema.dataKey = "";
+
+            if (
+                state.currentJsonData
+                && typeof state.currentJsonData === "object"
+                && !Array.isArray(state.currentJsonData)
+                && state.currentJsonData.metadata
+                && typeof state.currentJsonData.metadata === "object"
+                && state.currentJsonData.fields
+                && typeof state.currentJsonData.fields === "object"
+                && !Array.isArray(state.currentJsonData.fields)
+            ) {
+                const schemaRoot = deepClone(state.currentJsonData);
+                const dataKey = resolveSchemaDataKey(schemaRoot);
+                const schemaData = schemaRoot[dataKey];
+
+                state.crmModel.schema.enabled = true;
+                state.crmModel.schema.root = schemaRoot;
+                state.crmModel.schema.metadata = deepClone(schemaRoot.metadata || {});
+                state.crmModel.schema.fields = deepClone(schemaRoot.fields || {});
+                state.crmModel.schema.dataKey = dataKey;
+
+                if (Array.isArray(schemaData)) {
+                    state.crmModel.rootMode = "array";
+                    state.crmModel.records = schemaData.map(function(item) {
+                        return (item && typeof item === "object") ? { ...item } : { value: item };
+                    });
+                } else if (schemaData && typeof schemaData === "object") {
+                    state.crmModel.rootMode = "object";
+                    state.crmModel.records = [{ ...schemaData }];
+                } else {
+                    state.crmModel.rootMode = "object";
+                    const fallbackRecord = buildRecordFromFields(state.crmModel.schema.fields);
+                    if (!Object.keys(fallbackRecord).length) {
+                        fallbackRecord.value = schemaData == null ? "" : schemaData;
+                    }
+                    state.crmModel.records = [fallbackRecord];
+                }
+            } else if (Array.isArray(state.currentJsonData)) {
                 state.crmModel.rootMode = "array";
                 state.crmModel.records = state.currentJsonData.map(function(item) {
                     return (item && typeof item === "object") ? { ...item } : { value: item };
@@ -1345,6 +1600,7 @@
             renderCrmRecordSelect();
             renderCrmFields();
             renderCrmDragList();
+            renderNodeBuilder();
         }
 
         function renderCrmRecordSelect() {
@@ -1480,24 +1736,54 @@
 
             const rec = state.crmModel.records[state.crmModel.selectedIndex] || {};
 
-            const keys = Object.keys(rec);
-            if (!keys.length) {
-                rec.value = "";
+            let renderKeys = Object.keys(rec);
+            if (state.crmModel.schema.enabled) {
+                const schemaKeys = Object.keys(state.crmModel.schema.fields || {});
+                if (schemaKeys.length) {
+                    renderKeys = schemaKeys;
+                }
             }
 
-            for (const key of Object.keys(rec)) {
+            if (!renderKeys.length) {
+                rec.value = "";
+                renderKeys = ["value"];
+            }
+
+            for (const key of renderKeys) {
                 const wrapper = document.createElement("div");
                 const label = document.createElement("label");
                 label.textContent = key;
 
-                const input = document.createElement("input");
-                input.type = "text";
-                input.value = String(rec[key] ?? "");
+                const fieldType = getFieldType(key, rec[key]);
+                let input;
+
+                if (fieldType === "boolean") {
+                    input = document.createElement("input");
+                    input.type = "checkbox";
+                    input.checked = Boolean(rec[key]);
+                    input.addEventListener("change", function(event) {
+                        rec[key] = Boolean(event.target.checked);
+                        syncCrmToJsonText();
+                    });
+                } else if (fieldType === "array" || fieldType === "object") {
+                    input = document.createElement("textarea");
+                    input.style.minHeight = "120px";
+                    input.value = JSON.stringify(rec[key] == null ? getDefaultByType(fieldType) : rec[key], null, 2);
+                    input.addEventListener("input", function(event) {
+                        rec[key] = parseFieldInputValue(fieldType, event.target.value);
+                        syncCrmToJsonText();
+                    });
+                } else {
+                    input = document.createElement("input");
+                    input.type = fieldType === "number" ? "number" : "text";
+                    input.value = String(rec[key] == null ? "" : rec[key]);
+                    input.addEventListener("input", function(event) {
+                        rec[key] = parseFieldInputValue(fieldType, event.target.value);
+                        syncCrmToJsonText();
+                    });
+                }
+
                 input.dataset.field = key;
-                input.addEventListener("input", function(event) {
-                    rec[key] = event.target.value;
-                    syncCrmToJsonText();
-                });
 
                 wrapper.appendChild(label);
                 wrapper.appendChild(input);
@@ -1518,6 +1804,15 @@
                     return;
                 }
                 rec[name] = "";
+                if (state.crmModel.schema.enabled) {
+                    if (!state.crmModel.schema.fields || typeof state.crmModel.schema.fields !== "object") {
+                        state.crmModel.schema.fields = {};
+                    }
+                    state.crmModel.schema.fields[name] = {
+                        type: "string",
+                        default: ""
+                    };
+                }
                 renderCrmFields();
                 syncCrmToJsonText();
             });
@@ -1532,8 +1827,204 @@
             } else {
                 output = state.crmModel.records;
             }
-            el.jsonTextArea.value = JSON.stringify(output, null, 2);
-            state.currentJsonData = output;
+
+            if (state.crmModel.schema.enabled) {
+                const schemaRoot = deepClone(state.crmModel.schema.root || {});
+                schemaRoot.metadata = deepClone(state.crmModel.schema.metadata || {});
+                schemaRoot.fields = deepClone(state.crmModel.schema.fields || {});
+                schemaRoot[state.crmModel.schema.dataKey] = output;
+                output = schemaRoot;
+            }
+
+            updateEditorJson(output);
+            renderNodeBuilder();
+        }
+
+        function renderNodeBuilder() {
+            const root = getNodeBuilderRoot();
+            el.nodeBuilderList.innerHTML = "";
+
+            if (!root || typeof root !== "object") {
+                el.nodeBuilderHint.textContent = "Valid JSON object or array required";
+                state.nodeBuilderSelected = "";
+                return;
+            }
+
+            const nodeEntries = Array.isArray(root)
+                ? root.map(function(value, index) {
+                    return {
+                        id: String(index),
+                        label: "[" + index + "]",
+                        value
+                    };
+                })
+                : Object.keys(root).map(function(key) {
+                    return {
+                        id: key,
+                        label: key,
+                        value: root[key]
+                    };
+                });
+
+            if (!nodeEntries.length) {
+                el.nodeBuilderHint.textContent = "No nodes available";
+                state.nodeBuilderSelected = "";
+                return;
+            }
+
+            if (!nodeEntries.some(function(entry) { return entry.id === state.nodeBuilderSelected; })) {
+                state.nodeBuilderSelected = nodeEntries[0].id;
+            }
+
+            el.nodeBuilderHint.textContent = "Selected: " + state.nodeBuilderSelected;
+
+            nodeEntries.forEach(function(entry, index) {
+                const item = document.createElement("li");
+                item.className = "node-item" + (entry.id === state.nodeBuilderSelected ? " active" : "");
+                item.draggable = true;
+
+                const handle = document.createElement("span");
+                handle.className = "handle";
+                handle.textContent = "::";
+
+                const label = document.createElement("span");
+                label.className = "mono";
+                label.textContent = entry.label;
+
+                const typeBadge = document.createElement("span");
+                typeBadge.className = "node-type-pill";
+                typeBadge.textContent = inferNodeType(entry.value);
+
+                item.appendChild(handle);
+                item.appendChild(label);
+                item.appendChild(typeBadge);
+
+                item.addEventListener("click", function() {
+                    state.nodeBuilderSelected = entry.id;
+                    renderNodeBuilder();
+                });
+
+                item.addEventListener("dragstart", function(event) {
+                    event.dataTransfer.effectAllowed = "move";
+                    event.dataTransfer.setData("text/plain", String(index));
+                });
+
+                item.addEventListener("dragover", function(event) {
+                    event.preventDefault();
+                    item.classList.add("drag-over");
+                });
+
+                item.addEventListener("dragleave", function() {
+                    item.classList.remove("drag-over");
+                });
+
+                item.addEventListener("drop", function(event) {
+                    event.preventDefault();
+                    item.classList.remove("drag-over");
+                    const fromIndex = Number(event.dataTransfer.getData("text/plain"));
+                    if (!Number.isInteger(fromIndex) || fromIndex === index || fromIndex < 0) {
+                        return;
+                    }
+
+                    if (Array.isArray(root)) {
+                        const moved = root.splice(fromIndex, 1)[0];
+                        root.splice(index, 0, moved);
+                        state.nodeBuilderSelected = String(index);
+                    } else {
+                        const keys = Object.keys(root);
+                        const movedKey = keys[fromIndex];
+                        const targetKey = keys[index];
+                        if (movedKey == null || targetKey == null) {
+                            return;
+                        }
+
+                        const reorderedKeys = keys.filter(function(key) {
+                            return key !== movedKey;
+                        });
+                        const targetIndex = reorderedKeys.indexOf(targetKey);
+                        reorderedKeys.splice(targetIndex, 0, movedKey);
+
+                        const rebuilt = {};
+                        reorderedKeys.forEach(function(key) {
+                            rebuilt[key] = root[key];
+                        });
+
+                        state.nodeBuilderSelected = movedKey;
+                        updateEditorJson(rebuilt);
+                        hydrateCrmFromCurrentJson();
+                        return;
+                    }
+
+                    updateEditorJson(root);
+                    hydrateCrmFromCurrentJson();
+                });
+
+                item.addEventListener("dragend", function() {
+                    item.classList.remove("drag-over");
+                });
+
+                el.nodeBuilderList.appendChild(item);
+            });
+        }
+
+        function addNodeFromBuilder() {
+            const root = getNodeBuilderRoot();
+            if (!root || typeof root !== "object") {
+                setStatus(el.editorStatus, "Node builder needs valid root object or array JSON.", "bad");
+                return;
+            }
+
+            const requestedType = parseNodeType(prompt("Node type (string, number, boolean, null, array, object)", "string"));
+            const nodeValue = getDefaultByType(requestedType);
+
+            if (Array.isArray(root)) {
+                root.push(nodeValue);
+                state.nodeBuilderSelected = String(root.length - 1);
+            } else {
+                const key = prompt("Node key name");
+                if (!key) {
+                    return;
+                }
+                if (Object.prototype.hasOwnProperty.call(root, key)) {
+                    setStatus(el.editorStatus, "Node key already exists.", "bad");
+                    return;
+                }
+                root[key] = nodeValue;
+                state.nodeBuilderSelected = key;
+            }
+
+            updateEditorJson(root);
+            hydrateCrmFromCurrentJson();
+            setStatus(el.editorStatus, "Node added.", "ok");
+        }
+
+        function deleteSelectedNodeFromBuilder() {
+            const root = getNodeBuilderRoot();
+            if (!root || typeof root !== "object") {
+                setStatus(el.editorStatus, "Node builder needs valid root object or array JSON.", "bad");
+                return;
+            }
+
+            if (!state.nodeBuilderSelected) {
+                setStatus(el.editorStatus, "Choose a node first.", "bad");
+                return;
+            }
+
+            if (Array.isArray(root)) {
+                const index = Number(state.nodeBuilderSelected);
+                if (!Number.isInteger(index) || index < 0 || index >= root.length) {
+                    return;
+                }
+                root.splice(index, 1);
+                state.nodeBuilderSelected = root.length ? String(Math.max(0, index - 1)) : "";
+            } else {
+                delete root[state.nodeBuilderSelected];
+                state.nodeBuilderSelected = Object.keys(root)[0] || "";
+            }
+
+            updateEditorJson(root);
+            hydrateCrmFromCurrentJson();
+            setStatus(el.editorStatus, "Node deleted.", "ok");
         }
 
         function hydrateCrmFromTextarea() {
@@ -1686,6 +2177,7 @@
                         el.jsonTextArea.value = JSON.stringify(parsed, null, 2);
                         state.currentJsonData = parsed;
                         hydrateCrmFromCurrentJson();
+                        renderNodeBuilder();
                         setStatus(el.editorStatus, "Loaded dropped JSON into editor.", "ok");
                     } catch (_error) {
                         setStatus(el.editorStatus, "Dropped file is not valid JSON.", "bad");
@@ -1782,6 +2274,8 @@
                 try {
                     const parsed = JSON.parse(el.jsonTextArea.value);
                     el.jsonTextArea.value = JSON.stringify(parsed, null, 2);
+                    state.currentJsonData = parsed;
+                    renderNodeBuilder();
                     setStatus(el.editorStatus, "JSON formatted.", "ok");
                 } catch (error) {
                     setStatus(el.editorStatus, "JSON parse error: " + error.message, "bad");
@@ -1795,6 +2289,14 @@
                 } catch (error) {
                     setStatus(el.editorStatus, "Invalid JSON: " + error.message, "bad");
                 }
+            });
+
+            el.nodeAddBtn.addEventListener("click", function() {
+                addNodeFromBuilder();
+            });
+
+            el.nodeDeleteBtn.addEventListener("click", function() {
+                deleteSelectedNodeFromBuilder();
             });
 
             el.crmRootMode.addEventListener("change", function() {
@@ -1811,7 +2313,10 @@
             });
 
             el.crmNewRecordBtn.addEventListener("click", function() {
-                state.crmModel.records.push({});
+                const templateRecord = state.crmModel.schema.enabled
+                    ? buildRecordFromFields(state.crmModel.schema.fields || {})
+                    : {};
+                state.crmModel.records.push(templateRecord);
                 state.crmModel.selectedIndex = state.crmModel.records.length - 1;
                 renderCrmRecordSelect();
                 renderCrmFields();
@@ -1867,6 +2372,7 @@
             route();
             switchEditorMode("raw");
             setEditorStep(0);
+            renderNodeBuilder();
             if (state.authSession && isStoredSessionExpired()) {
                 signOut("Session timed out. Please login again.");
                 return;
