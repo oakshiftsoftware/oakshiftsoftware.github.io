@@ -370,10 +370,7 @@
         }
 
         .node-item {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 0.5rem;
-            align-items: center;
+            display: block;
             border: 1px solid var(--line);
             border-radius: 8px;
             padding: 0.45rem 0.55rem;
@@ -410,7 +407,7 @@
 
         .node-row {
             display: grid;
-            grid-template-columns: auto auto minmax(120px, 1fr) auto auto;
+            grid-template-columns: auto minmax(90px, auto) minmax(120px, 1fr) auto auto auto;
             gap: 0.45rem;
             align-items: center;
             width: 100%;
@@ -442,6 +439,33 @@
             height: 1.45rem;
             padding: 0;
             font-size: 0.74rem;
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(9, 19, 31, 0.55);
+            display: grid;
+            place-items: center;
+            z-index: 60;
+            padding: 1rem;
+        }
+
+        .modal-card {
+            width: min(100%, 520px);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: var(--shadow);
+            padding: 0.9rem;
+        }
+
+        .modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+            margin-bottom: 0.6rem;
         }
 
         .wizard-shell {
@@ -771,6 +795,34 @@
         <footer>
             <p><span id="yearNow"></span> <span id="footerTitle">GitHub WebEditor</span></p>
         </footer>
+
+        <div id="valueEditModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="valueEditTitle">
+            <div class="modal-card">
+                <div class="modal-head">
+                    <h3 id="valueEditTitle">Edit Value</h3>
+                    <button id="valueEditCloseBtn" type="button" class="warn">Close</button>
+                </div>
+                <div class="stack">
+                    <div id="valueEditPath" class="pill mono">Path</div>
+                    <div id="valueEditInputWrap">
+                        <label for="valueEditInput">Value</label>
+                        <input id="valueEditInput" type="text" class="mono">
+                    </div>
+                    <div id="valueEditBooleanWrap" class="hidden">
+                        <label for="valueEditBooleanSelect">Boolean value</label>
+                        <select id="valueEditBooleanSelect">
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
+                    <p id="valueEditNullHint" class="hidden" style="color: var(--muted); margin: 0;">Use "null" or leave blank to keep null. Any other value is stored as text.</p>
+                    <div class="row">
+                        <button id="valueEditSaveBtn" class="primary" type="button">Apply</button>
+                        <button id="valueEditCancelBtn" type="button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -883,12 +935,19 @@
                     root: null,
                     metadata: {},
                     fields: {},
-                    dataKey: ""
+                    dataKey: "",
+                    fieldCatalog: {},
+                    activeFieldGroup: "",
+                    activeFields: {}
                 }
             },
             nodeBuilderSelected: "",
             nodeTreeExpanded: {
                 root: true
+            },
+            valueEdit: {
+                pathId: "",
+                type: "string"
             }
         };
 
@@ -955,7 +1014,18 @@
             saveJsonBtn: document.getElementById("saveJsonBtn"),
             saveConfigBtn: document.getElementById("saveConfigBtn"),
             viewLogBtn: document.getElementById("viewLogBtn"),
-            editorStatus: document.getElementById("editorStatus")
+            editorStatus: document.getElementById("editorStatus"),
+            valueEditModal: document.getElementById("valueEditModal"),
+            valueEditPath: document.getElementById("valueEditPath"),
+            valueEditTitle: document.getElementById("valueEditTitle"),
+            valueEditCloseBtn: document.getElementById("valueEditCloseBtn"),
+            valueEditInputWrap: document.getElementById("valueEditInputWrap"),
+            valueEditInput: document.getElementById("valueEditInput"),
+            valueEditBooleanWrap: document.getElementById("valueEditBooleanWrap"),
+            valueEditBooleanSelect: document.getElementById("valueEditBooleanSelect"),
+            valueEditNullHint: document.getElementById("valueEditNullHint"),
+            valueEditSaveBtn: document.getElementById("valueEditSaveBtn"),
+            valueEditCancelBtn: document.getElementById("valueEditCancelBtn")
         };
 
         function applyBranding() {
@@ -1469,6 +1539,12 @@
 
         function parseNodeType(typeRaw) {
             const normalized = String(typeRaw || "").trim().toLowerCase();
+            if (normalized.startsWith("array")) {
+                return "array";
+            }
+            if (normalized.startsWith("object")) {
+                return "object";
+            }
             if (["string", "number", "boolean", "null", "array", "object"].includes(normalized)) {
                 return normalized;
             }
@@ -1495,10 +1571,15 @@
         }
 
         function getFieldDefinition(fieldName) {
-            const fields = state.crmModel.schema.fields || {};
+            const fields = state.crmModel.schema.activeFields || state.crmModel.schema.fields || {};
             const definition = fields[fieldName];
+            if (typeof definition === "string") {
+                return {
+                    type: definition
+                };
+            }
             if (definition && typeof definition === "object" && !Array.isArray(definition)) {
-                return definition;
+                return { ...definition };
             }
             return {};
         }
@@ -1538,10 +1619,83 @@
                 return conventional;
             }
 
+            const preferredArrayOrObject = Object.keys(rootObject || {}).find(function(key) {
+                if (key === "metadata" || key === "fields") {
+                    return false;
+                }
+                const value = rootObject[key];
+                return Array.isArray(value) || (value && typeof value === "object");
+            });
+            if (preferredArrayOrObject) {
+                return preferredArrayOrObject;
+            }
+
             const fallback = Object.keys(rootObject || {}).find(function(key) {
                 return key !== "metadata" && key !== "fields";
             });
             return fallback || "data";
+        }
+
+        function isFieldMapCandidate(value) {
+            if (!value || typeof value !== "object" || Array.isArray(value)) {
+                return false;
+            }
+            const keys = Object.keys(value);
+            if (!keys.length) {
+                return false;
+            }
+
+            return keys.every(function(key) {
+                const def = value[key];
+                return typeof def === "string"
+                    || (def && typeof def === "object" && !Array.isArray(def));
+            });
+        }
+
+        function resolveActiveFieldGroup(fieldCatalog, dataKey) {
+            if (!fieldCatalog || typeof fieldCatalog !== "object" || Array.isArray(fieldCatalog)) {
+                return {
+                    groupName: "",
+                    activeFields: {}
+                };
+            }
+
+            if (isFieldMapCandidate(fieldCatalog)) {
+                return {
+                    groupName: "",
+                    activeFields: fieldCatalog
+                };
+            }
+
+            if (fieldCatalog[dataKey] && isFieldMapCandidate(fieldCatalog[dataKey])) {
+                return {
+                    groupName: dataKey,
+                    activeFields: fieldCatalog[dataKey]
+                };
+            }
+
+            const singular = String(dataKey || "").replace(/s$/i, "");
+            if (singular && fieldCatalog[singular] && isFieldMapCandidate(fieldCatalog[singular])) {
+                return {
+                    groupName: singular,
+                    activeFields: fieldCatalog[singular]
+                };
+            }
+
+            const firstKey = Object.keys(fieldCatalog).find(function(key) {
+                return isFieldMapCandidate(fieldCatalog[key]);
+            });
+            if (firstKey) {
+                return {
+                    groupName: firstKey,
+                    activeFields: fieldCatalog[firstKey]
+                };
+            }
+
+            return {
+                groupName: "",
+                activeFields: {}
+            };
         }
 
         function buildRecordFromFields(fieldMap) {
@@ -1753,9 +1907,9 @@
             return true;
         }
 
-        function setPrimitiveValue(root, pathArray, nextValueRaw) {
+        function setPrimitiveValue(root, pathArray, nextValueRaw, forcedType) {
             const location = getAtPath(root, pathArray);
-            const currentType = inferEditableType(location.value);
+            const currentType = forcedType || inferEditableType(location.value);
             let nextValue = nextValueRaw;
 
             if (currentType === "number") {
@@ -1764,7 +1918,8 @@
             } else if (currentType === "boolean") {
                 nextValue = String(nextValueRaw) === "true";
             } else if (currentType === "null") {
-                nextValue = null;
+                const normalized = String(nextValueRaw == null ? "" : nextValueRaw).trim().toLowerCase();
+                nextValue = (!normalized || normalized === "null") ? null : String(nextValueRaw);
             } else {
                 nextValue = String(nextValueRaw);
             }
@@ -1776,6 +1931,63 @@
 
             location.parent[location.key] = nextValue;
             updateEditorJson(root);
+        }
+
+        function closeValueEditModal() {
+            el.valueEditModal.classList.add("hidden");
+            state.valueEdit.pathId = "";
+        }
+
+        function openValueEditModal(pathArray, valueType, value, label) {
+            const pathLabel = pathArray.map(function(part) {
+                return typeof part === "number" ? "[" + part + "]" : String(part);
+            }).join(".");
+
+            state.valueEdit.pathId = pathToId(pathArray);
+            state.valueEdit.type = valueType;
+
+            el.valueEditTitle.textContent = "Edit " + label;
+            el.valueEditPath.textContent = pathLabel || "root";
+
+            el.valueEditInputWrap.classList.toggle("hidden", valueType === "boolean");
+            el.valueEditBooleanWrap.classList.toggle("hidden", valueType !== "boolean");
+            el.valueEditNullHint.classList.toggle("hidden", valueType !== "null");
+
+            if (valueType === "boolean") {
+                el.valueEditBooleanSelect.value = String(Boolean(value));
+            } else {
+                el.valueEditInput.type = valueType === "number" ? "number" : "text";
+                el.valueEditInput.value = value == null ? "" : String(value);
+            }
+
+            el.valueEditModal.classList.remove("hidden");
+            if (valueType === "boolean") {
+                el.valueEditBooleanSelect.focus();
+            } else {
+                el.valueEditInput.focus();
+            }
+        }
+
+        function applyValueEditModal() {
+            if (!state.valueEdit.pathId) {
+                return;
+            }
+
+            const root = getNodeBuilderRoot();
+            if (!root || typeof root !== "object") {
+                closeValueEditModal();
+                return;
+            }
+
+            const pathArray = idToPath(state.valueEdit.pathId);
+            const valueType = state.valueEdit.type;
+            const nextValueRaw = valueType === "boolean"
+                ? el.valueEditBooleanSelect.value
+                : el.valueEditInput.value;
+
+            setPrimitiveValue(root, pathArray, nextValueRaw, valueType);
+            hydrateCrmFromCurrentJson();
+            closeValueEditModal();
         }
 
         function addNodeToContainer(root, containerPath) {
@@ -1839,7 +2051,6 @@
 
         function renderTreeEntry(entry, parentPath, listEl, root) {
             const pathId = pathToId(entry.path);
-            const typeName = inferNodeType(entry.value);
             const expandable = isExpandable(entry.value);
             const isSelected = state.nodeBuilderSelected === pathId;
 
@@ -1873,34 +2084,20 @@
                 valueCell.className = "mono";
             } else {
                 const primitiveType = inferEditableType(entry.value);
-                if (primitiveType === "boolean") {
-                    const select = document.createElement("select");
-                    select.className = "node-value-input";
-                    const trueOption = document.createElement("option");
-                    trueOption.value = "true";
-                    trueOption.textContent = "true";
-                    const falseOption = document.createElement("option");
-                    falseOption.value = "false";
-                    falseOption.textContent = "false";
-                    select.appendChild(trueOption);
-                    select.appendChild(falseOption);
-                    select.value = String(Boolean(entry.value));
-                    select.addEventListener("change", function(event) {
-                        setPrimitiveValue(root, entry.path, event.target.value);
-                        hydrateCrmFromCurrentJson();
-                    });
-                    valueCell.appendChild(select);
-                } else {
-                    const input = document.createElement("input");
-                    input.type = primitiveType === "number" ? "number" : "text";
-                    input.className = "node-value-input";
-                    input.value = entry.value == null ? "null" : String(entry.value);
-                    input.addEventListener("input", function(event) {
-                        setPrimitiveValue(root, entry.path, event.target.value);
-                        hydrateCrmFromCurrentJson();
-                    });
-                    valueCell.appendChild(input);
-                }
+                const display = document.createElement("span");
+                display.className = "mono";
+                display.textContent = entry.value == null ? "null" : String(entry.value);
+                valueCell.appendChild(display);
+
+                const editBtn = document.createElement("button");
+                editBtn.type = "button";
+                editBtn.className = "node-inline-btn";
+                editBtn.textContent = "Edit";
+                editBtn.addEventListener("click", function(event) {
+                    event.stopPropagation();
+                    openValueEditModal(entry.path, primitiveType, entry.value, entry.label);
+                });
+                valueCell.appendChild(editBtn);
             }
 
             const addBtn = document.createElement("button");
@@ -2009,6 +2206,9 @@
             state.crmModel.schema.metadata = {};
             state.crmModel.schema.fields = {};
             state.crmModel.schema.dataKey = "";
+            state.crmModel.schema.fieldCatalog = {};
+            state.crmModel.schema.activeFieldGroup = "";
+            state.crmModel.schema.activeFields = {};
 
             if (
                 state.currentJsonData
@@ -2016,19 +2216,27 @@
                 && !Array.isArray(state.currentJsonData)
                 && state.currentJsonData.metadata
                 && typeof state.currentJsonData.metadata === "object"
-                && state.currentJsonData.fields
-                && typeof state.currentJsonData.fields === "object"
-                && !Array.isArray(state.currentJsonData.fields)
             ) {
                 const schemaRoot = deepClone(state.currentJsonData);
                 const dataKey = resolveSchemaDataKey(schemaRoot);
                 const schemaData = schemaRoot[dataKey];
+                const metadataFields = (schemaRoot.metadata && schemaRoot.metadata.fields && typeof schemaRoot.metadata.fields === "object" && !Array.isArray(schemaRoot.metadata.fields))
+                    ? deepClone(schemaRoot.metadata.fields)
+                    : {};
+                const rootFields = (schemaRoot.fields && typeof schemaRoot.fields === "object" && !Array.isArray(schemaRoot.fields))
+                    ? deepClone(schemaRoot.fields)
+                    : {};
+                const fieldCatalog = Object.keys(rootFields).length ? rootFields : metadataFields;
+                const activeFieldSelection = resolveActiveFieldGroup(fieldCatalog, dataKey);
 
                 state.crmModel.schema.enabled = true;
                 state.crmModel.schema.root = schemaRoot;
                 state.crmModel.schema.metadata = deepClone(schemaRoot.metadata || {});
-                state.crmModel.schema.fields = deepClone(schemaRoot.fields || {});
+                state.crmModel.schema.fields = deepClone(rootFields);
                 state.crmModel.schema.dataKey = dataKey;
+                state.crmModel.schema.fieldCatalog = fieldCatalog;
+                state.crmModel.schema.activeFieldGroup = activeFieldSelection.groupName;
+                state.crmModel.schema.activeFields = deepClone(activeFieldSelection.activeFields || {});
 
                 if (Array.isArray(schemaData)) {
                     state.crmModel.rootMode = "array";
@@ -2040,7 +2248,7 @@
                     state.crmModel.records = [{ ...schemaData }];
                 } else {
                     state.crmModel.rootMode = "object";
-                    const fallbackRecord = buildRecordFromFields(state.crmModel.schema.fields);
+                    const fallbackRecord = buildRecordFromFields(state.crmModel.schema.activeFields || {});
                     if (!Object.keys(fallbackRecord).length) {
                         fallbackRecord.value = schemaData == null ? "" : schemaData;
                     }
@@ -2203,7 +2411,7 @@
 
             let renderKeys = Object.keys(rec);
             if (state.crmModel.schema.enabled) {
-                const schemaKeys = Object.keys(state.crmModel.schema.fields || {});
+                const schemaKeys = Object.keys(state.crmModel.schema.activeFields || {});
                 if (schemaKeys.length) {
                     schemaKeys.forEach(function(schemaKey) {
                         if (!Object.prototype.hasOwnProperty.call(rec, schemaKey)) {
@@ -2276,13 +2484,29 @@
                 }
                 rec[name] = "";
                 if (state.crmModel.schema.enabled) {
-                    if (!state.crmModel.schema.fields || typeof state.crmModel.schema.fields !== "object") {
-                        state.crmModel.schema.fields = {};
+                    if (!state.crmModel.schema.activeFields || typeof state.crmModel.schema.activeFields !== "object") {
+                        state.crmModel.schema.activeFields = {};
                     }
-                    state.crmModel.schema.fields[name] = {
+                    state.crmModel.schema.activeFields[name] = {
                         type: "string",
                         default: ""
                     };
+
+                    if (state.crmModel.schema.activeFieldGroup) {
+                        if (!state.crmModel.schema.fieldCatalog || typeof state.crmModel.schema.fieldCatalog !== "object") {
+                            state.crmModel.schema.fieldCatalog = {};
+                        }
+                        if (!state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] || typeof state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] !== "object") {
+                            state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] = {};
+                        }
+                        state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup][name] = {
+                            type: "string",
+                            default: ""
+                        };
+                        state.crmModel.schema.metadata.fields = deepClone(state.crmModel.schema.fieldCatalog);
+                    } else {
+                        state.crmModel.schema.metadata.fields = deepClone(state.crmModel.schema.activeFields);
+                    }
                 }
                 renderCrmFields();
                 syncCrmToJsonText();
@@ -2302,7 +2526,12 @@
             if (state.crmModel.schema.enabled) {
                 const schemaRoot = deepClone(state.crmModel.schema.root || {});
                 schemaRoot.metadata = deepClone(state.crmModel.schema.metadata || {});
-                schemaRoot.fields = deepClone(state.crmModel.schema.fields || {});
+                const nextRootFields = deepClone(state.crmModel.schema.fields || {});
+                if (Object.keys(nextRootFields).length || Object.prototype.hasOwnProperty.call(schemaRoot, "fields")) {
+                    schemaRoot.fields = nextRootFields;
+                } else {
+                    delete schemaRoot.fields;
+                }
                 schemaRoot[state.crmModel.schema.dataKey] = output;
                 output = schemaRoot;
             }
@@ -2649,6 +2878,30 @@
                 addNodeFromBuilder();
             });
 
+            el.valueEditSaveBtn.addEventListener("click", function() {
+                applyValueEditModal();
+            });
+
+            el.valueEditCancelBtn.addEventListener("click", function() {
+                closeValueEditModal();
+            });
+
+            el.valueEditCloseBtn.addEventListener("click", function() {
+                closeValueEditModal();
+            });
+
+            el.valueEditModal.addEventListener("click", function(event) {
+                if (event.target === el.valueEditModal) {
+                    closeValueEditModal();
+                }
+            });
+
+            el.valueEditInput.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    applyValueEditModal();
+                }
+            });
+
             el.crmRootMode.addEventListener("change", function() {
                 state.crmModel.rootMode = el.crmRootMode.value;
                 syncCrmToJsonText();
@@ -2664,7 +2917,7 @@
 
             el.crmNewRecordBtn.addEventListener("click", function() {
                 const templateRecord = state.crmModel.schema.enabled
-                    ? buildRecordFromFields(state.crmModel.schema.fields || {})
+                    ? buildRecordFromFields(state.crmModel.schema.activeFields || {})
                     : {};
                 state.crmModel.records.push(templateRecord);
                 state.crmModel.selectedIndex = state.crmModel.records.length - 1;
