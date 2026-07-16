@@ -400,6 +400,50 @@
             background: #fff;
         }
 
+        .node-children {
+            list-style: none;
+            margin: 0.35rem 0 0.2rem 1.25rem;
+            padding: 0;
+            display: grid;
+            gap: 0.35rem;
+        }
+
+        .node-row {
+            display: grid;
+            grid-template-columns: auto auto minmax(120px, 1fr) auto auto;
+            gap: 0.45rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .node-key {
+            font-family: var(--mono);
+            font-size: 0.82rem;
+        }
+
+        .node-value-input {
+            width: 100%;
+            min-width: 120px;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            padding: 0.32rem 0.45rem;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+        }
+
+        .node-inline-btn {
+            padding: 0.28rem 0.42rem;
+            font-size: 0.72rem;
+            border-radius: 7px;
+        }
+
+        .node-toggle {
+            width: 1.65rem;
+            height: 1.45rem;
+            padding: 0;
+            font-size: 0.74rem;
+        }
+
         .wizard-shell {
             overflow: hidden;
             border-radius: var(--radius);
@@ -622,29 +666,23 @@
                             <h2>Stage 4: Edit and Commit</h2>
                             <div class="row">
                                 <div class="mode-switch" role="tablist" aria-label="editor mode switch">
-                                    <button id="modeRawBtn" class="active">Drag & Drop JSON</button>
+                                    <button id="modeDndBtn" class="active">Drag & Drop</button>
                                     <button id="modeCrmBtn">CRM Entry</button>
+                                    <button id="modeTextBtn">Text</button>
                                 </div>
                                 <span class="pill mono" id="currentFilePill">No file loaded</span>
                             </div>
 
-                            <div id="rawMode" style="margin-top:0.8rem;">
+                            <div id="dndMode" style="margin-top:0.8rem;">
                                 <div class="drop-zone" id="dropZone">Drop a .json file here to load it into the editor</div>
-                                <label for="jsonTextArea" style="margin-top:0.8rem;">JSON content</label>
-                                <textarea id="jsonTextArea" spellcheck="false"></textarea>
-                                <div class="row" style="margin-top:0.7rem;">
-                                    <button id="formatJsonBtn">Format JSON</button>
-                                    <button id="validateJsonBtn">Validate JSON</button>
-                                </div>
                                 <div class="node-builder" id="nodeBuilderPanel">
-                                    <label>Top-level JSON node builder (drag and drop reorder)</label>
-                                    <p style="margin-top:0.2rem; color: var(--muted);">Works with root object or array. Reordering updates JSON immediately.</p>
+                                    <label>JSON object node editor (drag to reorder siblings)</label>
+                                    <p style="margin-top:0.2rem; color: var(--muted);">Expands objects and arrays recursively. Root key metadata is hidden here by design.</p>
                                     <div class="row" style="margin-top:0.45rem;">
-                                        <button id="nodeAddBtn" type="button">Add Node</button>
-                                        <button id="nodeDeleteBtn" type="button" class="warn">Delete Selected Node</button>
+                                        <button id="nodeAddBtn" type="button">Add Root Node</button>
                                         <span id="nodeBuilderHint" class="pill">No node selected</span>
                                     </div>
-                                    <ul id="nodeBuilderList" class="node-list"></ul>
+                                    <ul id="nodeTreeList" class="node-list"></ul>
                                 </div>
                             </div>
 
@@ -673,6 +711,15 @@
                                     <ul id="crmDragList" class="crm-drag-list"></ul>
                                 </div>
                                 <div id="crmFields" class="field-grid" style="margin-top:0.8rem;"></div>
+                            </div>
+
+                            <div id="textMode" class="hidden" style="margin-top:0.8rem;">
+                                <label for="jsonTextArea" style="margin-top:0.8rem;">JSON content</label>
+                                <textarea id="jsonTextArea" spellcheck="false"></textarea>
+                                <div class="row" style="margin-top:0.7rem;">
+                                    <button id="formatJsonBtn">Format JSON</button>
+                                    <button id="validateJsonBtn">Validate JSON</button>
+                                </div>
                             </div>
 
                             <div style="margin-top:0.85rem;" class="stack">
@@ -839,7 +886,10 @@
                     dataKey: ""
                 }
             },
-            nodeBuilderSelected: ""
+            nodeBuilderSelected: "",
+            nodeTreeExpanded: {
+                root: true
+            }
         };
 
         const el = {
@@ -879,20 +929,21 @@
             jsonFileSelect: document.getElementById("jsonFileSelect"),
             loadJsonBtn: document.getElementById("loadJsonBtn"),
             fileStatus: document.getElementById("fileStatus"),
-            modeRawBtn: document.getElementById("modeRawBtn"),
+            modeDndBtn: document.getElementById("modeDndBtn"),
             modeCrmBtn: document.getElementById("modeCrmBtn"),
+            modeTextBtn: document.getElementById("modeTextBtn"),
             currentFilePill: document.getElementById("currentFilePill"),
-            rawMode: document.getElementById("rawMode"),
+            dndMode: document.getElementById("dndMode"),
             crmMode: document.getElementById("crmMode"),
+            textMode: document.getElementById("textMode"),
             dropZone: document.getElementById("dropZone"),
             jsonTextArea: document.getElementById("jsonTextArea"),
             formatJsonBtn: document.getElementById("formatJsonBtn"),
             validateJsonBtn: document.getElementById("validateJsonBtn"),
             nodeBuilderPanel: document.getElementById("nodeBuilderPanel"),
             nodeBuilderHint: document.getElementById("nodeBuilderHint"),
-            nodeBuilderList: document.getElementById("nodeBuilderList"),
+            nodeTreeList: document.getElementById("nodeTreeList"),
             nodeAddBtn: document.getElementById("nodeAddBtn"),
-            nodeDeleteBtn: document.getElementById("nodeDeleteBtn"),
             crmRootMode: document.getElementById("crmRootMode"),
             crmRecordSelect: document.getElementById("crmRecordSelect"),
             crmDragPanel: document.getElementById("crmDragPanel"),
@@ -1385,12 +1436,19 @@
         }
 
         function switchEditorMode(mode) {
-            const isRaw = mode === "raw";
-            el.rawMode.classList.toggle("hidden", !isRaw);
-            el.crmMode.classList.toggle("hidden", isRaw);
-            el.modeRawBtn.classList.toggle("active", isRaw);
-            el.modeCrmBtn.classList.toggle("active", !isRaw);
-            if (isRaw) {
+            const isDnd = mode === "dnd";
+            const isCrm = mode === "crm";
+            const isText = mode === "text";
+
+            el.dndMode.classList.toggle("hidden", !isDnd);
+            el.crmMode.classList.toggle("hidden", !isCrm);
+            el.textMode.classList.toggle("hidden", !isText);
+
+            el.modeDndBtn.classList.toggle("active", isDnd);
+            el.modeCrmBtn.classList.toggle("active", isCrm);
+            el.modeTextBtn.classList.toggle("active", isText);
+
+            if (isDnd) {
                 renderNodeBuilder();
             }
         }
@@ -1535,6 +1593,412 @@
             el.jsonTextArea.value = JSON.stringify(nextData, null, 2);
         }
 
+        function pathToId(pathArray) {
+            return JSON.stringify(pathArray || []);
+        }
+
+        function idToPath(pathId) {
+            try {
+                const parsed = JSON.parse(pathId);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (_error) {
+                return [];
+            }
+        }
+
+        function isExpandable(value) {
+            return value && typeof value === "object";
+        }
+
+        function inferEditableType(value) {
+            if (value === null) {
+                return "null";
+            }
+            if (Array.isArray(value)) {
+                return "array";
+            }
+            return typeof value;
+        }
+
+        function getAtPath(root, pathArray) {
+            if (!Array.isArray(pathArray) || !pathArray.length) {
+                return {
+                    parent: null,
+                    key: null,
+                    value: root
+                };
+            }
+
+            let parent = null;
+            let cursor = root;
+            let key = null;
+            for (const segment of pathArray) {
+                parent = cursor;
+                key = segment;
+                if (parent == null) {
+                    return { parent: null, key: null, value: undefined };
+                }
+                cursor = parent[segment];
+            }
+
+            return {
+                parent,
+                key,
+                value: cursor
+            };
+        }
+
+        function getRootEntries(root) {
+            if (Array.isArray(root)) {
+                return root.map(function(value, index) {
+                    return {
+                        key: index,
+                        label: "[" + index + "]",
+                        value,
+                        path: [index]
+                    };
+                });
+            }
+
+            if (!root || typeof root !== "object") {
+                return [];
+            }
+
+            return Object.keys(root)
+                .filter(function(key) {
+                    return key !== "metadata";
+                })
+                .map(function(key) {
+                    return {
+                        key,
+                        label: key,
+                        value: root[key],
+                        path: [key]
+                    };
+                });
+        }
+
+        function getChildEntries(value, parentPath) {
+            if (Array.isArray(value)) {
+                return value.map(function(item, index) {
+                    return {
+                        key: index,
+                        label: "[" + index + "]",
+                        value: item,
+                        path: parentPath.concat([index])
+                    };
+                });
+            }
+
+            if (!value || typeof value !== "object") {
+                return [];
+            }
+
+            return Object.keys(value).map(function(key) {
+                return {
+                    key,
+                    label: key,
+                    value: value[key],
+                    path: parentPath.concat([key])
+                };
+            });
+        }
+
+        function reorderInParent(root, parentPath, fromKey, toKey) {
+            const location = getAtPath(root, parentPath);
+            const container = location.value;
+            if (!container || typeof container !== "object") {
+                return false;
+            }
+
+            if (Array.isArray(container)) {
+                const fromIndex = Number(fromKey);
+                const toIndex = Number(toKey);
+                if (!Number.isInteger(fromIndex) || !Number.isInteger(toIndex) || fromIndex < 0 || toIndex < 0 || fromIndex >= container.length || toIndex >= container.length || fromIndex === toIndex) {
+                    return false;
+                }
+                const moved = container.splice(fromIndex, 1)[0];
+                container.splice(toIndex, 0, moved);
+                return true;
+            }
+
+            const keys = Object.keys(container);
+            const fromIdx = keys.indexOf(String(fromKey));
+            const toIdx = keys.indexOf(String(toKey));
+            if (fromIdx < 0 || toIdx < 0 || fromIdx === toIdx) {
+                return false;
+            }
+
+            const movedKey = keys[fromIdx];
+            keys.splice(fromIdx, 1);
+            keys.splice(toIdx, 0, movedKey);
+
+            const rebuilt = {};
+            keys.forEach(function(key) {
+                rebuilt[key] = container[key];
+            });
+
+            if (!parentPath.length) {
+                Object.keys(container).forEach(function(key) {
+                    delete container[key];
+                });
+                Object.keys(rebuilt).forEach(function(key) {
+                    container[key] = rebuilt[key];
+                });
+                return true;
+            }
+
+            const parentContainer = getAtPath(root, parentPath.slice(0, -1)).value;
+            parentContainer[parentPath[parentPath.length - 1]] = rebuilt;
+            return true;
+        }
+
+        function setPrimitiveValue(root, pathArray, nextValueRaw) {
+            const location = getAtPath(root, pathArray);
+            const currentType = inferEditableType(location.value);
+            let nextValue = nextValueRaw;
+
+            if (currentType === "number") {
+                const parsed = Number(nextValueRaw);
+                nextValue = Number.isFinite(parsed) ? parsed : 0;
+            } else if (currentType === "boolean") {
+                nextValue = String(nextValueRaw) === "true";
+            } else if (currentType === "null") {
+                nextValue = null;
+            } else {
+                nextValue = String(nextValueRaw);
+            }
+
+            if (location.parent === null) {
+                updateEditorJson(nextValue);
+                return;
+            }
+
+            location.parent[location.key] = nextValue;
+            updateEditorJson(root);
+        }
+
+        function addNodeToContainer(root, containerPath) {
+            const location = getAtPath(root, containerPath);
+            const container = location.value;
+            if (!container || typeof container !== "object") {
+                setStatus(el.editorStatus, "Selected node is not an object or array.", "bad");
+                return;
+            }
+
+            const requestedType = parseNodeType(prompt("Node type (string, number, boolean, null, array, object)", "string"));
+            const nodeValue = getDefaultByType(requestedType);
+
+            if (Array.isArray(container)) {
+                container.push(nodeValue);
+            } else {
+                const key = prompt("Node key name");
+                if (!key) {
+                    return;
+                }
+                if (Object.prototype.hasOwnProperty.call(container, key)) {
+                    setStatus(el.editorStatus, "Node key already exists.", "bad");
+                    return;
+                }
+                container[key] = nodeValue;
+            }
+
+            state.nodeTreeExpanded[pathToId(containerPath)] = true;
+            updateEditorJson(root);
+            hydrateCrmFromCurrentJson();
+            setStatus(el.editorStatus, "Node added.", "ok");
+        }
+
+        function deleteNodeAtPath(root, pathArray) {
+            if (!Array.isArray(pathArray) || !pathArray.length) {
+                setStatus(el.editorStatus, "Cannot delete JSON root.", "bad");
+                return;
+            }
+
+            if (pathArray.length === 1 && pathArray[0] === "metadata") {
+                setStatus(el.editorStatus, "Metadata cannot be deleted in Drag & Drop view.", "bad");
+                return;
+            }
+
+            const location = getAtPath(root, pathArray);
+            if (location.parent == null) {
+                return;
+            }
+
+            if (Array.isArray(location.parent)) {
+                location.parent.splice(Number(location.key), 1);
+            } else {
+                delete location.parent[location.key];
+            }
+
+            state.nodeBuilderSelected = "";
+            updateEditorJson(root);
+            hydrateCrmFromCurrentJson();
+            setStatus(el.editorStatus, "Node deleted.", "ok");
+        }
+
+        function renderTreeEntry(entry, parentPath, listEl, root) {
+            const pathId = pathToId(entry.path);
+            const typeName = inferNodeType(entry.value);
+            const expandable = isExpandable(entry.value);
+            const isSelected = state.nodeBuilderSelected === pathId;
+
+            const item = document.createElement("li");
+            item.className = "node-item" + (isSelected ? " active" : "");
+            item.draggable = true;
+
+            const row = document.createElement("div");
+            row.className = "node-row";
+
+            const toggleBtn = document.createElement("button");
+            toggleBtn.type = "button";
+            toggleBtn.className = "node-inline-btn node-toggle";
+            toggleBtn.textContent = expandable ? (state.nodeTreeExpanded[pathId] ? "-" : "+") : "";
+            toggleBtn.disabled = !expandable;
+            toggleBtn.addEventListener("click", function(event) {
+                event.stopPropagation();
+                state.nodeTreeExpanded[pathId] = !state.nodeTreeExpanded[pathId];
+                renderNodeBuilder();
+            });
+
+            const keyLabel = document.createElement("span");
+            keyLabel.className = "node-key";
+            keyLabel.textContent = entry.label;
+
+            const valueCell = document.createElement("div");
+            if (expandable) {
+                valueCell.textContent = Array.isArray(entry.value)
+                    ? "Array(" + entry.value.length + ")"
+                    : "Object(" + Object.keys(entry.value).length + ")";
+                valueCell.className = "mono";
+            } else {
+                const primitiveType = inferEditableType(entry.value);
+                if (primitiveType === "boolean") {
+                    const select = document.createElement("select");
+                    select.className = "node-value-input";
+                    const trueOption = document.createElement("option");
+                    trueOption.value = "true";
+                    trueOption.textContent = "true";
+                    const falseOption = document.createElement("option");
+                    falseOption.value = "false";
+                    falseOption.textContent = "false";
+                    select.appendChild(trueOption);
+                    select.appendChild(falseOption);
+                    select.value = String(Boolean(entry.value));
+                    select.addEventListener("change", function(event) {
+                        setPrimitiveValue(root, entry.path, event.target.value);
+                        hydrateCrmFromCurrentJson();
+                    });
+                    valueCell.appendChild(select);
+                } else {
+                    const input = document.createElement("input");
+                    input.type = primitiveType === "number" ? "number" : "text";
+                    input.className = "node-value-input";
+                    input.value = entry.value == null ? "null" : String(entry.value);
+                    input.addEventListener("input", function(event) {
+                        setPrimitiveValue(root, entry.path, event.target.value);
+                        hydrateCrmFromCurrentJson();
+                    });
+                    valueCell.appendChild(input);
+                }
+            }
+
+            const addBtn = document.createElement("button");
+            addBtn.type = "button";
+            addBtn.className = "node-inline-btn";
+            addBtn.textContent = "+";
+            addBtn.disabled = !expandable;
+            addBtn.title = "Add child node";
+            addBtn.addEventListener("click", function(event) {
+                event.stopPropagation();
+                addNodeToContainer(root, entry.path);
+            });
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.type = "button";
+            deleteBtn.className = "node-inline-btn warn";
+            deleteBtn.textContent = "x";
+            deleteBtn.title = "Delete node";
+            deleteBtn.addEventListener("click", function(event) {
+                event.stopPropagation();
+                deleteNodeAtPath(root, entry.path);
+            });
+
+            row.appendChild(toggleBtn);
+            row.appendChild(keyLabel);
+            row.appendChild(valueCell);
+            row.appendChild(addBtn);
+            row.appendChild(deleteBtn);
+            item.appendChild(row);
+
+            item.addEventListener("click", function() {
+                state.nodeBuilderSelected = pathId;
+                el.nodeBuilderHint.textContent = "Selected: " + entry.label;
+                renderNodeBuilder();
+            });
+
+            item.addEventListener("dragstart", function(event) {
+                const payload = {
+                    parentPath: pathToId(parentPath),
+                    key: entry.key
+                };
+                event.dataTransfer.effectAllowed = "move";
+                event.dataTransfer.setData("text/plain", JSON.stringify(payload));
+            });
+
+            item.addEventListener("dragover", function(event) {
+                event.preventDefault();
+                item.classList.add("drag-over");
+            });
+
+            item.addEventListener("dragleave", function() {
+                item.classList.remove("drag-over");
+            });
+
+            item.addEventListener("drop", function(event) {
+                event.preventDefault();
+                item.classList.remove("drag-over");
+
+                let payload;
+                try {
+                    payload = JSON.parse(event.dataTransfer.getData("text/plain"));
+                } catch (_error) {
+                    return;
+                }
+
+                const targetParentId = pathToId(parentPath);
+                if (!payload || payload.parentPath !== targetParentId) {
+                    return;
+                }
+
+                const changed = reorderInParent(root, parentPath, payload.key, entry.key);
+                if (!changed) {
+                    return;
+                }
+
+                updateEditorJson(root);
+                hydrateCrmFromCurrentJson();
+            });
+
+            item.addEventListener("dragend", function() {
+                item.classList.remove("drag-over");
+            });
+
+            listEl.appendChild(item);
+
+            if (expandable && state.nodeTreeExpanded[pathId]) {
+                const children = getChildEntries(entry.value, entry.path);
+                if (children.length) {
+                    const childList = document.createElement("ul");
+                    childList.className = "node-children";
+                    children.forEach(function(child) {
+                        renderTreeEntry(child, entry.path, childList, root);
+                    });
+                    item.appendChild(childList);
+                }
+            }
+        }
+
         function hydrateCrmFromCurrentJson() {
             if (!state.currentJsonData) {
                 return;
@@ -1597,6 +2061,7 @@
 
             state.crmModel.selectedIndex = 0;
             el.crmRootMode.value = state.crmModel.rootMode;
+            el.crmRootMode.disabled = Boolean(state.crmModel.schema.enabled);
             renderCrmRecordSelect();
             renderCrmFields();
             renderCrmDragList();
@@ -1740,6 +2205,12 @@
             if (state.crmModel.schema.enabled) {
                 const schemaKeys = Object.keys(state.crmModel.schema.fields || {});
                 if (schemaKeys.length) {
+                    schemaKeys.forEach(function(schemaKey) {
+                        if (!Object.prototype.hasOwnProperty.call(rec, schemaKey)) {
+                            const typeName = getFieldType(schemaKey, "");
+                            rec[schemaKey] = getDefaultByType(typeName);
+                        }
+                    });
                     renderKeys = schemaKeys;
                 }
             }
@@ -1842,7 +2313,7 @@
 
         function renderNodeBuilder() {
             const root = getNodeBuilderRoot();
-            el.nodeBuilderList.innerHTML = "";
+            el.nodeTreeList.innerHTML = "";
 
             if (!root || typeof root !== "object") {
                 el.nodeBuilderHint.textContent = "Valid JSON object or array required";
@@ -1850,21 +2321,7 @@
                 return;
             }
 
-            const nodeEntries = Array.isArray(root)
-                ? root.map(function(value, index) {
-                    return {
-                        id: String(index),
-                        label: "[" + index + "]",
-                        value
-                    };
-                })
-                : Object.keys(root).map(function(key) {
-                    return {
-                        id: key,
-                        label: key,
-                        value: root[key]
-                    };
-                });
+            const nodeEntries = getRootEntries(root);
 
             if (!nodeEntries.length) {
                 el.nodeBuilderHint.textContent = "No nodes available";
@@ -1872,98 +2329,15 @@
                 return;
             }
 
-            if (!nodeEntries.some(function(entry) { return entry.id === state.nodeBuilderSelected; })) {
-                state.nodeBuilderSelected = nodeEntries[0].id;
+            if (!nodeEntries.some(function(entry) { return pathToId(entry.path) === state.nodeBuilderSelected; })) {
+                state.nodeBuilderSelected = pathToId(nodeEntries[0].path);
             }
 
-            el.nodeBuilderHint.textContent = "Selected: " + state.nodeBuilderSelected;
+            const selectedPath = idToPath(state.nodeBuilderSelected);
+            el.nodeBuilderHint.textContent = "Selected: " + (selectedPath.length ? selectedPath.join(".") : "root");
 
-            nodeEntries.forEach(function(entry, index) {
-                const item = document.createElement("li");
-                item.className = "node-item" + (entry.id === state.nodeBuilderSelected ? " active" : "");
-                item.draggable = true;
-
-                const handle = document.createElement("span");
-                handle.className = "handle";
-                handle.textContent = "::";
-
-                const label = document.createElement("span");
-                label.className = "mono";
-                label.textContent = entry.label;
-
-                const typeBadge = document.createElement("span");
-                typeBadge.className = "node-type-pill";
-                typeBadge.textContent = inferNodeType(entry.value);
-
-                item.appendChild(handle);
-                item.appendChild(label);
-                item.appendChild(typeBadge);
-
-                item.addEventListener("click", function() {
-                    state.nodeBuilderSelected = entry.id;
-                    renderNodeBuilder();
-                });
-
-                item.addEventListener("dragstart", function(event) {
-                    event.dataTransfer.effectAllowed = "move";
-                    event.dataTransfer.setData("text/plain", String(index));
-                });
-
-                item.addEventListener("dragover", function(event) {
-                    event.preventDefault();
-                    item.classList.add("drag-over");
-                });
-
-                item.addEventListener("dragleave", function() {
-                    item.classList.remove("drag-over");
-                });
-
-                item.addEventListener("drop", function(event) {
-                    event.preventDefault();
-                    item.classList.remove("drag-over");
-                    const fromIndex = Number(event.dataTransfer.getData("text/plain"));
-                    if (!Number.isInteger(fromIndex) || fromIndex === index || fromIndex < 0) {
-                        return;
-                    }
-
-                    if (Array.isArray(root)) {
-                        const moved = root.splice(fromIndex, 1)[0];
-                        root.splice(index, 0, moved);
-                        state.nodeBuilderSelected = String(index);
-                    } else {
-                        const keys = Object.keys(root);
-                        const movedKey = keys[fromIndex];
-                        const targetKey = keys[index];
-                        if (movedKey == null || targetKey == null) {
-                            return;
-                        }
-
-                        const reorderedKeys = keys.filter(function(key) {
-                            return key !== movedKey;
-                        });
-                        const targetIndex = reorderedKeys.indexOf(targetKey);
-                        reorderedKeys.splice(targetIndex, 0, movedKey);
-
-                        const rebuilt = {};
-                        reorderedKeys.forEach(function(key) {
-                            rebuilt[key] = root[key];
-                        });
-
-                        state.nodeBuilderSelected = movedKey;
-                        updateEditorJson(rebuilt);
-                        hydrateCrmFromCurrentJson();
-                        return;
-                    }
-
-                    updateEditorJson(root);
-                    hydrateCrmFromCurrentJson();
-                });
-
-                item.addEventListener("dragend", function() {
-                    item.classList.remove("drag-over");
-                });
-
-                el.nodeBuilderList.appendChild(item);
+            nodeEntries.forEach(function(entry) {
+                renderTreeEntry(entry, [], el.nodeTreeList, root);
             });
         }
 
@@ -1979,10 +2353,14 @@
 
             if (Array.isArray(root)) {
                 root.push(nodeValue);
-                state.nodeBuilderSelected = String(root.length - 1);
+                state.nodeBuilderSelected = pathToId([root.length - 1]);
             } else {
                 const key = prompt("Node key name");
                 if (!key) {
+                    return;
+                }
+                if (key === "metadata") {
+                    setStatus(el.editorStatus, "metadata is reserved and hidden in Drag & Drop view.", "bad");
                     return;
                 }
                 if (Object.prototype.hasOwnProperty.call(root, key)) {
@@ -1990,41 +2368,13 @@
                     return;
                 }
                 root[key] = nodeValue;
-                state.nodeBuilderSelected = key;
+                state.nodeBuilderSelected = pathToId([key]);
             }
 
+            state.nodeTreeExpanded.root = true;
             updateEditorJson(root);
             hydrateCrmFromCurrentJson();
             setStatus(el.editorStatus, "Node added.", "ok");
-        }
-
-        function deleteSelectedNodeFromBuilder() {
-            const root = getNodeBuilderRoot();
-            if (!root || typeof root !== "object") {
-                setStatus(el.editorStatus, "Node builder needs valid root object or array JSON.", "bad");
-                return;
-            }
-
-            if (!state.nodeBuilderSelected) {
-                setStatus(el.editorStatus, "Choose a node first.", "bad");
-                return;
-            }
-
-            if (Array.isArray(root)) {
-                const index = Number(state.nodeBuilderSelected);
-                if (!Number.isInteger(index) || index < 0 || index >= root.length) {
-                    return;
-                }
-                root.splice(index, 1);
-                state.nodeBuilderSelected = root.length ? String(Math.max(0, index - 1)) : "";
-            } else {
-                delete root[state.nodeBuilderSelected];
-                state.nodeBuilderSelected = Object.keys(root)[0] || "";
-            }
-
-            updateEditorJson(root);
-            hydrateCrmFromCurrentJson();
-            setStatus(el.editorStatus, "Node deleted.", "ok");
         }
 
         function hydrateCrmFromTextarea() {
@@ -2255,8 +2605,8 @@
                 }
             });
 
-            el.modeRawBtn.addEventListener("click", function() {
-                switchEditorMode("raw");
+            el.modeDndBtn.addEventListener("click", function() {
+                switchEditorMode("dnd");
             });
 
             el.modeCrmBtn.addEventListener("click", function() {
@@ -2268,6 +2618,10 @@
                         setStatus(el.editorStatus, "CRM loaded for object editing.", "ok");
                     }
                 }
+            });
+
+            el.modeTextBtn.addEventListener("click", function() {
+                switchEditorMode("text");
             });
 
             el.formatJsonBtn.addEventListener("click", function() {
@@ -2293,10 +2647,6 @@
 
             el.nodeAddBtn.addEventListener("click", function() {
                 addNodeFromBuilder();
-            });
-
-            el.nodeDeleteBtn.addEventListener("click", function() {
-                deleteSelectedNodeFromBuilder();
             });
 
             el.crmRootMode.addEventListener("change", function() {
@@ -2370,7 +2720,7 @@
             applyBranding();
             wireUiEvents();
             route();
-            switchEditorMode("raw");
+            switchEditorMode("dnd");
             setEditorStep(0);
             renderNodeBuilder();
             if (state.authSession && isStoredSessionExpired()) {
