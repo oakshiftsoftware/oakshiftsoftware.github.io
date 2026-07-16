@@ -306,8 +306,39 @@
 
         .field-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 0.75rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .crm-field-card {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 0.65rem;
+            background: #fff;
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .crm-field-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.55rem;
+        }
+
+        .crm-field-head label {
+            margin: 0;
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .crm-field-head select {
+            width: auto;
+            min-width: 110px;
+            max-width: 170px;
+            padding: 0.32rem 0.45rem;
+            font-size: 0.82rem;
         }
 
         .crm-drag-panel {
@@ -407,7 +438,7 @@
 
         .node-row {
             display: grid;
-            grid-template-columns: auto minmax(90px, auto) minmax(120px, 1fr) auto auto auto;
+            grid-template-columns: auto minmax(90px, auto) minmax(120px, 1fr) auto auto auto auto;
             gap: 0.45rem;
             align-items: center;
             width: 100%;
@@ -828,6 +859,58 @@
                 </div>
             </div>
         </div>
+
+        <div id="nodeCreateModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="nodeCreateTitle">
+            <div class="modal-card">
+                <div class="modal-head">
+                    <h3 id="nodeCreateTitle">Add Node</h3>
+                    <button id="nodeCreateCloseBtn" type="button" class="warn">Close</button>
+                </div>
+                <div class="stack">
+                    <div id="nodeCreatePath" class="pill mono">root</div>
+                    <p id="nodeCreateHint" style="color: var(--muted); margin: 0;"></p>
+                    <div id="nodeCreateKeyWrap">
+                        <label for="nodeCreateKeyInput">Key / Field Name</label>
+                        <input id="nodeCreateKeyInput" type="text" class="mono" autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="nodeCreateTypeSelect">Type</label>
+                        <select id="nodeCreateTypeSelect">
+                            <option value="string">string</option>
+                            <option value="number">number</option>
+                            <option value="boolean">boolean</option>
+                            <option value="null">null</option>
+                            <option value="array">array</option>
+                            <option value="object">object</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <button id="nodeCreateApplyBtn" class="primary" type="button">Apply</button>
+                        <button id="nodeCreateCancelBtn" type="button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="nodeJsonEditModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="nodeJsonEditTitle">
+            <div class="modal-card">
+                <div class="modal-head">
+                    <h3 id="nodeJsonEditTitle">Edit Node JSON</h3>
+                    <button id="nodeJsonEditCloseBtn" type="button" class="warn">Close</button>
+                </div>
+                <div class="stack">
+                    <div id="nodeJsonEditPath" class="pill mono">Path</div>
+                    <div>
+                        <label for="nodeJsonEditInput">JSON value</label>
+                        <textarea id="nodeJsonEditInput" spellcheck="false" style="min-height:220px;"></textarea>
+                    </div>
+                    <div class="row">
+                        <button id="nodeJsonEditApplyBtn" class="primary" type="button">Apply</button>
+                        <button id="nodeJsonEditCancelBtn" type="button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -953,6 +1036,14 @@
             valueEdit: {
                 pathId: "",
                 type: "string"
+            },
+            nodeCreate: {
+                mode: "",
+                pathId: "",
+                requireKey: false
+            },
+            nodeJsonEdit: {
+                pathId: ""
             }
         };
 
@@ -1032,7 +1123,24 @@
             valueEditBooleanSelect: document.getElementById("valueEditBooleanSelect"),
             valueEditNullHint: document.getElementById("valueEditNullHint"),
             valueEditSaveBtn: document.getElementById("valueEditSaveBtn"),
-            valueEditCancelBtn: document.getElementById("valueEditCancelBtn")
+            valueEditCancelBtn: document.getElementById("valueEditCancelBtn"),
+            nodeCreateModal: document.getElementById("nodeCreateModal"),
+            nodeCreateTitle: document.getElementById("nodeCreateTitle"),
+            nodeCreatePath: document.getElementById("nodeCreatePath"),
+            nodeCreateHint: document.getElementById("nodeCreateHint"),
+            nodeCreateKeyWrap: document.getElementById("nodeCreateKeyWrap"),
+            nodeCreateKeyInput: document.getElementById("nodeCreateKeyInput"),
+            nodeCreateTypeSelect: document.getElementById("nodeCreateTypeSelect"),
+            nodeCreateApplyBtn: document.getElementById("nodeCreateApplyBtn"),
+            nodeCreateCancelBtn: document.getElementById("nodeCreateCancelBtn"),
+            nodeCreateCloseBtn: document.getElementById("nodeCreateCloseBtn"),
+            nodeJsonEditModal: document.getElementById("nodeJsonEditModal"),
+            nodeJsonEditTitle: document.getElementById("nodeJsonEditTitle"),
+            nodeJsonEditPath: document.getElementById("nodeJsonEditPath"),
+            nodeJsonEditInput: document.getElementById("nodeJsonEditInput"),
+            nodeJsonEditApplyBtn: document.getElementById("nodeJsonEditApplyBtn"),
+            nodeJsonEditCancelBtn: document.getElementById("nodeJsonEditCancelBtn"),
+            nodeJsonEditCloseBtn: document.getElementById("nodeJsonEditCloseBtn")
         };
 
         function applyBranding() {
@@ -2010,9 +2118,193 @@
             updateEditorJson(root);
         }
 
+        function setNodeValue(root, pathArray, nextValue) {
+            const location = getAtPath(root, pathArray);
+            if (location.parent === null) {
+                updateEditorJson(nextValue);
+                return;
+            }
+            location.parent[location.key] = nextValue;
+            updateEditorJson(root);
+        }
+
+        function formatPathLabel(pathArray) {
+            return pathArray.map(function(part) {
+                return typeof part === "number" ? "[" + part + "]" : String(part);
+            }).join(".") || "root";
+        }
+
         function closeValueEditModal() {
             el.valueEditModal.classList.add("hidden");
             state.valueEdit.pathId = "";
+        }
+
+        function closeNodeCreateModal() {
+            el.nodeCreateModal.classList.add("hidden");
+            state.nodeCreate.mode = "";
+            state.nodeCreate.pathId = "";
+        }
+
+        function openNodeCreateModal(options) {
+            state.nodeCreate.mode = options.mode || "node";
+            state.nodeCreate.pathId = options.pathId || pathToId([]);
+            state.nodeCreate.requireKey = Boolean(options.requireKey);
+
+            el.nodeCreateTitle.textContent = options.title || "Add Node";
+            el.nodeCreatePath.textContent = options.pathLabel || "root";
+            el.nodeCreateHint.textContent = options.hint || "";
+            el.nodeCreateKeyWrap.classList.toggle("hidden", !state.nodeCreate.requireKey);
+            el.nodeCreateKeyInput.value = options.defaultKey || "";
+            el.nodeCreateTypeSelect.value = parseNodeType(options.defaultType || "string");
+
+            el.nodeCreateModal.classList.remove("hidden");
+            if (state.nodeCreate.requireKey) {
+                el.nodeCreateKeyInput.focus();
+            } else {
+                el.nodeCreateTypeSelect.focus();
+            }
+        }
+
+        function applyNodeCreateModal() {
+            if (!state.nodeCreate.mode) {
+                return;
+            }
+
+            if (state.nodeCreate.mode === "field") {
+                if (!state.crmModel.records.length) {
+                    closeNodeCreateModal();
+                    return;
+                }
+
+                const rec = state.crmModel.records[state.crmModel.selectedIndex] || {};
+                const name = String(el.nodeCreateKeyInput.value || "").trim();
+                const fieldType = parseNodeType(el.nodeCreateTypeSelect.value);
+                if (!name) {
+                    setStatus(el.editorStatus, "Field name is required.", "bad");
+                    return;
+                }
+                if (Object.prototype.hasOwnProperty.call(rec, name)) {
+                    setStatus(el.editorStatus, "Field already exists.", "bad");
+                    return;
+                }
+
+                rec[name] = getDefaultByType(fieldType);
+                if (state.crmModel.schema.enabled) {
+                    if (!state.crmModel.schema.activeFields || typeof state.crmModel.schema.activeFields !== "object") {
+                        state.crmModel.schema.activeFields = {};
+                    }
+                    state.crmModel.schema.activeFields[name] = {
+                        type: fieldType,
+                        default: getDefaultByType(fieldType)
+                    };
+
+                    if (state.crmModel.schema.activeFieldGroup) {
+                        if (!state.crmModel.schema.fieldCatalog || typeof state.crmModel.schema.fieldCatalog !== "object") {
+                            state.crmModel.schema.fieldCatalog = {};
+                        }
+                        if (!state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] || typeof state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] !== "object") {
+                            state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] = {};
+                        }
+                        state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup][name] = {
+                            type: fieldType,
+                            default: getDefaultByType(fieldType)
+                        };
+                        state.crmModel.schema.metadata.fields = deepClone(state.crmModel.schema.fieldCatalog);
+                    } else {
+                        state.crmModel.schema.metadata.fields = deepClone(state.crmModel.schema.activeFields);
+                    }
+                }
+
+                renderCrmFields();
+                syncCrmToJsonText();
+                closeNodeCreateModal();
+                setStatus(el.editorStatus, "Field added.", "ok");
+                return;
+            }
+
+            const root = getNodeBuilderRoot();
+            if (!root || typeof root !== "object") {
+                closeNodeCreateModal();
+                setStatus(el.editorStatus, "Node builder needs valid root object or array JSON.", "bad");
+                return;
+            }
+
+            const containerPath = idToPath(state.nodeCreate.pathId);
+            const location = getAtPath(root, containerPath);
+            const container = location.value;
+            if (!container || typeof container !== "object") {
+                setStatus(el.editorStatus, "Selected node is not an object or array.", "bad");
+                return;
+            }
+
+            const requestedType = parseNodeType(el.nodeCreateTypeSelect.value);
+            const nodeValue = getDefaultByType(requestedType);
+            let newPath;
+
+            if (Array.isArray(container)) {
+                container.push(nodeValue);
+                newPath = containerPath.concat(container.length - 1);
+            } else {
+                const key = String(el.nodeCreateKeyInput.value || "").trim();
+                if (!key) {
+                    setStatus(el.editorStatus, "Node key name is required.", "bad");
+                    return;
+                }
+                if (!containerPath.length && key === "metadata") {
+                    setStatus(el.editorStatus, "metadata is reserved and hidden in Drag & Drop view.", "bad");
+                    return;
+                }
+                if (Object.prototype.hasOwnProperty.call(container, key)) {
+                    setStatus(el.editorStatus, "Node key already exists.", "bad");
+                    return;
+                }
+                container[key] = nodeValue;
+                newPath = containerPath.concat(key);
+            }
+
+            state.nodeTreeExpanded[pathToId(containerPath)] = true;
+            state.nodeBuilderSelected = pathToId(newPath);
+            updateEditorJson(root);
+            hydrateCrmFromCurrentJson();
+            closeNodeCreateModal();
+            setStatus(el.editorStatus, "Node added.", "ok");
+        }
+
+        function closeNodeJsonEditModal() {
+            el.nodeJsonEditModal.classList.add("hidden");
+            state.nodeJsonEdit.pathId = "";
+        }
+
+        function openNodeJsonEditModal(pathArray, value, label) {
+            state.nodeJsonEdit.pathId = pathToId(pathArray);
+            el.nodeJsonEditTitle.textContent = "Edit " + (label || "Node") + " JSON";
+            el.nodeJsonEditPath.textContent = formatPathLabel(pathArray);
+            el.nodeJsonEditInput.value = JSON.stringify(value, null, 2);
+            el.nodeJsonEditModal.classList.remove("hidden");
+            el.nodeJsonEditInput.focus();
+        }
+
+        function applyNodeJsonEditModal() {
+            if (!state.nodeJsonEdit.pathId) {
+                return;
+            }
+
+            const root = getNodeBuilderRoot();
+            if (!root || typeof root !== "object") {
+                closeNodeJsonEditModal();
+                return;
+            }
+
+            try {
+                const nextValue = JSON.parse(el.nodeJsonEditInput.value);
+                const pathArray = idToPath(state.nodeJsonEdit.pathId);
+                setNodeValue(root, pathArray, nextValue);
+                hydrateCrmFromCurrentJson();
+                closeNodeJsonEditModal();
+                setStatus(el.editorStatus, "Node JSON updated.", "ok");
+            } catch (error) {
+                setStatus(el.editorStatus, "Invalid JSON for node edit: " + error.message, "bad");
+            }
         }
 
         function openValueEditModal(pathArray, valueType, value, label) {
@@ -2075,27 +2367,45 @@
                 return;
             }
 
-            const requestedType = parseNodeType(prompt("Node type (string, number, boolean, null, array, object)", "string"));
-            const nodeValue = getDefaultByType(requestedType);
+            openNodeCreateModal({
+                mode: "node",
+                title: "Add Child Node",
+                pathId: pathToId(containerPath),
+                pathLabel: formatPathLabel(containerPath),
+                requireKey: !Array.isArray(container),
+                defaultType: "string",
+                hint: Array.isArray(container)
+                    ? "Array target: key is automatic."
+                    : "Object target: provide a unique key."
+            });
+        }
 
-            if (Array.isArray(container)) {
-                container.push(nodeValue);
-            } else {
-                const key = prompt("Node key name");
-                if (!key) {
-                    return;
-                }
-                if (Object.prototype.hasOwnProperty.call(container, key)) {
-                    setStatus(el.editorStatus, "Node key already exists.", "bad");
-                    return;
-                }
-                container[key] = nodeValue;
+        function duplicateArrayObjectNode(root, parentPath, nodeIndex, label) {
+            const parentLocation = getAtPath(root, parentPath);
+            const container = parentLocation.value;
+            if (!Array.isArray(container)) {
+                setStatus(el.editorStatus, "Duplicate is only available for objects inside arrays.", "bad");
+                return;
             }
 
-            state.nodeTreeExpanded[pathToId(containerPath)] = true;
+            const source = container[nodeIndex];
+            if (!source || typeof source !== "object" || Array.isArray(source)) {
+                setStatus(el.editorStatus, "Only object entries can be duplicated here.", "bad");
+                return;
+            }
+
+            const duplicate = deepClone(source);
+            const insertAt = nodeIndex + 1;
+            container.splice(insertAt, 0, duplicate);
+
+            const newPath = parentPath.concat(insertAt);
+            state.nodeTreeExpanded[pathToId(parentPath)] = true;
+            state.nodeBuilderSelected = pathToId(newPath);
+
             updateEditorJson(root);
             hydrateCrmFromCurrentJson();
-            setStatus(el.editorStatus, "Node added.", "ok");
+            openNodeJsonEditModal(newPath, duplicate, (label || "Object") + " copy");
+            setStatus(el.editorStatus, "Object duplicated. Edit the new copy in the JSON modal.", "ok");
         }
 
         function deleteNodeAtPath(root, pathArray) {
@@ -2188,6 +2498,23 @@
                 addNodeToContainer(root, entry.path);
             });
 
+            const parentContainer = getAtPath(root, parentPath).value;
+            const canDuplicate = Array.isArray(parentContainer)
+                && entry.value
+                && typeof entry.value === "object"
+                && !Array.isArray(entry.value);
+
+            const duplicateBtn = document.createElement("button");
+            duplicateBtn.type = "button";
+            duplicateBtn.className = "node-inline-btn";
+            duplicateBtn.textContent = "Dup";
+            duplicateBtn.title = "Duplicate object in array and edit copy";
+            duplicateBtn.disabled = !canDuplicate;
+            duplicateBtn.addEventListener("click", function(event) {
+                event.stopPropagation();
+                duplicateArrayObjectNode(root, parentPath, Number(entry.key), entry.label);
+            });
+
             const deleteBtn = document.createElement("button");
             deleteBtn.type = "button";
             deleteBtn.className = "node-inline-btn warn";
@@ -2201,6 +2528,7 @@
             row.appendChild(toggleBtn);
             row.appendChild(keyLabel);
             row.appendChild(valueCell);
+            row.appendChild(duplicateBtn);
             row.appendChild(addBtn);
             row.appendChild(deleteBtn);
             item.appendChild(row);
@@ -2513,6 +2841,9 @@
                 const wrapper = document.createElement("div");
                 const label = document.createElement("label");
                 label.textContent = key;
+                const head = document.createElement("div");
+                head.className = "crm-field-head";
+                head.appendChild(label);
 
                 const fieldTypeOptions = resolveCrmFieldTypeOptions(key, rec[key]);
                 let fieldType = getFieldType(key, rec[key]);
@@ -2539,7 +2870,7 @@
                         renderCrmFields();
                         syncCrmToJsonText();
                     });
-                    wrapper.appendChild(typeSelect);
+                    head.appendChild(typeSelect);
                 }
 
                 if (fieldType === "boolean") {
@@ -2575,7 +2906,8 @@
 
                 input.dataset.field = key;
 
-                wrapper.appendChild(label);
+                wrapper.className = "crm-field-card";
+                wrapper.appendChild(head);
                 wrapper.appendChild(input);
                 el.crmFields.appendChild(wrapper);
             }
@@ -2585,42 +2917,14 @@
             addFieldBtn.type = "button";
             addFieldBtn.textContent = "Add Field";
             addFieldBtn.addEventListener("click", function() {
-                const name = prompt("Field name");
-                if (!name) {
-                    return;
-                }
-                if (Object.prototype.hasOwnProperty.call(rec, name)) {
-                    alert("Field already exists");
-                    return;
-                }
-                rec[name] = "";
-                if (state.crmModel.schema.enabled) {
-                    if (!state.crmModel.schema.activeFields || typeof state.crmModel.schema.activeFields !== "object") {
-                        state.crmModel.schema.activeFields = {};
-                    }
-                    state.crmModel.schema.activeFields[name] = {
-                        type: "string",
-                        default: ""
-                    };
-
-                    if (state.crmModel.schema.activeFieldGroup) {
-                        if (!state.crmModel.schema.fieldCatalog || typeof state.crmModel.schema.fieldCatalog !== "object") {
-                            state.crmModel.schema.fieldCatalog = {};
-                        }
-                        if (!state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] || typeof state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] !== "object") {
-                            state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup] = {};
-                        }
-                        state.crmModel.schema.fieldCatalog[state.crmModel.schema.activeFieldGroup][name] = {
-                            type: "string",
-                            default: ""
-                        };
-                        state.crmModel.schema.metadata.fields = deepClone(state.crmModel.schema.fieldCatalog);
-                    } else {
-                        state.crmModel.schema.metadata.fields = deepClone(state.crmModel.schema.activeFields);
-                    }
-                }
-                renderCrmFields();
-                syncCrmToJsonText();
+                openNodeCreateModal({
+                    mode: "field",
+                    title: "Add CRM Field",
+                    pathLabel: "record " + (state.crmModel.selectedIndex + 1),
+                    requireKey: true,
+                    defaultType: "string",
+                    hint: "Create a new field for the selected CRM record."
+                });
             });
             addFieldWrap.appendChild(addFieldBtn);
             el.crmFields.appendChild(addFieldWrap);
@@ -2689,33 +2993,17 @@
                 return;
             }
 
-            const requestedType = parseNodeType(prompt("Node type (string, number, boolean, null, array, object)", "string"));
-            const nodeValue = getDefaultByType(requestedType);
-
-            if (Array.isArray(root)) {
-                root.push(nodeValue);
-                state.nodeBuilderSelected = pathToId([root.length - 1]);
-            } else {
-                const key = prompt("Node key name");
-                if (!key) {
-                    return;
-                }
-                if (key === "metadata") {
-                    setStatus(el.editorStatus, "metadata is reserved and hidden in Drag & Drop view.", "bad");
-                    return;
-                }
-                if (Object.prototype.hasOwnProperty.call(root, key)) {
-                    setStatus(el.editorStatus, "Node key already exists.", "bad");
-                    return;
-                }
-                root[key] = nodeValue;
-                state.nodeBuilderSelected = pathToId([key]);
-            }
-
-            state.nodeTreeExpanded.root = true;
-            updateEditorJson(root);
-            hydrateCrmFromCurrentJson();
-            setStatus(el.editorStatus, "Node added.", "ok");
+            openNodeCreateModal({
+                mode: "node",
+                title: "Add Root Node",
+                pathId: pathToId([]),
+                pathLabel: "root",
+                requireKey: !Array.isArray(root),
+                defaultType: "string",
+                hint: Array.isArray(root)
+                    ? "Root array: new item key is automatic."
+                    : "Root object: provide a unique key (metadata is reserved)."
+            });
         }
 
         function hydrateCrmFromTextarea() {
@@ -3011,6 +3299,48 @@
             el.valueEditInput.addEventListener("keydown", function(event) {
                 if (event.key === "Enter") {
                     applyValueEditModal();
+                }
+            });
+
+            el.nodeCreateApplyBtn.addEventListener("click", function() {
+                applyNodeCreateModal();
+            });
+
+            el.nodeCreateCancelBtn.addEventListener("click", function() {
+                closeNodeCreateModal();
+            });
+
+            el.nodeCreateCloseBtn.addEventListener("click", function() {
+                closeNodeCreateModal();
+            });
+
+            el.nodeCreateModal.addEventListener("click", function(event) {
+                if (event.target === el.nodeCreateModal) {
+                    closeNodeCreateModal();
+                }
+            });
+
+            el.nodeCreateKeyInput.addEventListener("keydown", function(event) {
+                if (event.key === "Enter") {
+                    applyNodeCreateModal();
+                }
+            });
+
+            el.nodeJsonEditApplyBtn.addEventListener("click", function() {
+                applyNodeJsonEditModal();
+            });
+
+            el.nodeJsonEditCancelBtn.addEventListener("click", function() {
+                closeNodeJsonEditModal();
+            });
+
+            el.nodeJsonEditCloseBtn.addEventListener("click", function() {
+                closeNodeJsonEditModal();
+            });
+
+            el.nodeJsonEditModal.addEventListener("click", function(event) {
+                if (event.target === el.nodeJsonEditModal) {
+                    closeNodeJsonEditModal();
                 }
             });
 
