@@ -1800,6 +1800,31 @@
                 return fallback || "data";
             }
 
+            function isFieldDefinitionObject(definition) {
+                if (!definition || typeof definition !== "object" || Array.isArray(definition)) {
+                    return false;
+                }
+
+                const definitionKeys = [
+                    "type",
+                    "default",
+                    "field_type",
+                    "node_type",
+                    "value_type",
+                    "required",
+                    "optional",
+                    "description",
+                    "label",
+                    "hint",
+                    "options",
+                    "enum"
+                ];
+
+                return definitionKeys.some(function(key) {
+                    return Object.prototype.hasOwnProperty.call(definition, key);
+                });
+            }
+
             function isFieldMapCandidate(value) {
                 if (!value || typeof value !== "object" || Array.isArray(value)) {
                     return false;
@@ -1812,7 +1837,7 @@
                 return keys.every(function(key) {
                     const def = value[key];
                     return typeof def === "string"
-                        || (def && typeof def === "object" && !Array.isArray(def));
+                        || isFieldDefinitionObject(def);
                 });
             }
 
