@@ -1024,6 +1024,7 @@
                 selectedRepo: null,
                 config: null,
                 log: [],
+                logSha: "",
                 currentJsonPath: "",
                 currentJsonSha: "",
                 currentJsonData: null,
@@ -1578,6 +1579,7 @@
                 };
 
                 state.log = Array.isArray(logResult.data) ? logResult.data : [];
+                state.logSha = logResult.fileMeta.sha || "";
 
                 el.repoSummary.textContent = selected.full_name + " (branch: " + selected.default_branch + ")";
                 renderConfiguredFiles();
@@ -3062,32 +3064,117 @@
                 return parsed;
             }
 
-            async function commitFile(repoFullName, branch, path, message, contentString, sha) {
-                const response = await ghFetch("/repos/" + repoFullName + "/contents/" + path, {
-                    method: "PUT",
+            async function getBranchHeadCommitSha(repoFullName, branch) {
+                const refResponse = await ghFetch("/repos/" + repoFullName + "/git/ref/heads/" + encodeURIComponent(branch));
+                const refPayload = await refResponse.json();
+                return refPayload && refPayload.object ? refPayload.object.sha : "";
+            }
+
+            async function getCommitTreeSha(repoFullName, commitSha) {
+                const commitResponse = await ghFetch("/repos/" + repoFullName + "/git/commits/" + commitSha);
+                const commitPayload = await commitResponse.json();
+                return commitPayload && commitPayload.tree ? commitPayload.tree.sha : "";
+            }
+
+            async function createBlob(repoFullName, contentString) {
+                const blobResponse = await ghFetch("/repos/" + repoFullName + "/git/blobs", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        content: contentString,
+                        encoding: "utf-8"
+                    })
+                });
+                const blobPayload = await blobResponse.json();
+                return blobPayload.sha;
+            }
+
+            async function commitFilesTogether(repoFullName, branch, message, files) {
+                const parentCommitSha = await getBranchHeadCommitSha(repoFullName, branch);
+                if (!parentCommitSha) {
+                    throw new Error("Unable to resolve branch head commit.");
+                }
+
+                const baseTreeSha = await getCommitTreeSha(repoFullName, parentCommitSha);
+                if (!baseTreeSha) {
+                    throw new Error("Unable to resolve base tree for branch.");
+                }
+
+                const treeEntries = [];
+                const fileBlobShas = {};
+
+                for (const file of files) {
+                    const blobSha = await createBlob(repoFullName, file.content);
+                    fileBlobShas[file.path] = blobSha;
+                    treeEntries.push({
+                        path: file.path,
+                        mode: "100644",
+                        type: "blob",
+                        sha: blobSha
+                    });
+                }
+
+                const treeResponse = await ghFetch("/repos/" + repoFullName + "/git/trees", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        base_tree: baseTreeSha,
+                        tree: treeEntries
+                    })
+                });
+                const treePayload = await treeResponse.json();
+
+                const commitResponse = await ghFetch("/repos/" + repoFullName + "/git/commits", {
+                    method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
                         message,
-                        content: b64EncodeUnicode(contentString),
-                        branch,
-                        sha
+                        tree: treePayload.sha,
+                        parents: [parentCommitSha]
+                    })
+                });
+                const commitPayload = await commitResponse.json();
+
+                await ghFetch("/repos/" + repoFullName + "/git/refs/heads/" + encodeURIComponent(branch), {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        sha: commitPayload.sha,
+                        force: false
                     })
                 });
 
-                return response.json();
+                return {
+                    commitSha: commitPayload.sha,
+                    fileBlobShas
+                };
             }
 
-            async function appendLog(action, details) {
-                if (!state.selectedRepo) {
+            async function assertLatestFileSha(repoFullName, path, expectedSha) {
+                if (!expectedSha) {
                     return;
+                }
+                const latestMeta = await loadRepoFile(repoFullName, path);
+                if (latestMeta.sha !== expectedSha) {
+                    throw new Error("Remote file changed for " + path + ". Reload the file and retry commit.");
+                }
+            }
+
+            async function buildUpdatedLog(action, details) {
+                if (!state.selectedRepo) {
+                    throw new Error("Connect a repository first.");
                 }
 
                 const repoFullName = state.selectedRepo.full_name;
-                const branch = state.selectedRepo.default_branch;
                 const logLoaded = await loadRepoJsonFile(repoFullName, "ghwe_log.json");
-                const logSha = logLoaded.fileMeta.sha;
                 const existing = Array.isArray(logLoaded.data) ? logLoaded.data : [];
 
                 existing.push({
@@ -3097,16 +3184,11 @@
                     details
                 });
 
-                await commitFile(
-                    repoFullName,
-                    branch,
-                    "ghwe_log.json",
-                    "Append GHWE log entry: " + action,
-                    JSON.stringify(existing, null, 2),
-                    logSha
-                );
-
-                state.log = existing;
+                return {
+                    records: existing,
+                    sha: logLoaded.fileMeta.sha || "",
+                    content: JSON.stringify(existing, null, 2)
+                };
             }
 
             async function commitCurrentJson() {
@@ -3114,24 +3196,41 @@
                     throw new Error("Load a configured JSON file first.");
                 }
 
+                const repoFullName = state.selectedRepo.full_name;
+                const branch = state.selectedRepo.default_branch;
                 const json = parseAndNormalizeEditorJson();
                 const commitMessage = (el.commitMessage.value || "Update " + state.currentJsonPath + " via GHWE").trim();
+                const jsonPayload = JSON.stringify(json, null, 2);
 
-                const result = await commitFile(
-                    state.selectedRepo.full_name,
-                    state.selectedRepo.default_branch,
-                    state.currentJsonPath,
+                await assertLatestFileSha(repoFullName, state.currentJsonPath, state.currentJsonSha);
+                if (state.logSha) {
+                    await assertLatestFileSha(repoFullName, "ghwe_log.json", state.logSha);
+                }
+
+                const logUpdate = await buildUpdatedLog("update_json", {
+                    path: state.currentJsonPath
+                });
+
+                const result = await commitFilesTogether(
+                    repoFullName,
+                    branch,
                     commitMessage,
-                    JSON.stringify(json, null, 2),
-                    state.currentJsonSha
+                    [
+                        {
+                            path: state.currentJsonPath,
+                            content: jsonPayload
+                        },
+                        {
+                            path: "ghwe_log.json",
+                            content: logUpdate.content
+                        }
+                    ]
                 );
 
-                state.currentJsonSha = result.content.sha;
-                await appendLog("update_json", {
-                    path: state.currentJsonPath,
-                    commit_sha: result.commit.sha
-                });
-                setStatus(el.editorStatus, "Committed " + state.currentJsonPath + " and updated ghwe_log.json.", "ok");
+                state.currentJsonSha = result.fileBlobShas[state.currentJsonPath] || state.currentJsonSha;
+                state.logSha = result.fileBlobShas["ghwe_log.json"] || logUpdate.sha;
+                state.log = logUpdate.records;
+                setStatus(el.editorStatus, "Committed " + state.currentJsonPath + " and ghwe_log.json in one commit.", "ok");
             }
 
             async function commitConfig() {
@@ -3139,25 +3238,40 @@
                     throw new Error("Connect a repository first.");
                 }
 
+                const repoFullName = state.selectedRepo.full_name;
+                const branch = state.selectedRepo.default_branch;
                 const commitMessage = (el.commitMessage.value || "Update ghwe_config.json via GHWE").trim();
                 const payload = JSON.stringify(state.config.data, null, 2);
+                await assertLatestFileSha(repoFullName, "ghwe_config.json", state.config.sha);
+                if (state.logSha) {
+                    await assertLatestFileSha(repoFullName, "ghwe_log.json", state.logSha);
+                }
 
-                const result = await commitFile(
-                    state.selectedRepo.full_name,
-                    state.selectedRepo.default_branch,
-                    "ghwe_config.json",
-                    commitMessage,
-                    payload,
-                    state.config.sha
-                );
-
-                state.config.sha = result.content.sha;
-                await appendLog("update_config", {
-                    path: "ghwe_config.json",
-                    commit_sha: result.commit.sha
+                const logUpdate = await buildUpdatedLog("update_config", {
+                    path: "ghwe_config.json"
                 });
 
-                setStatus(el.editorStatus, "Committed ghwe_config.json and updated ghwe_log.json.", "ok");
+                const result = await commitFilesTogether(
+                    repoFullName,
+                    branch,
+                    commitMessage,
+                    [
+                        {
+                            path: "ghwe_config.json",
+                            content: payload
+                        },
+                        {
+                            path: "ghwe_log.json",
+                            content: logUpdate.content
+                        }
+                    ]
+                );
+
+                state.config.sha = result.fileBlobShas["ghwe_config.json"] || state.config.sha;
+                state.logSha = result.fileBlobShas["ghwe_log.json"] || logUpdate.sha;
+                state.log = logUpdate.records;
+
+                setStatus(el.editorStatus, "Committed ghwe_config.json and ghwe_log.json in one commit.", "ok");
             }
 
             function setupDropZone() {
@@ -3445,6 +3559,8 @@
                         }
                         const logLoaded = await loadRepoJsonFile(state.selectedRepo.full_name, "ghwe_log.json");
                         const data = Array.isArray(logLoaded.data) ? logLoaded.data : [];
+                        state.log = data;
+                        state.logSha = logLoaded.fileMeta.sha || state.logSha;
                         setStatus(el.editorStatus, "ghwe_log.json entries: " + data.length, "ok");
                     } catch (error) {
                         setStatus(el.editorStatus, error.message, "bad");
