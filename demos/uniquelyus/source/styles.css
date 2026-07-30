@@ -92,7 +92,7 @@ main {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    opacity: 0.25;
+    opacity: 0.35;
     z-index: -1;
     pointer-events: none;
 }
