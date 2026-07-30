@@ -1,4 +1,4 @@
-const courseDataUrl = "source/data/courses.json";
+const courseDataUrl = "https://uniquely-us.co.uk/source/data/courses.json";
 
 class Router {
     constructor() {
