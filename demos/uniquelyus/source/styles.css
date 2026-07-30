@@ -472,9 +472,9 @@ footer a:hover {
 
 .about-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 3rem;
-    align-items: start;
+    align-items: center;
     margin: 2rem 0;
 }
 
@@ -491,14 +491,18 @@ footer a:hover {
 }
 
 .about-image {
-    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
-    height: 400px;
-    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 5rem;
-    color: var(--text-white);
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
 }
 
 .gallery-grid {
@@ -595,10 +599,7 @@ footer a:hover {
 
     .about-content {
         grid-template-columns: 1fr;
-    }
-
-    .about-image {
-        height: 250px;
+        gap: 1.5rem;
     }
 
     .courses-grid {
