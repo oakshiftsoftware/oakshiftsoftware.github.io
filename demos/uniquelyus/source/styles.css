@@ -183,6 +183,9 @@ main {
     box-shadow: var(--shadow);
     transition: var(--transition);
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .course-card:hover {
@@ -204,6 +207,9 @@ main {
 
 .course-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .course-level {
@@ -238,6 +244,12 @@ main {
     margin-bottom: 1rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
+}
+
+.course-content .enroll-btn,
+.course-content a.enroll-btn,
+.course-content button.enroll-btn {
+    margin-top: auto;
 }
 
 .course-price {
