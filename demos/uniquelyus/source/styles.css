@@ -304,8 +304,13 @@ a.enroll-btn:hover {
 .enroll-btn.disabled,
 .enroll-btn[disabled],
 .enroll-btn.disabled:hover {
+    background-color: #ebbdbd;
+    color: #a76b6b;
+    border-color: #a76b6b;
+    /*
     background: var(--border-color);
     color: var(--text-light);
+    */
     cursor: not-allowed;
     transform: none;
 }
