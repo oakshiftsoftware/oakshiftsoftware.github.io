@@ -151,7 +151,7 @@ main {
 }
 
 .hero .cta-button {
-    background: #d17d93;
+    background: #569f38;
     color: #ffffff;
     padding: 1rem 2.5rem;
     border: none;
@@ -165,7 +165,7 @@ main {
 }
 
 .hero .cta-button:hover {
-    background: #bf566e;
+    background: #80c366;
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
