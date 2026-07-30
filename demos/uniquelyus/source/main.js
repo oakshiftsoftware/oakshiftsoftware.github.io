@@ -1,3 +1,5 @@
+const courseDataUrl = "source/data/courses.json";
+
 class Router {
     constructor() {
         this.pages = {
@@ -58,43 +60,60 @@ class Router {
         });
     }
 
-    loadCourses() {
+    async loadCourses() {
         const coursesGrid = document.getElementById('courses-grid');
-        const getIconClass = (title) => 'fa-solid fa-hashtag';
-        coursesGrid.innerHTML = coursesData.map(course => {
-            let cta = '';
-            const isFull = Number(course.spaces) === 0;
+        if (!coursesGrid) return;
 
-            if (isFull) {
-                cta = `<button class="enroll-btn disabled" disabled>Fully Booked</button>`;
-            } else if (course.url) {
-                cta = `<a class="enroll-btn" href="${course.url}" target="_blank" rel="noopener noreferrer">Enroll Now</a>`;
-            } else {
-                cta = `<button class="enroll-btn" onclick="enrollCourse('${course.title}')">Enroll Now</button>`;
+        const getIconClass = (title) => 'fa-solid fa-hashtag';
+
+        try {
+            const response = await fetch(courseDataUrl);
+            if (!response.ok) {
+                throw new Error(`Unable to load course data (${response.status})`);
             }
 
-            return `
-                <div class="course-card">
-                    <div class="course-image">
-                        <span style="margin-left: 10px;">
-                            <i class="${getIconClass(course.title)}" style="font-weight: normal;"></i>
-                            <span>${course.id}</span>
-                        </span>
-                    </div>
-                    <div class="course-content">
-                        <h3>${course.title}</h3>
-                        <p class="course-description">
-                            ID: ${course.id}<br>
-                            Duration: ${course.weeks} weeks
-                        </p>
-                        <div class="course-meta">
-                            <span>Spaces: ${course.spaces}</span>
-                            <span class="course-price">£${course.price.toFixed(2)}</span>
+            const payload = await response.json();
+            const courses = Array.isArray(payload) ? payload : (payload.courses || []);
+
+            coursesGrid.innerHTML = courses.map(course => {
+                let cta = '';
+                const isFull = Number(course.spaces) === 0;
+                const price = Number(course.price ?? 0);
+
+                if (isFull) {
+                    cta = `<button class="enroll-btn disabled" disabled>Fully Booked</button>`;
+                } else if (course.url) {
+                    cta = `<a class="enroll-btn" href="${course.url}" target="_blank" rel="noopener noreferrer">Enroll Now</a>`;
+                } else {
+                    cta = `<button class="enroll-btn" onclick="enrollCourse('${course.title}')">Enroll Now</button>`;
+                }
+
+                return `
+                    <div class="course-card">
+                        <div class="course-image">
+                            <span style="margin-left: 10px;">
+                                <i class="${getIconClass(course.title)}" style="font-weight: normal;"></i>
+                                <span>${course.id}</span>
+                            </span>
                         </div>
-                        ${cta}
-                    </div>
-                </div>`;
-        }).join('');
+                        <div class="course-content">
+                            <h3>${course.title}</h3>
+                            <p class="course-description">
+                                ID: ${course.id}<br>
+                                Duration: ${course.weeks} weeks
+                            </p>
+                            <div class="course-meta">
+                                <span>Spaces: ${course.spaces}</span>
+                                <span class="course-price">£${Number.isFinite(price) ? price.toFixed(2) : '0.00'}</span>
+                            </div>
+                            ${cta}
+                        </div>
+                    </div>`;
+            }).join('');
+        } catch (error) {
+            console.error('Unable to load courses from JSON:', error);
+            coursesGrid.innerHTML = '<p class="course-error">Unable to load courses right now.</p>';
+        }
     }
 }
 
