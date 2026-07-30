@@ -77,15 +77,45 @@ class Router {
 
             coursesGrid.innerHTML = courses.map(course => {
                 let cta = '';
-                const isFull = Number(course.spaces) === 0;
-                const price = Number(course.price ?? 0);
+                
+                const isCourseFull = Number(course.full_course_spaces) === 0;
+                const fullCoursePrice = Number(course.full_course_price ?? 0);
 
-                if (isFull) {
+                if (isCourseFull) {
                     cta = `<button class="enroll-btn disabled" disabled>Fully Booked</button>`;
                 } else if (course.url) {
                     cta = `<a class="enroll-btn" href="${course.url}" target="_blank" rel="noopener noreferrer">Enroll Now</a>`;
                 } else {
                     cta = `<button class="enroll-btn" onclick="enrollCourse('${course.title}')">Enroll Now</button>`;
+                }
+
+                let pricingInfo = '';
+
+                if (course.course_type === 'crochet') {
+                    pricingInfo = `
+                            <div class="course-meta">
+                                <span>Full Course Spaces: ${course.full_course_spaces}</span>
+                                <span class="course-price">£${Number.isFinite(fullCoursePrice) ? fullCoursePrice.toFixed(2) : '0.00'}</span>
+                            </div>
+                    `;
+                } else if (course.course_type === 'craft' || course.course_type === 'painting') {
+                    pricingInfo = `
+                            <div class="course-meta">
+                                <span>Full Course Spaces: ${course.full_course_spaces}</span>
+                                <span class="course-price">£${Number.isFinite(fullCoursePrice) ? fullCoursePrice.toFixed(2) : '0.00'}</span>
+                            </div>
+                            <div class="course-meta">
+                                <span>Single Session Spaces: ${course.single_session_spaces}</span>
+                                <span class="course-price">£${Number.isFinite(singleSessionPrice) ? singleSessionPrice.toFixed(2) : '0.00'}</span>
+                            </div>
+                    `;
+                } else if (course.course_type === 'one-off') {
+                    pricingInfo = `
+                            <div class="course-meta">
+                                <span>Single Session Spaces: ${course.single_session_spaces}</span>
+                                <span class="course-price">£${Number.isFinite(singleSessionPrice) ? singleSessionPrice.toFixed(2) : '0.00'}</span>
+                            </div>
+                    `;
                 }
 
                 return `
@@ -102,10 +132,7 @@ class Router {
                                 ID: ${course.id}<br>
                                 Duration: ${course.weeks} weeks
                             </p>
-                            <div class="course-meta">
-                                <span>Spaces: ${course.spaces}</span>
-                                <span class="course-price">£${Number.isFinite(price) ? price.toFixed(2) : '0.00'}</span>
-                            </div>
+                            ${pricingInfo}
                             ${cta}
                         </div>
                     </div>`;
