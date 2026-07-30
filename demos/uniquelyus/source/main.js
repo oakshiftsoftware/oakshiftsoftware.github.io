@@ -132,7 +132,8 @@ class Router {
                             <h3>${course.title}</h3>
                             <p class="course-description">
                                 ID: ${course.id}<br>
-                                Duration: ${course.weeks} weeks
+                                Duration: ${course.weeks} weeks<br><br>
+                                ${course.description || 'No description available.'}
                             </p>
                             ${pricingInfo}
                             ${cta}
