@@ -29,7 +29,7 @@ body {
 }
 
 header {
-    background: #2a2a2afa;
+    background: #343434;
     color: var(--text-white);
     padding: 1.5rem 0;
     position: sticky;
