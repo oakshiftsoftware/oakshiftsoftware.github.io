@@ -80,6 +80,8 @@ class Router {
                 
                 const isCourseFull = Number(course.full_course_spaces) === 0;
                 const fullCoursePrice = Number(course.full_course_price ?? 0);
+                const isSingleSessionFull = Number(course.single_session_spaces) === 0;
+                const singleSessionPrice = Number(course.single_session_price ?? 0);
 
                 if (isCourseFull) {
                     cta = `<button class="enroll-btn disabled" disabled>Fully Booked</button>`;
