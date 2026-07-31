@@ -9,20 +9,27 @@ function initBirthdayCelebration() {
 
     container.innerHTML = `
         <div class="birthday-celebration-badge">
-            <span class="birthday-icon">🎉</span>
+            <i class="birthday-icon fa-solid fa-cake-candles"></i>
             <span>1 Year Anniversary</span>
-            <span class="birthday-icon">🎂</span>
+            <i class="birthday-icon fa-solid fa-gift"></i>
         </div>
     `;
 
     const confettiLayer = document.createElement('div');
     confettiLayer.className = 'birthday-confetti-layer';
 
-    const confettiItems = ['🎉', '🎂', '✨', '🥳', '🎈', '💖'];
+    const confettiItems = [
+        'fa-solid fa-cake-candles',
+        'fa-solid fa-gift',
+        'fa-solid fa-star',
+        'fa-solid fa-heart',
+        'fa-solid fa-burst',
+        'fa-solid fa-champagne-glasses'
+    ];
     for (let index = 0; index < 18; index += 1) {
         const piece = document.createElement('span');
         piece.className = 'birthday-confetti-piece';
-        piece.textContent = confettiItems[index % confettiItems.length];
+        piece.innerHTML = `<i class="${confettiItems[index % confettiItems.length]}"></i>`;
         piece.style.left = `${Math.random() * 100}%`;
         piece.style.top = `-${Math.random() * 20 + 10}px`;
         piece.style.setProperty('--drift-x', `${(Math.random() - 0.5) * 220}px`);
