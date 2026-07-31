@@ -145,7 +145,7 @@ main {
 
 .birthday-celebration-badge {
     position: absolute;
-    top: 1.2rem;
+    top: 2.75rem;
     left: 50%;
     transform: translateX(-50%) translateY(-20px);
     display: inline-flex;
@@ -154,7 +154,7 @@ main {
     padding: 0.7rem 1rem;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.92);
-    color: #8a3b8b;
+    color: #a67e14;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
