@@ -134,6 +134,7 @@ class Router {
                 }
 
                 let pricingInfo = '';
+                let durationInfo = `<span>Duration: ${course.weeks} weeks</span><br><br>`;
 
                 if (course.course_type === 'crochet') {
                     pricingInfo = `
@@ -154,6 +155,7 @@ class Router {
                             </div>
                     `;
                 } else if (course.course_type === 'one-off') {
+                    durationInfo = "<br>";
                     pricingInfo = `
                             <div class="course-meta">
                                 <span>Single Session Spaces: ${course.single_session_spaces}</span>
@@ -174,7 +176,7 @@ class Router {
                             <h3>${course.title}</h3>
                             <p class="course-description">
                                 ID: ${course.id}<br>
-                                Duration: ${course.weeks} weeks<br><br>
+                                ${durationInfo}
                                 <i>${course.description || 'No description available.'}</i>
                             </p>
                             ${pricingInfo}
