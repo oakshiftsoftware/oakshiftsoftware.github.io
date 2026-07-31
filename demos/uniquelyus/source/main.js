@@ -125,7 +125,7 @@ class Router {
                 const isSingleSessionFull = Number(course.single_session_spaces) === 0;
                 const singleSessionPrice = Number(course.single_session_price ?? 0);
 
-                if (isCourseFull) {
+                if (isCourseFull || isSingleSessionFull) {
                     cta = `<button class="enroll-btn disabled" disabled>Fully Booked</button>`;
                 } else if (course.url) {
                     cta = `<a class="enroll-btn" href="${course.url}" target="_blank" rel="noopener noreferrer">Enroll Now</a>`;
