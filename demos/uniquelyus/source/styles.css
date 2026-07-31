@@ -165,7 +165,7 @@ main {
 
 .birthday-celebration-badge .birthday-icon {
     font-size: 1.15rem;
-    color: #c76515;
+    color: #a67e14;
     animation: birthdayIconBounce 1.2s ease-in-out infinite;
 }
 
@@ -186,7 +186,7 @@ main {
 }
 
 .birthday-confetti-piece i {
-    color: #ffffff;
+    color: #8b6908;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 

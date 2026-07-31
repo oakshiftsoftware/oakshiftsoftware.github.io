@@ -26,7 +26,7 @@ function initBirthdayCelebration() {
         'fa-solid fa-burst',
         'fa-solid fa-champagne-glasses'
     ];
-    for (let index = 0; index < 18; index += 1) {
+    for (let index = 0; index < 30; index += 1) {
         const piece = document.createElement('span');
         piece.className = 'birthday-confetti-piece';
         piece.innerHTML = `<i class="${confettiItems[index % confettiItems.length]}"></i>`;
