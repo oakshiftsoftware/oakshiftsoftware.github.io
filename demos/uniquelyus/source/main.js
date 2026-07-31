@@ -1,4 +1,39 @@
 const courseDataUrl = "https://uniquely-us.co.uk/source/data/courses.json";
+const SHOW_BIRTHDAY_ANNIVERSARY_ANIMATION = true;
+
+function initBirthdayCelebration() {
+    if (!SHOW_BIRTHDAY_ANNIVERSARY_ANIMATION) return;
+
+    const container = document.getElementById('birthday-celebration-root');
+    if (!container || container.dataset.initialized === 'true') return;
+
+    container.innerHTML = `
+        <div class="birthday-celebration-badge">
+            <span class="birthday-icon">🎉</span>
+            <span>1 Year Anniversary</span>
+            <span class="birthday-icon">🎂</span>
+        </div>
+    `;
+
+    const confettiLayer = document.createElement('div');
+    confettiLayer.className = 'birthday-confetti-layer';
+
+    const confettiItems = ['🎉', '🎂', '✨', '🥳', '🎈', '💖'];
+    for (let index = 0; index < 18; index += 1) {
+        const piece = document.createElement('span');
+        piece.className = 'birthday-confetti-piece';
+        piece.textContent = confettiItems[index % confettiItems.length];
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.top = `-${Math.random() * 20 + 10}px`;
+        piece.style.setProperty('--drift-x', `${(Math.random() - 0.5) * 220}px`);
+        piece.style.animationDuration = `${Math.random() * 3 + 3}s`;
+        piece.style.animationDelay = `${Math.random() * 0.6}s`;
+        confettiLayer.appendChild(piece);
+    }
+
+    container.appendChild(confettiLayer);
+    container.dataset.initialized = 'true';
+}
 
 class Router {
     constructor() {
@@ -150,6 +185,7 @@ class Router {
 
 document.addEventListener('DOMContentLoaded', () => {
     new Router();
+    initBirthdayCelebration();
 });
 
 

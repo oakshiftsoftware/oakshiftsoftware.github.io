@@ -132,6 +132,92 @@ main {
     text-align: center;
     margin-bottom: 3rem;
     opacity: 0.85;
+    position: relative;
+    overflow: hidden;
+}
+
+.birthday-celebration-root {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.birthday-celebration-badge {
+    position: absolute;
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #8a3b8b;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
+    animation: birthdayBadgeFloat 2.8s ease-in-out infinite;
+    z-index: 2;
+}
+
+.birthday-celebration-badge .birthday-icon {
+    font-size: 1.15rem;
+    animation: birthdayIconBounce 1.2s ease-in-out infinite;
+}
+
+.birthday-confetti-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.birthday-confetti-piece {
+    position: absolute;
+    display: inline-block;
+    font-size: 1.2rem;
+    animation: birthdayConfettiFall linear infinite;
+    opacity: 0.9;
+}
+
+@keyframes birthdayBadgeFloat {
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-6px);
+    }
+}
+
+@keyframes birthdayIconBounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes birthdayConfettiFall {
+    0% {
+        transform: translate3d(0, -20px, 0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate3d(var(--drift-x), 110vh, 0) rotate(720deg);
+        opacity: 0;
+    }
 }
 
 .hero-sub {
