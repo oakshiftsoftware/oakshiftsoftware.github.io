@@ -1,55 +1,71 @@
 {
-    "metadata": {
-        "lastUpdated": "2026-07-21T21:00:00Z",
-        "version": "1.1.0",
-        "//": "Courses are stored as an array of objects. Each course object contains the course's ID, title, number of weeks, number of spaces available, price, and URL for booking.",
-        "fields": {
-            "course": {
-                "id": "string",
-                "title": "string",
-                "weeks": "number",
-                "course_type": "string",
-                "full_course_spaces": "number",
-                "full_course_price": "string",
-                "single_session_spaces": "number",
-                "single_session_price": "string",
-                "url": "string"
-            }
-        }
+  "metadata": {
+    "lastUpdated": "2026-07-21T21:00:00Z",
+    "version": "1.1.0",
+    "//": "Courses are stored as an array of objects. Each course object contains the course's ID, title, number of weeks, number of spaces available, price, and URL for booking.",
+    "fields": {
+      "course": {
+        "id": "string",
+        "title": "string",
+        "description": "string",
+        "weeks": "number",
+        "course_type": "string",
+        "full_course_spaces": "number",
+        "full_course_price": "string",
+        "single_session_spaces": "number",
+        "single_session_price": "string",
+        "url": "string"
+      }
+    }
+  },
+  "courses": [
+    {
+      "id": "016",
+      "title": "Painting Course",
+      "description": "Course description here.",
+      "weeks": 6,
+      "course_type": "painting",
+      "full_course_spaces": 0,
+      "full_course_price": "32.50",
+      "single_session_spaces": 0,
+      "single_session_price": "32.50",
+      "url": "https://bookwhen.com/uniquelyuswalkden/e/ev-sx4sd-20260609183000"
     },
-    "courses": [
-        {
-            "id": "015",
-            "title": "Evening Crochet Course",
-            "weeks": 6,
-            "course_type": "crochet",
-            "full_course_spaces": 0,
-            "full_course_price": "10.00",
-            "single_session_spaces": 0,
-            "single_session_price": "5.00",
-            "url": "https://bookwhen.com/uniquelyuswalkden/e/ev-se90m-20260608183000"
-        },
-        {
-            "id": "016", 
-            "title": "Painting Course", 
-            "weeks": 6, 
-            "course_type": "painting",
-            "full_course_spaces": 0, 
-            "full_course_price": "32.50", 
-            "single_session_spaces": 0, 
-            "single_session_price": "32.50", 
-            "url": "https://bookwhen.com/uniquelyuswalkden/e/ev-sx4sd-20260609183000"
-        },
-        {
-            "id": "018", 
-            "title": "Craft Course", 
-            "weeks": 6, 
-            "course_type": "craft",
-            "full_course_spaces": 8, 
-            "full_course_price": "32.50", 
-            "single_session_spaces": 2, 
-            "single_session_price": "32.50", 
-            "url": "https://bookwhen.com/uniquelyuswalkden/e/ev-s8ihp-20260617183000"
-        }
-    ]
+    {
+      "id": "018",
+      "title": "Craft Course",
+      "description": "Course description here.",
+      "weeks": 6,
+      "course_type": "craft",
+      "full_course_spaces": 8,
+      "full_course_price": "32.50",
+      "single_session_spaces": 2,
+      "single_session_price": "32.50",
+      "url": "https://bookwhen.com/uniquelyuswalkden/e/ev-s8ihp-20260617183000"
+    },
+    {
+      "id": "023",
+      "title": "Evening Crochet Course",
+      "description": "Course description here.",
+      "weeks": 6,
+      "course_type": "crochet",
+      "full_course_spaces": 2,
+      "full_course_price": "30.00",
+      "single_session_spaces": 0,
+      "single_session_price": "0.00",
+      "url": "https://bookwhen.com/uniquelyuswalkden/e/ev-se90m-20260608183000"
+    },
+    {
+      "id": "999",
+      "title": "Test One-Off Class",
+      "description": "Test class description.",
+      "weeks": 0,
+      "course_type": "one-off",
+      "full_course_spaces": 0,
+      "full_course_price": "0.00",
+      "single_session_spaces": 6,
+      "single_session_price": "7.50",
+      "url": "#"
+    }
+  ]
 }
