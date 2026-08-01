@@ -47,9 +47,10 @@ class Router {
         this.pages = {
             '': 'home',
             'courses': 'courses',
+            'gallery': 'gallery',
+            'testimonials': 'testimonials',
             'about': 'about',
-            'contact': 'contact',
-            'gallery': 'gallery'
+            'contact': 'contact'
         };
         this.init();
     }
@@ -195,6 +196,23 @@ class Router {
 document.addEventListener('DOMContentLoaded', () => {
     new Router();
     initBirthdayCelebration();
+
+    const toggle = document.querySelector('.mobile-nav-toggle');
+    const nav = document.querySelector('header nav');
+
+    if (toggle && nav) {
+        toggle.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        nav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('open');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
 });
 
 

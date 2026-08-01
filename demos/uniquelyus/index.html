@@ -14,11 +14,17 @@
         <header>
             <div class="header-container">
                 <a href="#" class="logo"><img src="source/images/us-logo-01.png" alt="Uniquely Us Logo"></a>
+                <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <nav>
                     <ul id="nav-menu">
                         <li><a href="#" class="nav-link active">Home</a></li>
                         <li><a href="#courses" class="nav-link">Courses</a></li>
                         <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                        <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
                         <li><a href="#about" class="nav-link">About</a></li>
                         <li><a href="#contact" class="nav-link">Contact</a></li>
                     </ul>
@@ -62,7 +68,72 @@
                         </div>
                     </div>
 
-                    <h2 class="section-title">Testimonials</h2>
+                    <div class="qa-section">
+                        <h2 class="section-title">Frequently Asked Questions</h2>
+                        <p class="section-subtitle">Everything you need to know before joining one of our craft sessions</p>
+                        <div class="qa-list">
+                            <details class="qa-item" open>
+                                <summary>Are all your courses for beginners?</summary>
+                                <p>Yes, all courses are good for beginners and seasoned crafters. I will work at your skill level in every lesson. Even those who feel they can't craft will have fun.</p>
+                            </details>
+                            <details class="qa-item">
+                                <summary>Can I come on my own?</summary>
+                                <p>Yes of course you can, everyone is made to feel welcome and if you are anxious, let me know before hand and I'll do everything I can do to make you feel comfortable.</p>
+                            </details>
+                            <details class="qa-item">
+                                <summary>Can I bring my child?</summary>
+                                <p>Unfortunately these are courses for adults. 16-18 year olds can come if accompanied by another adult.</p>
+                            </details>
+                            <details class="qa-item">
+                                <summary>Why isn't it free?</summary>
+                                <p>Everything you pay goes into paying for equipment and materials so i'm able to run the classes. I don't take a wage, or get funding, it all goes back into the courses.</p>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="courses" class="page">
+                <div class="hero hero-sub">
+                    <h1>Our Courses</h1>
+                    <p>Discover the perfect craft class for you</p>
+                </div>
+
+                <div class="container">
+                    <div class="courses-grid" id="courses-grid">
+                        <!-- Courses dynamically loaded here -->
+                    </div>
+                </div>
+
+                <div class="container" style="margin-top: 2rem;">
+                    <div class="contact-map-card">
+                        <h3>Course Certification</h3>
+                        <p>All courses come with a Uniquely Us course completion certificate.</p>
+                        <img src="source/images/uu_sample_cert.jpg" alt="Sample Course Completion Certificate" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+
+            <div id="gallery" class="page">
+                <div class="hero hero-sub">
+                    <h1>Gallery</h1>
+                    <p>Browse recent work from our students and instructors</p>
+                </div>
+
+                <div class="container">
+                    <div id="gallery-grid" class="gallery-grid">
+                        <!-- Gallery images are loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="testimonials" class="page">
+                <div class="hero hero-sub">
+                    <h1>Testimonials</h1>
+                    <p>What our students say about their experience</p>
+                </div>
+
+                <div class="container">
                     <div class="testimonials">
                         <div class="testimonial">
                             <div class="testimonial-text">"I joined Gracie's group a few months ago, trying out the craft classes first. Each wk.k we tried out a different crafts ,   from painting stones that were coated in resin, to lace art. The classes are very laid back and have a great atmosphere. Gracie is a wonderful tutor and very artistic. I wanted to learn crochet so I'm now taking those classes. Being a knitter for years, its a craft I haven'tt been able to master alone, but with Gracie's help iI'm getting their. I highly recommend Gracie's classes, they are a wonderful weekly break from life ."</div>
@@ -96,32 +167,6 @@
                             <div class="testimonial-text">"Oh, I'm having amazing time on the 6wk craft course. Ive always crafted but there is always room for more knowledge and experience. II'm getting that. The three Christmas classes blew my mind. Amazing. Give all the classes a try. Warm friendly atmosphere and plenty to do and learn. Loving it. Value for money most definitely."</div>
                             <div class="testimonial-author">Maria</div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="courses" class="page">
-                <div class="hero hero-sub">
-                    <h1>Our Courses</h1>
-                    <p>Discover the perfect craft class for you</p>
-                </div>
-
-                <div class="container">
-                    <div class="courses-grid" id="courses-grid">
-                        <!-- Courses dynamically loaded here -->
-                    </div>
-                </div>
-            </div>
-
-            <div id="gallery" class="page">
-                <div class="hero hero-sub">
-                    <h1>Gallery</h1>
-                    <p>Browse recent work from our students and instructors</p>
-                </div>
-
-                <div class="container">
-                    <div id="gallery-grid" class="gallery-grid">
-                        <!-- Gallery images are loaded dynamically -->
                     </div>
                 </div>
             </div>
@@ -181,27 +226,65 @@
             <div id="contact" class="page">
                 <div class="hero hero-sub">
                     <h1>Get In Touch</h1>
-                    <p>We'd love to hear from you</p>
+                    <p>Please feel free to message me if you have any further questions regarding the courses.<br />If you'd like to hire my services to deliver a class or course at your venue, then please get in touch to discuss.</p>
                 </div>
 
                 <div class="container">
-                    <div class="contact-section">
-                        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-                            <input type="hidden" name="access_key" value="498d8707-c492-4f01-b9e5-b5ec26565c5a">
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" name="name" required>
+                    <div class="contact-layout">
+                        <div class="contact-card">
+                            <h3 style="margin-bottom: 1rem;">Come and say hello</h3>
+                            <div class="contact-detail">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <div>
+                                    <strong>Address</strong>
+                                    <p>Bridgewater Foundation Community Hub, 40 Chilham Road, Walkden, Greater Manchester, M28 3DP</p>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" required>
+                            <div class="contact-detail">
+                                <i class="fa-solid fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <p><a href="mailto:uniquelyuswalkden@hotmail.com">uniquelyuswalkden@hotmail.com</a></p>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea name="message" required></textarea>
+                            <div class="contact-detail">
+                                <i class="fa-solid fa-phone"></i>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <p><a href="tel:+447488373889">+44 7488 373889</a></p>
+                                </div>
                             </div>
-                            <button type="submit" class="submit-btn">Submit</button>
-                        </form>
+                            <div class="contact-detail">
+                                <i class="fa-brands fa-facebook-f"></i>
+                                <div>
+                                    <strong>Social</strong>
+                                    <p><a href="https://www.facebook.com/share/1D2kqDNMeY/" target="_blank" rel="noopener noreferrer">Follow along on Facebook</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-section">
+                            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                                <input type="hidden" name="access_key" value="498d8707-c492-4f01-b9e5-b5ec26565c5a">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="contact-map-card">
+                        <h3>Find us</h3>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2372.0761702423088!2d-2.3946986000000003!3d53.52069650000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487ba94ce8132c2f%3A0x741225b8c73012cb!2sWalkden%20Community%20Hub!5e0!3m2!1sen!2suk!4v1785568469994!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                     </div>
                 </div>
             </div>
